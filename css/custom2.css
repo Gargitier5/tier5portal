@@ -1,0 +1,201 @@
+@import url(https://fonts.googleapis.com/css?family=Fira+Sans:400,300,500,700);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700);
+
+body{background: url(../images/bg.jpg) repeat; background-size: cover; font-family: 'Fira Sans', sans-serif;}
+img{max-width: 100%;}
+/*.col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9{
+	padding-left: 5px; padding-right: 5px;
+}
+*/
+
+
+.header{background: #20334B; padding: 21px 0}
+.dropdown{float: right; color: #fff; text-align: center; padding: 5px}
+
+.profile-pic{width: 50px; height: 50px; border-radius: 50%; overflow: hidden; margin: 15px auto; border: 1px solid #ccc;}
+.dropdown-menu{text-align: center; padding: 5px 0 15px}
+.dropdown{cursor: pointer;}
+.log-btn{background: #20334B; padding: 2px 4px; cursor: pointer; font-size: 13px;}
+.log-btn:hover{color: #fff}
+.logo{text-align: left}
+.bodypart{margin: 13px 0}
+.box{background: #364353; box-sizing:border-box; }
+.dashboard{min-height: 412px; padding:13px; margin-bottom: 15px}
+.break-block{min-height: 199px; padding:13px;}
+.work-type{min-height: 197px; padding:13px; margin-top: 15px;}
+.employee-block{min-height: 200px; padding:13px; }
+.calender{min-height: 412px; margin-top: 15px; padding: 13px;}
+.notice-board{min-height: 196px; margin-top: 15px; padding: 13px;}
+
+
+
+.col {
+  padding-right:7px;
+  padding-left:7px;
+}
+
+.col:not(:first-child,:last-child) {
+  padding-right:7px;
+  padding-left:7px;
+}
+
+
+
+
+.chat{margin: 0; padding: 0}
+.chat ul{margin: 0; padding: 0}
+.chat ul li{margin: 0 0 10px; padding: 4px 0; list-style: none; color: #fff}
+
+
+.user-pic{background: #fff; border-radius:50%; overflow: hidden; float: left; margin-right: 5px;
+width: 27px; height: 27px; text-align: center;
+}
+.user-pic img{max-width: 100%;}
+
+.box h2{color: #fff; border-bottom: 1px solid #fff; margin: 0 0 15px 0; padding: 0; font-size: 14px;
+font-family: 'Fira Sans', sans-serif; font-weight: 300; font-size: 14px;
+}
+.box h4{color: #fff; font-size: 15px; font-weight: 300}
+.box p{color: #fff; font-size: 12px;}
+
+.user-name{font-size: 12px;}
+.dashboard-main{color: #fff; font-size: 14px; font-weight: 300;}
+.dashboard-right{text-align: center;}
+.points{background: #FE0000; color: #fff; padding: 4px 5px 2px; font-weight: 700}
+
+.dashboard-details{padding-bottom: 10px;}
+.employee-main{text-align: center;}
+.employee-pic{width: 62px; height: 62px; border-radius: 50%; background: #fff; border: 1px solid #05F2F1;
+overflow: hidden; text-align: center; margin: 0 auto;
+}
+.lunch-btn{background: #05F2F1; color: #000; padding:6px 0; text-align: center; display: block;}
+a.lunch-btn:hover{text-decoration: none;}
+
+.content {height: 130px;}
+.content ul{margin: 0; padding: 0}
+.content ul li{margin: 0 0 15px 0; padding: 8px; background: #10A6A6; 
+	color: #fff; font-size: 13px; line-height: 18px;}
+
+.break-block{color: #fff;}
+.break{background: #10A6A6; padding: 7px; margin-bottom: 12px; margin-top: 6px;}
+.time-left{font-size: 10px; padding-top: 10px;}
+.break-btn{background: #20334B; padding: 3px 6px; color: #fff;}
+.break-type{padding-top: 5px}
+.break.btn.focus, .btn:focus, .btn:hover{color: #10A6A6;}
+.work-type{color: #fff}
+.time{text-align: center; font-weight: 700px; font-size: 15px;}
+.type-btn{padding: 25px 0 0; text-align: center;}
+.type-btn ul{text-align: center; margin: 0; padding: 0}
+.type-btn ul li{margin: 0 0 15px 0; padding: 0 5px; display: inline-block;}
+.btn-type{background: #05F2F1; color: #000; padding: 4px 5px; border: 1px solid #05F2F1}
+.btn-type:hover{background: #20334B; color: #fff; border: 1px solid #40618B}
+.btn-type-selected{background: #20334B; color: #fff; border: 1px solid #40618B}
+
+
+.lunch .modal-body p{color: #000; }
+.lunch .modal-body{padding: 15px 15px 0 15px;background: url(../images/lunch-body.jpg) no-repeat bottom right;
+min-height: 500px;}
+
+.lunch h4.modal-title{color: #000; font-size: 18px; text-align: center;}
+.lunch-shop{border: 1px solid #0FCAE0; min-height: 130px; text-align: center;
+font-family: 'Open Sans', sans-serif; margin-bottom: 15px;}
+.lunch-shop:hover{border: 1px solid #009DB0;}
+.lunch-shop-name{margin-bottom: 25px;}
+.lunch-icon{padding: 11px 0 0 0;}
+.lunch-shop h4{text-transform: uppercase; font-size: 17px; color: #7B7B7B}
+.lunch-shop a {background: #009db0 none repeat scroll 0 0;
+  border-radius: 4px;
+  color: #fff;
+  display: inline-block;
+  font-size: 13px;
+  margin-top: 3px;
+  padding: 2px 6px 3px;
+  text-transform: uppercase;
+}
+.lunch-shop a:hover{background: #000; text-decoration: none;}
+.clock-time{margin-top: 20px;}
+.clock-time button{text-align: center; width: 100px; margin: 0 auto; padding:5px 0;}
+.shopname{text-align: center; margin-bottom: 15px;}
+.lunch-type{margin-bottom: 25px; font-weight: normal;}
+.cost{text-align: right;}
+.content1{height: 300px;}
+.center{text-align: center;}
+
+.center .btn-warning:hover{color: #fff;}
+
+@media only screen and (max-width: 1910px){
+
+	.padding1{padding: 0 6px 0 15px}
+.padding2{padding: 0 15px 0 6px}
+
+}
+
+
+
+
+
+@media only screen and (max-width: 900px){
+
+	
+	.box{width: 100%; margin: 0 auto}
+	.chat{width: 92%; margin: 15px auto}
+	.col{padding:0;}
+	.container{width: 100%;}
+	.dashboard{margin-bottom: 15px;}
+	.notice-board{margin-bottom: 15px !important;}
+	.employee-block{margin-bottom: 15px;}
+	.padding1{padding: 0 15px}
+	.padding2{padding: 0 15px}
+	.work-type{margin-top: 15px;}
+	.calender{margin-top: 15px;}
+	.chat ul li{width: 50%; float: left;}
+	.row{margin:0;}
+
+	
+
+}
+
+@media only screen and (max-width: 901px){
+
+	.lunch-shop-name{margin-bottom: 0}
+	.clock-time{padding-top: 30px;}
+
+}
+
+
+@media only screen and (max-width: 690px){
+	
+	.logo{text-align: center; padding-bottom: 10px; }
+	.box{width: 100%; margin: 0 auto}
+	.chat{width: 92%; margin: 15px auto}
+	.col{padding:0;}
+	.container{width: 100%;}
+	.dashboard{margin-bottom: 15px;}
+	.employee-block{margin-bottom: 15px;}
+	.padding1{padding: 0 15px}
+	.padding2{padding: 0 15px}
+	.work-type{margin-top: 15px; font-size: 12px;}
+	.calender{margin-top: 15px;}
+	.chat ul li{width: 50%; float: left;}
+	.row{margin:0;}
+	
+
+
+}
+
+	@media screen and (min-width: 350px) {
+
+		.dashboard-main{font-size: 12px;}
+		.dashboard-right{font-size: 11px; }
+		.break-btn{font-size: 12px;}
+		.time-left{text-align: center; padding-top: 0}
+		.work-type{font-size: 12px;}
+
+
+	}
+
+
+
+
+
+
