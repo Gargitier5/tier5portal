@@ -1,7 +1,44 @@
 //http://stackoverflow.com/questions/34876998/how-to-continue-timer-after-page-is-refreshed
 $(document).ready(function(){
 
+ $.post('employee_control/employee/wmodecheck',function(data){
 
+  if(data){
+  var data1=data.split(",");
+        $('#hours').html(data1[2]);
+        $('#minutes').html(data1[1]);
+        $('#seconds').html(data1[0]);
+        var totalSeconds = data1[3];
+        var hoursLabel = document.getElementById("hours");
+        var minutesLabel = document.getElementById("minutes");
+        var secondsLabel = document.getElementById("seconds");
+      setTimeout(setTime, 1000);
+
+
+        function setTime()
+        {
+            ++totalSeconds;
+            secondsLabel.innerHTML = pad(totalSeconds%60);
+            minutesLabel.innerHTML = pad(parseInt(totalSeconds/60));
+            hoursLabel.innerHTML = pad(parseInt(totalSeconds/3600));
+            
+        }
+
+        function pad(val)
+        {
+            var valString = val + "";
+            if(valString.length < 2)
+            {
+                return "0" + valString;
+            }
+            else
+            {
+                return valString;
+            }
+        }
+     }
+
+ });
  $.post('employee_control/employee/breakcheck',function(data){
   if(data)
   {
@@ -264,3 +301,36 @@ function Start_Break(breakid,duration)
      });
   }
 }
+
+       /* var totalSeconds = 0;
+        var hoursLabel = document.getElementById("hours");
+        var minutesLabel = document.getElementById("minutes");
+        var secondsLabel = document.getElementById("seconds");
+      function workingmode()
+      {
+        
+      
+        setInterval(setTime, 1000);
+      }
+
+        function setTime()
+        {
+            ++totalSeconds;
+            secondsLabel.innerHTML = pad(totalSeconds%60);
+            minutesLabel.innerHTML = pad(parseInt(totalSeconds/60));
+            hoursLabel.innerHTML = pad(parseInt(totalSeconds/3600));
+            
+        }
+
+        function pad(val)
+        {
+            var valString = val + "";
+            if(valString.length < 2)
+            {
+                return "0" + valString;
+            }
+            else
+            {
+                return valString;
+            }
+        }*/

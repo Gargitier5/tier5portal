@@ -177,6 +177,13 @@ class Employee extends CI_Controller
 
     public function submitlunchorder()
     {
+
+      $con['Eid']=$this->session->userdata('uid');
+      $con['date']=date("Y-m-d");
+      $check=$this->EmployeeModel->fetchinfo('attendance',$data,'row');
+
+      if($check)
+      {
       $data['Eid']=$this->session->userdata('uid');
       $data['date']=date("Y-m-d");
       $data['shopname']=$this->input->post('shopname');
@@ -187,6 +194,7 @@ class Employee extends CI_Controller
       $submit=$this->EmployeeModel->submitlunchorder($data);
 
       print_r($submit);
+      }
     }
 
     public function breakcheck()
@@ -231,7 +239,7 @@ class Employee extends CI_Controller
 
               $time_left="$hours:$minutes:$sec";
 
-              echo $time_left.",".$key['type'];;
+              echo $time_left.",".$key['type'];
            }
         }
 
@@ -309,6 +317,7 @@ class Employee extends CI_Controller
       {
            $con['emp_p_id']=$check['emp_p_id'];
            $udata['endTime']=date('H:i:s');
+           $udata['status']=0;
            $stop=$this->EmployeeModel->end('tbl_employee_productivity',$con,$udata);
            if($stop)
            {
@@ -343,6 +352,7 @@ class Employee extends CI_Controller
       {
            $con['emp_p_id']=$check['emp_p_id'];
            $udata['endTime']=date('H:i:s');
+           $udata['status']=0;
            $stop=$this->EmployeeModel->end('tbl_employee_productivity',$con,$udata);
            if($stop)
            {
@@ -361,6 +371,40 @@ class Employee extends CI_Controller
       
     }
 
+    public function wmodecheck()
+    {
+      $data['Eid']=$this->session->userdata('uid');
+      $data['date']=date('Y-m-d');
+      $data['status']=1;
+      $check=$this->EmployeeModel->fetchinfo('tbl_employee_productivity',$data,'row');
+      if($check)
+       {  
+
+          $nowtime = new DateTime('now');
+             $diff = $nowtime->diff(new DateTime($check['startTime']));
+
+             $time_spend = ((($diff->h*60)+$diff->i)*60)+$diff->s;
+            
+             //echo "$time_spend";
+             $sec=($time_spend % 60);
+               if($sec<10)
+               {
+               $sec="0".$sec;
+               }
+
+              $minutes = ($time_spend / 60) % 60;
+              if($minutes<10)
+               {
+               $minutes="0".$minutes;
+               }
+              $hours = floor($time_spend / (60 * 60));
+             // echo $sec.",".$minutes.",".$hours;
+              echo $sec.",".$minutes.",".$hours.",".$time_spend;
+
+       }
+
+    }
+
     public function setadmin()
     { 
       $data['Eid']=$this->session->userdata('uid');
@@ -377,6 +421,7 @@ class Employee extends CI_Controller
       {
            $con['emp_p_id']=$check['emp_p_id'];
            $udata['endTime']=date('H:i:s');
+           $udata['status']=0;
            $stop=$this->EmployeeModel->end('tbl_employee_productivity',$con,$udata);
            if($stop)
            {
