@@ -562,7 +562,7 @@
                   <div class="box calender">
                     <h2>Our Calender</h2>
                     <!-- <iframe src="https://calendar.google.com/calendar/embed?title=Tier5%20Events&amp;showTitle=0&amp;showPrint=0&amp;height=400&amp;wkst=1&amp;bgcolor=%23336666&amp;src=en.indian%23holiday%40group.v.calendar.google.com&amp;color=%232952A3&amp;ctz=Asia%2FCalcutta" style="border-width:0" width="100%" height="380" frameborder="0" scrolling="no"></iframe> -->
-                    <div id="calendar_div">
+                    <div id="calendar_div" class="table-responsive">
                         <?php echo $calendar; ?>
                     </div>
                   </div>  
