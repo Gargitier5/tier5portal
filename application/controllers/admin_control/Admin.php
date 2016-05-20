@@ -24,6 +24,11 @@ class Admin extends CI_Controller
    
           if ($this->session->userdata('adminid'))
           {
+              
+              $con['activation_status']=0;
+              $con1['date']=date('Y-m-d');
+              $data['total_employee']=$this->AdminModel->fetchinfo('employee',$con,'count');
+              $data['total_present']=$this->AdminModel->fetchinfo('attendance',$con1,'count');
               $data['sideber']=$this->load->view('admin/includes/sideber','',true);
               $data['header']=$this->load->view('admin/includes/header','',true);
               $this->load->view('admin/admin_dashboard.php',$data);
