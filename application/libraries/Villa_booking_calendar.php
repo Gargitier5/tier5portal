@@ -87,7 +87,7 @@ class Villa_booking_calendar {
     }
     
     public function get_villa(){
-        return $this->CI->Bookings_model->get_row('tortugas_villas', array('id_villa' => $this->villa_id, 'villa_status' => 1));
+//        return $this->CI->Bookings_model->get_row('tortugas_villas', array('id_villa' => $this->villa_id, 'villa_status' => 1));
     }
     
     public function get_villa_min_price(){
@@ -312,17 +312,17 @@ class Villa_booking_calendar {
                     }else{
                         $html .= "<li data-date='$data_date' class='$class bc-available bc-other-month'>";
                         $html .= "<span>$dispaly_date</span>";
-                        $html .= "<p>Available</p>";
-                        if(in_array($data_date, $updated_dates)){
-                            foreach($updated_date_prices as $val){
-                                if($val['date'] == $data_date){
-                                    $price = $val['price'];
-                                }
-                            }
-                        }else{
-                           $price = $this->get_villa_min_price();
-                        }
-                        $html .= "<p>$$price</p>";
+//                        $html .= "<p>Available</p>";
+//                        if(in_array($data_date, $updated_dates)){
+//                            foreach($updated_date_prices as $val){
+//                                if($val['date'] == $data_date){
+//                                    $price = $val['price'];
+//                                }
+//                            }
+//                        }else{
+//                           $price = $this->get_villa_min_price();
+//                        }
+//                        $html .= "<p>$$price</p>";
                         $html .= '</li>';
                     }
                 }else if($cb > ($totalDaysOfMonthDisplay)){
