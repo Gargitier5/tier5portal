@@ -28,7 +28,9 @@ class Employee extends CI_Controller
          if ($this->session->userdata('uid'))
           {
 
-         
+              $conmode['date']=date("Y-m-d");
+              $conmode['Eid']=$this->session->userdata('uid');
+              $conmode['status']=1;
               $data['calendar'] = $this->villa_booking_calendar->render_booking_calendar();
               $con['parent_id']=0;
               $con['status']=0;
@@ -48,7 +50,7 @@ class Employee extends CI_Controller
               $data['notice']=$this->EmployeeModel->getnotice();
               $data['lunch_order']=$this->EmployeeModel->fetchinfo('lunchorder',$clockin,'row');
               $data['lunch_bonus']=$this->EmployeeModel->getlunch_bonus($userid,$start_date,$end_date);
-
+              $data['checkmode']=$this->EmployeeModel->fetchinfo('tbl_employee_productivity',$conmode,'row');
               $this->load->view('employee/employeedashboard',$data);
           }
           else
@@ -119,8 +121,8 @@ class Employee extends CI_Controller
        $ctime=$this->EmployeeModel->clockintime($data);
        if($ctime)
        {
-
-           redirect(base_url().'employee_control/employee');
+           
+          redirect(base_url().'employee_control/employee');
        }
        else
        {
@@ -158,6 +160,8 @@ class Employee extends CI_Controller
        $data['type']=$this->input->post('breakid');
        $brk_start_time=$this->EmployeeModel->startbreak($data);
        return $brk_start_time;
+       
+
       }
     }
 
@@ -251,8 +255,145 @@ class Employee extends CI_Controller
         }
 
     }
-   
 
+
+    public function setproduction()
+    { 
+
+      $data['Eid']=$this->session->userdata('uid');
+      $data['date']=date('Y-m-d');
+      $data['startTime']=date('H:i:s');
+      $data['type']=1;
+      $data['status']=1;
+
+      $checkdata['Eid']=$this->session->userdata('uid');
+      $checkdata['date']=date('Y-m-d');
+      $checkdata['status']=1;
+      $check=$this->EmployeeModel->fetchinfo('tbl_employee_productivity',$checkdata,'row');
+      if($check)
+      {
+           $con['emp_p_id']=$check['emp_p_id'];
+           $udata['endTime']=date('H:i:s');
+           $udata['status']=0;
+           $stop=$this->EmployeeModel->end('tbl_employee_productivity',$con,$udata);
+           if($stop)
+           {
+            $insert=$this->EmployeeModel->productivity($data);
+            redirect(base_url().'employee_control/employee');
+           }
+      }
+      else
+      {
+
+
+         $insert=$this->EmployeeModel->productivity($data);
+         redirect(base_url().'employee_control/employee');
+      }
+
+
+    }
+     
+    public function setrnd()
+    {
+      $data['Eid']=$this->session->userdata('uid');
+      $data['date']=date('Y-m-d');
+      $data['startTime']=date('H:i:s');
+      $data['type']=2;
+      $data['status']=1;
+
+      $checkdata['Eid']=$this->session->userdata('uid');
+      $checkdata['date']=date('Y-m-d');
+      $checkdata['status']=1;
+      $check=$this->EmployeeModel->fetchinfo('tbl_employee_productivity',$checkdata,'row');
+      if($check)
+      {
+           $con['emp_p_id']=$check['emp_p_id'];
+           $udata['endTime']=date('H:i:s');
+           $stop=$this->EmployeeModel->end('tbl_employee_productivity',$con,$udata);
+           if($stop)
+           {
+            $insert=$this->EmployeeModel->productivity($data);
+            redirect(base_url().'employee_control/employee');
+           }
+      }
+      else
+      {
+
+
+         $insert=$this->EmployeeModel->productivity($data);
+         redirect(base_url().'employee_control/employee');
+      }
+
+      
+    }
+
+    public function settraining()
+    {
+      $data['Eid']=$this->session->userdata('uid');
+      $data['date']=date('Y-m-d');
+      $data['startTime']=date('H:i:s');
+      $data['type']=3;
+      $data['status']=1;
+
+      $checkdata['Eid']=$this->session->userdata('uid');
+      $checkdata['date']=date('Y-m-d');
+      $checkdata['status']=1;
+      $check=$this->EmployeeModel->fetchinfo('tbl_employee_productivity',$checkdata,'row');
+      if($check)
+      {
+           $con['emp_p_id']=$check['emp_p_id'];
+           $udata['endTime']=date('H:i:s');
+           $stop=$this->EmployeeModel->end('tbl_employee_productivity',$con,$udata);
+           if($stop)
+           {
+            $insert=$this->EmployeeModel->productivity($data);
+            redirect(base_url().'employee_control/employee');
+           }
+      }
+      else
+      {
+
+
+         $insert=$this->EmployeeModel->productivity($data);
+         redirect(base_url().'employee_control/employee');
+      }
+
+      
+    }
+
+    public function setadmin()
+    { 
+      $data['Eid']=$this->session->userdata('uid');
+      $data['date']=date('Y-m-d');
+      $data['startTime']=date('H:i:s');
+      $data['type']=4;
+      $data['status']=1;
+
+      $checkdata['Eid']=$this->session->userdata('uid');
+      $checkdata['date']=date('Y-m-d');
+      $checkdata['status']=1;
+      $check=$this->EmployeeModel->fetchinfo('tbl_employee_productivity',$checkdata,'row');
+      if($check)
+      {
+           $con['emp_p_id']=$check['emp_p_id'];
+           $udata['endTime']=date('H:i:s');
+           $stop=$this->EmployeeModel->end('tbl_employee_productivity',$con,$udata);
+           if($stop)
+           {
+            $insert=$this->EmployeeModel->productivity($data);
+            redirect(base_url().'employee_control/employee');
+           }
+      }
+      else
+      {
+
+
+         $insert=$this->EmployeeModel->productivity($data);
+         redirect(base_url().'employee_control/employee');
+      }
+
+      
+    }
 
 }
 ?>

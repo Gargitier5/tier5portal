@@ -76,14 +76,14 @@
              list($hours, $minutes, $seconds) = explode(':', $time2);
              $endTimestamp = mktime($hours, $minutes, $seconds);
 
-             $seconds = $endTimestamp - $startTimestamp;
-             $sec=($seconds % 60);
+             $letseconds = $endTimestamp - $startTimestamp;
+             $sec=($letseconds % 60);
              if($sec<10)
              {
              $sec="0".$sec;
              }
-            $minutes = ($seconds / 60) % 60;
-            $hours = floor($seconds / (60 * 60));
+            $minutes = ($letseconds / 60) % 60;
+            $hours = floor($letseconds / (60 * 60));
 
             $data5['Eid']=$data['Eid'];
             $data5['date']=$data['date'];
@@ -91,17 +91,67 @@
             $data5['clockin_late']='1';
             $data5['late_time']="$hours:$minutes:$sec";
 
-
-
             $result=$this->db->insert('attendance',$data5);
             if($result)
             {
-               return true;
+                 if($letseconds<=7200)
+                 {
+                    $start_date=date("Y-m-d", strtotime(date('m').'/01/'.date('Y')));
+                    $end_date=date("Y-m-d");
+
+                     $this->db->select('*');
+                     $this->db->where('Eid',$data['Eid']);
+                     $this->db->where('last_update BETWEEN "'. date('Y-m-d', strtotime($start_date)). '" and "'. date('Y-m-d', strtotime($end_date)).'"');
+                     $res = $this->db->get('point_history');
+                     $point=$res->row_array();
+                     $new['points']=$point['points']-250;
+                     $con['P_id']=$point['P_id'];
+                     $this->db->where($con);
+                     $res=$this->db->update('point_history',$new);
+                     return $this->db->affected_rows();
+
+                     
+                 }
+                 else if($letseconds>=7200 && $letseconds<=14400)
+                 {
+                    $start_date=date("Y-m-d", strtotime(date('m').'/01/'.date('Y')));
+                    $end_date=date("Y-m-d");
+
+                     $this->db->select('*');
+                     $this->db->where('Eid',$data['Eid']);
+                     $this->db->where('last_update BETWEEN "'. date('Y-m-d', strtotime($start_date)). '" and "'. date('Y-m-d', strtotime($end_date)).'"');
+                     $res = $this->db->get('point_history');
+                     $point=$res->row_array();
+                     $new['points']=$point['points']-500;
+                     $con['P_id']=$point['P_id'];
+                     $this->db->where($con);
+                     $res=$this->db->update('point_history',$new);
+                     return $this->db->affected_rows();
+                 }
+                 else
+                 {
+                      $start_date=date("Y-m-d", strtotime(date('m').'/01/'.date('Y')));
+                      $end_date=date("Y-m-d");
+
+                     $this->db->select('*');
+                     $this->db->where('Eid',$data['Eid']);
+                     $this->db->where('last_update BETWEEN "'. date('Y-m-d', strtotime($start_date)). '" and "'. date('Y-m-d', strtotime($end_date)).'"');
+                     $res = $this->db->get('point_history');
+                     $point=$res->row_array();
+                     $new['points']=$point['points']-1000;
+                     $con['P_id']=$point['P_id'];
+                     $this->db->where($con);
+                     $res=$this->db->update('point_history',$new);
+                     return $this->db->affected_rows();
+                 }
             }
             else
             {
                 return false;
             }
+              
+              
+            
           }
 
 
@@ -132,14 +182,14 @@
               list($hours, $minutes, $seconds) = explode(':', $time2);
               $endTimestamp = mktime($hours, $minutes, $seconds);
 
-              $seconds = $endTimestamp - $startTimestamp;
-              $sec=($seconds % 60);
+              $letseconds = $endTimestamp - $startTimestamp;
+              $sec=($letseconds % 60);
                if($sec<10)
                {
                $sec="0".$sec;
                }
-              $minutes = ($seconds / 60) % 60;
-              $hours = floor($seconds / (60 * 60));
+              $minutes = ($letseconds / 60) % 60;
+              $hours = floor($letseconds / (60 * 60));
 
                $con['Eid'] = $data['Eid'];
                $con['date'] = $data['date'];
@@ -149,7 +199,60 @@
 
                $this->db->where($con);
                $res=$this->db->update('attendance',$data4);
-               return $this->db->affected_rows();
+               if($res)
+               {
+                if($letseconds<=7200)
+                 {
+                    $start_date=date("Y-m-d", strtotime(date('m').'/01/'.date('Y')));
+                    $end_date=date("Y-m-d");
+
+                     $this->db->select('*');
+                     $this->db->where('Eid',$data['Eid']);
+                     $this->db->where('last_update BETWEEN "'. date('Y-m-d', strtotime($start_date)). '" and "'. date('Y-m-d', strtotime($end_date)).'"');
+                     $res = $this->db->get('point_history');
+                     $point=$res->row_array();
+                     $new['points']=$point['points']-250;
+                     $con['P_id']=$point['P_id'];
+                     $this->db->where($con);
+                     $res=$this->db->update('point_history',$new);
+                     return $this->db->affected_rows();
+
+                     
+                 }
+                 else if($letseconds>=7200 && $letseconds<=14400)
+                 {
+                    $start_date=date("Y-m-d", strtotime(date('m').'/01/'.date('Y')));
+                    $end_date=date("Y-m-d");
+
+                     $this->db->select('*');
+                     $this->db->where('Eid',$data['Eid']);
+                     $this->db->where('last_update BETWEEN "'. date('Y-m-d', strtotime($start_date)). '" and "'. date('Y-m-d', strtotime($end_date)).'"');
+                     $res = $this->db->get('point_history');
+                     $point=$res->row_array();
+                     $new['points']=$point['points']-500;
+                     $con['P_id']=$point['P_id'];
+                     $this->db->where($con);
+                     $res=$this->db->update('point_history',$new);
+                     return $this->db->affected_rows();
+                 }
+                 else
+                 {
+                      $start_date=date("Y-m-d", strtotime(date('m').'/01/'.date('Y')));
+                      $end_date=date("Y-m-d");
+
+                     $this->db->select('*');
+                     $this->db->where('Eid',$data['Eid']);
+                     $this->db->where('last_update BETWEEN "'. date('Y-m-d', strtotime($start_date)). '" and "'. date('Y-m-d', strtotime($end_date)).'"');
+                     $res = $this->db->get('point_history');
+                     $point=$res->row_array();
+                     $new['points']=$point['points']-1000;
+                     $con['P_id']=$point['P_id'];
+                     $this->db->where($con);
+                     $res=$this->db->update('point_history',$new);
+                     return $this->db->affected_rows();
+                 }
+               }
+               
            }
            else
            {
@@ -278,7 +381,7 @@
         
         if($result)
         {
-           echo '1';
+           return $this->db->last_insert_id;
         }
         else
         {
@@ -312,6 +415,28 @@
         }
       }
         
+    }
+
+
+    public function productivity($data)
+    {
+      $result=$this->db->insert('tbl_employee_productivity',$data);
+      if($result)
+      {
+        return true;
+      }
+      else
+      {
+        return false;
+      }
+
+    }
+
+    public function end($table,$con,$data)
+    {
+             $this->db->where($con);
+             $res=$this->db->update('tbl_employee_productivity',$data);
+             return $res;
     }
 
     public function endbreak($data)
@@ -357,14 +482,14 @@
               $default_time_sec= mktime($hours, $minutes, $seconds);
               
 
-              $seconds = $time_taken_sec - $default_time_sec;
-              $sec=($seconds % 60);
+              $letseconds = $time_taken_sec - $default_time_sec;
+              $sec=($letseconds % 60);
                if($sec<10)
                {
                $sec="0".$sec;
                }
-              $minutes = ($seconds / 60) % 60;
-              $hours = floor($seconds / (60 * 60));
+              $minutes = ($letseconds / 60) % 60;
+              $hours = floor($letseconds / (60 * 60));
 
               $extra_taken="$hours:$minutes:$sec";
          
@@ -377,7 +502,65 @@
             
              $this->db->where($data2);
              $res=$this->db->update('break_track',$nwdata);
-             return $this->db->affected_rows();
+             if($res)
+             {
+
+                  if($letseconds<=7200)
+                 {
+                    $start_date=date("Y-m-d", strtotime(date('m').'/01/'.date('Y')));
+                    $end_date=date("Y-m-d");
+
+                     $this->db->select('*');
+                     $this->db->where('Eid',$data['Eid']);
+                     $this->db->where('last_update BETWEEN "'. date('Y-m-d', strtotime($start_date)). '" and "'. date('Y-m-d', strtotime($end_date)).'"');
+                     $res = $this->db->get('point_history');
+                     $point=$res->row_array();
+                     $new['points']=$point['points']-250;
+                     $con['P_id']=$point['P_id'];
+                     $this->db->where($con);
+                     $res=$this->db->update('point_history',$new);
+                     return $this->db->affected_rows();
+
+                     
+                 }
+                 else if($letseconds>=7200 && $letseconds<=14400)
+                 {
+                    $start_date=date("Y-m-d", strtotime(date('m').'/01/'.date('Y')));
+                    $end_date=date("Y-m-d");
+
+                     $this->db->select('*');
+                     $this->db->where('Eid',$data['Eid']);
+                     $this->db->where('last_update BETWEEN "'. date('Y-m-d', strtotime($start_date)). '" and "'. date('Y-m-d', strtotime($end_date)).'"');
+                     $res = $this->db->get('point_history');
+                     $point=$res->row_array();
+                     $new['points']=$point['points']-500;
+                     $con['P_id']=$point['P_id'];
+                     $this->db->where($con);
+                     $res=$this->db->update('point_history',$new);
+                     return $this->db->affected_rows();
+                 }
+                 else
+                 {
+                      $start_date=date("Y-m-d", strtotime(date('m').'/01/'.date('Y')));
+                      $end_date=date("Y-m-d");
+
+                     $this->db->select('*');
+                     $this->db->where('Eid',$data['Eid']);
+                     $this->db->where('last_update BETWEEN "'. date('Y-m-d', strtotime($start_date)). '" and "'. date('Y-m-d', strtotime($end_date)).'"');
+                     $res = $this->db->get('point_history');
+                     $point=$res->row_array();
+                     $new['points']=$point['points']-1000;
+                     $con['P_id']=$point['P_id'];
+                     $this->db->where($con);
+                     $res=$this->db->update('point_history',$new);
+                     return $this->db->affected_rows();
+                 }
+
+
+
+
+
+             }
           }
           else
           {

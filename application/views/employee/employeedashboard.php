@@ -534,17 +534,17 @@
                           <div class="col-md-12">
                             <div class="type-btn">
                               <ul>
-                                <li>
-                                  <button class="btn btn-type">Production</button>
+                                <li>checkmode
+                                  <button class="btn btn-type" onclick="location.href='employee_control/Employee/setproduction'">Production</button>
                                 </li>
                                 <li>
-                                  <button class="btn btn-type">R&D</button>
+                                  <button class="btn btn-type" onclick="location.href='employee_control/Employee/setrnd'">R&D</button>
                                 </li>
                                 <li>
-                                  <button class="btn btn-type">Training</button>
+                                  <button class="btn btn-type" onclick="location.href='employee_control/Employee/settraining'">Training</button>
                                 </li>
                                 <li>
-                                  <button class="btn btn-type">Administrative</button>
+                                  <button class="btn btn-type" onclick="location.href='employee_control/Employee/setadmin'">Administrative</button>
                                 </li>
 
                               </ul>  
@@ -560,6 +560,7 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="box calender">
+                    <h2>Our Calender</h2>
                     <!-- <iframe src="https://calendar.google.com/calendar/embed?title=Tier5%20Events&amp;showTitle=0&amp;showPrint=0&amp;height=400&amp;wkst=1&amp;bgcolor=%23336666&amp;src=en.indian%23holiday%40group.v.calendar.google.com&amp;color=%232952A3&amp;ctz=Asia%2FCalcutta" style="border-width:0" width="100%" height="380" frameborder="0" scrolling="no"></iframe> -->
                     <div id="calendar_div">
                         <?php echo $calendar; ?>
@@ -570,7 +571,11 @@
                 
           </div>
 
-          <div class="col-lg-2 col-md-2 col">
+           
+
+          
+        </div>
+              <div class="col-lg-2 col-md-2 col">
               <div class="chat">
                 <ul>
                   <li>
@@ -613,14 +618,12 @@
                 </ul>  
                 <div class="clearfix"></div>
               </div>  
-          </div>  
+          </div> 
 
-          
-        </div>
-            
+
           </div>
           
-            
+          
         
 
         </div>
