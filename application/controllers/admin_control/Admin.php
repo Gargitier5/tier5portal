@@ -58,7 +58,49 @@ class Admin extends CI_Controller
         $this->load->view('admin/pointadd.php',$data);
     }
     
+    public function show_allholyday()
+    {
+      
+     // $con=
+      //$data['allholiday']=$this->AdminModel->fetchinfo('holiday',$con,'result');
+      $data['sideber']=$this->load->view('admin/includes/sideber','',true);
+      $data['header']=$this->load->view('admin/includes/header','',true);
+      $this->load->view('admin/show_allholyday.php',$data);
 
+    }
+    public function addholyday()
+    {
+
+      
+      $data['sideber']=$this->load->view('admin/includes/sideber','',true);
+      $data['header']=$this->load->view('admin/includes/header','',true);
+      $this->load->view('admin/addholyday.php',$data);
+    }
+
+    public function add_holi()
+    {
+      $data['date']=$this->input->post('datepicker');
+      $data['occation']=$this->input->post('reason');
+      $insert_holi=$this->AdminModel->insert('holiday',$data);
+      if($insert_holi)
+      {
+            $this->session->set_userdata('succ_msg','HolidayAdded Successfully,Check Holiday List');
+           redirect(base_url().'admin_control/admin/addholyday');
+      }
+      else
+      {
+           $this->session->set_userdata('succ_msg','Try Again');
+           redirect(base_url().'admin_control/admin/addholyday');
+      }
+    }
+    
+    public function specialholiday()
+    {
+      $data['sideber']=$this->load->view('admin/includes/sideber','',true);
+      $data['header']=$this->load->view('admin/includes/header','',true);
+      $this->load->view('admin/specialholiday.php',$data);
+    }
+  
     public function expendature_attend()
     {
          if($_POST)

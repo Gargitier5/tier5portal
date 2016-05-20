@@ -78,6 +78,20 @@
                     </ul>
                   </li>
 
+                    <li><a><i class="fa fa-smile-o"></i>Holiday Management<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="<?php echo base_url();?>admin_control/admin/show_allholyday">All Holidays</a>
+                      </li>
+
+                      <li><a href="<?php echo base_url();?>admin_control/admin/addholyday">Add Holiday</a>
+                      </li>
+
+                      <li><a href="<?php echo base_url();?>admin_control/admin/specialholiday">Special Holiday</a>
+                      </li>
+                      
+                    </ul>
+                  </li>
+
                 </ul>
               </div>
               <!-- <div class="menu_section">

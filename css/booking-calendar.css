@@ -106,34 +106,34 @@ h3.booking-head span{ background: url("../images/content-bg.gif") repeat #fff;}
 
     #calender_section_bot ul li p{font-size: 9px;}
 
-    .bc-navigation{width: 100% !important; float: none;}
-    .bc-month{width: 100% !important; float: none; margin: 10px 0 }
-    .bc-navigation-month{width: 100% !important; float: none;}
+    .bc-navigation{width: 10% !important; float: none;}
+    .bc-month{width: 10% !important; float: none; margin: 10px 0 }
+    .bc-navigation-month{width: 10% !important; float: none;}
 
 
 }
-@media only screen and (min-width: 320px) and (max-width: 479px) {
-    #calender_section{ width:219px;}
+@media only screen and (min-width: 32px) and (max-width: 47px) {
+    #calender_section{ width:21px;}
     #calender_section_top ul li{ width:30px; font-size:11px;}
     #calender_section_bot ul li{ width:30px;}
-    #calender_section_bot{ width:217px;}
+    #calender_section_bot{ width:21px;}
     #calender_section_bot ul li{ height:50px;}
 
-    #calender_section_bot ul li{width: 100% !important; height: 100px;}
+    #calender_section_bot ul li{width: 100% !important; height: 10px;}
     .bc-navigation{width: 100%; float: none; padding: 4px 0}
     .bc-month{width: 100%; float: none; padding: 4px 0}
-    .bc-navigation-month{width: 100%; float: none; margin-top: 10px;}
+    .bc-navigation-month{width: 10%; float: none; margin-top: 10px;}
     .bc-navigation-month select{width: 100%;}
 
 
 }
 
-@media only screen and (min-width: 768px) and (max-width: 1023px) {
-    #calender_section{ width:700px;}
-    #calender_section_top ul li{ width:100px;}
-    #calender_section_bot ul li{ width:116px;}
-    #calender_section_bot{ width:700px;}
-    #calender_section_bot ul li{ height:50px;}
+@media only screen and (min-width: 76px) and (max-width: 10px) {
+    #calender_section{ width:70px;}
+    #calender_section_top ul li{ width:10px;}
+    #calender_section_bot ul li{ width:11px;}
+    #calender_section_bot{ width:70px;}
+    #calender_section_bot ul li{ height:5px;}
     #calender_section_bot ul li span{padding: 2px 0 0 0 !important; font-size: 10px;}
 }
 
@@ -142,9 +142,9 @@ h3.booking-head span{ background: url("../images/content-bg.gif") repeat #fff;}
 #calender_section_bot ul li{vertical-align: middle;}
 
 #calender_section_bot ul li.bc-past{background: #898989 !important; color: #fff}
-#calender_section_bot ul li span{display: block; width: 100%; margin: 0; padding: 21px 0 0; font-size: 19px;}
+#calender_section_bot ul li span{display: block; width: 10%; margin: 0; padding: 21px 0 0; font-size: 5px;}
 #calender_section_bot ul li p{margin: 0; display: inline-block;}
-#calender_section_bot ul li.bc-available{background: #8EC63F; color: #fff}
+#calender_section_bot ul li.bc-available{background: #05f2f1; color: #fff}
 #calender_section_bot ul li.bc-booked{background: #F44B52; color: #fff}
 #calender_section_top ul li{background: #A963A9; color: #fff; padding: 6px; border:none; }
 #calender_section_top ul li:first-child{border-top-left-radius: 5px; border-bottom-left-radius: 5px;}
