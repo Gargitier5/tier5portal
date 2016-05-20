@@ -23,12 +23,13 @@ class Employee extends CI_Controller
                
         $check=$this->EmployeeModel->login($username,$password);
 
-   
+        $this->load->library('villa_booking_calendar');
+        
          if ($this->session->userdata('uid'))
           {
 
          
-
+              $data['calendar'] = $this->villa_booking_calendar->render_booking_calendar();
               $con['parent_id']=0;
               $con['status']=0;
               $userid['id']=$this->session->userdata('uid');

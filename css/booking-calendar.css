@@ -1,0 +1,160 @@
+/* fullcalendar style */
+/*    .fc-highlight {background: #000 !important}
+    .fc-day-grid-available {
+        margin: 1px 2px 0;
+        padding: 0 1px;
+    }
+    .fc-available {
+        color: #fff;
+        border-radius: 3px;
+        display: block;
+        font-size: 0.85em;
+        font-weight: 400;
+        line-height: 1.3;
+        position: relative;
+    }
+    .fc-available-day-number{
+        text-align: left;
+        padding-bottom: 2px;
+        padding-top: 2px;
+    }
+    .fc-available-day-number.fc-other-month {
+        opacity: 0.3;
+    }
+    .fc-time {display: none;}
+    .fc-past {opacity: 0.3;}
+    .req {color: red;}*/
+    
+    /* new custom calendar style */
+
+
+
+.none{ display:none;}
+.dropdown{color: #444444;font-size:17px;}
+#calender_section{  margin:30px auto 0;}
+#calender_section h2{ background-color:#efefef; color:#444444; font-size:17px; text-align:center; line-height:40px;}
+#calender_section h2 a{ float:none;}
+#calender_section_top{ width:100%; float:left; margin-top:20px;}
+#calender_section_top ul{padding:0; list-style-type:none;}
+#calender_section_top ul li{ float:left; display:block; width:122px; border-right:1px solid #fff;  text-align:center; font-size:14px; min-height:0; background:none; box-shadow:none; margin:0; padding:0;}
+#calender_section_bot{ width:100%; margin-top:9px; float:left; border-left:2px solid #fff; border-bottom:2px solid #fff;}
+#calender_section_bot ul{ margin:0; padding:0; list-style-type:none;}
+#calender_section_bot ul li{ float:left; width:122px; height:96px; text-align:center; border-top:2px solid #fff; border-right:2px solid #fff; min-height:0; background:none; box-shadow:none; margin:0; padding:0; position:relative;}
+#calender_section_bot ul li span{ margin-top:7px; float:left; margin-left:7px; text-align:center;}
+
+.calender-days {margin: 0 !important}
+.date-selected {background: #3c8e0c !important; opacity: 1 !important}
+.bc-future, .bc-other-month{background: #ddd; color: #999 ; opacity: 0.4}
+.bc-future:hover{opacity: 1}
+
+
+.bc-booked {color: #DD6464;}
+.bc-available {color: #68BA68;}
+.bc-today {color: #FFA500}
+.grey{ background-color:#DDDDDD !important; }
+.light_sky{ background-color:#B9FFFF !important; }
+
+/*========== Hover Popup ===============*/
+.date_cell { cursor: pointer; cursor: hand; }
+.date_cell:hover { background: #3c8e0c !important; }
+.date_window {
+    margin-top:20px;
+    margin-bottom: 2px;
+    padding: 5px;
+    font-size: 16px;
+    margin-left:9px;
+    margin-right:14px
+}
+
+
+
+
+.bc-navigation{width: 30%; float: left}
+.bc-month{width: 30%; float: left; text-align: center; font-family: "Times New Roman", Georgia, Serif; color: #000; font-style: italic; font-size: 25px;}
+.bc-navigation-month{width: 30%; float: right; text-align: center;  }
+.bc-navigation-month select{width: 40%; float: right;  color: #fff; -webkit-appearance: none; -moz-appearance: none; appearance: none; padding: 3px; border-radius: 5px; border:none; margin-right: 10px; font-size: 12px;
+background: url('../images/down-arrow.png') no-repeat right 4px center #F44B52;
+}
+
+a.cal-navi{background: #8EC63F; padding: 2px 8px; border-radius: 4px;}
+.bc-navigation a{border:none !important;}
+
+h3.booking-head{background: url('../images/minus.png') repeat-x bottom; padding: 10px 0 0 ; font-weight: normal; font-style: italic; font-family: "Times New Roman", Georgia, Serif; font-size: 24px;}
+h3.booking-head span{ background: url("../images/content-bg.gif") repeat #fff;}
+
+
+/*@media only screen and (min-width:480px) and (max-width:850px) {
+
+#calender_section_top ul li{width: 100px !important}
+
+
+}*/
+
+@media only screen and (max-width: 688px) {
+
+    
+
+
+}
+
+@media only screen and (min-width:480px) and (max-width:767px) {
+    #calender_section{ width:336px;}
+    #calender_section_top ul li{ width:47px; }
+    #calender_section_bot ul li{ width:47px; height: 71px !important;}
+
+    #calender_section_bot ul li span{padding: 2px 0 0 0 !important; font-size: 10px !important;}
+
+    #calender_section_bot ul li p{font-size: 9px;}
+
+    .bc-navigation{width: 100% !important; float: none;}
+    .bc-month{width: 100% !important; float: none; margin: 10px 0 }
+    .bc-navigation-month{width: 100% !important; float: none;}
+
+
+}
+@media only screen and (min-width: 320px) and (max-width: 479px) {
+    #calender_section{ width:219px;}
+    #calender_section_top ul li{ width:30px; font-size:11px;}
+    #calender_section_bot ul li{ width:30px;}
+    #calender_section_bot{ width:217px;}
+    #calender_section_bot ul li{ height:50px;}
+
+    #calender_section_bot ul li{width: 100% !important; height: 100px;}
+    .bc-navigation{width: 100%; float: none; padding: 4px 0}
+    .bc-month{width: 100%; float: none; padding: 4px 0}
+    .bc-navigation-month{width: 100%; float: none; margin-top: 10px;}
+    .bc-navigation-month select{width: 100%;}
+
+
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+    #calender_section{ width:700px;}
+    #calender_section_top ul li{ width:100px;}
+    #calender_section_bot ul li{ width:116px;}
+    #calender_section_bot{ width:700px;}
+    #calender_section_bot ul li{ height:50px;}
+    #calender_section_bot ul li span{padding: 2px 0 0 0 !important; font-size: 10px;}
+}
+
+/*table css*/
+
+#calender_section_bot ul li{vertical-align: middle;}
+
+#calender_section_bot ul li.bc-past{background: #898989 !important; color: #fff}
+#calender_section_bot ul li span{display: block; width: 100%; margin: 0; padding: 21px 0 0; font-size: 19px;}
+#calender_section_bot ul li p{margin: 0; display: inline-block;}
+#calender_section_bot ul li.bc-available{background: #8EC63F; color: #fff}
+#calender_section_bot ul li.bc-booked{background: #F44B52; color: #fff}
+#calender_section_top ul li{background: #A963A9; color: #fff; padding: 6px; border:none; }
+#calender_section_top ul li:first-child{border-top-left-radius: 5px; border-bottom-left-radius: 5px;}
+#calender_section_top ul li:last-child{border-top-right-radius: 5px; border-bottom-right-radius: 5px;}
+
+.bc-booked p{font-size: 19px;}
+
+
+.modal-backdrop{z-index: 1 }
+.modal{z-index: 500}
+
+
+/*table css*/

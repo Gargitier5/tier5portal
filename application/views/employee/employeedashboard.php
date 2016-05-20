@@ -10,9 +10,10 @@
     <base href="<?php echo base_url();?>">
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/booking-calendar.css" rel="stylesheet">
     <link href="css/custom2.css" rel="stylesheet">
     <!-- jQuery -->
-     <script src="vendors/jquery/dist/jquery.min.js"></script>
+    <script src="vendors/jquery/dist/jquery.min.js"></script>
 
                     
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -23,9 +24,12 @@
     <![endif]-->
     <script type="text/javascript" src="js/jquery-2.0.3.js"></script>
     <script type="text/javascript" src="js/jquery.countdownTimer.js"></script>
-   
+    <script type="text/javascript">
+      var BASE_URL = "<?php echo (is_https() ? 'https' : 'http').'://'.$_SERVER['HTTP_HOST'].substr($_SERVER['SCRIPT_NAME'], 0, strpos($_SERVER['SCRIPT_NAME'], basename($_SERVER['SCRIPT_FILENAME'])))?>";
+    </script>
 
    <script type="text/javascript" src="js/employee.js"></script> 
+   <script type="text/javascript" src="js/booking-calendar.js"></script> 
 
     <link rel="stylesheet" href="css/jquery.mCustomScrollbar.css">
 
@@ -35,7 +39,7 @@
 
    
 
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+   <!-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
       google.charts.load("current", {packages:["corechart"]});
       google.charts.setOnLoadCallback(drawChart);
@@ -94,7 +98,7 @@
         var chart = new google.visualization.Histogram(document.getElementById('chart_div'));
         chart.draw(data, options);
       }
-    </script>
+    </script>-->
 
 
      <!-- For Chart -->
@@ -556,8 +560,10 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="box calender">
-                    <iframe src="https://calendar.google.com/calendar/embed?title=Tier5%20Events&amp;showTitle=0&amp;showPrint=0&amp;height=400&amp;wkst=1&amp;bgcolor=%23336666&amp;src=en.indian%23holiday%40group.v.calendar.google.com&amp;color=%232952A3&amp;ctz=Asia%2FCalcutta" style="border-width:0" width="100%" height="380" frameborder="0" scrolling="no"></iframe>
-
+                    <!-- <iframe src="https://calendar.google.com/calendar/embed?title=Tier5%20Events&amp;showTitle=0&amp;showPrint=0&amp;height=400&amp;wkst=1&amp;bgcolor=%23336666&amp;src=en.indian%23holiday%40group.v.calendar.google.com&amp;color=%232952A3&amp;ctz=Asia%2FCalcutta" style="border-width:0" width="100%" height="380" frameborder="0" scrolling="no"></iframe> -->
+                    <div id="calendar_div">
+                        <?php echo $calendar; ?>
+                    </div>
                   </div>  
                 </div>
               </div>  
@@ -620,6 +626,23 @@
         </div>
       </div>  
     </section>  
+
+
+
+
+<div class="modal booking-popup" id="booking_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Book Now</h4>
+            </div>
+            <form role="form" name="booking_form" action="" id="booking_form" method="POST">
+                <input type="text" name="" value=""/>
+            </form>
+        </div>
+    </div>
+</div>
     
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
