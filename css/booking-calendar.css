@@ -97,7 +97,7 @@ h3.booking-head span{ background: url("../images/content-bg.gif") repeat #fff;}
 
 }
 
-/*@media only screen and (min-width:480px) and (max-width:767px) {
+@media only screen and (min-width:480px) and (max-width:767px) {
     #calender_section{ width:336px;}
     #calender_section_top ul li{ width:47px; }
     #calender_section_bot ul li{ width:47px; height: 71px !important;}
@@ -135,7 +135,7 @@ h3.booking-head span{ background: url("../images/content-bg.gif") repeat #fff;}
     #calender_section_bot{ width:700px;}
     #calender_section_bot ul li{ height:50px;}
     #calender_section_bot ul li span{padding: 2px 0 0 0 !important; font-size: 10px;}
-}*/
+}
 
 /*table css*/
 
