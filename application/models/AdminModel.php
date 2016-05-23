@@ -94,6 +94,14 @@
         return $res->result_array();
     }
 
+    public function showallemp()
+    {
+      $this->db->select('*');
+       $this->db->where('activation_status',0);
+      $res=$this->db->get('employee');
+        return $res->result_array();
+    }
+
     public function update($tbl,$con,$data)
     {
         $this->db->where($con);
@@ -224,8 +232,25 @@
         
         return $res->result_array();
       }
+       
+      public function getholiday($con)
+      {
+        $this->db->select('*');
+        $this->db->order_by('date','ASC');
+        $this->db->where("DATE_FORMAT(date,'%Y')", $con );
+        $res=$this->db->get('holiday');
+        return $res->result_array();
+      }
       
-
+      public function fetchallspc($con)
+      {
+        $this->db->select('specialholiday.*,employee.name');
+        $this->db->join('employee',"specialholiday.Eid=employee.id");
+        $this->db->order_by('date','DESC');
+        $this->db->where("DATE_FORMAT(date,'%Y')", $con );
+        $res=$this->db->get('specialholiday');
+        return $res->result_array();
+      }
     public function empclock($con)
     {
 
@@ -272,6 +297,60 @@
       
       return $res->result_array();
     }
+
+    public function emplateclockin($con)
+    {
+      $this->db->select('attendance.*,employee.name');
+      $this->db->join('employee',"attendance.Eid=employee.id");
+      $this->db->where('attendance.date',$con);
+      $this->db->where('attendance.clockin_late',1);
+      $res=$this->db->get('attendance');
+      
+      return $res->result_array();
+
+    }
+
+    public function empearlyclockout($con)
+    {
+       $this->db->select('attendance.*,employee.name');
+      $this->db->join('employee',"attendance.Eid=employee.id");
+      $this->db->where('attendance.date',$con);
+      $this->db->where('attendance.clockout_early',1);
+      $res=$this->db->get('attendance');
+      
+      return $res->result_array();
+    }
+
+    public function emplatebrk($con)
+    {
+       $this->db->select('break_track.*,employee.name');
+      $this->db->join('employee',"break_track.Eid=employee.id");
+      $this->db->where('break_track.date',$con);
+      $this->db->where('break_track.action',1);
+      $res=$this->db->get('break_track');
+      
+      return $res->result_array();
+    }
+
+    public function empabsent($con)
+    {
+      $this->db->select('tbl_late_emp.*,employee.name');
+      $this->db->join('employee',"tbl_late_emp.Eid=employee.id");
+      $this->db->where('tbl_late_emp.date',$con);
+      $res=$this->db->get('tbl_late_emp');
+      return $res->result_array();
+    }
+
+     public function selectprint($data)
+          {
+             $this->db->select('lunchorder.*,employee.name');
+             $this->db->where('Liid',$data);
+             $this->db->join('employee','employee.id=lunchorder.Eid');
+             $res=$this->db->get('lunchorder');
+             return $res->result_array();
+
+          }
+
 
 
   } 

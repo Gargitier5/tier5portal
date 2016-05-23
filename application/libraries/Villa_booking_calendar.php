@@ -26,7 +26,7 @@ class Villa_booking_calendar {
     // @CI: instance of codeigniter class to load any library, model or helper into this library.
     protected $CI;
     // @booking_dates: Array of all dates those are booked
-    protected $booking_dates = array();
+    protected $event_date = array();
     // @prices: Array of all dates and corrosponding prices those are updated
     protected $prices = array();
     // @dates: Array of all dates those booking price has been updated
@@ -242,11 +242,51 @@ class Villa_booking_calendar {
         return $html;
     }
 
+    public function get_event_date()
+    {
+      $CI=& get_instance();
+      $CI->load->database(); 
+
+      $CI->db->select('*');
+      $res = $CI->db->get('tbl_event_informations');
+      $result=$res->result_array();  
+      return $result;   
+    }
+
+    public function check_date($results, $cur_month, $cur_date)
+    {
+      if(!empty($results)){
+        foreach ($results as $result) {
+            # code...
+            $date_arr = explode('-', $result['date']);
+            /*print_r($date_arr);*/
+            /*$month = $date_arr[1];
+            $date = $date_arr[2];*/
+            if($cur_month == $date_arr[1] && $cur_date == $date_arr[2]){
+                return $result['EventId'];
+                break;
+            }
+
+        }
+      } 
+      return false;
+    }
+    
+
     public function render_booking_calendar_dates($year, $month){
-        $updated_date_prices = $this->get_villa_prices();
-        $updated_dates = $this->get_villa_dates();
-        $bookings = $this->get_booking($this->villa_id); // get the booking start dates and end dates for that villa id
-        $booking_dates = $this->get_booking_dates($bookings); // get all the booked dates
+        $event_date=$this->get_event_date();
+        /*echo '<pre>';
+        print_r($this->check_date($event_date, '05', '11'));
+        die();*/
+
+        /*echo '<pre>';
+        print_r($event_date);
+        die();*/
+
+        //$updated_date_prices = $this->get_villa_prices();
+        //$updated_dates = $this->get_villa_dates();
+        //$bookings = $this->get_booking($this->villa_id); // get the booking start dates and end dates for that villa id
+        //$booking_dates = $this->get_booking_dates($bookings); // get all the booked dates
         $dateYear = $year;
         $dateMonth = $month;
         $date = $year.'-'.$month.'-01';
@@ -268,34 +308,16 @@ class Villa_booking_calendar {
                 $eventNum = 0;
                 $class = (strtotime(date('Y-m-d')) > strtotime($currentDate)) ? 'bc-past' : 'bc-current';
                 $class .= (date('Y-m-d') == $currentDate) ? ' bc-today' : '';
-                if(in_array($currentDate, $booking_dates)){
-                    $html .= '<li data-date="'.$currentDate.'" class="'.$class.' bc-booked bc-unavailable">';
-                    $html .= "<span>$dayCount</span>";
-                    if(strtotime(date('Y-m-d')) <= strtotime($currentDate)){
-                        $html .= "<p>Booked</p>";
-                    }
-                    $html .= '</li>';
-                }else{
-                    $class .= (strtotime(date('Y-m-d')) > strtotime($currentDate)) ? '' : ' date_cell';
-                    $html .= '<li data-date="'.$currentDate.'" class="'.$class.' bc-available">';
-                    $html .= "<span>$dayCount</span>";
-                    /*if(strtotime(date('Y-m-d')) <= strtotime($currentDate)){
-                        $html .= "<p>Available</p>";
-                        if(in_array($currentDate, $updated_dates)){
-                            foreach($updated_date_prices as $val){
-                                if($val['date'] == $currentDate){
-                                    $price = $val['price'];
-                                }
-                            }
-                        }else{
-                           $price = $this->get_villa_min_price();
-                        }
-                        $html .= "<p>$$price</p>";
-                    }*/
-                    $html .= '</li>';
+                $class .= (strtotime(date('Y-m-d')) > strtotime($currentDate)) ? '' : ' date_cell';
+                $html .= '<li data-date="'.$currentDate.'" class="'.$class.' bc-available">';
+                $html .= "<span>$dayCount</span>";
+                //var_dump($this->check_date($event_date, $dateMonth, $dayCount));
+                if($event = $this->check_date($event_date, $dateMonth, $dayCount)){
+                    $html .= "<span class='event-show'>Event</span>";                   
                 }
+                $html .= '</li>';
                 $dayCount++;
-            }else{
+            }else{ // not required. keep it for now
                 $dispaly_date = '&nbsp;';
                 if(($cb < ($currentMonthFirstDay + 1) && $currentMonthFirstDay <> 7)){
                     $date_prev = new DateTime($date);
@@ -304,7 +326,7 @@ class Villa_booking_calendar {
                     $data_date = $date_prev->format('Y-m-d');
                     $back_days--;
                     $class = (strtotime(date('Y-m-d')) > strtotime($data_date)) ? 'bc-past' : 'date_cell';
-                    if(in_array($data_date, $booking_dates)){
+                    if(in_array($data_date, $event_date)){
                         $html .= "<li data-date='$data_date' class='$class bc-unavailable bc-booked bc-other-month'>";
                         $html .= "<span>$dispaly_date</span>";
                         $html .= "<p>Booked</p>";
@@ -333,7 +355,7 @@ class Villa_booking_calendar {
                     $dispaly_date = $date_next->format('d');
                     $data_date = $date_next->format('Y-m-d');
                     $increment++;
-                    if(in_array($data_date, $booking_dates)){
+                    if(in_array($data_date, $event_date)){
                         $html .= "<li data-date='$data_date' class='bc-future bc-unavailable bc-booked bc-other-month'>";
                         $html .= "<span>$dispaly_date</span>";
                         $html .= "<p>Booked</p>";

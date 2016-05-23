@@ -330,7 +330,7 @@ class Employee extends CI_Controller
 
 
          $insert=$this->EmployeeModel->productivity($data);
-         redirect(base_url().'employee_control/employee');
+         reworkingmodedirect(base_url().'employee_control/employee');
       }
 
       
@@ -370,6 +370,7 @@ class Employee extends CI_Controller
 
       
     }
+
 
     public function wmodecheck()
     {

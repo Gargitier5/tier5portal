@@ -524,66 +524,8 @@
                         </div> 
                         <div class="col-md-4 col-sm-4 col-xs-4">
                           <div class="time">
-                            <label id="hours">00</label>:<label id="minutes">00</label>:<label id="seconds">00</label>
-    <script type="text/javascript">
-     var totalSeconds = 0;
-        var hoursLabel = document.getElementById("hours");
-        var minutesLabel = document.getElementById("minutes");
-        var secondsLabel = document.getElementById("seconds");
-      function workingmodep()
-      {
-        
-        var res= $.ajax({
-        type : 'post',
-        url : 'employee_control/employee/setproduction',
-        async : false,
-        success : function(msg)
-          {
-               window.location.reload();   
-          }
-        });
-        setInterval(setTime, 1000);
-      }
-
-      function workingmoder()
-      {
-        
-        var res= $.ajax({
-        type : 'post',
-        url : 'employee_control/employee/setrnd',
-        //data : 'shop_id='+shop_id,
-        async : false,
-        success : function(msg)
-          {
-              $('#itembyshop').html(msg);
-          }
-        });
-        setInterval(setTime, 1000);
-      }
-
-        function setTime()
-        {
-            ++totalSeconds;
-            secondsLabel.innerHTML = pad(totalSeconds%60);
-            minutesLabel.innerHTML = pad(parseInt(totalSeconds/60));
-            hoursLabel.innerHTML = pad(parseInt(totalSeconds/3600));
-            
-        }
-
-        function pad(val)
-        {
-            var valString = val + "";
-            if(valString.length < 2)
-            {
-                return "0" + valString;
-            }
-            else
-            {
-                return valString;
-            }
-        }
-    </script>
-
+                            <div id="timer"></div>
+<!-- <div id ="stop_timer" onclick="clearInterval(timerVar)">Stop time</div> -->
                           </div>  
 
                         </div>  
@@ -594,10 +536,10 @@
                             <div class="type-btn">
                               <ul>
                                 <li>
-                                  <button class="btn btn-type"  <?php if($checkmode['type']==1){ echo "disabled";} ?> onclick="workingmodep();">Production</button>
+                                  <button class="btn btn-type"  <?php if($checkmode['type']==1){ echo "disabled";} ?> onclick="location.href='employee_control/Employee/setproduction'">Production</button>
                                 </li>
                                 <li>
-                                  <button class="btn btn-type"  <?php if($checkmode['type']==2){ echo "disabled";} ?> onclick="workingmoder();">R&D</button>
+                                  <button class="btn btn-type"  <?php if($checkmode['type']==2){ echo "disabled";} ?> onclick="location.href='employee_control/Employee/setrnd'">R&D</button>
                                 </li>
                                 <li>
                                   <button class="btn btn-type"  <?php if($checkmode['type']==3){ echo "disabled";} ?> onclick="location.href='employee_control/Employee/settraining'">Training</button>

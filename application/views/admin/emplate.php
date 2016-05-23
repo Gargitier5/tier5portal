@@ -81,15 +81,57 @@
                       <table class="table table-striped jambo_table bulk_action">
                         <thead>
                           <tr>
+                            <th>Name</th>
+                            <th>Duration</th>
            
                             
                           </tr>
                         </thead>
                          
                         <tbody>
-                          <tr>
-                               
+                          <?php foreach ($emplateclockin as $key) 
+                          {?>
+                            <tr>
+                               <td><?php echo $key['name']; ?></td>
+                               <td><?php echo $key['late_time']; ?></td>
                           </tr>
+                          <?php } ?>
+                          
+                        </tbody>
+                      </table>
+                    </div>
+                </div>
+              </div>
+
+
+            </div>
+
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                
+
+ 
+                  <h2>Employee Early On Clock Out</h2>
+                  <div class="x_content">
+                    <div class="table-responsive">
+                      <table class="table table-striped jambo_table bulk_action">
+                        <thead>
+                          <tr>
+                            <th>Name</th>
+                            <th>Duration</th>
+                            
+                          </tr>
+                        </thead>
+                         
+                        <tbody>
+                          <?php foreach ($empearlyclockout as $key) 
+                          {?>
+                            <tr>
+                               <td><?php echo $key['name']; ?></td>
+                               <td><?php echo $key['early_time']; ?></td>
+                          </tr>
+                          <?php } ?>
+                          
                         </tbody>
                       </table>
                     </div>
@@ -110,16 +152,56 @@
                       <table class="table table-striped jambo_table bulk_action">
                         <thead>
                           <tr>
-           
+                            <th>Name</th>
+                            <th>Break Name</th>
+                            <th>Duration</th>
                             
                           </tr>
                         </thead>
                          
-                        <tbody>
-                          <tr>
-                               
+                          <tbody>
+                          <?php foreach ($emplatebrk as $key) 
+                          {?>
+                            <tr>
+                               <td><?php echo $key['name']; ?></td>
+                               <td><?php if($key['type']==1){ echo "First Break";}else if($key['type']==2){ echo "Second Break";}else{ echo "Third Break";}  ?></td>
+                               <td><?php echo $key['time']; ?></td>
                           </tr>
+                          <?php } ?>
+                          
                         </tbody>
+                      </table>
+                    </div>
+                </div>
+              </div>
+
+
+            </div>
+
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                
+
+ 
+                  <h2>Employee Absent</h2>
+                  <div class="x_content">
+                    <div class="table-responsive">
+                      <table class="table table-striped jambo_table bulk_action">
+                        <thead>
+                          <tr>
+                             <th>Name</th>
+                            <th>Duration</th>
+                            
+                          </tr>
+                        </thead>
+                         
+                       <?php foreach ($empabsent as $key) 
+                          {?>
+                            <tr>
+                               <td><?php echo $key['name']; ?></td>
+                               <td>9:00:00</td>
+                          </tr>
+                          <?php } ?>
                       </table>
                     </div>
                 </div>

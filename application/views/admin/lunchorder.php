@@ -27,7 +27,7 @@
     <!-- jQuery -->
      <script src="vendors/jquery/dist/jquery.min.js"></script>
 
-    <script type="text/javascript" src="js/admin_emp.js"></script>
+    <script type="text/javascript" src="js/lunchorderadmin.js"></script>
 
 
       <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
@@ -117,7 +117,7 @@ echo $datee; ?></td>
                                 <td><?php echo $value['items']; ?></td>
                                 <td><?php echo $value['cost']; ?></td>
                                 <td><button id="dlrlnh" class="btn btn-danger btn-sm glyphicon glyphicon-trash" onclick="dlt(<?php echo $value['Liid']; ?>)"></button></td>
-                                <td><button class="btn btn-danger btn-sm glyphicon glyphicon-print" onclick="myFunction(<?php echo $value['Liid']; ?>)"></button></td>
+                                <td><button class="btn btn-danger btn-sm glyphicon glyphicon-print" onclick="print_single(<?php echo $value['Liid']; ?>)"></button></td>
                                 <td><input type="checkbox" name="print_check[]" value="<?php echo $value['Liid']; ?>" id="printselect_<?php echo $value['Liid']; ?>"></td>
                             </tr>
                           <?php }?>
@@ -129,6 +129,42 @@ echo $datee; ?></td>
               </div>
 
               
+           
+
+
+
+             <div class="modal fade" id="printsingleorder" role="dialog">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title printconfirm" align="center"><strong>Print</strong></h4>
+              </div>
+              <div class="modal-body ">
+                <div class="col-sm-1"></div>
+                <div class="col-sm-10">
+                     <div id='printdiv' style='padding-left:30px;padding-right:30px;'>
+                     </div>
+                
+
+                </div>
+                <div class="col-sm-1"></div>
+              </div>  
+              <div class="modal-footer">
+                <a id="printfinal" class="btn btn-danger btn-md glyphicon glyphicon-print" >Print</a>
+              </div>            
+          </div>     
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+
 
 
             </div>

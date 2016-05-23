@@ -3,45 +3,42 @@ $(document).ready(function(){
 
  $.post('employee_control/employee/wmodecheck',function(data){
 
-  if(data){
-  var data1=data.split(",");
-        $('#hours').html(data1[2]);
-        $('#minutes').html(data1[1]);
-        $('#seconds').html(data1[0]);
+  
+      var data1=data.split(",");  
+
+
+        var timerVar = setInterval(countTimer, 1000);
         var totalSeconds = data1[3];
-        var hoursLabel = document.getElementById("hours");
-        var minutesLabel = document.getElementById("minutes");
-        var secondsLabel = document.getElementById("seconds");
-      setTimeout(setTime, 1000);
-
-
-        function setTime()
+        function countTimer()
         {
-            ++totalSeconds;
-            secondsLabel.innerHTML = pad(totalSeconds%60);
-            minutesLabel.innerHTML = pad(parseInt(totalSeconds/60));
-            hoursLabel.innerHTML = pad(parseInt(totalSeconds/3600));
-            
+         ++totalSeconds;
+         var hour = Math.floor(totalSeconds /3600);
+         if(hour<10)
+         {
+          hour="0"+hour;
+         }
+         var minute = Math.floor((totalSeconds - hour*3600)/60);
+         if(minute<10)
+         {
+          minute="0"+minute;
+         }
+
+         var seconds = totalSeconds - (hour*3600 + minute*60);
+         if(seconds<10)
+         {
+          seconds="0"+seconds;
+         }
+         document.getElementById("timer").innerHTML = hour + ":" + minute + ":" + seconds;
         }
 
-        function pad(val)
-        {
-            var valString = val + "";
-            if(valString.length < 2)
-            {
-                return "0" + valString;
-            }
-            else
-            {
-                return valString;
-            }
-        }
-     }
+        
+     
 
  });
  $.post('employee_control/employee/breakcheck',function(data){
   if(data)
   {
+
     $('#clockout_btn').prop('disabled', true);
     var data1=data.split(','); 
     $('#breakstart_'+data1[1]).text("Work");
@@ -239,6 +236,8 @@ function Start_Break(breakid,duration)
         if(data)
         {
 
+
+
           var data2=duration.split(':'); 
           $('#hm_timer'+breakid).countdowntimer({
           hours : data2[0],
@@ -246,12 +245,6 @@ function Start_Break(breakid,duration)
           seconds:data2[2],
           pauseButton : 'breakstart_'+breakid
           });
-          
-
-         
-
-
-
 
 
 

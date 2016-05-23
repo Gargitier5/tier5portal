@@ -105,6 +105,7 @@
                      $res = $this->db->get('point_history');
                      $point=$res->row_array();
                      $new['points']=$point['points']-250;
+                     $new['last_update']=date("Y-m-d");
                      $con['P_id']=$point['P_id'];
                      $this->db->where($con);
                      $res=$this->db->update('point_history',$new);
@@ -212,8 +213,8 @@
                      $res = $this->db->get('point_history');
                      $point=$res->row_array();
                      $new['points']=$point['points']-250;
-                     $con['P_id']=$point['P_id'];
-                     $this->db->where($con);
+                     $con1['P_id']=$point['P_id'];
+                     $this->db->where($con1);
                      $res=$this->db->update('point_history',$new);
                      return $this->db->affected_rows();
 
@@ -229,10 +230,11 @@
                      $this->db->where('last_update BETWEEN "'. date('Y-m-d', strtotime($start_date)). '" and "'. date('Y-m-d', strtotime($end_date)).'"');
                      $res = $this->db->get('point_history');
                      $point=$res->row_array();
-                     $new['points']=$point['points']-500;
-                     $con['P_id']=$point['P_id'];
-                     $this->db->where($con);
-                     $res=$this->db->update('point_history',$new);
+                     $new1['points']=$point['points']-500;
+
+                     $con1['P_id']=$point['P_id'];
+                     $this->db->where($con1);
+                     $res=$this->db->update('point_history',$new1);
                      return $this->db->affected_rows();
                  }
                  else
@@ -246,8 +248,8 @@
                      $res = $this->db->get('point_history');
                      $point=$res->row_array();
                      $new['points']=$point['points']-1000;
-                     $con['P_id']=$point['P_id'];
-                     $this->db->where($con);
+                     $con1['P_id']=$point['P_id'];
+                     $this->db->where($con1);
                      $res=$this->db->update('point_history',$new);
                      return $this->db->affected_rows();
                  }

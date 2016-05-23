@@ -150,7 +150,7 @@
                 </div>
                 <div class="x_content">
                    <h1><?php  echo $total_present; ?> </h1>
-
+                         
                 </div>
               </div>
             </div>

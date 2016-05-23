@@ -60,9 +60,25 @@ class Admin extends CI_Controller
     
     public function show_allholyday()
     {
-      
-     // $con=
-      //$data['allholiday']=$this->AdminModel->fetchinfo('holiday',$con,'result');
+       if($_POST)
+       {
+          if($this->input->post('yearselect'))
+          {
+            $con=$this->input->post('yearselect');
+          }
+          else
+          {
+             $con=date('Y');
+          }
+          
+
+       }
+       else
+       {
+          $con=date('Y');
+       }
+       
+       $data['allholiday']=$this->AdminModel->getholiday($con);
       $data['sideber']=$this->load->view('admin/includes/sideber','',true);
       $data['header']=$this->load->view('admin/includes/header','',true);
       $this->load->view('admin/show_allholyday.php',$data);
@@ -94,13 +110,79 @@ class Admin extends CI_Controller
       }
     }
     
+    public function delete_holiday()
+    {
+      $con['h_list']=$this->input->post('ho');
+      $delete=$this->AdminModel->delete($con,'holiday');
+      return $delete;
+
+    }
+    public function delete_spholiday()
+    {
+      $con['sp_h']=$this->input->post('ho');
+      $delete=$this->AdminModel->delete($con,'specialholiday');
+      return $delete;
+
+    }
+    
     public function specialholiday()
     {
+      
+       if($_POST)
+       {
+          if($this->input->post('yearselect'))
+          {
+            $con=$this->input->post('yearselect');
+          }
+          else
+          {
+             $con=date('Y');
+          }
+          
+
+       }
+       else
+       {
+          $con=date('Y');
+       }
+      $data['allspecialholiday']=$this->AdminModel->fetchallspc($con);
+      $data['showallemp']=$this->AdminModel->showallemp();
       $data['sideber']=$this->load->view('admin/includes/sideber','',true);
       $data['header']=$this->load->view('admin/includes/header','',true);
       $this->load->view('admin/specialholiday.php',$data);
     }
-  
+    
+    public function addspholiday()
+    {
+        if($_POST)
+      {
+            $data['Eid']=$this->input->post('name');
+            $data['date']=$this->input->post('datepicker');
+            $data['reason']=$this->input->post('reason');
+            if($data['Eid'] && $data['date'] && $data['reason'])
+            {
+              $insert_spholiday=$this->AdminModel->insert('specialholiday',$data);
+              if($insert_spholiday)
+              {
+                 $this->session->set_userdata('succ_msg','Special Holiday Added Successfully');
+                     redirect(base_url().'admin_control/admin/specialholiday');
+              }
+              else
+              {
+                $this->session->set_userdata('err_msg','Try Again!!!');
+                     redirect(base_url().'admin_control/admin/specialholiday');
+              }
+            }
+            else
+            {
+              $this->session->set_userdata('err_msg','All Fields Are Needed!!!');
+                   redirect(base_url().'admin_control/admin/specialholiday');
+            }
+      }
+
+
+    }
+
     public function expendature_attend()
     {
          if($_POST)
@@ -849,12 +931,81 @@ class Admin extends CI_Controller
 
       public function emplate()
       {
-          
+        $con=date('Y-m-d');
+        $data['empabsent']=$this->AdminModel->empabsent($con);
+        $data['empearlyclockout']=$this->AdminModel->empearlyclockout($con);
+        $data['emplateclockin']=$this->AdminModel->emplateclockin($con);
+        $data['emplatebrk']=$this->AdminModel->emplatebrk($con);
         $data['header']=$this->load->view('admin/includes/header','',true);
         $data['sideber']=$this->load->view('admin/includes/sideber','',true);
         $this->load->view('admin/emplate.php',$data);
 
       }
+
+      function Fnsingleprint()
+    {
+        extract($_POST);
+        $result='';
+        $Fetch_Info=$this->AdminModel->selectprint($orderid);
+          foreach($Fetch_Info as $orders)
+          {
+            if($orders['ord_emp']=='')
+            {
+        $result.= '<div class="col-sm-10"   style="border: 2px solid black;" >
+                
+                      <div align="left"><img src="'.base_url().'application/views/img/logo.png" alt="" width="200px" /></div><div align="right" style="padding-right:10px;">Shop Name:<span id="empshop"> '.$orders['shopname'].'</span></div>
+                      </br>
+                      <div style="padding-left:10px;"> Employee Name:<span id="empname"> '.$orders['propname'].'</span></div>
+                      <br>
+                      <br>
+                      <div style="padding-left:10px;"> Lunch Items:<span id="emplunch"> '.$orders['items'].'</span></div><div align="right" style="padding-right:10px;">Total Cost:<span id="empcost"> '.$orders['cost'].'</span></div>
+                  
+                     <div style="padding-left:10px;">  Date:<span id="empdate"> '.date('d/m/Y',strtotime($orders['date'])).'</span></div>
+                      </br>
+                      </br>
+                      </br>
+
+                      <div align="right"> Authorized Signature...............................................<img src="'.base_url().'application/views/img/logo.png" alt="" width="50px"  /></div>
+               
+                       </div>';
+                   }
+                   else
+                   {
+
+                    $n_exp=explode(',',$orders['ord_emp']);
+            $n_arr=array();
+            $str='';
+            /*for($i=0; $i<count($n_exp);$i++)
+            {
+                  $name=$this->AdminModel->FngetName($n_exp[$i]);
+                array_push($n_arr,$name['propname']);
+              
+            }*/
+            $str=implode(',',$n_arr);
+            $cost=count($n_exp)*$orders['cost'];
+                    $result.= '<div class="col-sm-10"   style="border: 2px solid black;" >
+                
+                      <div align="left"><img src="'.base_url().'application/views/img/logo.png" alt="" width="200px" /></div><div align="right" style="padding-right:10px;">Shop Name:<span id="empshop"> '.$orders['shopname'].'</span></div>
+                      </br>
+                      <div style="padding-left:10px;"> Employee Name:<span id="empname"> '.$str.'</span></div>
+                      <br>
+                      <br>
+                      <div style="padding-left:10px;"> Lunch Items:<span id="emplunch"> '.$orders['items'].'</span></div><div align="right" style="padding-right:10px;">Per head Cost:<span id="empcost"> '.$orders['cost'].'</span></div><div align="right" style="padding-right:10px;">Total Cost:<span id="empcost"> '.$cost.'</span></div>
+                  
+                     <div style="padding-left:10px;">  Date:<span id="empdate"> '.date('d/m/Y',strtotime($orders['date'])).'</span></div>
+                      </br>
+                      </br>
+                      </br>
+
+                      <div align="right"> Authorized Signature...............................................<img src="'.base_url().'application/views/img/logo.png" alt="" width="50px"  /></div>
+               
+                       </div>';
+                   }
+
+            }
+            
+            echo $result;
+    }
 
 }
 ?>

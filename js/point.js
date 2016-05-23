@@ -61,3 +61,27 @@ function editpoint(po_id)
 {
     alert(po_id);
 }
+
+function delete_holiday(ho_id)
+{
+
+  $.post('admin_control/admin/delete_holiday',{ho:ho_id},function(){
+    // if(data)
+     //{
+       window.location.reload();
+     //}
+  });
+
+}
+
+function delete_spholiday(ho_id)
+{
+
+  $.post('admin_control/admin/delete_spholiday',{ho:ho_id},function(){
+    // if(data)
+     //{
+       window.location.reload();
+     //}
+  });
+
+}
