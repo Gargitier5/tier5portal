@@ -272,7 +272,30 @@ class Admin extends CI_Controller
        
         $this->load->view('admin/expendature_attend.php',$data);
     }
-
+    
+     public function getitembyshop()
+   {
+      extract($_POST);
+      $items="";
+      //print_r($_POST);
+      $data['parent_id']=$this->input->post('shopid');
+      $result=$this->AdminModel->fetchinfo('items',$data,'result');
+      foreach ($result as $value)
+      {
+            $condition="";
+            $condition=($value['limit1']+$value['item']);
+        $options="";
+        for($y=1;$y<=$value['limit1'];$y++)
+        {
+                         
+      $options.='<option id="limit_'.$value['Lnid'].'" value="'.$y.'">'.$y.'</option>';
+                          
+      }
+        //print_r($value['item']);
+        $items.= "<tr><td id='item_name_".$value['Lnid']."'>".$value['item']."</td><td id='item_cost_".$value['Lnid']."'>".$value['cost']."</td><td><select id='item_limit_".$value['Lnid']."'>".$options."</select></td><td><input type='button' value='Add' id='btnadd_".$value['Lnid']."' onclick='addorremove(".$value['Lnid'].",".$value['cost'].")' ></td></tr>";
+      }
+      echo $items;
+   }
     public function allpoint()
     {   
 
@@ -783,6 +806,7 @@ class Admin extends CI_Controller
     {
       
       $data['Liid']=$this->input->post('orderid');
+      //print_r($data);
       $result=$this->AdminModel->delete($data,'lunchorder');
       if($result)
       {
@@ -790,9 +814,53 @@ class Admin extends CI_Controller
       }
       
     }
-
-    public function placelunch()
+    public function sublorder()
     {
+      $data['Eid']=$this->input->post('emp_id');
+      $data['date']=date('Y-m-d');
+      $data['shopname']=$this->input->post('shop_name');
+      $data['shop_id']=$this->input->post('shop_id');
+      $data['items']=$this->input->post('total_item');
+      $data['cost']=$this->input->post('total_cost');
+      $data['status']='0';
+      
+      if($data['cost']<=100)
+      {
+        $con['Eid']=$data['Eid'];
+        $con['date']=$data['date'];
+        $check=$this->AdminModel->fetchinfo('lunchorder',$con,'count');
+        if($check>0)
+        {
+          $this->session->set_userdata('err_msg','This Employee Already Placed Lunch Order');
+          redirect(base_url().'admin_control/admin/placelunch');
+        }
+        else
+        {
+          $insert_lorder=$this->AdminModel->insert('lunchorder',$data);
+          if($insert_lorder)
+          {
+             $this->session->set_userdata('succ_msg','Lunch Order Placed Successfully');
+             redirect(base_url().'admin_control/admin/placelunch');
+          }
+          else
+          {
+            $this->session->set_userdata('err_msg','Try Again');
+           redirect(base_url().'admin_control/admin/placelunch');
+          }
+        }
+        
+      }
+      else
+      {
+          $this->session->set_userdata('err_msg','Cost More Than Rs 100/-');
+          redirect(base_url().'admin_control/admin/placelunch');
+      }
+
+
+    }
+    public function placelunch()
+    {   
+
         $con['activation_status']=0;
         $data['allemployee']=$this->AdminModel->fetchinfo('employee',$con,'result');
 
@@ -1032,9 +1100,9 @@ class Admin extends CI_Controller
             {
         $result.= '<div class="col-sm-10"   style="border: 2px solid black;" >
                 
-                      <div align="left"><img src="'.base_url().'application/views/img/logo.png" alt="" width="200px" /></div><div align="right" style="padding-right:10px;">Shop Name:<span id="empshop"> '.$orders['shopname'].'</span></div>
+                      <div align="left"><img src="'.base_url().'images/logo.png" alt="" width="200px" /></div><div align="right" style="padding-right:10px;">Shop Name:<span id="empshop"> '.$orders['shopname'].'</span></div>
                       </br>
-                      <div style="padding-left:10px;"> Employee Name:<span id="empname"> '.$orders['propname'].'</span></div>
+                      <div style="padding-left:10px;"> Employee Name:<span id="empname"> '.$orders['name'].'</span></div>
                       <br>
                       <br>
                       <div style="padding-left:10px;"> Lunch Items:<span id="emplunch"> '.$orders['items'].'</span></div><div align="right" style="padding-right:10px;">Total Cost:<span id="empcost"> '.$orders['cost'].'</span></div>
@@ -1044,7 +1112,7 @@ class Admin extends CI_Controller
                       </br>
                       </br>
 
-                      <div align="right"> Authorized Signature...............................................<img src="'.base_url().'application/views/img/logo.png" alt="" width="50px"  /></div>
+                      <div align="right"> Authorized Signature...............................................<img src="'.base_url().'images/logo.png" alt="" width="50px"  /></div>
                
                        </div>';
                    }
@@ -1057,14 +1125,14 @@ class Admin extends CI_Controller
             /*for($i=0; $i<count($n_exp);$i++)
             {
                   $name=$this->AdminModel->FngetName($n_exp[$i]);
-                array_push($n_arr,$name['propname']);
+                array_push($n_arr,$name['name']);
               
             }*/
             $str=implode(',',$n_arr);
             $cost=count($n_exp)*$orders['cost'];
                     $result.= '<div class="col-sm-10"   style="border: 2px solid black;" >
                 
-                      <div align="left"><img src="'.base_url().'application/views/img/logo.png" alt="" width="200px" /></div><div align="right" style="padding-right:10px;">Shop Name:<span id="empshop"> '.$orders['shopname'].'</span></div>
+                      <div align="left"><img src="'.base_url().'images/logo.png" alt="" width="200px" /></div><div align="right" style="padding-right:10px;">Shop Name:<span id="empshop"> '.$orders['shopname'].'</span></div>
                       </br>
                       <div style="padding-left:10px;"> Employee Name:<span id="empname"> '.$str.'</span></div>
                       <br>
@@ -1076,7 +1144,7 @@ class Admin extends CI_Controller
                       </br>
                       </br>
 
-                      <div align="right"> Authorized Signature...............................................<img src="'.base_url().'application/views/img/logo.png" alt="" width="50px"  /></div>
+                      <div align="right"> Authorized Signature...............................................<img src="'.base_url().'images/logo.png" alt="" width="50px"  /></div>
                
                        </div>';
                    }
@@ -1084,6 +1152,186 @@ class Admin extends CI_Controller
             }
             
             echo $result;
+    }
+
+    public function FnfetchAllOrder()
+    {
+
+
+      $data['date']=$this->input->post('date');
+        $data['status']=0;
+
+
+      $all_order=$this->AdminModel->FnAllorder($data);
+
+      //echo '<pre>';print_r($all_order);
+      $result='';
+      if(!empty($all_order))
+      {
+      foreach($all_order as $orders)
+      {
+        if($orders['ord_emp']=='')
+        {
+         $result.= '<div class="col-sm-10"   style="border: 2px solid black;" >
+                
+                      <div align="left"><img src="'.base_url().'images/logo.png" alt="" width="200px" /></div><div align="right" style="padding-right:10px;">Shop Name:<span id="empshop"> '.$orders['shopname'].'</span></div>
+                      </br>
+                      <div style="padding-left:10px;"> Employee Name:<span id="empname"> '.$orders['name'].'</span></div>
+                    
+                      <br>
+                      <br>
+                      <div style="padding-left:10px;"> Lunch Items:<span id="emplunch"> '.$orders['items'].'</span></div><div align="right" style="padding-right:10px;">Total Cost:<span id="empcost"> '.$orders['cost'].'</span></div>
+                  
+                      <div style="padding-left:10px;"> Date:<span id="empdate"> '.date('d/m/Y',strtotime($orders['date'])).'</span></div>
+                      </br>
+                      </br>
+                      </br>
+
+                      <div align="right"> Authorized Signature...............................................<img src="'.base_url().'images/logo.png" alt="" width="50px"  /></div>
+               
+                       </div>';
+
+                 $result.= '&nbsp;&nbsp;<div style="margin-top:5px;"></div>';
+             }
+             else
+             {
+              if(strpos($orders['ord_emp'], ',') !== false)
+              {
+                 $n_exp=explode(',',$orders['ord_emp']);
+            $n_arr=array();
+            $str='';
+            for($i=0; $i<count($n_exp);$i++)
+            {
+                  $name=$this->AdminModel->FngetName($n_exp[$i]);
+                array_push($n_arr,$name['name']);
+              
+            }
+            $str=implode(',',$n_arr);
+            $cost=count($n_exp)*$orders['cost'];
+                $result.= '<div class="col-sm-10"   style="border: 2px solid black;" >
+                
+                      <div align="left"><img src="'.base_url().'images/logo.png" alt="" width="200px" /></div><div align="right" style="padding-right:10px;">Shop Name:<span id="empshop"> '.$orders['shopname'].'</span></div>
+                      </br>
+                      <div style="padding-left:10px;"> Employee Name:<span id="empname"> '.$str.'</span></div>
+                    
+                      <br>
+                      <br>
+                      <div style="padding-left:10px;"> Lunch Items:<span id="emplunch"> '.$orders['items'].'</span></div><div align="right" style="padding-right:10px;">Per Head Cost:<span id="empcost"> '.$orders['cost'].'</span></div><div align="right" style="padding-right:10px;">Total Cost:<span id="empcost"> '.$cost.'</span></div>
+                  
+                      <div style="padding-left:10px;"> Date:<span id="empdate"> '.date('d/m/Y',strtotime($orders['date'])).'</span></div>
+                      </br>
+                      </br>
+                      </br>
+
+                      <div align="right"> Authorized Signature...............................................<img src="'.base_url().'images/logo.png" alt="" width="50px"  /></div>
+               
+                       </div>';
+
+                 $result.= '&nbsp;&nbsp;<div style="margin-top:5px;"></div>';
+              }
+          
+             }
+
+      }
+        //$result.='<a id="printfinalAll" class="btn btn-danger btn-md glyphicon glyphicon-print" >Print</a>';
+        }
+      echo $result;
+
+    }
+
+
+    public function selectprint()
+    {
+      extract($_POST);
+      //$data=$orderid;
+      //print_r($orderid);
+      $result='';
+      
+      for($i=0;$i<count($orderid);$i++)
+      {
+      $all_order=$this->AdminModel->selectprint($orderid[$i]);
+        if(!empty($all_order))
+      {
+
+      foreach($all_order as $orders)
+      {
+
+        if($orders['ord_emp']!='' && strpos($orders['ord_emp'], ',') !== false)
+        {
+          
+        
+                    $n_exp=explode(',',$orders['ord_emp']);
+            $n_arr=array();
+            $str1='';
+            for($k=0; $k<count($n_exp);$k++)
+            {
+                  $name=$this->AdminModel->FngetName($n_exp[$k]);
+                array_push($n_arr,$name['name']);
+              
+            }
+            $str1=implode(',',$n_arr);
+            $cost=count($n_exp)*$orders['cost'];
+            
+            
+                 $result.= '<div class="col-sm-10" style="border: 2px solid black;" >
+                
+                      <div align="left"><img src="'.base_url().'images/logo.png" alt="" width="200px" /></div><div align="right" style="padding-right:10px;">Shop Name:<span id="empshop"> '.$orders['shopname'].'</span></div>
+                      </br>
+                      <div style="padding-left:10px;"> Employee Name:<span id="empname"> '.$str1.'</span></div>
+                    
+                      <br>
+                      <br>
+                      <div style="padding-left:10px;"> Lunch Items:<span id="emplunch"> '.$orders['items'].'</span></div><div align="right" style="padding-right:10px;">Per Head Cost:<span id="empcost"> '.$orders['cost'].'</span></div><div align="right" style="padding-right:10px;">Total Cost:<span id="empcost"> '.$cost.'</span></div>
+                  
+                      <div style="padding-left:10px;"> Date:<span id="empdate"> '.date('d/m/Y',strtotime($orders['date'])).'</span></div>
+                      </br>
+                      </br>
+                      </br>
+
+                      <div align="right"> Authorized Signature...............................................<img src="'.base_url().'application/views/img/logo.png" alt="" width="50px"  /></div>
+               
+                       </div>';
+
+                  $result.= '&nbsp;&nbsp;<div style="margin-top:5px;"></div>';
+          
+
+             }
+             else
+             {
+              
+                  $result.= '<div class="col-sm-10"   style="border: 2px solid black;" >
+                
+                      <div align="left"><img src="'.base_url().'images/logo.png" alt="" width="200px" style="-webkit-print-color-adjust: exact;"/></div><div align="right" style="padding-right:10px;">Shop Name:<span id="empshop"> '.$orders['shopname'].'</span></div>
+                      </br>
+                      <div style="padding-left:10px;"> Employee Name:<span id="empname"> '.$orders['name'].'</span></div>
+                      <br>
+                      <br>
+                      <div style="padding-left:10px;">  Lunch Items:<span id="emplunch"> '.$orders['items'].'</span></div><div align="right" style="padding-right:10px;">Total Cost:<span id="empcost"> '.$orders['cost'].'</span></div>
+                  
+                     <div style="padding-left:10px;">  Date:<span id="empdate"> '.date('d/m/Y',strtotime($orders['date'])).'</span></div>
+                      </br>
+                      </br>
+                      </br>
+
+                      <div align="right"> Authorized Signature...............................................<img src="'.base_url().'images/logo.png" alt="" width="50px"  /></div>
+               
+                       </div>';
+                                          
+                 $result.= '&nbsp;&nbsp;<div style="margin-top:5px;"></div>';
+                
+          
+
+              
+             }
+
+      }
+        //$result.='<a id="printfinalAll" class="btn btn-danger btn-md glyphicon glyphicon-print" >Print</a>';
+        }
+
+      }
+        echo $result;
+       
+    
     }
 
 }

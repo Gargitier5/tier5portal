@@ -89,13 +89,30 @@
                   <div class="x_content">
 
                    
-                   <div id="msg"></div>
+                    <div> 
+                   <?php if($this->session->userdata('succ_msg')!=''){?>
+                      <div class="alert alert-success alert-dismissable">
+                    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                    <h4>  <i class="icon fa fa-check"></i> Success!</h4>
+                    <?php echo $this->session->userdata('succ_msg');$this->session->set_userdata('succ_msg','');?>
+                  </div>
+
+<?php } if($this->session->userdata('err_msg')!=''){ ?>
+
+<div class="alert alert-danger alert-dismissable">
+                    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                    <h4><i class="icon fa fa-ban"></i> Sorry!</h4>
+                  <?php echo  $this->session->userdata('err_msg');$this->session->set_userdata('err_msg','');?>
+                 </div> 
+<?php }?>
+                </div>
                     <div class="table-responsive">
                         <table class="table table-striped jambo_table bulk_action">
                         <tr>
                           <td>Select The Employee Name</td>
                           <td>
-                            <select >
+                           
+                            <select id="emp_name" name="emp_name">
                               <option value="">--Select--</option>
                             <?php foreach($allemployee as $employee){
                               ?>
@@ -108,11 +125,11 @@
                        <tr>
                           <td>Select The Shop</td>
                           <td>
-                            <select id="selectshop_id" >
+                            <select id="selectshop_id" name="selectshop_id">
                               <option value="">--Select--</option>
                             <?php foreach($allshop as $shop){
                               ?>
-                                    <option value="<?php echo $shop['Lnid'];?>"><?php echo $shop['item'];?></option>
+                                    <option value="<?php echo $shop['Lnid'];?>,<?php echo $shop['item'];?>"><?php echo $shop['item'];?></option>
                             <?php }
                               ?>
                             </select>
@@ -132,8 +149,8 @@
                     </tr>
                     <tr>
                          <td>Selected Item
-
-                           <input type="hidden" name="total_item_lunch1" id="total_item_lunch1">
+<!-- 
+                           <input type="text" name="total_item_lunch1" id="total_item_lunch1"> -->
                          </td>
                         
                          <td id="total_item_lunch" name="total_item_lunch">
@@ -143,13 +160,13 @@
                           
                     </tr>
                     <tr>
-                         <td>Cost <input type="hidden" name="total_cost_lunch1" id="total_cost_lunch1"></td>
+                         <td>Cost <!-- <input type="text" name="total_cost_lunch1" id="total_cost_lunch1"></td> -->
                          <td id="total_cost_lunch" name="total_cost_lunch">00</td>
 
                     </tr>
                     <tr>
-                         <td><input type="button" value="Submit Lunch Order" onclick="lunchsubmit();"></td>
-                         
+                         <td><input type="submit" id="submit_lunch" value="Submit Lunch Order"></td>
+                       
                  
                     </tr>
                     

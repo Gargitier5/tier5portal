@@ -59,6 +59,37 @@
        return $res->result_array();
     }
     
+    public function FnAllorder($data)
+           {
+            
+
+            $this->db->select('lunchorder.*,employee.name');
+            if($data['date']=='')
+            {
+            $this->db->where('date',date('Y-m-d'));
+            }
+            else
+            {
+               $this->db->where('date',date('Y-m-d',strtotime($data['date'])));
+            }
+          //  $this->db->where('ord_emp',$data['ord_emp']);
+            $this->db->where('status',$data['status']);
+            $this->db->join('employee','employee.id=lunchorder.Eid');
+            $res=$this->db->get('lunchorder');
+           return $res->result_array();
+           }
+    public function selectprint($data)
+          {
+             $this->db->select('lunchorder.*,employee.name');
+             //$result= $this->db->get_where('lunchorder',$data);
+             //return $result->row_array();
+             //return $data;
+             $this->db->where('Liid',$data);
+             $this->db->join('employee','employee.id=lunchorder.Eid');
+             $res=$this->db->get('lunchorder');
+             return $res->result_array();
+
+          }
     public function fnallpointexp($start_date,$end_date)
     {
        $this->db->select('point_history.*,employee.name');
@@ -341,15 +372,6 @@
       return $res->result_array();
     }
 
-     public function selectprint($data)
-          {
-             $this->db->select('lunchorder.*,employee.name');
-             $this->db->where('Liid',$data);
-             $this->db->join('employee','employee.id=lunchorder.Eid');
-             $res=$this->db->get('lunchorder');
-             return $res->result_array();
-
-          }
 
 
 

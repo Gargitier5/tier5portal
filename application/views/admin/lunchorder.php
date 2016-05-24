@@ -132,31 +132,13 @@ echo $datee; ?></td>
            
 
 
-
-             <div class="modal fade" id="printsingleorder" role="dialog">
-        <div class="modal-dialog modal-lg">
-          <div class="modal-content">
-              <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h4 class="modal-title printconfirm" align="center"><strong>Print</strong></h4>
-              </div>
-              <div class="modal-body ">
-                <div class="col-sm-1"></div>
-                <div class="col-sm-10">
-                     <div id='printdiv' style='padding-left:30px;padding-right:30px;'>
-                     </div>
-                
-
-                </div>
-                <div class="col-sm-1"></div>
-              </div>  
-              <div class="modal-footer">
-                <a id="printfinal" class="btn btn-danger btn-md glyphicon glyphicon-print" >Print</a>
-              </div>            
-          </div>     
+   <div class="container container-fluid" id='new_print' style="display:none">
+        <div class='row'>
+        <div class="col-sm-10" style="margin-bottom:5px;"><a class="btn btn-danger" href="admin_control/admin/lunchorder">Back</a></div>
+        <div id='print_all' class="col-md-12 col-sm-12">
         </div>
-      </div>
-
+         <a id="printfinalAll" class="btn btn-danger btn-md glyphicon glyphicon-print" >Print</a>
+        </div></div>
 
 
 
