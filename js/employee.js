@@ -2,11 +2,12 @@
 $(document).ready(function(){
 
  $.post('employee_control/employee/wmodecheck',function(data){
-
+    
+  
   
       var data1=data.split(",");  
 
-
+      
         var timerVar = setInterval(countTimer, 1000);
         var totalSeconds = data1[3];
         function countTimer()

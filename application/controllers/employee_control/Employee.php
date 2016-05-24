@@ -403,6 +403,10 @@ class Employee extends CI_Controller
               echo $sec.",".$minutes.",".$hours.",".$time_spend;
 
        }
+       else
+       {
+        return false;
+       }
 
     }
 

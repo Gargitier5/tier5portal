@@ -45,7 +45,59 @@ class Admin extends CI_Controller
       redirect(base_url());
       $this->session->sess_destroy();
     }
+    
+    public function deleteshop()
+    {
+      $shopid=$this->input->post('shopid');
+      $con['parent_id']=$shopid;
+      $delete_item_of_shop=$this->AdminModel->delete($con,'items');
+       
+          $con1['Lnid']=$shopid;
+          $delete_shop=$this->AdminModel->delete($con1,'items');
+          if($delete_shop)
+          {
+            return true;
+          }
+          else
+          {
+            return false;
+          }
+    }
 
+    public function showallitem()
+    {
+       $shopid=$this->input->post('shopid');
+       $con['parent_id']=$shopid;
+       $getitem=$this->AdminModel->fetchinfo('items',$con,'result');
+
+         $result="";
+         foreach ($getitem as $row)
+          {
+          echo "<tr><td>".$row['item']."</td><td>".$row['cost']."</td><td>".$row['limit1']."</td><td><input type='button' class='btn btn-danger glyphicon glyphicon-trash' value='Delete' onclick='deleteitem(".$row['Lnid'].",".$shopid.")'></td></tr>";
+          }
+         echo $result;
+       
+    }
+
+    public function additem()
+    {
+      $data['item']=$this->input->post('itemname');
+      $data['cost']=$this->input->post('itemcost');
+      $data['limit1']=$this->input->post('itemlimit');
+      $data['parent_id']=$this->input->post('shopselect');
+      $data['status']=0;
+
+      if($data['item'] && $data['cost'] && $data['limit1'] && $data['parent_id'] )
+      {
+        $insert_item=$this->AdminModel->insert('items',$data);
+        if($insert_item)
+        {
+           $this->session->set_userdata('succ_msg','Item Added Successfully,Check Item List');
+           redirect(base_url().'admin_control/admin/addlunchitem');
+        }
+      }
+      
+    }
 
     public function pointadd()
     {
@@ -58,6 +110,20 @@ class Admin extends CI_Controller
         $this->load->view('admin/pointadd.php',$data);
     }
     
+    public function deleteitem()
+    {
+      $itemid['Lnid']=$this->input->post('itemid');
+      $delete_item=$this->AdminModel->delete($itemid,'items');
+      if($delete_item)
+      {
+        return true;
+      }
+      else
+      {
+        return false;
+      }
+
+    }
     public function show_allholyday()
     {
        if($_POST)
@@ -774,7 +840,20 @@ class Admin extends CI_Controller
       }
 
       public function addlunchitem()
-      {
+      { 
+        if($_POST)
+        { 
+          $add['item']=$this->input->post('shopname');
+          $add['cost']="0:00";
+          $add['limit1']="0";
+          $add['parent_id']="0";
+          $add['status']="0";
+          if($add['item'])
+          {
+          $insert_item=$this->AdminModel->insert('items',$add);
+          }
+        }
+
         $con['parent_id']=0;
         $data['allshop']=$this->AdminModel->fetchinfo('items',$con,'result');
         $data['header']=$this->load->view('admin/includes/header','',true);

@@ -20,7 +20,7 @@
     <link href="vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
     <!-- jVectorMap -->
     <link href="css/maps/jquery-jvectormap-2.0.3.css" rel="stylesheet"/>
-
+    
     <!-- Custom Theme Style -->
     <link href="css/custom.css" rel="stylesheet">
      
@@ -31,7 +31,7 @@
        <!-- jQuery -->
      <script src="vendors/jquery/dist/jquery.min.js"></script>
 
-
+     <script type="text/javascript" src="js/placelunch.js"></script>
 
 
       <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
