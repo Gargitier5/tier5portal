@@ -242,15 +242,12 @@
               <p>
                 Please Place Lunch order before 1:15:00 PM. Lunchorder Will not be active after that.
               </p> 
-                  <?php if (strtotime("13:15:00")>=time()) 
-                  {
-                    echo '<a href="#" class="lunch-btn" data-toggle="modal" id="show_lunch" >Lunch Order</a>';
-                  }
+                 
 
-                  ?>
+                  <a href="#" class="lunch-btn" data-toggle="modal" id="show_lunch" <?php if(date('H:i:s')<="13:15:00"){ echo "style=display:block;";} else {echo "style=display:none;";}?> >Lunch Order</a>
            <!--    <a href="#" class="lunch-btn" data-toggle="modal" id="show_lunch" >Lunch Order</a> -->
               <br>
-              <a class="lunch-btn" data-toggle="lunch_modal"  id="view_lunch" data-target="#lunch_modal">View Order</a>
+              <a class="lunch-btn" data-toggle="lunch_modal"  id="view_lunch" data-target="#lunch_modal" <?php if(date('H:i:s')<="13:15:00"){ echo "style=display:block;";} else {echo "style=display:none;";}?>>View Order</a>
 
            
               <!-- Modal -->
