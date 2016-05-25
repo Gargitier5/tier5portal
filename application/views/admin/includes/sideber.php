@@ -11,6 +11,8 @@
                       </li>
                       <li><a href="<?php echo base_url();?>admin_control/admin/add_employee">Add New Employee</a>
                       </li>
+                      <li><a href="">Set Points/Lunch Bonus</a>
+                      </li>
                     </ul>
                   </li>
 

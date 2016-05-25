@@ -277,7 +277,7 @@
         }
       
     }
-
+    
 
     public function getempofmonth()
     {
@@ -338,6 +338,19 @@
       $res = $this->db->get('notice_board');
       return $res->result_array();
     
+    }
+
+    public function getmode($data)
+    {
+
+       $this->db->select('*');
+       $this->db->where('Eid',$data['Eid']);
+       $this->db->where('date',$data['date']);
+       $this->db->order_by('emp_p_id','DESC');
+       $this->db->limit(1);
+       $res = $this->db->get('tbl_employee_productivity');
+       return  $result=$res->row_array();
+
     }
 
     public function getpoint($userid,$start_date,$end_date)

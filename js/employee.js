@@ -2,14 +2,14 @@
 $(document).ready(function(){
 
  $.post('employee_control/employee/wmodecheck',function(data){
-    
-  
-  
-      var data1=data.split(",");  
+      if(data) 
+      {
+       var data1=data.split(",");  
 
       
         var timerVar = setInterval(countTimer, 1000);
         var totalSeconds = data1[3];
+      }  
         function countTimer()
         {
          ++totalSeconds;
@@ -31,9 +31,6 @@ $(document).ready(function(){
          }
          document.getElementById("timer").innerHTML = hour + ":" + minute + ":" + seconds;
         }
-
-        
-     
 
  });
  $.post('employee_control/employee/breakcheck',function(data){
@@ -232,6 +229,8 @@ function Start_Break(breakid,duration)
   
   if(button=='Start Break')
   {
+
+   
     $.post('employee_control/employee/startbreak',{breakid:breakid},function(data){//inserting 0 in breakstatus column in attendence table 
       
         if(data)
@@ -280,9 +279,19 @@ function Start_Break(breakid,duration)
         
         }               
     });
+
+     $.post('employee_control/employee/checkwork',function(data){
+     
+    window.location.reload();   
+
+    }); 
   }
   else
   {
+      $.post('employee_control/employee/checkstastuswork',function(data){
+         
+      });
+
      $.post('employee_control/employee/endbreak', {breakid:breakid},function(data){//inserting 0 in breakstatus column in attendence table 
         if(data)
         { 

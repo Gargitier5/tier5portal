@@ -145,6 +145,56 @@ class Employee extends CI_Controller
       }
     }
 
+    public function checkwork()
+    {
+       $data['date']=date("Y-m-d");
+       $data['Eid'] = $this->session->userdata('uid');
+       $data['status']=1;
+
+       $checkmode=$this->EmployeeModel->fetchinfo('tbl_employee_productivity',$data,'row');
+
+       if($checkmode)
+       {
+
+        $con['date']=$data['date'];
+        $con['Eid']=$data['Eid'];
+        $con['status']=$data['status'];
+        $con['type']=$checkmode['type'];
+
+        $data1['status']=0;
+        $data1['endTime']=date('H:i:s');
+        $stopworkingmode=$this->EmployeeModel->update('tbl_employee_productivity',$con,$data1);
+
+       } 
+       else
+       {
+        return false;
+       }
+    }
+
+    public function checkstastuswork()
+    {
+      $data['date']=date("Y-m-d");
+      $data['Eid'] = $this->session->userdata('uid');
+
+      $take=$this->EmployeeModel->getmode($data);
+      if($take)
+       {
+          
+            $data1['Eid']=$this->session->userdata('uid');
+            $data1['date']=date('Y-m-d');
+            $data1['startTime']=date('H:i:s');
+            $data1['type']=$take['type'];
+            $data1['status']=1;
+            $insert=$this->EmployeeModel->productivity($data1); 
+
+       }
+       else
+       {
+        return false;
+       }
+    }
+
     public function startbreak()
     {
 
