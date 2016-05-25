@@ -243,7 +243,7 @@
                 Please Place Lunch order before 1:15:00 PM. Lunchorder Will not be active after that.
               </p> 
                  
-
+<?php echo date('H:i:s');?>
                   <a href="#" class="lunch-btn" data-toggle="modal" id="show_lunch" <?php if(date('H:i:s')<="13:15:00"){ echo "style=display:block;";} else {echo "style=display:none;";}?> >Lunch Order</a>
            <!--    <a href="#" class="lunch-btn" data-toggle="modal" id="show_lunch" >Lunch Order</a> -->
               <br>
