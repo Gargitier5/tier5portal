@@ -16,10 +16,14 @@ class Admin extends CI_Controller
 
    public function index()
     {  
+
+          if($_POST)
+          {
           $username=$this->input->post('adminid');
           $password=$this->input->post('adminpass');
          
-               
+      if($username && $password)
+      {         
         $check=$this->AdminModel->login($username,$password);
         if($check)
         {
@@ -37,11 +41,40 @@ class Admin extends CI_Controller
           else
           {
              redirect(base_url());
+
           }
         }
         else
         {
+          $this->session->set_userdata('e_message','Invalid Username or Password');
           redirect(base_url());
+        }
+      }
+      else
+      {
+        $this->session->set_userdata('e_message','Enter Username And Password');
+          redirect(base_url());
+      }
+
+        }
+        else
+        {
+           if ($this->session->userdata('adminid'))
+          {
+              
+              $con['activation_status']=0;
+              $con1['date']=date('Y-m-d');
+              $data['total_employee']=$this->AdminModel->fetchinfo('employee',$con,'count');
+              $data['total_present']=$this->AdminModel->fetchinfo('attendance',$con1,'count');
+              $data['sideber']=$this->load->view('admin/includes/sideber','',true);
+              $data['header']=$this->load->view('admin/includes/header','',true);
+              $this->load->view('admin/admin_dashboard.php',$data);
+          }
+          else
+          {
+             redirect(base_url());
+
+          }
         }
     }
 
@@ -69,7 +102,7 @@ class Admin extends CI_Controller
 
     public function logout()
     {
-     $this->session->unset_userdata('adminid');
+      $this->session->unset_userdata('adminid');
       redirect(base_url());
       $this->session->sess_destroy();
     }

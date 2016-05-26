@@ -91,9 +91,22 @@ setInterval( function() {
 
     <div class="bodypart">
         <div class="container">
-         <div class="col-md-12">   
+         <div class="col-md-12">
+
          <div class="row">   
         <div class="logo"><img src="images/tier5.png" alt="img"></div>
+               <div> 
+                <?php
+                 if($this->session->userdata('e_message')!='')
+                 {
+                   echo '<div style="color:red;">'.$this->session->userdata('e_message').'</div>';
+                   $this->session->set_userdata('e_message','');
+                 }   
+                ?>
+              </div>
+              <br>
+              <br>
+
         <ul>
             <li data-toggle="modal" data-target="#admin-login"><a href="#">ADMIN LOGIN</a></li>
           <!--   <li data-toggle="modal" data-target="#hr-login"><a href="#">HR LOGIN</a></li> -->

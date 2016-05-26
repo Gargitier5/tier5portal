@@ -8,30 +8,34 @@
     <title>Tier5</title>
     <link rel=icon href="http://tier5.us/images/favicon.ico">
     <base href="<?php echo base_url();?>">
+
+     <script src="http://code.jquery.com/jquery-latest.min.js"
+        type="text/javascript"></script>
+
+         <script type="text/javascript">
+      var BASE_URL = "<?php echo (is_https() ? 'https' : 'http').'://'.$_SERVER['HTTP_HOST'].substr($_SERVER['SCRIPT_NAME'], 0, strpos($_SERVER['SCRIPT_NAME'], basename($_SERVER['SCRIPT_FILENAME'])))?>";
+    </script>
+
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/booking-calendar.css" rel="stylesheet">
     <link href="css/custom2.css" rel="stylesheet">
     <!-- jQuery -->
-    <script src="vendors/jquery/dist/jquery.min.js"></script>
+  
 
-                    
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    <script type="text/javascript" src="js/jquery-2.0.3.js"></script>
-    <script type="text/javascript" src="js/jquery.countdownTimer.js"></script>
-    <script type="text/javascript">
-      var BASE_URL = "<?php echo (is_https() ? 'https' : 'http').'://'.$_SERVER['HTTP_HOST'].substr($_SERVER['SCRIPT_NAME'], 0, strpos($_SERVER['SCRIPT_NAME'], basename($_SERVER['SCRIPT_FILENAME'])))?>";
-    </script>
-
-   <script type="text/javascript" src="js/employee.js"></script> 
+     <script type="text/javascript" src="js/employee.js"></script>
+      
    <script type="text/javascript" src="js/booking-calendar.js"></script> 
 
     <link rel="stylesheet" href="css/jquery.mCustomScrollbar.css">
+
+    <style type="text/css">
+
+    ::selection{ background-color: #E13300; color: white; }
+    ::moz-selection{ background-color: #E13300; color: white; }
+    ::webkit-selection{ background-color: #E13300; color: white; }
+
+    </style>
 
 
 
@@ -583,45 +587,19 @@
               <div class="col-lg-2 col-md-2 col">
               <div class="chat">
                 <ul>
-                  <li>
-                    <div class="user-pic">
-                          <img src="images/user1.jpg" alt="img">
-                        </div>  
-                      <div class="user-name">Kingsuk Majumder</div>
-
-                  </li>
-                  <li>
-                    <div class="user-pic">
-                          <img src="images/user2.jpg" alt="img">
-                        </div>  
-                      <div class="user-name">Subhankar Roy</div>
-
-                  </li>
-                  <li>
-                    <div class="user-pic">
-                          <img src="images/user3.jpg" alt="img">
-                        </div>  
-                      <div class="user-name">Biplab Mukherjee</div>
-
-                  </li> 
-                  <li>
-                    <div class="user-pic">
-                          <img src="images/user4.jpg" alt="img">
-                        </div>  
-                      <div class="user-name">Amit Das</div>
-
-                  </li> 
+               <?php foreach($userlist as $online):
+    if($online['id']!= $this->session->userdata('uid')):
+    ?>
                   <li>
                     <div class="user-pic">
                           <img src="images/user5.jpg" alt="img">
                         </div>  
-                      <div class="user-name">Gargi Pal</div>
+                      <div class="user-name"><span onclick="javascript:chatWith('<?php echo $online['id'];?>','<?php echo $online['name'];?>' )"><?php echo $online['name'];?></span></div>
 
-                  </li> 
-
-
-                </ul>  
-                <div class="clearfix"></div>
+                  </li>
+                  <?php endif;endforeach;?>
+                   </ul>
+              <div class="clearfix"></div>
               </div>  
           </div> 
 
@@ -652,14 +630,8 @@
     </div>
 </div>
     
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
-
-   
-  <script>window.jQuery || document.write('<script src="../js/minified/jquery-1.11.0.min.js"><\/script>')</script>
-  
-  <!-- custom scrollbar plugin -->
-  <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+ <script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
   
   <script>
     (function($){
@@ -673,5 +645,12 @@
     })(jQuery);
   </script>
   <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+  <link type="text/css" rel="stylesheet" media="all" href="css/chat/chat.css" />
+    <link type="text/css" rel="stylesheet" media="all" href="css/chat/screen.css" />
+
+    <script type="text/javascript" src="js/chat/jquery.js"></script>
+    <script type="text/javascript" src="js/countdowntimer.js"></script>
+
+    <script type="text/javascript" src="js/chat/chat.js"></script>
   </body>
 </html>

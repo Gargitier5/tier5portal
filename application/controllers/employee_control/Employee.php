@@ -12,51 +12,108 @@ class Employee extends CI_Controller
 		$this->load->model('EmployeeModel');
 		$this->load->helper('custom');
 		$this->load->library('session');
+     $this->load->library('villa_booking_calendar');
 	}
 
 
 
     public function index()
     {  
-        $username=$this->input->post('empid');
-        $password=$this->input->post('emppass');
-               
-        $check=$this->EmployeeModel->login($username,$password);
+        if($_POST)
+        {
+              $username=$this->input->post('empid');
+              $password=$this->input->post('emppass');
+                     
+              $check=$this->EmployeeModel->login($username,$password);
 
-        $this->load->library('villa_booking_calendar');
-        
-         if ($this->session->userdata('uid'))
-          {
+             
+              
+               if ($this->session->userdata('uid'))
+                {
 
-              $conmode['date']=date("Y-m-d");
-              $conmode['Eid']=$this->session->userdata('uid');
-              $conmode['status']=1;
-              $data['calendar'] = $this->villa_booking_calendar->render_booking_calendar();
-              $con['parent_id']=0;
-              $con['status']=0;
-              $userid['id']=$this->session->userdata('uid');
-              $data['emp_details']=$this->EmployeeModel->fetchinfo('employee',$userid,'row');
-              $data['allshop']=$this->EmployeeModel->fetchinfo('items',$con,'result');
-              $clockin['Eid']=$this->session->userdata('uid');
-              $clockin['date']=date("Y-m-d");
-              $data['clockintime']=$this->EmployeeModel->fetchinfo('attendance',$clockin,'row');
-              $data['allbreak']=$this->EmployeeModel->getbreak();
-              $start_date=date("Y-m-d", strtotime(date('m').'/01/'.date('Y')));
-              $end_date=date("Y-m-d");
-              $userid=$this->session->userdata('uid');
-              $data['points']=$this->EmployeeModel->getpoint($userid,$start_date,$end_date);
-              $data['userid']=$this->session->userdata('uid');
-              $data['empofmonth']=$this->EmployeeModel->getempofmonth();
-              $data['notice']=$this->EmployeeModel->getnotice();
-              $data['lunch_order']=$this->EmployeeModel->fetchinfo('lunchorder',$clockin,'row');
-              $data['lunch_bonus']=$this->EmployeeModel->getlunch_bonus($userid,$start_date,$end_date);
-              $data['checkmode']=$this->EmployeeModel->fetchinfo('tbl_employee_productivity',$conmode,'row');
-              $this->load->view('employee/employeedashboard',$data);
-          }
-          else
-          {
-               redirect(base_url());
-          }
+                    /* chat introduce */
+                    $_SESSION['chatusername'] = $this->session->userdata('emp_name');
+                    $_SESSION['username'] = $this->session->userdata('uid');
+
+
+                    $con_online=array('online_status'=>1);
+                    $data['userlist']=$this->EmployeeModel->fetchinfo('employee',$con_online,'result');
+                    /* chat introduce */
+
+                    $conmode['date']=date("Y-m-d");
+                    $conmode['Eid']=$this->session->userdata('uid');
+                    $conmode['status']=1;
+                    $data['calendar'] = $this->villa_booking_calendar->render_booking_calendar();
+                    $con['parent_id']=0;
+                    $con['status']=0;
+                    $userid['id']=$this->session->userdata('uid');
+                    $data['emp_details']=$this->EmployeeModel->fetchinfo('employee',$userid,'row');
+                    $data['allshop']=$this->EmployeeModel->fetchinfo('items',$con,'result');
+                    $clockin['Eid']=$this->session->userdata('uid');
+                    $clockin['date']=date("Y-m-d");
+                    $data['clockintime']=$this->EmployeeModel->fetchinfo('attendance',$clockin,'row');
+                    $data['allbreak']=$this->EmployeeModel->getbreak();
+                    $start_date=date("Y-m-d", strtotime(date('m').'/01/'.date('Y')));
+                    $end_date=date("Y-m-d");
+                    $userid=$this->session->userdata('uid');
+                    $data['points']=$this->EmployeeModel->getpoint($userid,$start_date,$end_date);
+                    $data['userid']=$this->session->userdata('uid');
+                    $data['empofmonth']=$this->EmployeeModel->getempofmonth();
+                    $data['notice']=$this->EmployeeModel->getnotice();
+                    $data['lunch_order']=$this->EmployeeModel->fetchinfo('lunchorder',$clockin,'row');
+                    $data['lunch_bonus']=$this->EmployeeModel->getlunch_bonus($userid,$start_date,$end_date);
+                    $data['checkmode']=$this->EmployeeModel->fetchinfo('tbl_employee_productivity',$conmode,'row');
+                    $this->load->view('employee/employeedashboard',$data);
+                }
+                else
+                {
+                     redirect(base_url());
+                }
+        }
+        else
+        {
+          if ($this->session->userdata('uid'))
+                {
+
+                    /* chat introduce */
+                    $_SESSION['chatusername'] = $this->session->userdata('emp_name');
+                    $_SESSION['username'] = $this->session->userdata('uid');
+
+
+                    $con_online=array('online_status'=>1);
+                    $data['userlist']=$this->EmployeeModel->fetchinfo('employee',$con_online,'result');
+                    /* chat introduce */
+
+                    $conmode['date']=date("Y-m-d");
+                    $conmode['Eid']=$this->session->userdata('uid');
+                    $conmode['status']=1;
+                    $data['calendar'] = $this->villa_booking_calendar->render_booking_calendar();
+                    $con['parent_id']=0;
+                    $con['status']=0;
+                    $userid['id']=$this->session->userdata('uid');
+                    $data['emp_details']=$this->EmployeeModel->fetchinfo('employee',$userid,'row');
+                    $data['allshop']=$this->EmployeeModel->fetchinfo('items',$con,'result');
+                    $clockin['Eid']=$this->session->userdata('uid');
+                    $clockin['date']=date("Y-m-d");
+                    $data['clockintime']=$this->EmployeeModel->fetchinfo('attendance',$clockin,'row');
+                    $data['allbreak']=$this->EmployeeModel->getbreak();
+                    $start_date=date("Y-m-d", strtotime(date('m').'/01/'.date('Y')));
+                    $end_date=date("Y-m-d");
+                    $userid=$this->session->userdata('uid');
+                    $data['points']=$this->EmployeeModel->getpoint($userid,$start_date,$end_date);
+                    $data['userid']=$this->session->userdata('uid');
+                    $data['empofmonth']=$this->EmployeeModel->getempofmonth();
+                    $data['notice']=$this->EmployeeModel->getnotice();
+                    $data['lunch_order']=$this->EmployeeModel->fetchinfo('lunchorder',$clockin,'row');
+                    $data['lunch_bonus']=$this->EmployeeModel->getlunch_bonus($userid,$start_date,$end_date);
+                    $data['checkmode']=$this->EmployeeModel->fetchinfo('tbl_employee_productivity',$conmode,'row');
+                    $this->load->view('employee/employeedashboard',$data);
+                }
+                else
+                {
+                     redirect(base_url());
+                }
+        }
     }
 
     public function bdmaccess()

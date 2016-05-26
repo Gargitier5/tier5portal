@@ -25,7 +25,7 @@
                       <a href="javascript:;">Help</a>
                     </li> -->
                     <li>
-                       <a href="employee_control/Employee/logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
+                       <a href="admin_control/Admin/logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
                     </li>
                   </ul>
                 </li>

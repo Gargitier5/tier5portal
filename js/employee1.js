@@ -34,15 +34,13 @@ $(document).ready(function(){
 
  });
  $.post('employee_control/employee/breakcheck',function(data){
-
   if(data)
   {
-      $('#clockout_btn').attr('disabled','disabled');
-    //$('#clockout_btn').prop('disabled', true);
+
+    $('#clockout_btn').prop('disabled', true);
     var data1=data.split(','); 
     $('#breakstart_'+data1[1]).text("Work");
     var data2=data1[0].split(':'); 
-   
     $('#hm_timer'+data1[1]).countdowntimer({
           hours : data2[0],
           minutes :data2[1],
@@ -53,28 +51,28 @@ $(document).ready(function(){
 
     if(data1[1]==1)
           {
-            $('#breakstart_2').attr('disabled', 'disabled');
-            $('#breakstart_3').attr('disabled', 'disabled');
+            $('#breakstart_2').prop('disabled', true);
+            $('#breakstart_3').prop('disabled', true);
 
             
           }
           else if(data1[1]==2)
           {
-            $('#breakstart_1').attr('disabled', 'disabled');
-            $('#breakstart_3').attr('disabled', 'disabled');
+            $('#breakstart_1').prop('disabled', true);
+            $('#breakstart_3').prop('disabled', true);
             
           }
           else if(data1[1]==3)
           {
-            $('#breakstart_1').attr('disabled', 'disabled');
-            $('#breakstart_2').attr('disabled', 'disabled');
+            $('#breakstart_1').prop('disabled', true);
+            $('#breakstart_2').prop('disabled', true);
             
           }
           else
           {
-            $('#breakstart_1').removeAttr('disabled');
-            $('#breakstart_2').removeAttr('disabled');
-            $('#breakstart_3').removeAttr('disabled');
+            $('#breakstart_1').prop('disabled', false);
+            $('#breakstart_2').prop('disabled', false);
+            $('#breakstart_3').prop('disabled', false);
 
           }
   }
@@ -83,15 +81,14 @@ $(document).ready(function(){
 $.post('employee_control/employee/breakdis',function(data){
 
     //alert(data);
-       //$('#clockout_btn').prop('disabled', false);
-         //$('#clockout_btn').removeAttr("disabled");
+       $('#clockout_btn').prop('disabled', false);
       var data1=data.split(",");
       for(i=0; i<data1.length-1; i++)
       { 
         data2= data1[i];
         for(x=1; x<=data2; x++)
         {
-        $('#breakstart_'+x).attr("disabled", 'disabled');
+        $('#breakstart_'+x).prop("disabled", true);
         }
       }
   });
@@ -204,7 +201,7 @@ function add_item(id)
               $('#total_cost').text(totalcost);
               $('#btnadd_'+id).val('Remove');
               $('#total_item').append('<span id="itemqty_'+id+'">('+itemquantity+')</span><span id="itm_'+id+'">'+itemname+'</span>');
-             $('#item_limit_'+id).attr('disabled', 'disabled');
+             $('#item_limit_'+id).prop('disabled', true);
       }
 
       else
@@ -218,7 +215,7 @@ function add_item(id)
             $('#itemqty_'+id).remove();
             $('#btnadd_'+id).val('Add');
            $('#total_cost').text(totalcost);
-           $('#item_limit_'+id).removeAttr('disabled');
+           $('#item_limit_'+id).prop('disabled', false);
 
       } 
 }
@@ -254,29 +251,29 @@ function Start_Break(breakid,duration)
           $('#breakstart_'+breakid).text("Work");
           if(breakid==1)
           {  
-            $('#breakstart_2').attr('disabled', 'disabled');
-            $('#breakstart_3').attr('disabled', 'disabled');
-            $('#clockout_btn').attr('disabled', 'disabled');
+            $('#breakstart_2').prop('disabled', true);
+            $('#breakstart_3').prop('disabled', true);
+            $('#clockout_btn').prop('disabled', true);
           }
           else if(breakid==2)
           {
-            $('#breakstart_1').attr('disabled', 'disabled');
-            $('#breakstart_3').attr('disabled', 'disabled');
-            $('#clockout_btn').attr('disabled', 'disabled');
+            $('#breakstart_1').prop('disabled', true);
+            $('#breakstart_3').prop('disabled', true);
+            $('#clockout_btn').prop('disabled', true);
             
           }
           else if(breakid==3)
           {
-            $('#breakstart_1').attr('disabled', 'disabled');
-            $('#breakstart_2').attr('disabled', 'disabled');
-            $('#clockout_btn').attr('disabled', 'disabled');
+            $('#breakstart_1').prop('disabled', true);
+            $('#breakstart_2').prop('disabled', true);
+            $('#clockout_btn').prop('disabled', true);
           }
           else
           {
-            $('#breakstart_1').removeAttr('disabled');
-            $('#breakstart_2').removeAttr('disabled');
-            $('#breakstart_3').removeAttr('disabled');
-            $('#clockout_btn').removeAttr('disabled');
+            $('#breakstart_1').prop('disabled', false);
+            $('#breakstart_2').prop('disabled', false);
+            $('#breakstart_3').prop('disabled', false);
+            $('#clockout_btn').prop('disabled', false);
 
           }
         
@@ -340,6 +337,3 @@ function Start_Break(breakid,duration)
                 return valString;
             }
         }*/
-
-
-

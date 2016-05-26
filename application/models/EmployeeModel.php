@@ -6,33 +6,49 @@
       parent::__construct(); 
       $this->load->database();
     }
-
-
+    
     public function login($username,$password)
     {
 
-
+      if($username && $password)
+      {
         $this->db->select('*');
         $this->db->where('username',$username);
         //$this->db->where('password',md5($pass));
         $this->db->where('password',$password);
-
+		    $this->db->join('employee','employee.id=emp_details.Eid');
         $res=$this->db->get('emp_details');
         $result1=$res->row_array();
-       // $result=$res->num_rows();
-        if($result1['role']==0)
+        if( $result1)
         {
-         
-          return false;
+           // $result=$res->num_rows();
+            if($result1['role']==0)
+            {
+             
+              return false;
+            }
+            else
+            {
+               
+               $this->session->set_userdata('uid',$result1['Eid']);
+               $this->session->set_userdata('role',$result1['role']);
+                 $this->session->set_userdata('emp_name',$result1['name']);
+              //$this->session->set_userdata('uname',$result['Eid']);
+              return $result1;
+            }
         }
         else
         {
-           
-           $this->session->set_userdata('uid',$result1['Eid']);
-           $this->session->set_userdata('role',$result1['role']);
-          //$this->session->set_userdata('uname',$result['Eid']);
-          return $result1;
+          $this->session->set_userdata('e_message','Invalid Username or Password');
+          redirect(base_url());
         }
+      }
+      else
+      {
+          $this->session->set_userdata('e_message','Enter Username And Password');
+          redirect(base_url());
+
+      }
     } 
 
     
