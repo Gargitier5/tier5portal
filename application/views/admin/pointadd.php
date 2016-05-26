@@ -31,28 +31,39 @@
     {
     //alert(po_id);
     $('#add_point_'+po_id).show();
+  
     $('#input').show();
+    $('#choose').show();
+     $('#chooseac_'+po_id).show();
     }
 
     function add_p(po_id)
     {
       var npoint=$('#new_point_'+po_id).val();
-      //alert(npoint);
-      var res= $.ajax({
-        type : 'post',
-        url : 'admin_control/admin/add_point',
-        data : 'po_id='+po_id+'& npoint='+npoint,
-        async : false,
-        success : function(msg)
-          {
-              if(msg)
-              {
-
-                //alert(msg)
-                  window.location.reload();       
-              } 
-          }
-        });
+      var action=$('#chooseaction_'+po_id).val();
+      var oldpoint=$('#oldpoint_'+po_id).text();
+      var empid=$('#emp_'+po_id).val();
+      if(action)
+      {
+      if(action==1)
+      {
+        var finalpoint= parseInt(oldpoint)+parseInt(npoint);
+      }
+      else if(action==2)
+      {
+        var finalpoint= parseInt(oldpoint)-parseInt(npoint);
+      }
+      else
+      {
+        var finalpoint=parseInt(oldpoint);
+      }
+     
+      $.post('admin_control/admin/add_point',{point_id:po_id,npoint:npoint,action:action,finalpoint:finalpoint,empid:empid},function(data){
+        //alert(data);  
+        window.location.reload(); 
+      });
+     }
+     
     }
    </script>
     <!-- Custom Theme Style -->
@@ -121,8 +132,9 @@
                           <tr class="headings">
                               <th class="column-title">Name</th>
                               <th class="column-title">Point</th>
-                               <th class="column-title" style="display:none" id="input">Input</th>
                               <th class="column-title">Action</th>
+                              <th class="column-title" id="choose" style="display:none">Choose Activity</th>
+                               <th class="column-title" id="input" style="display:none">Input</th>
                               
                           </tr>
                         </thead>
@@ -132,10 +144,12 @@
                                {
                                 ?>
                                    <tr>
-                                       <td><?php echo $key['name'];?></td>
-                                       <td><?php echo $key['points'];?></td>
-                                       <td id="add_point_<?php echo $key['P_id'];?>" style="display:none"><input type="number" id="new_point_<?php echo $key['P_id'];?>" > <button id="add_p" class="btn  btn-xs btn-success" onclick="add_p(<?php echo $key['P_id'];?>)">Add</button></td>
+                                       <td><?php echo $key['name'];?><input type="text" value="<?php echo $key['Eid'];?>" id="emp_<?php echo $key['P_id'];?>" style="display:none" name="emp_<?php echo $key['P_id'];?>"></td>
+                                       <td id="oldpoint_<?php echo $key['P_id'];?>"><?php echo $key['points'];?></td>
                                        <td><button class="btn btn-success btn-xs glyphicon glyphicon-edit" onclick="editpoint(<?php echo $key['P_id'];?>)"> </button></td>
+                                        <td id="chooseac_<?php echo $key['P_id'];?>" style="display:none"><select id="chooseaction_<?php echo $key['P_id'];?>" name="chooseaction_<?php echo $key['P_id'];?>"><option value="">--Select--</option><option value="1">Add</option><option value="2">Deduct</option></select></td>
+                                       <td id="add_point_<?php echo $key['P_id'];?>" style="display:none"><input type="number" id="new_point_<?php echo $key['P_id'];?>" > <button id="add_p" class="btn  btn-xs btn-success" onclick="add_p(<?php echo $key['P_id'];?>)">Click To Change</button></td>
+                                       
                                    </tr>
 
                                <?php }?>

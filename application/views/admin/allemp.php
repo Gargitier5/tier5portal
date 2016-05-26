@@ -100,6 +100,9 @@
                               <th class="column-title">Date Of Birth</th>
                               <th class="column-title">Joining Date</th>
                               <th class="column-title">Employment Status</th>
+                              <th class="column-title">Company Email</th>
+                              <th class="column-title">Designation</th>
+                               <th class="column-title">Salary</th>
                               <th class="column-title">Last Date Of Employment</th>
                               <th class="column-title">Reason</th>
                               <th class="column-title">Adress</th>
@@ -119,6 +122,9 @@
                               <td><?php echo $value['dob'];?></td>
                               <td><?php echo $value['joining_date'];?></td>
                               <td><?php if($value['activation_status']==0){echo "Working";}else{echo "Resigned";}?></td>
+                              <td><?php echo $value['comemail'];?></td>
+                              <td><?php echo $value['designation'];?></td>
+                              <td><?php echo $value['salary'];?></td>
                               <td><?php if($value['activation_status']==0){echo " ";}else{echo $value['resign_date'];}?></td>
                               <td><?php echo $value['reason'];?></td>
                               <td colspan="2" ><?php echo $value['address'];?></td>

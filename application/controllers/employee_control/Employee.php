@@ -59,6 +59,12 @@ class Employee extends CI_Controller
           }
     }
 
+    public function bdmaccess()
+    {
+      $this->load->view('employee/bdm.php');
+          
+    }
+
     public function logout()
     {
      $this->session->unset_userdata('uid');

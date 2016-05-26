@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
+<head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Meta, title, CSS, favicons, etc. -->
     <meta charset="utf-8">
@@ -11,7 +10,6 @@
     <link rel=icon href="http://tier5.us/images/favicon.ico">
     <base href="<?php echo base_url();?>">
     <!-- Bootstrap -->
-
     <link href="vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
@@ -21,23 +19,29 @@
     <link href="vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
     <!-- jVectorMap -->
     <link href="css/maps/jquery-jvectormap-2.0.3.css" rel="stylesheet"/>
-    
-    <!-- jQuery -->
-    <script src="vendors/jquery/dist/jquery.min.js"></script>
 
-    <script type="text/javascript" src="js/jquery.validate.js"></script>
-    <script type="text/javascript" src="js/event.js"></script>
     <!-- Custom Theme Style -->
     <link href="css/custom.css" rel="stylesheet">
-    <style>
-    .hilighted-text
-    {
-      font-weight: bold;
-      color: red;
-      font-style: italic;
-    }
-    </style>
-  </head>
+     
+    <!-- jQuery -->
+     <script src="vendors/jquery/dist/jquery.min.js"></script>
+
+      <script>
+  $(function() {
+    $( ".datepicker" ).datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+  });
+  </script>
+
+
+      <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  <link rel="stylesheet" href="/resources/demos/style.css">
+
+
+  </head> 
 
   <body class="nav-md">
     <div class="container body">
@@ -106,7 +110,7 @@ if($this->session->userdata('succ_msg')!=''){?>
                         <label for="name" class="control-label col-md-3 col-sm-3 col-xs-12" >Name <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" class="col-md-7 col-xs-12" id='name' name='name' required="required">
+                          <input type="text"  id='name' name='name' class="form-control col-md-7 col-xs-12 parsley-success" required="required" >
                         </div>
                       </div>
                       <div class="form-group">
@@ -160,35 +164,24 @@ if($this->session->userdata('succ_msg')!=''){?>
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Date Of Birth <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id='dob' name='dob' required="required" class="date-picker form-control col-md-7 col-xs-12 parsley-success"><ul class="parsley-errors-list" ></ul>
+                          <input type="text" id='dob' name='dob' required="required" class="datepicker form-control col-md-7 col-xs-12 parsley-success"><ul class="parsley-errors-list" ></ul>
                         </div>
                       </div>
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Date Of Joining <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id='doj' name='doj' required="required" class="date-picker form-control col-md-7 col-xs-12 parsley-success" id="birthday" data-parsley-id="16"><ul class="parsley-errors-list" id="parsley-id-16"></ul>
+                          <input type="text" id='doj' name='doj' required="required" class="datepicker form-control col-md-7 col-xs-12 parsley-success" id="birthday" data-parsley-id="16"><ul class="parsley-errors-list" id="parsley-id-16"></ul>
                         </div>
                       </div>
-                      <br>
-                      <br>
-                      <br>
+                     
 
-                      <h3>Create User </h3>
-                      <div class="ln_solid"></div>
-                      <div class="form-group">
-                        <label for="uname" class="control-label col-md-3 col-sm-3 col-xs-12">Username <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id='uname' name='uname' class="form-control col-md-7 col-xs-12 parsley-success" required="required" id="first-name" data-parsley-id="5"><ul class="parsley-errors-list" id="parsley-id-5"></ul>
-                        </div>
-                      </div>
 
                        <div class="form-group">
-                        <label for="uname" class="control-label col-md-3 col-sm-3 col-xs-12">Company Email Id <span class="required">*</span>
+                        <label for="uname" class="control-label col-md-3 col-sm-3 col-xs-12">Company Email Id 
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id='coemail' name='coemail' class="form-control col-md-7 col-xs-12 parsley-success" required="required" id="first-name" data-parsley-id="5"><ul class="parsley-errors-list" id="parsley-id-5"></ul>
+                          <input type="text" id='coemail' name='coemail' class="form-control col-md-7 col-xs-12 parsley-success" data-parsley-id="5"><ul class="parsley-errors-list" id="parsley-id-5"></ul>
                         </div>
                       </div>
 
@@ -196,7 +189,7 @@ if($this->session->userdata('succ_msg')!=''){?>
                         <label for="uname" class="control-label col-md-3 col-sm-3 col-xs-12">Designation <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id='deg' name='deg' class="form-control col-md-7 col-xs-12 parsley-success" required="required" id="first-name" data-parsley-id="5"><ul class="parsley-errors-list" id="parsley-id-5"></ul>
+                          <input type="text" id='deg' name='deg' class="form-control col-md-7 col-xs-12 parsley-success" required="required" data-parsley-id="5"><ul class="parsley-errors-list" id="parsley-id-5"></ul>
                         </div>
                       </div>
 
@@ -204,16 +197,13 @@ if($this->session->userdata('succ_msg')!=''){?>
                         <label for="uname" class="control-label col-md-3 col-sm-3 col-xs-12">Salary <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text"  id='salary' name='salary' class="form-control col-md-7 col-xs-12 parsley-success" required="required" id="first-name" data-parsley-id="5"><ul class="parsley-errors-list" id="parsley-id-5"></ul>
+                          <input type="text"  id='salary' name='salary' class="form-control col-md-7 col-xs-12 parsley-success" required="required" data-parsley-id="5"><ul class="parsley-errors-list" id="parsley-id-5"></ul>
                         </div>
                       </div>
 
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">
                         </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                         <label>Default Password For This User Is <span class="hilighted-text">Tier5</span></label>
-                        </div>
                       </div>
 
 

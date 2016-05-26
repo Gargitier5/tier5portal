@@ -2,7 +2,7 @@
               <div class="menu_section">
                 
                 <ul class="nav side-menu">
-                  <li><a href="<?php echo base_url();?>admin_control/admin/index"><i class="fa fa-home"></i> Home </a></li>
+                  <li><a href="<?php echo base_url();?>admin_control/admin/home"><i class="fa fa-home"></i> Home </a></li>
                   <li><a><i class="fa fa-user"></i> Manage Employee <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="<?php echo base_url();?>admin_control/admin/allemp">Employee Personal Information</a></li>
@@ -11,7 +11,7 @@
                       </li>
                       <li><a href="<?php echo base_url();?>admin_control/admin/add_employee">Add New Employee</a>
                       </li>
-                      <li><a href="">Set Points/Lunch Bonus</a>
+                      <li><a href="<?php echo base_url();?>admin_control/admin/setbonus">Create New User</a>
                       </li>
                     </ul>
                   </li>
@@ -24,13 +24,23 @@
                       </li>
                     </ul>
                   </li>
-
-                  <li><a><i class="fa fa-flag"></i> Manage Facility <span class="fa fa-chevron-down"></span></a>
+                   <?php 
+                   $type=$this->session->userdata('role');
+                   if($type==0)
+                   {
+                    ?>
+                    <li><a><i class="fa fa-flag"></i> Manage Facility <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="<?php echo base_url();?>admin_control/admin/allbreak">Manage Break</a></li>
                       <li><a href="<?php echo base_url();?>admin_control/admin/manageclockin">Manage Clock In/Clock Out Time</a></li>
                     </ul>
                   </li>
+
+
+                   <?php
+                    }
+                   ?>
+             
                   <li><a><i class="fa fa-ticket"></i>Lunch Program <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="<?php echo base_url();?>admin_control/admin/lunchorder">Lunch Order</a>
@@ -94,6 +104,35 @@
                     </ul>
                   </li>
 
+                  <li><a><i class="fa fa-tags"></i>Log Book<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="<?php echo base_url();?>admin_control/admin/logactivity">See Point Deduct/Add Activity</a>
+                      </li>
+                    </ul>
+                  </li>
+
+                  <?php 
+                   $type=$this->session->userdata('role');
+                   if($type==0)
+                   {
+                    ?>
+                  <li><a><i class="fa fa-comment"></i>Chat<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="">See Chat History</a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-hand-o-right"></i>Keep Eye On BDM<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="">Proposals Submitted By BDM</a>
+                      </li>
+                      <li><a href="">Change Status</a>
+                      </li>
+                      <li><a href="">See Progress</a>
+                      </li>
+                    </ul>
+                  </li>
+                 <?php } ?>
                 </ul>
               </div>
               <!-- <div class="menu_section">

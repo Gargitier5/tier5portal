@@ -19,21 +19,23 @@
 
         $res=$this->db->get('emp_details');
         $result1=$res->row_array();
-        $result=$res->num_rows();
-        if($result)
+       // $result=$res->num_rows();
+        if($result1['role']==0)
         {
          
-          $this->session->set_userdata('uid',$result1['Eid']);
-          //$this->session->set_userdata('uname',$result['Eid']);
-          return $result;
+          return false;
         }
         else
         {
-           return false;
+           
+           $this->session->set_userdata('uid',$result1['Eid']);
+           $this->session->set_userdata('role',$result1['role']);
+          //$this->session->set_userdata('uname',$result['Eid']);
+          return $result1;
         }
     } 
 
-
+    
     public function clockintime($data)
     {
         $data2['Eid'] = $data['Eid'];
@@ -289,6 +291,7 @@
       return  $result=$res->row_array();
     }
 
+    
 
     public function fetchinfo($tbl,$con,$type)
     {

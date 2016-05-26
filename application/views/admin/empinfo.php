@@ -111,9 +111,6 @@ if($this->session->userdata('succ_msg')!=''){?>
                           <tr class="headings">
                               <th class="column-title">Name</th>
                               <th class="column-title">User Name</th>
-                              <th class="column-title">Email</th>
-                              <th class="column-title">Designation</th>
-                              <th class="column-title">Salary</th>
                               <th class="column-title">Password</th>
                               <th class="column-title"></th>
                               <th class="column-title"></th>
@@ -129,11 +126,8 @@ if($this->session->userdata('succ_msg')!=''){?>
                           <tr>
                               <td><?php echo $value['name']; ?></td>
                               <td><?php echo $value['username']; ?></td>
-                              <td><?php echo $value['email']; ?></td>
-                              <td><?php echo $value['designation']; ?></td>
-                              <td><?php echo $value['salary']; ?></td>
                               <td colspan="4"><input type="button" class="btn btn-success btn-xs" onclick="reset_pass(<?php echo $value['Eid'];?>)" value="Reset"><input type="text" style="display:none" id="newpass_<?php echo $value['Eid'];?>" name="newpass" placeholder="Enter New Password"><input type="button" class="btn btn-success btn-xs" onclick="reset(<?php echo $value['Eid'];?>)" id="btn_<?php echo $value['Eid'];?>" style="display:none" value="Click To Reset"></td>
-                              <td><input type="button" class="btn btn-success btn-xs" onclick="edit_employee('<?php echo $value['Eid'];?>','<?php echo $value['name'];?>','<?php echo $value['username'];?>','<?php echo $value['email'];?>','<?php echo $value['designation'];?>','<?php echo $value['salary'];?>')" value="Edit"></td>
+                              <td><input type="button" class="btn btn-success btn-xs" onclick="edit_employee('<?php echo $value['Eid'];?>','<?php echo $value['name'];?>','<?php echo $value['username'];?>')" value="Edit"></td>
                               <td><input type="button" class="btn btn-success btn-xs" onclick="change_work_status(<?php echo $value['Eid'];?>)" value="Make Inactive"><textarea style="display:none" id="reason_<?php echo $value['Eid'];?>" name="newpass" placeholder="Describe Reason"></textarea><input type="text" style="display:none" placeholder="Select The Date" class="datepicker" id="datepicker<?php echo $value['Eid'];?>"><input type="button" class="btn btn-success btn-xs" onclick="change_work(<?php echo $value['Eid'];?>)" id="click_btn_<?php echo $value['Eid'];?>" style="display:none" value="Click To Inactive"></td> 
                           </tr>
                           <?php }?>
@@ -158,9 +152,6 @@ if($this->session->userdata('succ_msg')!=''){?>
                           <tr class="headings">
                               <th class="column-title">Name</th>
                               <th class="column-title">User Name</th>
-                              <th class="column-title">Email</th>
-                              <th class="column-title">Designation</th>
-                              <th class="column-title">Salary</th>
                               <th class="column-title">Action</th>
                           </tr>
                         </thead>
@@ -171,9 +162,6 @@ if($this->session->userdata('succ_msg')!=''){?>
                             <form method="post" action="admin_control/Admin/edit_emp">
                               <td><span id="name"></span><input type="text" id="emid" name="emid" style="display:none"></span></td>
                               <td><input type="text" id="username" name="username"></td>
-                              <td><input type="text" id="email" name="email"></td>
-                              <td><input type="text" id="desig" name="desig"></td>
-                              <td><input type="text" id="salary" name="salary"></td>
                               <td><input type="submit" value="Edit Employee"></td> 
                             </form>
                           </tr>

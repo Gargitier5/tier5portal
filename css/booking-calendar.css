@@ -165,3 +165,24 @@ h3.booking-head span{ background: url("../images/content-bg.gif") repeat #fff;}
 
 
 /*table css*/
+
+.birthday-event {
+  background: rgba(0, 0, 0, 0) url("images/birthday-cake.png") no-repeat scroll 0 0;
+  bottom: 3px;
+  height: 16px;
+
+  margin: 0 auto !important;
+  position: absolute;
+  right: 2px;
+  width: 16px !important;
+}
+.other-event {
+  background: rgba(0, 0, 0, 0) url("images/sunbed.png") no-repeat scroll 0 0;
+  bottom: 3px;
+  height: 16px;
+  left: 2px;
+  margin: 0 auto !important;
+  position: absolute;
+ 
+  width: 16px !important;
+}

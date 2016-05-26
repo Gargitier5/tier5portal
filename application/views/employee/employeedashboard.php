@@ -119,9 +119,16 @@
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6">
                  <div class="dropdown">
+                  <?php 
+                   $type=$this->session->userdata('role');
+                   if($type==3)
+                   {?>
+                  <span class="bdm"><a href="employee_control/employee/bdmaccess">BDM</a></span>
+                  <?php }?>
                   <span class="dropdown-toggle" type="button" data-toggle="dropdown">Welcome <?php echo $emp_details['name'];?>
                   <span class="caret"></span></span>
                   <ul class="dropdown-menu">
+
                       <div class="profile-pic">
                         <img src="images/profile-pic.jpg" alt="img">
                       </div>

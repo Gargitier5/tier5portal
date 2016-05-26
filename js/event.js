@@ -1,3 +1,10 @@
+$(document).ready(function(){
+
+
+
+   
+
+});
 function delete_event(ev_id)
 {
 	//alert(ev_id);

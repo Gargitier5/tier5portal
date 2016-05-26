@@ -18,10 +18,11 @@ class Admin extends CI_Controller
     {  
           $username=$this->input->post('adminid');
           $password=$this->input->post('adminpass');
-          $type=1;
+         
                
-        $check=$this->AdminModel->login($username,$password,$type);
-   
+        $check=$this->AdminModel->login($username,$password);
+        if($check)
+        {
           if ($this->session->userdata('adminid'))
           {
               
@@ -37,7 +38,34 @@ class Admin extends CI_Controller
           {
              redirect(base_url());
           }
+        }
+        else
+        {
+          redirect(base_url());
+        }
     }
+
+    public function home()
+    {  
+          
+          if ($this->session->userdata('adminid'))
+          {
+              
+              $con['activation_status']=0;
+              $con1['date']=date('Y-m-d');
+              $data['total_employee']=$this->AdminModel->fetchinfo('employee',$con,'count');
+              $data['total_present']=$this->AdminModel->fetchinfo('attendance',$con1,'count');
+              $data['sideber']=$this->load->view('admin/includes/sideber','',true);
+              $data['header']=$this->load->view('admin/includes/header','',true);
+              $this->load->view('admin/admin_dashboard.php',$data);
+          }
+          else
+          {
+             redirect(base_url());
+          }
+       
+    }
+    
 
     public function logout()
     {
@@ -46,6 +74,56 @@ class Admin extends CI_Controller
       $this->session->sess_destroy();
     }
     
+    public function setbonus()
+    {
+      $data['shownoemp']=$this->AdminModel->shownoemp();
+      $data['showallemp']=$this->AdminModel->showallemp();
+      $data['sideber']=$this->load->view('admin/includes/sideber','',true);
+      $data['header']=$this->load->view('admin/includes/header','',true);
+      $this->load->view('admin/setbonus.php',$data);
+    }
+
+    public function createuser()
+    {
+      $data['Eid']=$this->input->post('emp_ide');
+      $data['username']=$this->input->post('uname');
+      $data['password']="Tier5";
+      $data['role']=$this->input->post('roleid');
+
+      $con['username']=$this->input->post('uname');
+      $checkuser=$this->AdminModel->fetchinfo('emp_details',$con,'count');
+      if($checkuser>0)
+      {
+         $this->session->set_userdata('err_msg','This Username Already Used');
+             redirect(base_url().'admin_control/admin/setbonus');
+      }
+      else
+      {
+        $insert_item=$this->AdminModel->insert('emp_details',$data);
+         if($insert_item)
+         {
+            $con1['id']=$data['Eid'];
+            $data1['activation_status']='0';
+            $update=$this->AdminModel->update('employee',$con1,$data1);
+            if($update)
+            {
+             $this->session->set_userdata('succ_msg','User Created Successfully!!The Employee Is Active Now');
+             redirect(base_url().'admin_control/admin/setbonus');
+            }
+            else
+            {
+              $this->session->set_userdata('err_msg','User Createted But Not Active');
+             redirect(base_url().'admin_control/admin/setbonus');
+            }
+         }
+         else
+         {
+              $this->session->set_userdata('err_msg','Try Again');
+             redirect(base_url().'admin_control/admin/setbonus');
+         }
+       }
+    }
+
     public function deleteshop()
     {
       $shopid=$this->input->post('shopid');
@@ -63,7 +141,42 @@ class Admin extends CI_Controller
             return false;
           }
     }
+     public function setpointnewemp()
+     {
+       $data['Eid']=$this->input->post('emp_idd');
+       $data['points']=$this->input->post('newapoint');
+       $data['last_update']=date('Y-m-d');
+       $insert_item=$this->AdminModel->insert('point_history',$data);
+       if($insert_item)
+       {
+          $this->session->set_userdata('succ_msg','Point Added Successfully!!');
+           redirect(base_url().'admin_control/admin/setbonus');
+       }
+       else
+       {
+            $this->session->set_userdata('err_msg','Try Again');
+           redirect(base_url().'admin_control/admin/setbonus');
+       }
+     }
 
+     public function setlbonus()
+     { 
+      $data['Eid']=$this->input->post('emp_id');
+       $data['Lunch_bonus']=$this->input->post('newpoint');
+       $data['last_update']=date('Y-m-d');
+       $insert_item=$this->AdminModel->insert('lunch_bonus',$data);
+       if($insert_item)
+       {
+          $this->session->set_userdata('succ_msg','Lunch Bonus Successfully!!');
+           redirect(base_url().'admin_control/admin/setbonus');
+       }
+       else
+       {
+            $this->session->set_userdata('err_msg','Try Again');
+           redirect(base_url().'admin_control/admin/setbonus');
+       }
+
+     }
     public function showallitem()
     {
        $shopid=$this->input->post('shopid');
@@ -335,12 +448,42 @@ class Admin extends CI_Controller
     
     public function add_point()
     {
-      $point['points']=$this->input->post('npoint');
+
+      $point['points']=$this->input->post('finalpoint');
       $point['last_update']=date("Y-m-d");
-      $data['P_id']=$this->input->post('po_id');
-      $update=$this->AdminModel->update('point_history',$data,$point);
-      return $update;
+      $data1['P_id']=$this->input->post('point_id');
+      $update=$this->AdminModel->update('point_history',$data1,$point);
       
+      //return $update;
+      if($update)
+      {
+          $data2['Eid']=$this->input->post('empid');
+          $data2['action']=$this->input->post('action');
+          $data2['point']=$this->input->post('npoint');
+          $data2['date']=date('Y-m-d');
+          $data2['time']=date('H:i:s');
+          //print_r($data2);
+          $update_log=$this->AdminModel->insert('log_book',$data2);
+          if($update_log)
+          {
+            return $update_log;
+          }
+          else
+          {
+            return false;
+          }
+      }
+      
+    }
+
+
+    public function logactivity()
+    {
+          $data['all_log']=$this->AdminModel->logactivity();
+          $data['sideber']=$this->load->view('admin/includes/sideber','',true);
+          $data['header']=$this->load->view('admin/includes/header','',true);
+       
+          $this->load->view('admin/logactivity.php',$data);
     }
 
     public function shownotice()
@@ -678,12 +821,10 @@ class Admin extends CI_Controller
       {
 
           $data['username']=$this->input->post('username');
-          $data['email']=$this->input->post('email');
-          $data['designation']=$this->input->post('desig');
-          $data['salary']=$this->input->post('salary');
+        
 
           $con['Eid']=$this->input->post('emid');
-          if($data['username'] && $data['email'] && $data['designation'] && $data['salary'] &&  $con['Eid'] )
+          if($data['username'] &&  $con['Eid'] )
           {
               $update=$this->AdminModel->update('emp_details',$con,$data);
               if($update)
@@ -967,7 +1108,7 @@ class Admin extends CI_Controller
             $data['Eid']=$this->input->post('emp_name');
             $data['date']=$this->input->post('date');
             $data['event_informations']=$this->input->post('newevent');
-           
+             print_r($data);
             if($data['Eid'] && $data['date'] && $data['event_informations'])
             {
                $insert_break=$this->AdminModel->insert('tbl_event_informations',$data);
@@ -981,6 +1122,11 @@ class Admin extends CI_Controller
                     $this->session->set_userdata('err_msg','Try Again');
                     redirect(base_url().'admin_control/admin/addevent');
                 }
+            }
+            else
+            {
+                    $this->session->set_userdata('err_msg','All Fields Are Needed');
+                    redirect(base_url().'admin_control/admin/addevent');
             }
           }
 
@@ -1001,53 +1147,33 @@ class Admin extends CI_Controller
             $data['m_status']=$this->input->post('marrige');
             $data['dob']=$this->input->post('dob');
             $data['joining_date']=$this->input->post('doj');
-
+            $data['comemail']=$this->input->post('coemail');
+            $data['designation']=$this->input->post('deg');
+            $data['salary']=$this->input->post('salary');
+            $data['activation_status ']='2';
 
             
 
-            if($data['name'] && $data['personal_email'] && $data['address'] && $data['phon_no'] && $data['alt_ph_no'] && $data['gender'] && $data['m_status'] && $data['dob'] && $data['joining_date'])
+            if($data['name'] && $data['personal_email'] && $data['address'] && $data['phon_no'] && $data['alt_ph_no'] && $data['gender'] && $data['m_status'] && $data['dob'] && $data['joining_date'] && $data['designation'] && $data['salary'])
             {
 
               $new_emp=$this->AdminModel->insert('employee',$data);
-            
               if($new_emp)
               {
-
-                 $data1['username']=$this->input->post('uname');
-                 $data1['email']=$this->input->post('coemail');
-                 $data1['designation']=$this->input->post('deg');
-                 $data1['salary']=$this->input->post('salary');
-                 $data1['Eid']=$new_emp;
-                 $data1['password']='Tier5';
-
-                 $new_user=$this->AdminModel->insert('emp_details',$data1);
-
-                 if($new_user)
-                 {
-                    $this->session->set_userdata('succ_msg','Employee Added Successfully Added Successfully');
-                    redirect(base_url().'admin_control/admin/add_employee');
-                 }
-                 else
-                 {
-
-                      $this->session->set_userdata('err_msg','Employee Added But User not Created');
-                      redirect(base_url().'admin_control/admin/add_employee');
-
-                 }
+                 $this->session->set_userdata('succ_msg','Employee Added Successfully');
+                 redirect(base_url().'admin_control/admin/add_employee');
               }
               else
               {
-
-                  $this->session->set_userdata('err_msg','Employee Added But User not Created');
-                  redirect(base_url().'admin_control/admin/add_employee');
-
+                $this->session->set_userdata('err_msg','Employee Cannot Added');
+                redirect(base_url().'admin_control/admin/add_employee');
               }
             
             }
             else
             {
 
-                $this->session->set_userdata('err_msg','Employee Cannot Added');
+                $this->session->set_userdata('err_msg','All Fields Are Required');
                 redirect(base_url().'admin_control/admin/add_employee');
             }
             

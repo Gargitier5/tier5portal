@@ -11,7 +11,6 @@
     <link rel=icon href="http://tier5.us/images/favicon.ico">
     <base href="<?php echo base_url();?>">
     <!-- Bootstrap -->
-
     <link href="vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
@@ -21,15 +20,29 @@
     <link href="vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
     <!-- jVectorMap -->
     <link href="css/maps/jquery-jvectormap-2.0.3.css" rel="stylesheet"/>
-    
-    <!-- jQuery -->
-    <script src="vendors/jquery/dist/jquery.min.js"></script>
 
-    <script type="text/javascript" src="js/jquery.validate.js"></script>
-    <script type="text/javascript" src="js/event.js"></script>
     <!-- Custom Theme Style -->
     <link href="css/custom.css" rel="stylesheet">
-  </head>
+     
+    <!-- jQuery -->
+     <script src="vendors/jquery/dist/jquery.min.js"></script>
+
+      <script>
+  $(function() {
+    $( ".datepicker" ).datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+  });
+  </script>
+
+
+      <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  <link rel="stylesheet" href="/resources/demos/style.css">
+
+
+  </head> 
 
   <body class="nav-md">
     <div class="container body">
@@ -120,6 +133,7 @@ if($this->session->userdata('succ_msg')!=''){?>
                               <td><input type="text" id="date" name="date" class="datepicker"></td>
                               <td><input type="text" id="newevent" name="newevent"></td>
                               <td><input type="submit" class="btn btn-xs btn-success" value="Add Event"></td>
+                            </form>
                           </tr>
                           
                         </tbody>

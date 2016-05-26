@@ -183,6 +183,18 @@ font-family: 'Open Sans', sans-serif; margin-bottom: 15px;}
 
 }
 
+/* For BDM CSS */
+.content1 {height: 300px;}
+.bdm{margin-right: 15px;}
+.bdm a{color: #fff}
+
+.work-update {margin-bottom: 15px;min-height: 371px;padding: 13px;}
+label{color: #fff; font-weight: normal;}
+.submit-btn {background: #05f2f1 none repeat scroll 0 0; color: #000;
+ padding: 6px 10px; text-align: center;}
+
+/* For BDM CSS */
+
 	@media screen and (min-width: 350px) {
 
 		.dashboard-main{font-size: 12px;}

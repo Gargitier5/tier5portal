@@ -8,26 +8,30 @@
       $this->load->database();
     } 
 
-     Public function login($username,$password,$type)
+     Public function login($username,$password)
     {
         $this->db->select('*');
         $this->db->where('username',$username);
         //$this->db->where('password',md5($pass));
         $this->db->where('password',$password);
-        $this->db->where('type',$type);
-        $res=$this->db->get('admin');
+        $res=$this->db->get('emp_details');
         $result1=$res->row_array();
-        $result=$res->num_rows();
-        if($result)
+        if($result1['role']==0)
         {
-         
-          $this->session->set_userdata('adminid',$result1['aid']);
-          //$this->session->set_userdata('uname',$result['Eid']);
-          return $result;
+           $this->session->set_userdata('adminid',$result1['Eid']);
+           $this->session->set_userdata('role',$result1['role']);
+           return $result1;
+
+        }
+        else if ($result1['role']==1)
+        {
+           $this->session->set_userdata('adminid',$result1['Eid']);
+           $this->session->set_userdata('role',$result1['role']);
+           return $result1;
         }
         else
         {
-           return false;
+          return false;
         }
     }
 
@@ -45,6 +49,15 @@
          $this->db->order_by('n_id','DESC');
         $res=$this->db->get('notice_board');
         return $res->result_array();
+    }
+
+    public function logactivity()
+    {
+         $this->db->select('log_book.*,employee.name');
+         $this->db->join('employee',"log_book.Eid=employee.id");
+         $this->db->order_by('log_id','DESC');
+         $res=$this->db->get('log_book');
+         return $res->result_array();
     }
     
 
@@ -124,7 +137,15 @@
       
         return $res->result_array();
     }
+    
+    public function shownoemp()
+    { 
+      $this->db->select('*');
+       $this->db->where('activation_status',2);
+      $res=$this->db->get('employee');
+        return $res->result_array();
 
+    }
     public function showallemp()
     {
       $this->db->select('*');
