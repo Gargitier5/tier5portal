@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -37,11 +38,84 @@
 
     </style>
 
-  </head>
+
+
+    <!-- For Chart -->
+
+   
+
+   <!-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Dinosaur', 'Length'],
+          ['Acrocanthosaurus (top-spined lizard)', 12.2],
+          ['Albertosaurus (Alberta lizard)', 9.1],
+          ['Allosaurus (other lizard)', 12.2],
+          ['Apatosaurus (deceptive lizard)', 22.9],
+          ['Archaeopteryx (ancient wing)', 0.9],
+          ['Argentinosaurus (Argentina lizard)', 36.6],
+          ['Baryonyx (heavy claws)', 9.1],
+          ['Brachiosaurus (arm lizard)', 30.5],
+          ['Ceratosaurus (horned lizard)', 6.1],
+          ['Coelophysis (hollow form)', 2.7],
+          ['Compsognathus (elegant jaw)', 0.9],
+          ['Deinonychus (terrible claw)', 2.7],
+          ['Diplodocus (double beam)', 27.1],
+          ['Dromicelomimus (emu mimic)', 3.4],
+          ['Gallimimus (fowl mimic)', 5.5],
+          ['Mamenchisaurus (Mamenchi lizard)', 21.0],
+          ['Megalosaurus (big lizard)', 7.9],
+          ['Microvenator (small hunter)', 1.2],
+          ['Ornithomimus (bird mimic)', 4.6],
+          ['Oviraptor (egg robber)', 1.5],
+          ['Plateosaurus (flat lizard)', 7.9],
+          ['Sauronithoides (narrow-clawed lizard)', 2.0],
+          ['Seismosaurus (tremor lizard)', 45.7],
+          ['Spinosaurus (spiny lizard)', 12.2],
+          ['Supersaurus (super lizard)', 30.5],
+          ['Tyrannosaurus (tyrant lizard)', 15.2],
+          ['Ultrasaurus (ultra lizard)', 30.5],
+          ['Velociraptor (swift robber)', 1.8]]);
+
+        var options = {
+          title: 'Lengths of dinosaurs, in meters',
+          legend: { position: 'none' },
+        };
+        var options = {
+    title: 'Country Populations',
+    legend: { position: 'none' },
+    colors: ['#fff'],
+    backgroundColor: '#466E74',
+    legendTextStyle: { color: '#FFF' },
+    titleTextStyle: { color: '#FFF' },
+    hAxis: {
+      color: '#FFF',
+    },
+
+      chartArea: {
+                backgroundColor: '#466E74'
+            },
+  };
+
+        var chart = new google.visualization.Histogram(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>-->
+
+
+     <!-- For Chart -->
+</head>
+
   <body>
+  <input type="hidden" id="session_user" value="<?php echo $this->session->userdata('emp_name');?>">
+  <input type="hidden" id="from_id" value="<?php echo $this->session->userdata('uid');?>">
     <section class="header">
       <div class="container">
         <div class="row">
+        <input type="hidden" id="username" value="<?php echo $this->session->userdata('emp_name');?>">
             <div class="col-lg-6 col-md-6 col-sm-6">
             <div class="logo"><a href="#"><img src="images/tier5.png" alt="Tier5"></a></div>
             </div>
@@ -184,7 +258,9 @@
               </p> 
                  
 
+
                   <a href="#" class="lunch-btn" data-toggle="modal" data-target="#myModal" id="show_lunch" <?php if(date('H:i:s')<="23:45:00"){ echo "style=display:block;";} else {echo "style=display:none;";}?> >Lunch Order</a>
+
            <!--    <a href="#" class="lunch-btn" data-toggle="modal" id="show_lunch" >Lunch Order</a> -->
               <br>
               <a class="lunch-btn" data-toggle="modal"  id="view_lunch" data-target="#lunch_modal" <?php if(date('H:i:s')<="23:45:00"){ echo "style=display:block;";} else {echo "style=display:none;";}?>>View Order</a>
@@ -480,7 +556,9 @@
 
                       <div class="col-md-4 col-sm-4 col-xs-4 time-left">
                        
+
                         <h6 id="breakdur"> <?php  $breakinfo=breakinfo($key['break_id'],$userid); ?> <span id="hm_timer<?php echo $key['break_id']?>" class="break_span"></span><span id="counterr<?php echo $key['break_id']?>" style="color: red; font-size: 150%;"></span></h6>
+
                       </div>  
                       
                       <div class="col-md-4 col-sm-4 col-xs-4">
@@ -566,9 +644,19 @@
     ?>
                   <li>
                     <div class="user-pic">
-                          <img src="images/user5.jpg" alt="img">
+                    <?php if($online['gender']=="Male" && $online['online_status']==1){?>
+                          <img src="images/male_online.png" alt="img">
+                          <?php } if($online['gender']=="Male" && $online['online_status']==0){ ?>
+                          <img src="images/male_offline.png" alt="img">
+                          <?php } if($online['gender']=="Female" && $online['online_status']==1){ ?>
+                          <img src="images/female_online.png" alt="img">
+                          <?php }
+                           if($online['gender']=="Female" && $online['online_status']==0){ ?>
+                          <img src="images/female_offline.png" alt="img">
+                          <?php }?>
+
                         </div>  
-                      <div class="user-name"><span onclick="javascript:chatWith('<?php echo $online['id'];?>','<?php echo $online['name'];?>' )"><?php echo $online['name'];?></span></div>
+                      <div class="user-name"><span onclick="javascript:chatWith('<?php echo $online['username'];?>')" data-id="<?php echo $online['id'];?>" class="user_spc" style="cursor:pointer;"><?php echo $online['username'];?></span></div>
 
                   </li>
                   <?php endif;endforeach;?>
@@ -622,9 +710,9 @@
   <link type="text/css" rel="stylesheet" media="all" href="css/chat/chat.css" />
     <link type="text/css" rel="stylesheet" media="all" href="css/chat/screen.css" />
 
-    <script type="text/javascript" src="js/chat/jquery.js"></script>
+    <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/countdowntimer.js"></script>
 
-    <script type="text/javascript" src="js/chat/chat.js"></script>
+    <script type="text/javascript" src="js/chat.js"></script>
   </body>
 </html>

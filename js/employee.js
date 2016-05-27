@@ -1,4 +1,5 @@
 //http://stackoverflow.com/questions/34876998/how-to-continue-timer-after-page-is-refreshed
+
 $(document).ready(function(){
 
 
@@ -15,6 +16,8 @@ function chk_time()
   if(time_remains!='')
   {
  
+
+
     if(data2[0]=="00" && data2[1]=="00" && data2[2]=="00")
     {
          //alert('hi');
@@ -96,6 +99,7 @@ function chk_time()
     }
   }
 }
+
  $.post('employee_control/employee/wmodecheck',function(data){
       if(data) 
       {

@@ -12,13 +12,15 @@ class Employee extends CI_Controller
 		$this->load->model('EmployeeModel');
 		$this->load->helper('custom');
 		$this->load->library('session');
-     $this->load->library('villa_booking_calendar');
+    $this->load->library('villa_booking_calendar');
+
 	}
 
 
 
     public function index()
     {  
+     
         if($_POST)
         {
               $username=$this->input->post('empid');
@@ -32,12 +34,12 @@ class Employee extends CI_Controller
                 {
 
                     /* chat introduce */
-                    $_SESSION['chatusername'] = $this->session->userdata('emp_name');
-                    $_SESSION['username'] = $this->session->userdata('uid');
+                    //$_SESSION['chatusername'] = $this->session->userdata('emp_name');
+                    //$_SESSION['username'] = $this->session->userdata('emp_name');
 
-
+                    
                     $con_online=array('online_status'=>1);
-                    $data['userlist']=$this->EmployeeModel->fetchinfo('employee',$con_online,'result');
+                    $data['userlist']=$this->EmployeeModel->AllEmployee();
                     /* chat introduce */
 
                     $conmode['date']=date("Y-m-d");
@@ -82,7 +84,7 @@ class Employee extends CI_Controller
 
 
                     $con_online=array('online_status'=>1);
-                    $data['userlist']=$this->EmployeeModel->fetchinfo('employee',$con_online,'result');
+                    $data['userlist']=$this->EmployeeModel->AllEmployee();
                     /* chat introduce */
 
                     $conmode['date']=date("Y-m-d");

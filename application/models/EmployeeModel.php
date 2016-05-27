@@ -32,7 +32,7 @@
                
                $this->session->set_userdata('uid',$result1['Eid']);
                $this->session->set_userdata('role',$result1['role']);
-                 $this->session->set_userdata('emp_name',$result1['name']);
+                 $this->session->set_userdata('emp_name',$result1['username']);
               //$this->session->set_userdata('uname',$result['Eid']);
               return $result1;
             }
@@ -51,7 +51,14 @@
       }
     } 
 
-    
+    public function AllEmployee()
+    {
+      $this->db->select('*');
+      $this->db->join('employee','employee.id=emp_details.Eid');
+      $res=$this->db->get('emp_details');
+      return $result=$res->result_array();
+
+    }
     public function clockintime($data)
     {
         $data2['Eid'] = $data['Eid'];
