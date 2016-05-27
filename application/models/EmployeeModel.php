@@ -382,6 +382,23 @@
       return $res->row_array();
     }
 
+    public function placedorder($userid,$end_date)
+    {
+    
+         $this->db->select('lunchorder.*,employee.name');
+         $this->db->join('employee',"lunchorder.Eid=employee.id");
+         $this->db->where('Eid',$userid);
+         $this->db->where('date',$end_date);
+         $res=$this->db->get('lunchorder');
+         return $res->row_array();
+    }
+    
+    public function delete($con,$tbl)
+    {
+        $this->db->where($con);
+        $this->db->delete($tbl);
+        return $this->db->affected_rows(); 
+    }
     public function getlunch_bonus($userid,$start_date,$end_date)
     {
       

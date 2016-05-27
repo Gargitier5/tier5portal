@@ -56,7 +56,7 @@ class Employee extends CI_Controller
                     $start_date=date("Y-m-d", strtotime(date('m').'/01/'.date('Y')));
                     $end_date=date("Y-m-d");
                     $userid=$this->session->userdata('uid');
-                    //$data['placedorder']=$this->EmployeeModel->fetchinfo('lunchorder',$condtn,'row');
+                    $data['placedorder']=$this->EmployeeModel->placedorder($userid,$end_date);
                     $data['points']=$this->EmployeeModel->getpoint($userid,$start_date,$end_date);
                     $data['userid']=$this->session->userdata('uid');
                     $data['empofmonth']=$this->EmployeeModel->getempofmonth();
@@ -100,13 +100,14 @@ class Employee extends CI_Controller
                     $data['allbreak']=$this->EmployeeModel->getbreak();
                     $start_date=date("Y-m-d", strtotime(date('m').'/01/'.date('Y')));
                     $end_date=date("Y-m-d");
-                    $userid=$this->session->userdata('uid');
-                    $data['points']=$this->EmployeeModel->getpoint($userid,$start_date,$end_date);
+                    $user_id=$this->session->userdata('uid');
+                    $data['points']=$this->EmployeeModel->getpoint($user_id,$start_date,$end_date);
+                    $data['placedorder']=$this->EmployeeModel->placedorder($user_id,$end_date);
                     $data['userid']=$this->session->userdata('uid');
                     $data['empofmonth']=$this->EmployeeModel->getempofmonth();
                     $data['notice']=$this->EmployeeModel->getnotice();
                     $data['lunch_order']=$this->EmployeeModel->fetchinfo('lunchorder',$clockin,'row');
-                    $data['lunch_bonus']=$this->EmployeeModel->getlunch_bonus($userid,$start_date,$end_date);
+                    $data['lunch_bonus']=$this->EmployeeModel->getlunch_bonus($user_id,$start_date,$end_date);
                     $data['checkmode']=$this->EmployeeModel->fetchinfo('tbl_employee_productivity',$conmode,'row');
                     $this->load->view('employee/employeedashboard',$data);
                 }
@@ -122,6 +123,24 @@ class Employee extends CI_Controller
       $this->load->view('employee/bdm.php');
           
     }
+    
+    public function checklunchorder()
+    {
+               $end_date=date("Y-m-d");
+                    $user_id=$this->session->userdata('uid');
+
+       $exist=$this->EmployeeModel->placedorder($userid,$end_date);
+       if($exist)
+       {
+        return $exist;
+       }
+       else
+       {
+        return false;
+       }
+    }
+
+
 
     public function logout()
     {
@@ -138,6 +157,10 @@ class Employee extends CI_Controller
        $data['clockout']=$time;
        $data['Eid'] = $this->session->userdata('uid');
        $ctime=$this->EmployeeModel->clockouttime($data);
+       $con['id']=$this->session->userdata('uid');
+       $data1['online_status']='0';
+       $make_online=$this->EmployeeModel->update('employee',$con,$data1);
+
        if($ctime)
        {
 
@@ -172,6 +195,21 @@ class Employee extends CI_Controller
       }
       echo $items;
     }
+
+    public function deletelunch($id)
+    {
+      $con['Liid']=$id;
+      $delete_order=$this->EmployeeModel->delete($con,'lunchorder');
+      if($delete_order)
+      {
+        redirect(base_url().'employee_control/employee');
+      }
+      else
+       {
+           redirect(base_url().'employee_control/employee');
+       }
+
+    }
     
 
     public function clockin()
@@ -183,6 +221,10 @@ class Employee extends CI_Controller
        $data['clockin']=$time;
        $data['Eid'] = $this->session->userdata('uid');
        $ctime=$this->EmployeeModel->clockintime($data);
+
+       $con['id']=$this->session->userdata('uid');
+       $data1['online_status']='1';
+       $make_online=$this->EmployeeModel->update('employee',$con,$data1);
        if($ctime)
        {
            

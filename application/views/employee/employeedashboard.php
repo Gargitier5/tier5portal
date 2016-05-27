@@ -145,7 +145,7 @@
                 </div>  
               </div>  --> 
 
-                <div id="time"></div>
+         
 
 
 
@@ -187,7 +187,7 @@
                   <a href="#" class="lunch-btn" data-toggle="modal" data-target="#myModal" id="show_lunch" <?php if(date('H:i:s')<="23:45:00"){ echo "style=display:block;";} else {echo "style=display:none;";}?> >Lunch Order</a>
            <!--    <a href="#" class="lunch-btn" data-toggle="modal" id="show_lunch" >Lunch Order</a> -->
               <br>
-              <a class="lunch-btn" data-toggle="lunch_modal"  id="view_lunch" data-target="#lunch_modal" <?php if(date('H:i:s')<="23:45:00"){ echo "style=display:block;";} else {echo "style=display:none;";}?>>View Order</a>
+              <a class="lunch-btn" data-toggle="modal"  id="view_lunch" data-target="#lunch_modal" <?php if(date('H:i:s')<="23:45:00"){ echo "style=display:block;";} else {echo "style=display:none;";}?>>View Order</a>
 
            
               <!-- Modal -->
@@ -305,7 +305,52 @@
               </div>
             </div>
             <!-- Modal -->
+           <div id="lunch_modal" class="modal fade lunch" role="dialog">
+                 <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Your Lunch Odred For Today!!!</h4>
+        </div>
+        <div class="modal-body">
+            <?php if($placedorder['Liid']){ ?>   
+             <table class="table table-bordered table-hover table-responsive center">
+                        <thead>
+                          <tr>
+                            <th>Employee Name</th>
+                            <th>Date</th>
+                            <th>Shop Name</th>
+                            <th>Items</th>
+                            <th>Cost</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <th><?php echo $placedorder['name'];?></th>
+                            <th><?php echo $placedorder['date'];?></th>
+                            <th><?php echo $placedorder['shopname'];?></th>
+                            <th><?php echo $placedorder['items'];?></th>
+                            <th><?php echo $placedorder['cost'];?></th>
+                            <th><button class="btn btn-success" onclick="location.href='employee_control/Employee/deletelunch/<?php echo $placedorder['Liid'];?>';">Delete</button></th>
+                        </tbody>
+                      </table> 
+         
+           <?php } else { ?>
 
+            <table class="table table-bordered table-hover table-responsive center">
+                  No Lunch Order For Today!!!
+
+            </table> 
+           <?php }?>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+          </div>
+          </div>
                 <!--Clockout Modal Start-->
                     <div id="clockout" class="modal fade clock-out-modal" role="dialog">
                       <div class="modal-dialog">

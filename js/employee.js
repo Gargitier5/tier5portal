@@ -1,6 +1,9 @@
 //http://stackoverflow.com/questions/34876998/how-to-continue-timer-after-page-is-refreshed
 $(document).ready(function(){
 
+
+
+
 setInterval(function(){ chk_time() }, 1000);
 
 
@@ -123,6 +126,9 @@ function chk_time()
 
 
  });
+
+
+
  $.post('employee_control/employee/breakcheck',function(data){
 
       if(data)
@@ -257,7 +263,6 @@ $('#show_lunch').click(function(){
 
 
 
-
   });
 
 //========On Select Shop=====================
@@ -281,6 +286,7 @@ function display_item(shop_id,shopname)
     $('#shop_name').html(shopname);
     $('#shop_id').html(shop_id);
 }
+
 
 
 
@@ -343,7 +349,7 @@ function Start_Break(breakid,duration)
   
   if(button=='Start Break')
   {
-
+    
    
     $.post('employee_control/employee/startbreak',{breakid:breakid},function(data){//inserting 0 in breakstatus column in attendence table 
       
