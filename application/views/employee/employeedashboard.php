@@ -108,6 +108,7 @@
 
      <!-- For Chart -->
 </head>
+
   <body>
   <input type="hidden" id="session_user" value="<?php echo $this->session->userdata('emp_name');?>">
   <input type="hidden" id="from_id" value="<?php echo $this->session->userdata('uid');?>">
@@ -218,7 +219,12 @@
                 </div>  
               </div>  --> 
 
-                           
+                <div id="time"></div>
+
+
+
+
+          
           
                             
             </div>
@@ -252,10 +258,12 @@
               </p> 
                  
 
-                  <a href="#" class="lunch-btn" data-toggle="modal" id="show_lunch" <?php if(date('H:i:s')<="23:45:00"){ echo "style=display:block;";} else {echo "style=display:none;";}?> data-target="#myModal">Lunch Order</a>
+
+                  <a href="#" class="lunch-btn" data-toggle="modal" data-target="#myModal" id="show_lunch" <?php if(date('H:i:s')<="23:45:00"){ echo "style=display:block;";} else {echo "style=display:none;";}?> >Lunch Order</a>
+
            <!--    <a href="#" class="lunch-btn" data-toggle="modal" id="show_lunch" >Lunch Order</a> -->
               <br>
-              <a class="lunch-btn" data-toggle="lunch_modal"  id="view_lunch" data-target="#lunch_modal" <?php if(date('H:i:s')<="03:45:00"){ echo "style=display:block;";} else {echo "style=display:none;";}?>>View Order</a>
+              <a class="lunch-btn" data-toggle="lunch_modal"  id="view_lunch" data-target="#lunch_modal" <?php if(date('H:i:s')<="23:45:00"){ echo "style=display:block;";} else {echo "style=display:none;";}?>>View Order</a>
 
            
               <!-- Modal -->
@@ -503,7 +511,9 @@
 
                       <div class="col-md-4 col-sm-4 col-xs-4 time-left">
                        
-                        <h6 id="breakdur"> <?php  $breakinfo=breakinfo($key['break_id'],$userid); ?> <span id="hm_timer<?php echo $key['break_id']?>" class="break_span"></span></h6>
+
+                        <h6 id="breakdur"> <?php  $breakinfo=breakinfo($key['break_id'],$userid); ?> <span id="hm_timer<?php echo $key['break_id']?>" class="break_span"></span><span id="counterr<?php echo $key['break_id']?>" style="color: red; font-size: 150%;"></span></h6>
+
                       </div>  
                       
                       <div class="col-md-4 col-sm-4 col-xs-4">
@@ -529,7 +539,7 @@
                         </div> 
                         <div class="col-md-4 col-sm-4 col-xs-4">
                           <div class="time">
-                            <div id="timer"></div>
+                            <div id="timerr"></div>
 <!-- <div id ="stop_timer" onclick="clearInterval(timerVar)">Stop time</div> -->
                           </div>  
 
@@ -541,16 +551,16 @@
                             <div class="type-btn">
                               <ul>
                                 <li>
-                                  <button class="btn btn-type"  <?php if($checkmode['type']==1){ echo "disabled";} ?> onclick="location.href='employee_control/Employee/setproduction'">Production</button>
+                                  <button class="btn btn-type1"  <?php if($checkmode['type']==1){ echo "disabled";} ?> onclick="location.href='employee_control/Employee/setproduction'">Production</button>
                                 </li>
                                 <li>
-                                  <button class="btn btn-type"  <?php if($checkmode['type']==2){ echo "disabled";} ?> onclick="location.href='employee_control/Employee/setrnd'">R&D</button>
+                                  <button class="btn btn-type1"  <?php if($checkmode['type']==2){ echo "disabled";} ?> onclick="location.href='employee_control/Employee/setrnd'">R&D</button>
                                 </li>
                                 <li>
-                                  <button class="btn btn-type"  <?php if($checkmode['type']==3){ echo "disabled";} ?> onclick="location.href='employee_control/Employee/settraining'">Training</button>
+                                  <button class="btn btn-type1"  <?php if($checkmode['type']==3){ echo "disabled";} ?> onclick="location.href='employee_control/Employee/settraining'">Training</button>
                                 </li>
                                 <li>
-                                  <button class="btn btn-type"  <?php if($checkmode['type']==4){ echo "disabled";} ?> onclick="location.href='employee_control/Employee/setadmin'">Administrative</button>
+                                  <button class="btn btn-type1"  <?php if($checkmode['type']==4){ echo "disabled";} ?> onclick="location.href='employee_control/Employee/setadmin'">Administrative</button>
                                 </li>
 
                               </ul>  

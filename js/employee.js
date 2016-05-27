@@ -13,10 +13,87 @@ function chk_time()
   if(time_remains!='')
   {
  
-  if(data2[0]=="00" && data2[1]=="00" && data2[2]=="00")
-  {
-     
-  }
+
+
+    if(data2[0]=="00" && data2[1]=="00" && data2[2]=="00")
+    {
+         //alert('hi');
+       //clearInterval(time_remains);
+       $('.break_span').html("");
+      $.post('employee_control/employee/breakcheck',function(data){
+
+      if(data)
+      {
+          var dataa=data.split('+');
+          $('#clockout_btn').attr('disabled','disabled');
+          var data1=dataa[0].split(','); 
+          $('#breakstart_'+data1[1]).text("Work");
+          var data2=data1[0].split(':');         
+            
+         if(data1[1]==1)
+          {
+            $('#breakstart_2').attr('disabled', 'disabled');
+            $('#breakstart_3').attr('disabled', 'disabled');   
+          }
+          else if(data1[1]==2)
+          {
+            $('#breakstart_1').attr('disabled', 'disabled');
+            $('#breakstart_3').attr('disabled', 'disabled'); 
+          }
+          else if(data1[1]==3)
+          {
+            $('#breakstart_1').attr('disabled', 'disabled');
+            $('#breakstart_2').attr('disabled', 'disabled');  
+          }
+          else
+          {
+            $('#breakstart_1').removeAttr('disabled');
+            $('#breakstart_2').removeAttr('disabled');
+            $('#breakstart_3').removeAttr('disabled');
+          }
+
+          if(dataa[1]==0)
+          {
+                $('#hm_timer'+data1[1]).countdowntimer({
+                hours : data2[0],
+                minutes :data2[1],
+                seconds:data2[2],
+                pauseButton : 'breakstart_'+data1[1]
+
+                });
+          }
+          else
+          {
+                 var counter = dataa[2],
+                 cDisplay = document.getElementById('counterr'+data1[1]);
+                 format = function(t) {
+                 var minutes = Math.floor(t/60);
+                     if(minutes>59)
+                     {
+                       minutes=Math.floor(minutes % 60);
+                     }
+                     seconds = Math.floor(t % 60);
+                     hours=Math.floor(t/3600);
+                     hours = (hours < 10) ? "0" + hours.toString() : hours.toString();
+                     minutes = (minutes < 10) ? "0" + minutes.toString() : minutes.toString();
+                     seconds = (seconds < 10) ? "0" + seconds.toString() : seconds.toString();
+                     cDisplay.innerHTML = hours + ":" +minutes + ":" + seconds ;
+                 };
+                setInterval(function() {
+                   counter++;
+                   format(counter);
+                },1000);
+               
+          }
+      }  
+  
+
+
+
+});
+      
+       
+    }
   }
 }
 
@@ -24,86 +101,105 @@ function chk_time()
       if(data) 
       {
        var data1=data.split(",");  
-
-      
-        var timerVar = setInterval(countTimer, 1000);
-        var totalSeconds = data1[3];
+        //var totalSeconds = data1[3];
+        var counter = data1[3],
+                 cDisplay = document.getElementById('timerr');
+                 format = function(t) {
+                 var minutes = Math.floor(t/60);
+                     if(minutes>59)
+                     {
+                       minutes=Math.floor(minutes % 60);
+                     }
+                     seconds = Math.floor(t % 60);
+                     hours=Math.floor(t/3600);
+                     hours = (hours < 10) ? "0" + hours.toString() : hours.toString();
+                     minutes = (minutes < 10) ? "0" + minutes.toString() : minutes.toString();
+                     seconds = (seconds < 10) ? "0" + seconds.toString() : seconds.toString();
+                     cDisplay.innerHTML = hours + ":" +minutes + ":" + seconds ;
+                 };
+                setInterval(function() {
+                   counter++;
+                   format(counter);
+                },1000);
       }  
-        function countTimer()
-        {
-         ++totalSeconds;
-         var hour = Math.floor(totalSeconds /3600);
-         if(hour<10)
-         {
-          hour="0"+hour;
-         }
-         var minute = Math.floor((totalSeconds - hour*3600)/60);
-         if(minute<10)
-         {
-          minute="0"+minute;
-         }
+    
+ 
 
-         var seconds = totalSeconds - (hour*3600 + minute*60);
-         if(seconds<10)
-         {
-          seconds="0"+seconds;
-         }
-         document.getElementById("timer").innerHTML = hour + ":" + minute + ":" + seconds;
-        }
 
  });
  $.post('employee_control/employee/breakcheck',function(data){
 
-  if(data)
-  {
-      $('#clockout_btn').attr('disabled','disabled');
-    //$('#clockout_btn').prop('disabled', true);
-    var data1=data.split(','); 
-    $('#breakstart_'+data1[1]).text("Work");
-    var data2=data1[0].split(':'); 
-   
-    $('#hm_timer'+data1[1]).countdowntimer({
-          hours : data2[0],
-          minutes :data2[1],
-          seconds:data2[2],
-          pauseButton : 'breakstart_'+data1[1]
-          });
-
-
-    if(data1[1]==1)
+      if(data)
+      {
+          var dataa=data.split('+');
+          $('#clockout_btn').attr('disabled','disabled');
+          var data1=dataa[0].split(','); 
+          $('#breakstart_'+data1[1]).text("Work");
+          var data2=data1[0].split(':');         
+            
+         if(data1[1]==1)
           {
             $('#breakstart_2').attr('disabled', 'disabled');
-            $('#breakstart_3').attr('disabled', 'disabled');
-
-            
+            $('#breakstart_3').attr('disabled', 'disabled');   
           }
           else if(data1[1]==2)
           {
             $('#breakstart_1').attr('disabled', 'disabled');
-            $('#breakstart_3').attr('disabled', 'disabled');
-            
+            $('#breakstart_3').attr('disabled', 'disabled'); 
           }
           else if(data1[1]==3)
           {
             $('#breakstart_1').attr('disabled', 'disabled');
-            $('#breakstart_2').attr('disabled', 'disabled');
-            
+            $('#breakstart_2').attr('disabled', 'disabled');  
           }
           else
           {
             $('#breakstart_1').removeAttr('disabled');
             $('#breakstart_2').removeAttr('disabled');
             $('#breakstart_3').removeAttr('disabled');
-
           }
-  }
+
+          if(dataa[1]==0)
+          {
+                $('#hm_timer'+data1[1]).countdowntimer({
+                hours : data2[0],
+                minutes :data2[1],
+                seconds:data2[2],
+                pauseButton : 'breakstart_'+data1[1]
+
+                });
+          }
+          else
+          {
+                 var counter = dataa[2],
+                 cDisplay = document.getElementById('counterr'+data1[1]);
+                 format = function(t) {
+                 var minutes = Math.floor(t/60);
+                     if(minutes>59)
+                     {
+                       minutes=Math.floor(minutes % 60);
+                     }
+                     seconds = Math.floor(t % 60);
+                     hours=Math.floor(t/3600);
+                     hours = (hours < 10) ? "0" + hours.toString() : hours.toString();
+                     minutes = (minutes < 10) ? "0" + minutes.toString() : minutes.toString();
+                     seconds = (seconds < 10) ? "0" + seconds.toString() : seconds.toString();
+                     cDisplay.innerHTML = hours + ":" +minutes + ":" + seconds ;
+                 };
+                setInterval(function() {
+                   counter++;
+                   format(counter);
+                },1000);
+               
+          }
+      }  
+  
+
+
+
 });
 
 $.post('employee_control/employee/breakdis',function(data){
-
-    //alert(data);
-       //$('#clockout_btn').prop('disabled', false);
-         //$('#clockout_btn').removeAttr("disabled");
       var data1=data.split(",");
       for(i=0; i<data1.length-1; i++)
       { 

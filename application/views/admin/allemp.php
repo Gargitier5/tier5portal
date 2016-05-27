@@ -81,12 +81,25 @@
 
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
-       
+       <?php 
+if($this->session->userdata('succ_msg')!=''){?>
+                      <div class="alert alert-success alert-dismissable">
+                    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                    <h4>  <i class="icon fa fa-check"></i> Success!</h4>
+                    <?php echo $this->session->userdata('succ_msg');$this->session->set_userdata('succ_msg','');?>
+                  </div>
+
+<?php } if($this->session->userdata('err_msg')!=''){ ?>
+
+<div class="alert alert-danger alert-dismissable">
+                    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                    <h4><i class="icon fa fa-ban"></i> Sorry!</h4>
+                  <?php echo  $this->session->userdata('err_msg');$this->session->set_userdata('err_msg','');?>
+                  </div>
+<?php }?>
+ 
 
                   <div class="x_content">
-
-                   
-                   <div id="msg"></div>
                     <div class="table-responsive">
                       <table class="table table-striped jambo_table bulk_action">
                         <thead>
@@ -107,6 +120,7 @@
                               <th class="column-title">Reason</th>
                               <th class="column-title">Adress</th>
                               <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                              <th class="column-title">Action</th>
                           </tr>
                         </thead>
                          
@@ -128,12 +142,11 @@
                               <td><?php if($value['activation_status']==0){echo " ";}else{echo $value['resign_date'];}?></td>
                               <td><?php echo $value['reason'];?></td>
                               <td colspan="2" ><?php echo $value['address'];?></td>
+                              <td><button class="btn btn-success glyphicon glyphicon-edit" onclick="location.href='admin_control/Admin/editprof/<?php echo $value['id'];?>';"></td>
                           </tr>
                           <?php }?>
                         </tbody>
                       </table>
-
-  
                     </div>
                   </div>
                 </div>

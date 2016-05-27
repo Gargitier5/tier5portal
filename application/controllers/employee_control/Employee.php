@@ -39,7 +39,7 @@ class Employee extends CI_Controller
 
                     
                     $con_online=array('online_status'=>1);
-                    $data['userlist']=$this->EmployeeModel->fetchinfo('employee',$con_online,'result');
+                    $data['userlist']=$this->EmployeeModel->AllEmployee();
                     /* chat introduce */
 
                     $conmode['date']=date("Y-m-d");
@@ -58,6 +58,7 @@ class Employee extends CI_Controller
                     $start_date=date("Y-m-d", strtotime(date('m').'/01/'.date('Y')));
                     $end_date=date("Y-m-d");
                     $userid=$this->session->userdata('uid');
+                    //$data['placedorder']=$this->EmployeeModel->fetchinfo('lunchorder',$condtn,'row');
                     $data['points']=$this->EmployeeModel->getpoint($userid,$start_date,$end_date);
                     $data['userid']=$this->session->userdata('uid');
                     $data['empofmonth']=$this->EmployeeModel->getempofmonth();
@@ -273,6 +274,7 @@ class Employee extends CI_Controller
        $data['starttime']=date("H:i:s");
        $data['date']=date("Y-m-d");
        $data['type']=$this->input->post('breakid');
+       $data['status']='1';
        $brk_start_time=$this->EmployeeModel->startbreak($data);
        return $brk_start_time;
        
@@ -286,6 +288,7 @@ class Employee extends CI_Controller
         $data['endtime']=date("H:i:s");
         $data['date']=date("Y-m-d");
         $data['type']=$this->input->post('breakid');
+        $data['status']='0';
         $brk_end_time=$this->EmployeeModel->endbreak($data);
         print_r($brk_end_time);
     }
@@ -317,13 +320,13 @@ class Employee extends CI_Controller
 
         $data['Eid']=$this->session->userdata('uid');
         $data['date']=date("Y-m-d");
-        //$data['endtime']!='00:00:00';
+
         
         $submit=$this->EmployeeModel->fetchinfo("break_track",$data,"result");
         foreach ($submit as $key)
         {
            
-           if($key['endtime']=='00:00:00')
+           if($key['status']=='1')
            {
              $con['rank']=$key['type'];
              $submit=$this->EmployeeModel->fetchinfo('break',$con,'row');
@@ -335,26 +338,48 @@ class Employee extends CI_Controller
             
              $time = explode(':', $default_time);
              $default=($time[0]*3600) + ($time[1]*60) + $time[2];
-             
-             $remainingtime = $default - $time_spend;
-             //echo $remainingtime;
+             if($default >$time_spend)
+             {
+                $remainingtime = $default - $time_spend;
+                $sec=($remainingtime % 60);
 
-             $sec=($remainingtime % 60);
-               if($sec<10)
-               {
-               $sec="0".$sec;
-               }
+                 if($sec<10)
+                 {
+                 $sec="0".$sec;
+                 }
 
-              $minutes = ($remainingtime / 60) % 60;
-              if($minutes<10)
-               {
-               $minutes="0".$minutes;
-               }
-              $hours = floor($remainingtime / (60 * 60));
+                  $minutes = ($remainingtime / 60) % 60;
+                  if($minutes<10)
+                   {
+                   $minutes="0".$minutes;
+                   }
+                  $hours = floor($remainingtime / (60 * 60));
 
-              $time_left="$hours:$minutes:$sec";
+                  $time_left="$hours:$minutes:$sec";
 
-              echo $time_left.",".$key['type'];
+                  echo $time_left.",".$key['type']."+"."0"."+".$remainingtime;
+              }
+              else
+              {
+                $remainingtime = $time_spend -$default;
+                $sec=($remainingtime % 60);
+
+                 if($sec<10)
+                 {
+                 $sec="0".$sec;
+                 }
+
+                  $minutes = ($remainingtime / 60) % 60;
+                  if($minutes<10)
+                   {
+                   $minutes="0".$minutes;
+                   }
+                  $hours = floor($remainingtime / (60 * 60));
+
+                  $time_left="$hours:$minutes:$sec";
+
+                  echo $time_left.",".$key['type']."+"."1"."+".$remainingtime;
+              }
            }
         }
 

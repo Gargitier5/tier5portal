@@ -116,6 +116,49 @@ class Admin extends CI_Controller
       $this->load->view('admin/setbonus.php',$data);
     }
 
+    public function editprof($id)
+    {
+
+      $con['id']=$id;
+      $data['emp_info']=$this->AdminModel->fetchinfo('employee',$con,'row');
+      $data['sideber']=$this->load->view('admin/includes/sideber','',true);
+      $data['header']=$this->load->view('admin/includes/header','',true);
+      $this->load->view('admin/editprof.php',$data);
+    }
+
+    public function editoldemployee()
+    {
+       $con['id']=$this->input->post('empid');
+
+        $data['name']=$this->input->post('name');
+        $data['personal_email']=$this->input->post('peremail');
+        $data['address']=$this->input->post('address');
+        $data[' phon_no']=$this->input->post('phno');
+        $data['alt_ph_no']=$this->input->post('altphno');
+        $data['gender']=$this->input->post('gender');
+        $data[' m_status']=$this->input->post('marrige');
+        $data['dob']=$this->input->post('dob');
+        $data['joining_date']=$this->input->post('doj');
+        $data['comemail']=$this->input->post('coemail');
+        $data['designation']=$this->input->post('deg');
+        $data['salary']=$this->input->post('salary');
+        $update=$this->AdminModel->update('employee',$con,$data);
+        if($update)
+        {
+             $this->session->set_userdata('succ_msg','Employee Edited Successfully');
+             redirect(base_url().'admin_control/admin/allemp');
+        }
+        else
+        {
+             $this->session->set_userdata('succ_msg','Employee Edited Successfully');
+             redirect(base_url().'admin_control/admin/allemp');
+
+        }
+
+     // print_r($_POST);
+
+    }
+
     public function createuser()
     {
       $data['Eid']=$this->input->post('emp_ide');

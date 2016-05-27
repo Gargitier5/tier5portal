@@ -32,7 +32,7 @@
                
                $this->session->set_userdata('uid',$result1['Eid']);
                $this->session->set_userdata('role',$result1['role']);
-                 $this->session->set_userdata('emp_name',$result1['name']);
+                 $this->session->set_userdata('emp_name',$result1['username']);
               //$this->session->set_userdata('uname',$result['Eid']);
               return $result1;
             }
@@ -405,7 +405,7 @@
      $data1['Eid']=$data['Eid'];
      $data1['date']=$data['date'];
      $data1['type']=$data['type'];
-
+     $data1['status']='1';
 
       $this->db->select('*');
       $this->db->where($data1);
@@ -540,7 +540,7 @@
               $nwdata['endtime']=$data['endtime'];
               $nwdata['action']='1';
               $nwdata['time']=$extra_taken;
-            
+              $nwdata['status']='0';
              $this->db->where($data2);
              $res=$this->db->update('break_track',$nwdata);
              if($res)
@@ -606,6 +606,7 @@
           else
           {
              $nwdata['endtime']=$data['endtime'];
+             $nwdata['status']='0';
              $this->db->where($data2);
              $res=$this->db->update('break_track',$nwdata);
              return $this->db->affected_rows();
