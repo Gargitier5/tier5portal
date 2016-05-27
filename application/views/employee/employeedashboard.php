@@ -37,82 +37,6 @@
 
     </style>
 
-
-
-    <!-- For Chart -->
-
-   
-
-   <!-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load("current", {packages:["corechart"]});
-      google.charts.setOnLoadCallback(drawChart);
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Dinosaur', 'Length'],
-          ['Acrocanthosaurus (top-spined lizard)', 12.2],
-          ['Albertosaurus (Alberta lizard)', 9.1],
-          ['Allosaurus (other lizard)', 12.2],
-          ['Apatosaurus (deceptive lizard)', 22.9],
-          ['Archaeopteryx (ancient wing)', 0.9],
-          ['Argentinosaurus (Argentina lizard)', 36.6],
-          ['Baryonyx (heavy claws)', 9.1],
-          ['Brachiosaurus (arm lizard)', 30.5],
-          ['Ceratosaurus (horned lizard)', 6.1],
-          ['Coelophysis (hollow form)', 2.7],
-          ['Compsognathus (elegant jaw)', 0.9],
-          ['Deinonychus (terrible claw)', 2.7],
-          ['Diplodocus (double beam)', 27.1],
-          ['Dromicelomimus (emu mimic)', 3.4],
-          ['Gallimimus (fowl mimic)', 5.5],
-          ['Mamenchisaurus (Mamenchi lizard)', 21.0],
-          ['Megalosaurus (big lizard)', 7.9],
-          ['Microvenator (small hunter)', 1.2],
-          ['Ornithomimus (bird mimic)', 4.6],
-          ['Oviraptor (egg robber)', 1.5],
-          ['Plateosaurus (flat lizard)', 7.9],
-          ['Sauronithoides (narrow-clawed lizard)', 2.0],
-          ['Seismosaurus (tremor lizard)', 45.7],
-          ['Spinosaurus (spiny lizard)', 12.2],
-          ['Supersaurus (super lizard)', 30.5],
-          ['Tyrannosaurus (tyrant lizard)', 15.2],
-          ['Ultrasaurus (ultra lizard)', 30.5],
-          ['Velociraptor (swift robber)', 1.8]]);
-
-        var options = {
-          title: 'Lengths of dinosaurs, in meters',
-          legend: { position: 'none' },
-        };
-        var options = {
-    title: 'Country Populations',
-    legend: { position: 'none' },
-    colors: ['#fff'],
-    backgroundColor: '#466E74',
-    legendTextStyle: { color: '#FFF' },
-    titleTextStyle: { color: '#FFF' },
-    hAxis: {
-      color: '#FFF',
-    },
-
-      chartArea: {
-                backgroundColor: '#466E74'
-            },
-  };
-
-        var chart = new google.visualization.Histogram(document.getElementById('chart_div'));
-        chart.draw(data, options);
-      }
-    </script>-->
-
-
-     <!-- For Chart -->
-
-
-
-
-
-
-
   </head>
   <body>
     <section class="header">
@@ -221,7 +145,12 @@
                 </div>  
               </div>  --> 
 
-                           
+                <div id="time"></div>
+
+
+
+
+          
           
                             
             </div>
@@ -255,10 +184,10 @@
               </p> 
                  
 
-                  <a href="#" class="lunch-btn" data-toggle="modal" id="show_lunch" <?php if(date('H:i:s')<="03:45:00"){ echo "style=display:block;";} else {echo "style=display:none;";}?> >Lunch Order</a>
+                  <a href="#" class="lunch-btn" data-toggle="modal" data-target="#myModal" id="show_lunch" <?php if(date('H:i:s')<="23:45:00"){ echo "style=display:block;";} else {echo "style=display:none;";}?> >Lunch Order</a>
            <!--    <a href="#" class="lunch-btn" data-toggle="modal" id="show_lunch" >Lunch Order</a> -->
               <br>
-              <a class="lunch-btn" data-toggle="lunch_modal"  id="view_lunch" data-target="#lunch_modal" <?php if(date('H:i:s')<="03:45:00"){ echo "style=display:block;";} else {echo "style=display:none;";}?>>View Order</a>
+              <a class="lunch-btn" data-toggle="lunch_modal"  id="view_lunch" data-target="#lunch_modal" <?php if(date('H:i:s')<="23:45:00"){ echo "style=display:block;";} else {echo "style=display:none;";}?>>View Order</a>
 
            
               <!-- Modal -->
@@ -506,7 +435,7 @@
 
                       <div class="col-md-4 col-sm-4 col-xs-4 time-left">
                        
-                        <h6 id="breakdur"> <?php  $breakinfo=breakinfo($key['break_id'],$userid); ?> <span id="hm_timer<?php echo $key['break_id']?>"></span></h6>
+                        <h6 id="breakdur"> <?php  $breakinfo=breakinfo($key['break_id'],$userid); ?> <span id="hm_timer<?php echo $key['break_id']?>" class="break_span"></span><span id="counterr<?php echo $key['break_id']?>" style="color: red; font-size: 150%;"></span></h6>
                       </div>  
                       
                       <div class="col-md-4 col-sm-4 col-xs-4">
@@ -532,7 +461,7 @@
                         </div> 
                         <div class="col-md-4 col-sm-4 col-xs-4">
                           <div class="time">
-                            <div id="timer"></div>
+                            <div id="timerr"></div>
 <!-- <div id ="stop_timer" onclick="clearInterval(timerVar)">Stop time</div> -->
                           </div>  
 
@@ -544,16 +473,16 @@
                             <div class="type-btn">
                               <ul>
                                 <li>
-                                  <button class="btn btn-type"  <?php if($checkmode['type']==1){ echo "disabled";} ?> onclick="location.href='employee_control/Employee/setproduction'">Production</button>
+                                  <button class="btn btn-type1"  <?php if($checkmode['type']==1){ echo "disabled";} ?> onclick="location.href='employee_control/Employee/setproduction'">Production</button>
                                 </li>
                                 <li>
-                                  <button class="btn btn-type"  <?php if($checkmode['type']==2){ echo "disabled";} ?> onclick="location.href='employee_control/Employee/setrnd'">R&D</button>
+                                  <button class="btn btn-type1"  <?php if($checkmode['type']==2){ echo "disabled";} ?> onclick="location.href='employee_control/Employee/setrnd'">R&D</button>
                                 </li>
                                 <li>
-                                  <button class="btn btn-type"  <?php if($checkmode['type']==3){ echo "disabled";} ?> onclick="location.href='employee_control/Employee/settraining'">Training</button>
+                                  <button class="btn btn-type1"  <?php if($checkmode['type']==3){ echo "disabled";} ?> onclick="location.href='employee_control/Employee/settraining'">Training</button>
                                 </li>
                                 <li>
-                                  <button class="btn btn-type"  <?php if($checkmode['type']==4){ echo "disabled";} ?> onclick="location.href='employee_control/Employee/setadmin'">Administrative</button>
+                                  <button class="btn btn-type1"  <?php if($checkmode['type']==4){ echo "disabled";} ?> onclick="location.href='employee_control/Employee/setadmin'">Administrative</button>
                                 </li>
 
                               </ul>  

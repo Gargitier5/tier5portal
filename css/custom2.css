@@ -91,7 +91,9 @@ a.lunch-btn:hover{text-decoration: none;}
 .btn-type:hover{background: #20334B; color: #fff; border: 1px solid #40618B}
 .btn-type-selected{background: #20334B; color: #fff; border: 1px solid #40618B}
 
-
+.btn-type1{background: #05F2F1; color: #000; padding: 4px 5px; border: 1px solid #05F2F1}
+.btn-type1:hover{background: #20334B; color: #fff; border: 1px solid #40618B}
+.btn-type1-selected{background: #20334B; color: #fff; border: 1px solid #40618B}
 .lunch .modal-body p{color: #000; }
 .lunch .modal-body{padding: 15px 15px 0 15px;background: url(../images/lunch-body.jpg) no-repeat bottom right;
 min-height: 500px;}
