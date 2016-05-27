@@ -51,7 +51,14 @@
       }
     } 
 
-    
+    public function AllEmployee()
+    {
+      $this->db->select('*');
+      $this->db->join('employee','employee.id=emp_details.Eid');
+      $res=$this->db->get('emp_details');
+      return $result=$res->result_array();
+
+    }
     public function clockintime($data)
     {
         $data2['Eid'] = $data['Eid'];

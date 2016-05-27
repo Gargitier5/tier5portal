@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -106,18 +107,14 @@
 
 
      <!-- For Chart -->
-
-
-
-
-
-
-
-  </head>
+</head>
   <body>
+  <input type="hidden" id="session_user" value="<?php echo $this->session->userdata('emp_name');?>">
+  <input type="hidden" id="from_id" value="<?php echo $this->session->userdata('uid');?>">
     <section class="header">
       <div class="container">
         <div class="row">
+        <input type="hidden" id="username" value="<?php echo $this->session->userdata('emp_name');?>">
             <div class="col-lg-6 col-md-6 col-sm-6">
             <div class="logo"><a href="#"><img src="images/tier5.png" alt="Tier5"></a></div>
             </div>
@@ -255,7 +252,7 @@
               </p> 
                  
 
-                  <a href="#" class="lunch-btn" data-toggle="modal" id="show_lunch" <?php if(date('H:i:s')<="03:45:00"){ echo "style=display:block;";} else {echo "style=display:none;";}?> >Lunch Order</a>
+                  <a href="#" class="lunch-btn" data-toggle="modal" id="show_lunch" <?php if(date('H:i:s')<="23:45:00"){ echo "style=display:block;";} else {echo "style=display:none;";}?> data-target="#myModal">Lunch Order</a>
            <!--    <a href="#" class="lunch-btn" data-toggle="modal" id="show_lunch" >Lunch Order</a> -->
               <br>
               <a class="lunch-btn" data-toggle="lunch_modal"  id="view_lunch" data-target="#lunch_modal" <?php if(date('H:i:s')<="03:45:00"){ echo "style=display:block;";} else {echo "style=display:none;";}?>>View Order</a>
@@ -506,7 +503,7 @@
 
                       <div class="col-md-4 col-sm-4 col-xs-4 time-left">
                        
-                        <h6 id="breakdur"> <?php  $breakinfo=breakinfo($key['break_id'],$userid); ?> <span id="hm_timer<?php echo $key['break_id']?>"></span></h6>
+                        <h6 id="breakdur"> <?php  $breakinfo=breakinfo($key['break_id'],$userid); ?> <span id="hm_timer<?php echo $key['break_id']?>" class="break_span"></span></h6>
                       </div>  
                       
                       <div class="col-md-4 col-sm-4 col-xs-4">
@@ -592,9 +589,19 @@
     ?>
                   <li>
                     <div class="user-pic">
-                          <img src="images/user5.jpg" alt="img">
+                    <?php if($online['gender']=="Male" && $online['online_status']==1){?>
+                          <img src="images/male_online.png" alt="img">
+                          <?php } if($online['gender']=="Male" && $online['online_status']==0){ ?>
+                          <img src="images/male_offline.png" alt="img">
+                          <?php } if($online['gender']=="Female" && $online['online_status']==1){ ?>
+                          <img src="images/female_online.png" alt="img">
+                          <?php }
+                           if($online['gender']=="Female" && $online['online_status']==0){ ?>
+                          <img src="images/female_offline.png" alt="img">
+                          <?php }?>
+
                         </div>  
-                      <div class="user-name"><span onclick="javascript:chatWith('<?php echo $online['id'];?>','<?php echo $online['name'];?>' )"><?php echo $online['name'];?></span></div>
+                      <div class="user-name"><span onclick="javascript:chatWith('<?php echo $online['username'];?>')" data-id="<?php echo $online['id'];?>" class="user_spc" style="cursor:pointer;"><?php echo $online['username'];?></span></div>
 
                   </li>
                   <?php endif;endforeach;?>
@@ -648,9 +655,9 @@
   <link type="text/css" rel="stylesheet" media="all" href="css/chat/chat.css" />
     <link type="text/css" rel="stylesheet" media="all" href="css/chat/screen.css" />
 
-    <script type="text/javascript" src="js/chat/jquery.js"></script>
+    <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/countdowntimer.js"></script>
 
-    <script type="text/javascript" src="js/chat/chat.js"></script>
+    <script type="text/javascript" src="js/chat.js"></script>
   </body>
 </html>
