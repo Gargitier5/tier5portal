@@ -113,7 +113,7 @@
   <input type="hidden" id="session_user" value="<?php echo $this->session->userdata('emp_name');?>">
   <input type="hidden" id="from_id" value="<?php echo $this->session->userdata('uid');?>">
     <section class="header">
-      <div class="container">
+      <div class="container-fluid">
         <div class="row">
         <input type="hidden" id="username" value="<?php echo $this->session->userdata('emp_name');?>">
             <div class="col-lg-6 col-md-6 col-sm-6">
@@ -154,9 +154,9 @@
       </div>  
     </section> 
     <section class="bodypart">
-      <div class="container">
+      <div class="container-fluid">
         <div class="row">
-          <div class="col-lg-5 col-md-5 col">
+          <div class="col-lg-5 col-md-5 col-sm-5 col">
             <div class="row">
               <div class="col-md-12">
             <div class="box dashboard">
@@ -166,7 +166,7 @@
                 <div class="col-md-9 col-xs-9">
                     Your total points 
                 </div>
-                <div class="col-md-3 col-xs-3 dashboard-right">
+                <div class="col-md-3 col-sm-3 col-xs-3 dashboard-right">
                   <span class="points"><?php echo $points['points'] ?></span>
                 </div>
 
@@ -233,7 +233,7 @@
             </div>
             <div class="row">
 
-            <div class="col-md-6 padding1 no-padding">
+            <div class="col-md-6 col-sm-6 padding1 no-padding">
               
             <div class="box employee-block">
               <h2>Employee of the month</h2>
@@ -250,7 +250,7 @@
             </div> 
             </div>
 
-          <div class="col-md-6 padding2 no-padding">
+          <div class="col-md-6 col-sm-6 padding2 no-padding">
             <div class="box employee-block">
               <h2>Lunch Order</h2>
               <p>
@@ -365,7 +365,7 @@
                   <br>
                   <br>
                   <div class="col-md-1"></div>
-                  <div class="col-md-10">
+                  <div class="col-md-10 col-sm-10">
                     <button type="button" class="btn btn-link pull-left" id="prev"><span></span> Prev</button>
                   <button type="submit" class="btn btn-primary pull-right" id="submitorder">Submit Lunch Order</button>
                   </div> 
@@ -461,7 +461,7 @@
           </div>
           </div>
            <div class="row"> 
-             <div class="col-md-12">
+             <div class="col-md-12 col-sm-12">
                 <div class="box notice-board">
                     <h2>Notice Board</h2>
 
@@ -518,25 +518,25 @@
 
             
           </div>
-          <div class="col-lg-5 col-md-5 col">
+          <div class="col-lg-5 col-md-5 col-sm-5 col">
                 <div class="row ">
                 <div class="col-md-12">
                   <div class="box break-block">
 
                     <div class="break">
                     <div class="row">
-                      <div class="col-md-4">Clock In:</div>
-                      <div class="col-md-4"><?php if($clockintime['clockin']){ echo $clockintime['clockin'];} else { echo "Please Clock In!!";} ?></div>
-                      <div class="col-md-4">
+                      <div class="col-md-4 col-sm-4">Clock In:</div>
+                      <div class="col-md-4 col-sm-4"><?php if($clockintime['clockin']){ echo $clockintime['clockin'];} else { echo "Please Clock In!!";} ?></div>
+                      <div class="col-md-4 col-sm-4">
                         <button id="" class="btn break-btn" onclick="location.href='employee_control/Employee/clockin'" name="clockinbtn"  <?php if($clockintime['clockin']){ echo "disabled";} ?>>Clock In</button>
                       </div>
                     </div> 
                     </div> 
                     <div class="break">
                     <div class="row">
-                      <div class="col-md-4">Clock Out:</div>
-                      <div class="col-md-4"><?php if($clockintime['clockin']){ echo $clockintime['clockout'];} else { echo "";} ?></div>
-                      <div class="col-md-4">
+                      <div class="col-md-4 col-sm-4">Clock Out:</div>
+                      <div class="col-md-4 col-sm-4"><?php if($clockintime['clockin']){ echo $clockintime['clockout'];} else { echo "";} ?></div>
+                      <div class="col-md-4 col-sm-4">
 
                         <button id="clockout_btn" class="btn break-btn" name="clockinbtn" data-toggle="modal" data-target="#clockout">Clock Out</button>
 
@@ -575,7 +575,7 @@
               </div> 
 
               <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-12 col-sm-12">
                   <div class="box work-type">
                       <div class="row">
                         <div class="col-md-8 col-sm-8 col-xs-8">
@@ -619,7 +619,7 @@
               </div> 
 
               <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-12 col-sm-12">
                   <div class="box calender">
                     <h2>Our Calender</h2>
                     <!-- <iframe src="https://calendar.google.com/calendar/embed?title=Tier5%20Events&amp;showTitle=0&amp;showPrint=0&amp;height=400&amp;wkst=1&amp;bgcolor=%23336666&amp;src=en.indian%23holiday%40group.v.calendar.google.com&amp;color=%232952A3&amp;ctz=Asia%2FCalcutta" style="border-width:0" width="100%" height="380" frameborder="0" scrolling="no"></iframe> -->
@@ -637,7 +637,7 @@
           
         </div>
               <div class="col-lg-2 col-md-2 col">
-              <div class="chat">
+              <div class="chat employee-chat">
                 <ul>
                <?php foreach($userlist as $online):
     if($online['id']!= $this->session->userdata('uid')):
@@ -662,6 +662,32 @@
                   <?php endif;endforeach;?>
                    </ul>
               <div class="clearfix"></div>
+              </div> 
+              <div class="chat admin-chat">
+                <h3>Admin Chat</h3>
+                <ul>
+                  <li>
+                    <div class="user-pic">
+                          <img src="images/user1.jpg" alt="img">
+                        </div>  
+                      <div class="user-name">Kingsuk Majumder</div>
+
+                  </li>
+                  <li>
+                    <div class="user-pic">
+                          <img src="images/user1.jpg" alt="img">
+                        </div>  
+                      <div class="user-name">Kingsuk Majumder</div>
+
+                  </li>
+                  <li>
+                    <div class="user-pic">
+                          <img src="images/user1.jpg" alt="img">
+                        </div>  
+                      <div class="user-name">Kingsuk Majumder</div>
+
+                  </li>
+                </ul>  
               </div>  
           </div> 
 

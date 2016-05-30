@@ -24,6 +24,10 @@
 
     <!-- Custom Theme Style -->
     <link href="css/custom.css" rel="stylesheet">
+
+ 
+
+
   </head>
 
   <body class="nav-md">
@@ -118,9 +122,10 @@
           </div> -->
           <!-- /top tiles -->
 
-       
-
           <div class="row">
+               <div class="col-md-9 col-sm-9 col-xs-12">
+
+                  <div class="row">
 
 
             <div class="col-md-4 col-sm-4 col-xs-12">
@@ -176,8 +181,7 @@
 
           </div>
 
-         
-         <div class="row">
+              <div class="row">
 
 
             <div class="col-md-4 col-sm-4 col-xs-12">
@@ -231,9 +235,7 @@
             </div>
 
           </div>
-
-
-          <div class="row">
+              <div class="row">
 
 
             <div class="col-md-4 col-sm-4 col-xs-12">
@@ -288,6 +290,143 @@
             </div>
 
           </div>
+
+
+
+               </div>
+               <!-- half -->
+
+               <div class="col-md-3 col-sm-3 col-xs-12">
+              <div class="chat employe-chat">
+                <ul>
+                  <li>
+                    <div class="user-pic">
+                          <img src="images/user1.jpg" alt="img">
+                        </div>  
+                      <div class="user-name">Kingsuk Majumder</div>
+
+                  </li>
+                  <li>
+                    <div class="user-pic">
+                          <img src="images/user2.jpg" alt="img">
+                        </div>  
+                      <div class="user-name">Subhankar Roy</div>
+
+                  </li>
+                  <li>
+                    <div class="user-pic">
+                          <img src="images/user3.jpg" alt="img">
+                        </div>  
+                      <div class="user-name">Biplab Mukherjee</div>
+
+                  </li> 
+                  <li>
+                    <div class="user-pic">
+                          <img src="images/user4.jpg" alt="img">
+                        </div>  
+                      <div class="user-name">Amit Das</div>
+
+                  </li> 
+                  <li>
+                    <div class="user-pic">
+                          <img src="images/user5.jpg" alt="img">
+                        </div>  
+                      <div class="user-name">Gargi Pal</div>
+
+                  </li>
+                  <li>
+                    <div class="user-pic">
+                          <img src="images/user1.jpg" alt="img">
+                        </div>  
+                      <div class="user-name">Kingsuk Majumder</div>
+
+                  </li>
+                  <li>
+                    <div class="user-pic">
+                          <img src="images/user2.jpg" alt="img">
+                        </div>  
+                      <div class="user-name">Subhankar Roy</div>
+
+                  </li>
+                  <li>
+                    <div class="user-pic">
+                          <img src="images/user3.jpg" alt="img">
+                        </div>  
+                      <div class="user-name">Biplab Mukherjee</div>
+
+                  </li> 
+                  <li>
+                    <div class="user-pic">
+                          <img src="images/user4.jpg" alt="img">
+                        </div>  
+                      <div class="user-name">Amit Das</div>
+
+                  </li> 
+                  <li>
+                    <div class="user-pic">
+                          <img src="images/user5.jpg" alt="img">
+                        </div>  
+                      <div class="user-name">Gargi Pal</div>
+
+                  </li> 
+                  <li>
+                    <div class="user-pic">
+                          <img src="images/user1.jpg" alt="img">
+                        </div>  
+                      <div class="user-name">Kingsuk Majumder</div>
+
+                  </li>
+                  <li>
+                    <div class="user-pic">
+                          <img src="images/user2.jpg" alt="img">
+                        </div>  
+                      <div class="user-name">Subhankar Roy</div>
+
+                  </li>
+                  <li>
+                    <div class="user-pic">
+                          <img src="images/user3.jpg" alt="img">
+                        </div>  
+                      <div class="user-name">Biplab Mukherjee</div>
+
+                  </li> 
+                  <li>
+                    <div class="user-pic">
+                          <img src="images/user4.jpg" alt="img">
+                        </div>  
+                      <div class="user-name">Amit Das</div>
+
+                  </li> 
+                  <li>
+                    <div class="user-pic">
+                          <img src="images/user5.jpg" alt="img">
+                        </div>  
+                      <div class="user-name">Gargi Pal</div>
+
+                  </li>  
+
+
+                </ul>  
+                <div class="clearfix"></div>
+              </div> 
+
+
+
+               </div>
+                
+
+
+          
+
+          </div>
+
+          
+
+         
+         
+
+
+          
 
 
           
