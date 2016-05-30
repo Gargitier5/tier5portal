@@ -31,7 +31,31 @@ var newMessages = new Array();
 var newMessagesWin = new Array();
 var chatBoxes = new Array();
 var sessionUser=$('#session_user').val();
+function notifyMe() {
+  // Let's check if the browser supports notifications
+  if (!("Notification" in window)) {
+    alert("This browser does not support desktop notification");
+  }
 
+  // Let's check whether notification permissions have already been granted
+  else if (Notification.permission === "granted") {
+    // If it's okay let's create a notification
+    var notification = new Notification("Hi there!");
+  }
+
+  // Otherwise, we need to ask the user for permission
+  else if (Notification.permission !== 'denied') {
+    Notification.requestPermission(function (permission) {
+      // If the user accepts, let's create a notification
+      if (permission === "granted") {
+        var notification = new Notification("Hi there!");
+      }
+    });
+  }
+
+  // At last, if the user has denied notifications, and you 
+  // want to be respectful there is no need to bother them any more.
+}
 $(document).ready(function(){
 	
 	originalTitle = document.title;
@@ -155,6 +179,7 @@ function chatHeartbeat(){
 			if (newMessagesWin[x] == true) {
 				++blinkNumber;
 				if (blinkNumber >= blinkOrder) {
+
 					document.title = x+' says...';
 					titleChanged = 1;
 					break;	
@@ -169,6 +194,13 @@ function chatHeartbeat(){
 			++blinkOrder;
 		}
 
+
+		if(blinkOrder>0)
+		{
+			//$('#notify').click();
+			//new Notification(x+' says...');
+		}
+
 	} else {
 		for (x in newMessagesWin) {
 			newMessagesWin[x] = false;
@@ -178,6 +210,9 @@ function chatHeartbeat(){
 	for (x in newMessages) {
 		if (newMessages[x] == true) {
 			if (chatboxFocus[x] == false) {
+				
+				//$('#notify').click();
+
 				//FIXME: add toggle all or none policy, otherwise it looks funny
 				$('#chatbox_'+x+' .chatboxhead').toggleClass('chatboxblink');
 			}

@@ -6,8 +6,9 @@ define ('DBUSER','root');
 define ('DBPASS','123456');
 define ('DBNAME','emp_management');*/
 require_once('./db.php');
-session_start();
 
+session_start();
+date_default_timezone_set("Asia/Kolkata");
 /*global $dbh;
 $dbh = mysql_connect(DBPATH,DBUSER,DBPASS);
 mysql_selectdb(DBNAME,$dbh);*/

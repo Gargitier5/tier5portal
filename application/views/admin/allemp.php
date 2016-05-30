@@ -179,6 +179,12 @@ if($this->session->userdata('succ_msg')!=''){?>
 
     <!-- Custom Theme Scripts -->
     <script src="js/custom.js"></script>
+    <!-- chat section -->
+    <link type="text/css" rel="stylesheet" media="all" href="css/chat/chat.css" />
+    <link type="text/css" rel="stylesheet" media="all" href="css/chat/screen.css" />
+<script type="text/javascript" src="js/jquery.js"></script>
+ <script type="text/javascript" src="js/chat.js"></script>
+  <!-- chat section -->
   </body>
 </html>
 

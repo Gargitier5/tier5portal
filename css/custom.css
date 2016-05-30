@@ -4704,7 +4704,7 @@ ul.notifications {
 .chat ul li{margin: 0 0 10px; padding: 4px 0; list-style: none; color: #000}
 
 
-.user-pic{background: #000; border-radius:50%; overflow: hidden; float: left; margin-right: 5px;
+.user-pic{background: #fff; border-radius:50%; overflow: hidden; float: left; margin-right: 5px;
 width: 27px; height: 27px; text-align: center;
 }
 .user-pic img{max-width: 100%;}

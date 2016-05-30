@@ -112,6 +112,10 @@
   <body>
   <input type="hidden" id="session_user" value="<?php echo $this->session->userdata('emp_name');?>">
   <input type="hidden" id="from_id" value="<?php echo $this->session->userdata('uid');?>">
+<button onclick="notifyMe()" id="notify" style="display:none">Notify me!</button>
+
+
+
     <section class="header">
       <div class="container-fluid">
         <div class="row">
@@ -640,7 +644,7 @@
               <div class="chat employee-chat">
                 <ul>
                <?php foreach($userlist as $online):
-    if($online['id']!= $this->session->userdata('uid')):
+    if($online['id']!= $this->session->userdata('uid') && $online['role']>1):
     ?>
                   <li>
                     <div class="user-pic">
@@ -656,7 +660,7 @@
                           <?php }?>
 
                         </div>  
-                      <div class="user-name"><span onclick="javascript:chatWith('<?php echo $online['username'];?>')" data-id="<?php echo $online['id'];?>" class="user_spc" style="cursor:pointer;"><?php echo $online['username'];?></span></div>
+                      <div class="user-name"><span onclick="javascript:chatWith('<?php echo $online['username'];?>')" data-id="<?php echo $online['id'];?>" class="user_spc" style="cursor:pointer;"><?php echo $online['name'];?></span></div>
 
                   </li>
                   <?php endif;endforeach;?>
@@ -664,29 +668,29 @@
               <div class="clearfix"></div>
               </div> 
               <div class="chat admin-chat">
-                <h3>Admin Chat</h3>
+                <h3>Management Chat</h3>
                 <ul>
+                 <?php foreach($userlist as $online):
+    if($online['id']!= $this->session->userdata('uid') && $online['role']<=1):
+    ?>
                   <li>
                     <div class="user-pic">
-                          <img src="images/user1.jpg" alt="img">
-                        </div>  
-                      <div class="user-name">Kingsuk Majumder</div>
+                    <?php if($online['role']==1){?>
+                          <img src="images/hr.png" alt="img">
+                          <?php } if($online['role']==0){ ?>
+                          <img src="images/admin.png" alt="img">
+                          <?php } ?>
 
+                        </div> 
+                        <?php if($online['role']==1){?> 
+                      <div class="user-name"><span onclick="javascript:chatWith('<?php echo $online['username'];?>')" data-id="<?php echo $online['id'];?>" class="user_spc" style="cursor:pointer;"><?php echo $online['name'];?> (HR) </span></div>
+                        <?php } else { ?>
+                      <div class="user-name"><span onclick="javascript:chatWith('<?php echo $online['username'];?>')" data-id="<?php echo $online['id'];?>" class="user_spc" style="cursor:pointer;"><?php echo $online['name'];?> (Admin)</span></div>
+                        <?php }?>
                   </li>
-                  <li>
-                    <div class="user-pic">
-                          <img src="images/user1.jpg" alt="img">
-                        </div>  
-                      <div class="user-name">Kingsuk Majumder</div>
-
-                  </li>
-                  <li>
-                    <div class="user-pic">
-                          <img src="images/user1.jpg" alt="img">
-                        </div>  
-                      <div class="user-name">Kingsuk Majumder</div>
-
-                  </li>
+                  <?php endif;endforeach;?>
+                  
+                 
                 </ul>  
               </div>  
           </div> 

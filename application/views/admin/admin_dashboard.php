@@ -10,6 +10,8 @@
     <link rel=icon href="http://tier5.us/images/favicon.ico">
     <base href="<?php echo base_url();?>">
     
+      <script src="http://code.jquery.com/jquery-latest.min.js"
+        type="text/javascript"></script>
 
     <!-- Bootstrap -->
     <link href="vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -25,7 +27,8 @@
     <!-- Custom Theme Style -->
     <link href="css/custom.css" rel="stylesheet">
 
- 
+    <!-- Bootstrap -->
+    <script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
 
 
   </head>
@@ -86,6 +89,7 @@
 
         <!-- page content -->
         <div class="right_col" role="main">
+<input type="hidden" id="session_user" value="<?php echo $this->session->userdata('admin_user');?>">
 
           <!-- top tiles -->
          <!--  <div class="row tile_count">
@@ -298,119 +302,58 @@
 
                <div class="col-md-3 col-sm-3 col-xs-12">
               <div class="chat employe-chat">
-                <ul>
+                 <ul>
+               <?php foreach($employee as $online):
+    if($online['id']!= $this->session->userdata('adminid') && $online['role']>1):
+    ?>
                   <li>
                     <div class="user-pic">
-                          <img src="images/user1.jpg" alt="img">
+                    <?php if($online['gender']=="Male" && $online['online_status']==1){?>
+                          <img src="images/male_online.png" alt="img">
+                          <?php } if($online['gender']=="Male" && $online['online_status']==0){ ?>
+                          <img src="images/male_offline.png" alt="img">
+                          <?php } if($online['gender']=="Female" && $online['online_status']==1){ ?>
+                          <img src="images/female_online.png" alt="img">
+                          <?php }
+                           if($online['gender']=="Female" && $online['online_status']==0){ ?>
+                          <img src="images/female_offline.png" alt="img">
+                          <?php }?>
+
                         </div>  
-                      <div class="user-name">Kingsuk Majumder</div>
+                      <div class="user-name"><span onclick="javascript:chatWith('<?php echo $online['username'];?>')" data-id="<?php echo $online['id'];?>" class="user_spc" style="cursor:pointer;"><?php echo $online['username'];?></span></div>
 
                   </li>
-                  <li>
-                    <div class="user-pic">
-                          <img src="images/user2.jpg" alt="img">
-                        </div>  
-                      <div class="user-name">Subhankar Roy</div>
-
-                  </li>
-                  <li>
-                    <div class="user-pic">
-                          <img src="images/user3.jpg" alt="img">
-                        </div>  
-                      <div class="user-name">Biplab Mukherjee</div>
-
-                  </li> 
-                  <li>
-                    <div class="user-pic">
-                          <img src="images/user4.jpg" alt="img">
-                        </div>  
-                      <div class="user-name">Amit Das</div>
-
-                  </li> 
-                  <li>
-                    <div class="user-pic">
-                          <img src="images/user5.jpg" alt="img">
-                        </div>  
-                      <div class="user-name">Gargi Pal</div>
-
-                  </li>
-                  <li>
-                    <div class="user-pic">
-                          <img src="images/user1.jpg" alt="img">
-                        </div>  
-                      <div class="user-name">Kingsuk Majumder</div>
-
-                  </li>
-                  <li>
-                    <div class="user-pic">
-                          <img src="images/user2.jpg" alt="img">
-                        </div>  
-                      <div class="user-name">Subhankar Roy</div>
-
-                  </li>
-                  <li>
-                    <div class="user-pic">
-                          <img src="images/user3.jpg" alt="img">
-                        </div>  
-                      <div class="user-name">Biplab Mukherjee</div>
-
-                  </li> 
-                  <li>
-                    <div class="user-pic">
-                          <img src="images/user4.jpg" alt="img">
-                        </div>  
-                      <div class="user-name">Amit Das</div>
-
-                  </li> 
-                  <li>
-                    <div class="user-pic">
-                          <img src="images/user5.jpg" alt="img">
-                        </div>  
-                      <div class="user-name">Gargi Pal</div>
-
-                  </li> 
-                  <li>
-                    <div class="user-pic">
-                          <img src="images/user1.jpg" alt="img">
-                        </div>  
-                      <div class="user-name">Kingsuk Majumder</div>
-
-                  </li>
-                  <li>
-                    <div class="user-pic">
-                          <img src="images/user2.jpg" alt="img">
-                        </div>  
-                      <div class="user-name">Subhankar Roy</div>
-
-                  </li>
-                  <li>
-                    <div class="user-pic">
-                          <img src="images/user3.jpg" alt="img">
-                        </div>  
-                      <div class="user-name">Biplab Mukherjee</div>
-
-                  </li> 
-                  <li>
-                    <div class="user-pic">
-                          <img src="images/user4.jpg" alt="img">
-                        </div>  
-                      <div class="user-name">Amit Das</div>
-
-                  </li> 
-                  <li>
-                    <div class="user-pic">
-                          <img src="images/user5.jpg" alt="img">
-                        </div>  
-                      <div class="user-name">Gargi Pal</div>
-
-                  </li>  
-
-
-                </ul>  
+                  <?php endif;endforeach;?>
+                   </ul> 
                 <div class="clearfix"></div>
               </div> 
 
+              <div class="chat admin-chat">
+                <h4>Management Chat</h4>
+                <ul>
+                 <?php foreach($employee as $online):
+    if($online['id']!= $this->session->userdata('adminid') && $online['role']<=1):
+    ?>
+                  <li>
+                    <div class="user-pic">
+                    <?php if($online['role']==1){?>
+                          <img src="images/hr.png" alt="img">
+                          <?php } if($online['role']==0){ ?>
+                          <img src="images/admin.png" alt="img">
+                          <?php } ?>
 
+                        </div> 
+                        <?php if($online['role']==1){?> 
+                      <div class="user-name"><span onclick="javascript:chatWith('<?php echo $online['username'];?>')" data-id="<?php echo $online['id'];?>" class="user_spc" style="cursor:pointer;"><?php echo $online['name'];?> (HR) </span></div>
+                        <?php } else { ?>
+                      <div class="user-name"><span onclick="javascript:chatWith('<?php echo $online['username'];?>')" data-id="<?php echo $online['id'];?>" class="user_spc" style="cursor:pointer;"><?php echo $online['name'];?> (Admin)</span></div>
+                        <?php }?>
+                  </li>
+                  <?php endif;endforeach;?>
+                  
+                 
+                </ul>  
+              </div>
 
                </div>
                 
@@ -443,11 +386,9 @@
         <!-- /footer content -->
       </div>
     </div>
-
+    
     <!-- jQuery -->
-    <script src="vendors/jquery/dist/jquery.min.js"></script>
-    <!-- Bootstrap -->
-    <script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+   
     <!-- FastClick -->
     <script src="vendors/fastclick/lib/fastclick.js"></script>
     <!-- NProgress -->
@@ -481,7 +422,10 @@
 
     <!-- Custom Theme Scripts -->
     <script src="js/custom.js"></script>
-
+<link type="text/css" rel="stylesheet" media="all" href="css/chat/chat.css" />
+    <link type="text/css" rel="stylesheet" media="all" href="css/chat/screen.css" />
+<script type="text/javascript" src="js/jquery.js"></script>
+ <script type="text/javascript" src="js/chat.js"></script>
     <!-- Flot -->
     <script>
       $(document).ready(function() {
