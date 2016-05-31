@@ -29,6 +29,7 @@
     <script type="text/javascript" src="js/notice.js"></script>
     <!-- Custom Theme Style -->
     <link href="css/custom.css" rel="stylesheet">
+    <link href="css/admin/chat_screen.css" rel="stylesheet">
     <style>
     .hilighted-text
     {
@@ -95,75 +96,49 @@
                  </div> 
 <?php }?>
                     <div class="ln_solid"></div>
-                       <div class="table-responsive">
-                      <table class="table table-striped jambo_table bulk_action">
-                        <thead>
-                          <tr class="headings">
-                              <th class="column-title">Date <br>(mm/dd/yy)</th>
-                              <th class="column-title">From</th>
-                              <th class="column-title">To</th>
-                              <th class="column-title">Message</th>
-                              <th class="column-title">Status</th>
-                          </tr>
-                          <?php foreach($history as $h){
+          <div class="panel panel-default">
 
-                              $sender=FnEmployeeName($h['from']);
-                              $receiver=FnEmployeeName($h['to']);
-                            ?>
-                          <tr>
-                          <th><?php echo date('m/d/Y h:i A',strtotime($h['sent']));?></th>
-                          <th><?php echo $sender['name'];?></th>
-                          <th><?php echo $receiver['name'];?></th>
-                          <th><?php echo $h['message'];?></th>
-                          <th><?php if($h['recd']==1){echo 'sent';}else{echo 'Failed';}?></th>
-                          </tr>
-                          <?php }?>
-                        </thead>
-                         
-                        <tbody>
-                        
-                        </tbody>
-                      </table>
-                    </div> 
-                    <br>
-                    <br>
-                     
-                    <div class="table-responsive" id="edit_note" style="display:none">
-                      <h4>Edit Notice</h4>
-                      <table class="table table-striped jambo_table bulk_action">
-                        <thead>
-                          <tr class="headings">
-                              
-                              <th class="column-title">Subject</th>
-                              <th class="column-title">Notice</th>
-                              <th class="column-title">Action</th>
-                              
+          <?php foreach($history as $his):
+            $str=str_replace("-"," And ",$his['chat_btwn']);
+           
+          ?>
+          <div class="panel-heading">
+          <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $his['chat_btwn'];?>"><?php echo ucfirst($str);?></a>
+          <div align="right"  ></div>
+          </h4>
+          </div>
+    
 
-                              
-                            
-                          </tr>
-                        </thead>
-                         
-                        <tbody>
-                          
-                          <tr>
-                            <form method="post" action="admin_control/Admin/edit_notice">
-                              <td><input type="text" id="subject" name="subject"> <input type="text" style="display:none" id="noticeid" name="noticeid"></td>
-                              <td><textarea id="notice" name="notice"></textarea></td>
-                              <td><input type="submit" value="Add" class="btn btn-primary"></td>
-                            </form>
-   
-                          </tr>
-                         
-                        </tbody>
-                      </table>
-                    </div>    
-                     
-                  
-                    
-                  </div>
-                </div>
-              </div>
+          <div id="collapse<?php echo $his['chat_btwn'];?>" class="panel-collapse collapse">
+          <div class="panel-body">
+          <?php  $fetchHistory=FngetChatHistory($his['chat_btwn']); if(!empty($fetchHistory)){
+          ?>
+
+<div class="chat">
+  <ul>
+    
+ <?php foreach($fetchHistory as $hist){ ?>
+     <li><img src="images/Talk_male.png">
+      <div class="message"><?php echo $hist['from']." : ".$hist['message'];?></div>
+    </li>
+    <?php }?>
+  </ul>
+ 
+</div>
+           <?php
+
+          } ?>
+
+
+
+          </div>
+          </div>
+          <?php endforeach;?>
+
+        </div>
+        </div>
+        </div>
 
 
             </div>

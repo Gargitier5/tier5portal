@@ -174,6 +174,14 @@ function sendChat() {
 	$from = $_POST['sentfrom'];
 	$to = $_POST['to'];
 	$message = $_POST['message'];
+	if(strlen($from) < strlen($to))
+	{
+		$chat_btwn=$from."-".$to;
+	}
+	else
+	{
+		$chat_btwn=$to."-".$from;
+	}
 
 	$_SESSION['openChatBoxes'][$_POST['to']] = date('Y-m-d H:i:s', time());
 	
@@ -194,7 +202,7 @@ EOD;
 
 	unset($_SESSION['tsChatBoxes'][$_POST['to']]);
 
-	$sql = "insert into chat (chat.from,chat.to,message,sent) values ('".mysql_real_escape_string($from)."', '".mysql_real_escape_string($to)."','".mysql_real_escape_string($message)."',NOW())";
+	$sql = "insert into chat (chat.from,chat.to,chat.chat_btwn,message,sent) values ('".mysql_real_escape_string($from)."', '".mysql_real_escape_string($to)."','".mysql_real_escape_string($chat_btwn)."','".mysql_real_escape_string($message)."',NOW())";
 	$query = mysql_query($sql);
 	echo "1";
 	exit(0);
