@@ -210,7 +210,6 @@
         $this->db->join('employee',"lunchorder.Eid=employee.id");
         $this->db->where('lunchorder.date',$con);
         $res=$this->db->get('lunchorder');
-        $res->result_array();
         
         return $res->result_array();
 
@@ -321,6 +320,20 @@
       $this->db->join('employee',"break_track.Eid=employee.id");
       $this->db->where('break_track.date',$con);
       $this->db->where('break_track.type',1);
+       $this->db->where('break_track.status',0);
+      $res=$this->db->get('break_track');
+      
+      return $res->result_array();
+    }
+
+    public function onfirstbreak($con)
+    {
+
+      $this->db->select('break_track.*,employee.name');
+      $this->db->join('employee',"break_track.Eid=employee.id");
+      $this->db->where('break_track.date',$con);
+      $this->db->where('break_track.type',1);
+      $this->db->where('break_track.status',1);
       $res=$this->db->get('break_track');
       
       return $res->result_array();
@@ -337,6 +350,19 @@
       
       return $res->result_array();
     }
+
+    public function onsecondbreak($con)
+    {
+
+      $this->db->select('break_track.*,employee.name');
+      $this->db->join('employee',"break_track.Eid=employee.id");
+      $this->db->where('break_track.date',$con);
+      $this->db->where('break_track.type',2);
+      $this->db->where('break_track.status',1);
+      $res=$this->db->get('break_track');
+      
+      return $res->result_array();
+    }
      
     public function thirdbreak($con)
     {
@@ -349,7 +375,18 @@
       
       return $res->result_array();
     }
+    public function onthirdbreak($con)
+    {
 
+      $this->db->select('break_track.*,employee.name');
+      $this->db->join('employee',"break_track.Eid=employee.id");
+      $this->db->where('break_track.date',$con);
+      $this->db->where('break_track.type',3);
+      $this->db->where('break_track.status',1);
+      $res=$this->db->get('break_track');
+      
+      return $res->result_array();
+    }
     public function emplateclockin($con)
     {
       $this->db->select('attendance.*,employee.name');

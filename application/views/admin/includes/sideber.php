@@ -2,7 +2,7 @@
               <div class="menu_section">
                 
                 <ul class="nav side-menu">
-                  <li><a href="<?php echo base_url();?>admin_control/admin/home"><i class="fa fa-home"></i> Home </a></li>
+                  <li><a href="<?php echo base_url();?>admin_control/admin"><i class="fa fa-home"></i> Home </a></li>
                   <li><a><i class="fa fa-user"></i> Manage Employee <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="<?php echo base_url();?>admin_control/admin/allemp">Employee Personal Information</a></li>

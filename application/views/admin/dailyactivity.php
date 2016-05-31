@@ -72,7 +72,7 @@
               <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                   <div class="input-group">
-                   <input type="text" placeholder="Choose Date">
+                   <input type="text" class="datepicker" id="empactivedate" name="empactivedate" onchange="checkdate()" placeholder="Choose Date">
                   </div>
                 </div>
               </div>
@@ -108,7 +108,7 @@
                       </thead>
 
 
-                      <tbody>
+                      <tbody id="attend">
                         <?php foreach($present_employee as $emp) {?>
                         <tr>
                           <td><?php echo $emp['name'];?></td>
@@ -148,7 +148,7 @@
                           <th>Time Taken</th>
                         </tr>
                       </thead>
-                      <tbody>
+                      <tbody id="fbreak">
                       <?php foreach($firstbreak as $emp) {?>
                         <tr>
                           <td><?php echo $emp['name'];?></td>
@@ -171,8 +171,16 @@
              {
              $sec="0".$sec;
              }
-            $minutes = ($seconds / 60) % 60;
+             $minutes = ($seconds / 60) % 60;
+             if($minutes<10)
+             {
+             $minutes="0".$minutes;
+             }
             $hours = floor($seconds / (60 * 60));
+            if($hours<10)
+             {
+             $hours="0".$hours;
+             }
 
             echo $hours.":".$minutes.":".$sec;
 
@@ -181,6 +189,14 @@
                           </td>            
                         </tr>
                         <?php }?>
+
+
+                        <?php foreach ($onfirstbreak as $onfbreak ){?>
+                        <tr>
+                          <td><?php echo $onfbreak['name'];?></td>
+                          <td></td>
+                        </tr>
+                          <?php }?>
                       </tbody>
 
                     </table>
@@ -216,9 +232,9 @@
                       </thead>
 
 
-                      <tbody>
+                      <tbody id="sbreak">
                       <?php foreach($secondbreak as $emp) {?>
-                        <tr>
+                        <tr >
                           <td><?php echo $emp['name'];?></td>
                           <td>
                           <?php
@@ -239,7 +255,15 @@
              $sec="0".$sec;
              }
             $minutes = ($seconds / 60) % 60;
+             if($minutes<10)
+             {
+             $minutes="0".$minutes;
+             }
             $hours = floor($seconds / (60 * 60));
+            if($hours<10)
+             {
+             $hours="0".$hours;
+             }
 
             echo $hours.":".$minutes.":".$sec;
 
@@ -247,6 +271,12 @@
 </td>            
                         </tr>
                         <?php }?>
+                        <?php foreach ($onsecondbreak as $onsbreak ){?>
+                        <tr>
+                          <td><?php echo $onsbreak['name'];?></td>
+                          <td></td>
+                        </tr>
+                          <?php }?>
                       </tbody>
                     </table>
                   </div>
@@ -280,7 +310,7 @@
                         </tr>
                       </thead>
 
-                      <tbody>
+                      <tbody id="lbreak">
                       <?php foreach($thirdbreak as $emp) {?>
                         <tr>
                           <td><?php echo $emp['name'];?></td>
@@ -303,7 +333,15 @@
              $sec="0".$sec;
              }
             $minutes = ($seconds / 60) % 60;
+             if($minutes<10)
+             {
+             $minutes="0".$minutes;
+             }
             $hours = floor($seconds / (60 * 60));
+            if($hours<10)
+             {
+             $hours="0".$hours;
+             }
 
             echo $hours.":".$minutes.":".$sec;
 
@@ -314,6 +352,12 @@
                           </td>            
                         </tr>
                         <?php }?>
+                        <?php foreach ($onthirdbreak as $onlbreak ){?>
+                        <tr>
+                          <td><?php echo $onlbreak['name'];?></td>
+                          <td></td>
+                        </tr>
+                          <?php }?>
                       </tbody>
                     </table>
                   </div>
