@@ -187,6 +187,8 @@
 
   }
 
+
+
     public function clockouttime($data)
     {
         $data2['Eid'] = $data['Eid'];
@@ -459,6 +461,19 @@
         return false;
         }
       }
+    }
+    public function stopactiv($data)
+    {
+       $con['Eid']=$data['Eid'];
+       $con['date']=$data['date'];
+       $con['status']='1';
+       
+       $data['endTime']=date('H:i:s');
+       $data['status']='1';
+
+       $this->db->where($con);
+       $res=$this->db->update('tbl_employee_productivity',$data);
+
     }
 
     public function submitlunchorder($data)
