@@ -78,7 +78,7 @@
     public function FnChatHistory()
     {
         $this->db->select('*');
-        
+        $this->db->group_by('chat_btwn');
         $this->db->order_by('id',"desc");
         $res=$this->db->get('chat');
         return $res->result_array();
