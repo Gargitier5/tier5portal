@@ -74,17 +74,17 @@ a.lunch-btn:hover{text-decoration: none;}
 .content {height: 130px;}
 .content ul{margin: 0; padding: 0}
 .content ul li{margin: 0 0 15px 0; padding: 8px; background: #10A6A6; 
-	color: #fff; font-size: 13px; line-height: 18px;}
+	color: #fff; font-size: 13px; line-height: 18px; overflow: hidden;}
 
-.break-block{color: #fff;}
-.break{background: #10A6A6; padding: 7px; margin-bottom: 12px; margin-top: 6px;}
+.break-block{color: #fff; font-size: 12px;}
+.break{background: #10A6A6; padding: 7px; margin-bottom: 12px; margin-top: 6px; font-size: 12px !important;}
 .time-left{font-size: 10px; padding-top: 10px;}
 .break-btn{background: #20334B; padding: 3px 6px; color: #fff;}
 .break-type{padding-top: 5px}
 .break.btn.focus, .btn:focus, .btn:hover{color: #10A6A6;}
 .work-type{color: #fff}
 .time{text-align: center; font-weight: 700px; font-size: 15px;}
-.type-btn{padding: 25px 0 0; text-align: center;}
+.type-btn{padding: 25px 0 0; text-align: center; }
 .type-btn ul{text-align: center; margin: 0; padding: 0}
 .type-btn ul li{margin: 0 0 15px 0; padding: 0 5px; display: inline-block;}
 .btn-type{background: #05F2F1; color: #000; padding: 4px 5px; border: 1px solid #05F2F1}

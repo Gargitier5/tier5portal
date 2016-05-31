@@ -18,6 +18,11 @@
       	 return $result->result_array();
       }
 
+
+      
+
+
+
     
 
     
@@ -103,7 +108,7 @@
 
     public function deduct($data4)
     {
-      $data=$data4['Eid'];
+      $data['Eid']=$data4['Eid'];
       $start_date=date("Y-m-d", strtotime(date('m').'/01/'.date('Y')));
       $end_date=date("Y-m-d");
 

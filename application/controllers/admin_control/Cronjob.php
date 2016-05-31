@@ -38,36 +38,23 @@ class Cronjob extends CI_Controller
 
             $data['Eid'] = $key['id'];
             $data['date']=date("Y-m-d");
-            $check_clock_in = $this->CronjobModel->fetchinfo('attendance',$data,'row');
-            if($check_clock_in)
+            $check_clock_in = $this->CronjobModel->fetchinfo('attendance',$data,'result');
+            if(!$check_clock_in)
             {
-              return false;
-            }
-            else
-            {
+             
+
                 $day=date('D');
-                if($day='Sun' or $day='Sat')
+                if($day!='Sun' or $day!='Sat')
                 {
-                  return false;
-                }
-                else
-                {
+                
                    $data1['date']=date("Y-m-d");
                    $check_holiday= $this->CronjobModel->fetchinfo('holiday',$data1,'count');
-                   if($check_holiday)
-                   {
-                     return false;
-                   }
-                   else
+                   if(!$check_holiday)
                    {
                       $data2['Eid']= $key['id'];
                       $data2['date']=date("Y-m-d");
-                      $check_special= $this->CronjobModel->fetchinfo('holiday',$data1,'count');
-                      if($check_special)
-                      {
-                        return false;
-                      }
-                      else
+                      $check_special= $this->CronjobModel->fetchinfo('specialholiday',$data1,'count');
+                      if(!$check_special)
                       {
                         $data3['Eid']=$key['id'];
                         $data3['date']=date("Y-m-d");
@@ -77,12 +64,12 @@ class Cronjob extends CI_Controller
                         $result1 = $this->CronjobModel->insertabsent($data3);
                          if($result1)
                         {
-                          $data4=$key['id'];
+                          $data4['Eid']=$key['id'];
                           $deduct_point=$this->CronjobModel->deduct($data4);
                         }
                       }
-
-                   }
+                    }
+                   
                 }
             }
         }
@@ -101,7 +88,7 @@ class Cronjob extends CI_Controller
             $data['points']=3000;
             $data[' last_update']=date("Y-m-d");
             $result1 = $this->CronjobModel->resetattendance($data);
-            print_r($result1) ;
+            print_r($result1);
         }
     }
 //======Cron Job For Reset Lunch Bonus Monthly========================  

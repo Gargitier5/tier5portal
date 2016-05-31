@@ -57,10 +57,7 @@ $('#endofmonth').val(end_date);
   
 });
 
-function editpoint(po_id)
-{
-    alert(po_id);
-}
+
 
 function delete_holiday(ho_id)
 {

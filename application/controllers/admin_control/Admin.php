@@ -119,6 +119,23 @@ class Admin extends CI_Controller
           }
        
     }
+    public function bdmactivity()
+    {
+
+      if($_POST)
+      {
+
+      }
+      else
+      {
+        $con=date('Y-m-d');
+        $data['bdmac']=$this->AdminModel->getactivity($con);
+      }
+      $data['bdm']=$this->AdminModel->get_bdm();
+      $data['sideber']=$this->load->view('admin/includes/sideber','',true);
+      $data['header']=$this->load->view('admin/includes/header','',true);
+      $this->load->view('admin/bdmactivity.php',$data);
+    }
     
 
     public function logout()
@@ -948,12 +965,36 @@ class Admin extends CI_Controller
 
     public function lunchorder()
     {
+        
         $con=date('Y-m-d');
         $data['allorder']=$this->AdminModel->lunchinfo($con);
         $data['header']=$this->load->view('admin/includes/header','',true);
         $data['sideber']=$this->load->view('admin/includes/sideber','',true);
         $this->load->view('admin/lunchorder.php',$data);
 
+    }
+
+    public function prevlunchorder()
+    {
+       $con=$this->input->post('date');
+       $get_order=$this->AdminModel->lunchinfo($con);
+  
+       $result="";
+      foreach ($get_order as $value) 
+       { 
+       
+        $result.="<tr>
+                     <td>".$value['date']."</td>
+                     <td>".$value['name']."</td>
+                     <td>".$value['shopname']."</td>
+                     <td>".$value['items']."</td>
+                     <td>".$value['cost']."</td>
+                     <td></td>
+                     <td></td>
+                     <td></td>
+                    </tr>";
+       }
+      print_r($result) ;
     }
 
     public function manageclockin()
@@ -1285,13 +1326,14 @@ class Admin extends CI_Controller
          $data['present_employee']=$this->AdminModel->empclock($con);
 
          $data['firstbreak']=$this->AdminModel->firstbreak($con);
+         $data['onfirstbreak']=$this->AdminModel->onfirstbreak($con);
 
          
          $data['secondbreak']=$this->AdminModel->secondbreak($con);
-
+         $data['onsecondbreak']=$this->AdminModel->onsecondbreak($con);
          
          $data['thirdbreak']=$this->AdminModel->thirdbreak($con);
-
+         $data['onthirdbreak']=$this->AdminModel->onthirdbreak($con);
 
          $data['header']=$this->load->view('admin/includes/header','',true);
          $data['sideber']=$this->load->view('admin/includes/sideber','',true);
@@ -1312,8 +1354,189 @@ class Admin extends CI_Controller
 
       }
 
-      function Fnsingleprint()
-    {
+      public function emplatedatecin()
+      {
+        $con=$this->input->post('date');
+        $getattend=$this->AdminModel->emplateclockin($con);
+        $result="";
+        foreach ($getattend as $attend)
+        {
+          $result.="<tr><td>".$attend['name']."</td><td>".$attend['late_time']."</td></tr>";
+        }
+        echo $result;
+      }
+
+      public function empearlyclockout()
+      {
+        $con=$this->input->post('date');
+        $getattend=$this->AdminModel->empearlyclockout($con);
+        $result="";
+        foreach ($getattend as $attend)
+        {
+          $result.="<tr><td>".$attend['name']."</td><td>".$attend['early_time']."</td></tr>";
+        }
+        echo $result;
+      }
+
+      public function breaklatedate()
+      {
+        $con=$this->input->post('date');
+        $getattend=$this->AdminModel->emplatebrk($con);
+        $result="";
+        foreach ($getattend as $attend)
+        {
+          if($attend['type']==1)
+          {
+            $break="First Break";
+          }
+          else if($attend['type']==2)
+          {
+            $break="Second Break";
+          }
+          else 
+          {
+            $break="Third Break";
+          }
+          $result.="<tr><td>".$attend['name']."</td><td>".$break."</td><td>".$attend['time']."</td></tr>";
+        }
+        echo $result;
+      }
+      public function empabsentdate()
+      {
+        $con=$this->input->post('date');
+        $getattend=$this->AdminModel->empabsent($con);
+        $result="";
+        foreach ($getattend as $attend)
+        {
+          $result.="<tr><td>".$attend['name']."</td><td>9:00:00</td></tr>";
+        }
+        echo $result;
+      }
+
+      public function getattendence()
+      {
+        extract($_POST);
+        $con=$this->input->post('showdate');
+        $getattend=$this->AdminModel->empclock($con);
+        $result="";
+        foreach ($getattend as $key)
+        {
+          $result.="<tr><td>".$key['name']."</td><td>".$key['clockin']."</td><td>".$key['clockout']."</td></tr>";
+        }
+        //$attend="<tr><td>".$getattend['name']."</td><td>""</td><td>""</td></tr>";
+        print_r($result);
+      }
+
+      public function getfbreak()
+      {
+        extract($_POST);
+        $con=$this->input->post('showdate');
+        $getafbreak=$this->AdminModel->firstbreak($con);
+        $result="";
+        foreach ($getafbreak as $key)
+        {
+          $time1 = $key['starttime'];
+              $time2 = $key['endtime'];
+
+              list($hours, $minutes, $seconds) = explode(':', $time1);
+              $startTimestamp = mktime($hours, $minutes, $seconds);
+ 
+              list($hours, $minutes, $seconds) = explode(':', $time2);
+              $endTimestamp = mktime($hours, $minutes, $seconds);
+
+              $letseconds = $endTimestamp - $startTimestamp;
+              $sec=($letseconds % 60);
+               if($sec<10)
+               {
+               $sec="0".$sec;
+               }
+              $minutes = ($letseconds / 60) % 60;
+                if($minutes<10)
+               {
+               $minutes="0".$minutes;
+               }
+              $hours = floor($letseconds / (60 * 60));
+          $result.="<tr><td>".$key['name']."</td><td>".$hours.":".$minutes.":".$sec."</td></tr>";
+        }
+        //$attend="<tr><td>".$getattend['name']."</td><td>""</td><td>""</td></tr>";
+        print_r($result);
+
+      }
+
+      public function getsbreak()
+      {
+        extract($_POST);
+        $con=$this->input->post('showdate');
+        $getafbreak=$this->AdminModel->secondbreak($con);
+        $result="";
+        foreach ($getafbreak as $key)
+        {
+          $time1 = $key['starttime'];
+              $time2 = $key['endtime'];
+
+              list($hours, $minutes, $seconds) = explode(':', $time1);
+              $startTimestamp = mktime($hours, $minutes, $seconds);
+ 
+              list($hours, $minutes, $seconds) = explode(':', $time2);
+              $endTimestamp = mktime($hours, $minutes, $seconds);
+
+              $letseconds = $endTimestamp - $startTimestamp;
+              $sec=($letseconds % 60);
+               if($sec<10)
+               {
+               $sec="0".$sec;
+               }
+              $minutes = ($letseconds / 60) % 60;
+                if($minutes<10)
+               {
+               $minutes="0".$minutes;
+               }
+              $hours = floor($letseconds / (60 * 60));
+          $result.="<tr><td>".$key['name']."</td><td>".$hours.":".$minutes.":".$sec."</td></tr>";
+        }
+        //$attend="<tr><td>".$getattend['name']."</td><td>""</td><td>""</td></tr>";
+        print_r($result);
+
+      }
+
+       public function getlbreak()
+      {
+        extract($_POST);
+        $con=$this->input->post('showdate');
+        $getafbreak=$this->AdminModel->thirdbreak($con);
+        $result="";
+        foreach ($getafbreak as $key)
+        {
+             $time1 = $key['starttime'];
+              $time2 = $key['endtime'];
+
+              list($hours, $minutes, $seconds) = explode(':', $time1);
+              $startTimestamp = mktime($hours, $minutes, $seconds);
+ 
+              list($hours, $minutes, $seconds) = explode(':', $time2);
+              $endTimestamp = mktime($hours, $minutes, $seconds);
+
+              $letseconds = $endTimestamp - $startTimestamp;
+              $sec=($letseconds % 60);
+               if($sec<10)
+               {
+               $sec="0".$sec;
+               }
+              $minutes = ($letseconds / 60) % 60;
+                if($minutes<10)
+               {
+               $minutes="0".$minutes;
+               }
+              $hours = floor($letseconds / (60 * 60));
+          $result.="<tr><td>".$key['name']."</td><td>".$hours.":".$minutes.":".$sec."</td></tr>";
+        }
+        //$attend="<tr><td>".$getattend['name']."</td><td>""</td><td>""</td></tr>";
+        print_r($result);
+
+      }
+
+      public function Fnsingleprint()
+      {
         extract($_POST);
         $result='';
         $Fetch_Info=$this->AdminModel->selectprint($orderid);

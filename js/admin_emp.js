@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-$( ".datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' });
+$( ".datepicker" ).datepicker({ dateFormat: 'yy-mm-dd'});
 
 $('#timepicker').timepicker();
 });
@@ -120,4 +120,54 @@ function dlt(orderid)
             }
         });
       }
+}
+
+function checkdate()
+{
+
+  var showdate=$('#empactivedate').val();
+  var res= $.ajax({
+        type : 'post',
+        url : 'admin_control/admin/getattendence',
+        data :'showdate='+showdate,
+        async : false,
+        success : function(msg)
+            {   
+              $('#attend').html(msg);  
+            }
+        });
+
+  var res= $.ajax({
+        type : 'post',
+        url : 'admin_control/admin/getfbreak',
+        data :'showdate='+showdate,
+        async : false,
+        success : function(msg)
+            {   
+              $('#fbreak').html(msg);  
+            }
+        });
+
+ var res= $.ajax({
+        type : 'post',
+        url : 'admin_control/admin/getsbreak',
+        data :'showdate='+showdate,
+        async : false,
+        success : function(msg)
+            {   
+              $('#sbreak').html(msg);  
+            }
+        });
+
+ var res= $.ajax({
+        type : 'post',
+        url : 'admin_control/admin/getlbreak',
+        data :'showdate='+showdate,
+        async : false,
+        success : function(msg)
+            {   
+              $('#lbreak').html(msg);  
+            }
+        });
+
 }

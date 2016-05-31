@@ -37,6 +37,27 @@
         }
     }
 
+    public function getactivity($con)
+    {
+
+       $this->db->select('bdm_activity.*,bdm_url.url,employee.name');
+       $this->db->join('employee','bdm_activity.Eid=employee.id');
+       $this->db->join('bdm_url','bdm_activity.main_url=bdm_url.burl_id');
+       $this->db->where('bdm_activity.date',$con);
+       $this->db->order_by('b_ac_id','DESC');
+       $res=$this->db->get('bdm_activity');
+       return $res->result_array();
+    }
+
+
+    public function get_bdm()
+    {
+      $this->db->select('*');
+      $this->db->join('employee','employee.id=emp_details.Eid');
+      $this->db->where('emp_details.role',3);
+      $res=$this->db->get('emp_details');
+      return $result=$res->result_array();
+    }
      public function AllEmployee()
     {
       $this->db->select('*');
@@ -230,7 +251,6 @@
         $this->db->join('employee',"lunchorder.Eid=employee.id");
         $this->db->where('lunchorder.date',$con);
         $res=$this->db->get('lunchorder');
-        $res->result_array();
         
         return $res->result_array();
 
@@ -341,6 +361,20 @@
       $this->db->join('employee',"break_track.Eid=employee.id");
       $this->db->where('break_track.date',$con);
       $this->db->where('break_track.type',1);
+       $this->db->where('break_track.status',0);
+      $res=$this->db->get('break_track');
+      
+      return $res->result_array();
+    }
+
+    public function onfirstbreak($con)
+    {
+
+      $this->db->select('break_track.*,employee.name');
+      $this->db->join('employee',"break_track.Eid=employee.id");
+      $this->db->where('break_track.date',$con);
+      $this->db->where('break_track.type',1);
+      $this->db->where('break_track.status',1);
       $res=$this->db->get('break_track');
       
       return $res->result_array();
@@ -357,6 +391,19 @@
       
       return $res->result_array();
     }
+
+    public function onsecondbreak($con)
+    {
+
+      $this->db->select('break_track.*,employee.name');
+      $this->db->join('employee',"break_track.Eid=employee.id");
+      $this->db->where('break_track.date',$con);
+      $this->db->where('break_track.type',2);
+      $this->db->where('break_track.status',1);
+      $res=$this->db->get('break_track');
+      
+      return $res->result_array();
+    }
      
     public function thirdbreak($con)
     {
@@ -369,7 +416,18 @@
       
       return $res->result_array();
     }
+    public function onthirdbreak($con)
+    {
 
+      $this->db->select('break_track.*,employee.name');
+      $this->db->join('employee',"break_track.Eid=employee.id");
+      $this->db->where('break_track.date',$con);
+      $this->db->where('break_track.type',3);
+      $this->db->where('break_track.status',1);
+      $res=$this->db->get('break_track');
+      
+      return $res->result_array();
+    }
     public function emplateclockin($con)
     {
       $this->db->select('attendance.*,employee.name');

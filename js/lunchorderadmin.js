@@ -1,5 +1,11 @@
 $(document).ready(function(){
 
+      $( ".datepicker" ).datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+
+
+
         $( "#printfinalAll" ).bind( "click", function() {
       
       var divContents = $("#print_all").html();
@@ -107,3 +113,14 @@ function print_single(orderid1)
      });
   }
 
+function checkdate()
+{
+
+  var datee=$('#date').val();
+  //alert(datee);
+  $.post('admin_control/admin/prevlunchorder', {date:datee}, function(data){
+            
+   $('#lorder').html(data);
+  });
+
+}

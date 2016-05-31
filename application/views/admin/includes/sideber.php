@@ -41,7 +41,7 @@
                     }
                    ?>
              
-                  <li><a><i class="fa fa-ticket"></i>Lunch Program <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-cutlery"></i>Lunch Program <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="<?php echo base_url();?>admin_control/admin/lunchorder">Lunch Order</a>
                       </li>
@@ -122,9 +122,9 @@
                       </li>
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-hand-o-right"></i>Keep Eye On BDM<span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-hand-o-right"></i>BDM Activity<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="">Proposals Submitted By BDM</a>
+                      <li><a href="<?php echo base_url();?>admin_control/admin/bdmactivity">Proposals Submitted By BDM</a>
                       </li>
                       <li><a href="">Change Status</a>
                       </li>

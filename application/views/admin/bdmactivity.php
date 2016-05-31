@@ -25,9 +25,23 @@
     <link href="css/custom.css" rel="stylesheet">
      
     <!-- jQuery -->
+  
      <script src="vendors/jquery/dist/jquery.min.js"></script>
+      <style type="text/css">
+      .dateclass
+      {
+        float: right;
+      }
 
-    <script type="text/javascript" src="js/point.js"></script>
+
+      </style>
+      <script>
+  $(function() {
+    $( ".datepicker" ).datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+  });
+  </script>
 
 
       <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
@@ -37,11 +51,6 @@
 
 
   </head> 
-<style type="text/css">
-.ui-datepicker-calendar {
-    display: none;
- }
-</style>
 
   <body class="nav-md">
     <div class="container body">
@@ -49,12 +58,12 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              
+             
             </div>
 
             <div class="clearfix"></div>
 
-          
+            
 
             <br />
 
@@ -72,69 +81,55 @@
 
         <!-- page content -->
         <div class="right_col" role="main">
-        
-
             <div class="clearfix"></div>
 
             <div class="row">
-
-              
-
-              
-              
-
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
-                  <div class="x_title">
-                    <h2>Show Points </h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                     
-                    </ul>
-                    <div class="clearfix"></div>
-                  </div>
                   <div class="x_content">
-                     <!-- <input type="text" id="myDate"  required="required" name="myDate" class="monthYearPicker">
-                     <input type="text" id="datecheck" name="datecheck">
-                     <br> -->
-
-                       <form method="post" action="admin_control/admin/expendature_attend" >
-               <br><input type="hidden" id="datecheck" name="datecheck" value="">
-               <input type="hidden" id="endofmonth" name="endofmonth" value="">
-               <input id="myDate" name="myDate" class="monthYearPicker" value="<?php echo $current;?>" />
-               <button type="submit"> Submit Month</button>
-              </form>
+                    <br>
+                    <br>
+                    <strong>Select Name:</strong><select><option value="">--Select--</option><?php foreach ($bdm as $value) {?><option value="<?php echo $value['Eid'];?>"><?php echo $value['name'];?></option>
+                     
+                    <?php }?></select>
+                    <div class="dateclass"><strong>Date:</strong><input type="text" id="sdate" name="sdate" class="datepicker"></div>
                      <br>
-                    <table class="table table-striped jambo_table bulk_action">
-                     <thead>
-                       <tr>
-                          <td>Name</td>
-                          <td>Month</td>
-                       </tr>
-                      </thead>
-                      <tbody> 
-                        <?php foreach($allpoints as $key) {?>
-                         <tr>
-                          <td><?php echo $key['name'];?></td>
-                          <td><?php echo $key['points'];?></td>
-                         </tr>
-                        <?php }?>
-                
-                     </tbody>
-                   </table>
+                    <br>
+                     <div class="table-responsive">
+                         <table class="table table-striped jambo_table bulk_action">
+                        <thead>
+                              <th class="column-title">Date</th>
+                              <th class="column-title">Time</th>
+                              <th class="column-title">BDM Name</th>
+                              <th class="column-title">Portal</th>
+                              <th class="column-title">Posted Link</th>
+                              <th class="column-title">Proposal Link</th>
+                        </thead>
+                        <tbody>
+                         <?php foreach ($bdmac as $key) {?>
+                          <tr>
+                              <td><?php echo $key['date'];?></td>
+                              <td><?php echo $key['time'];?></td>
+                              <td><?php echo $key['name'];?></td>
+                              <td><?php echo $key['url'];?></td>
+                              <td><?php echo $key['posted_url'];?></td>
+                              <td><?php echo $key['proposed_url'];?></td>
+                              
+                          </tr>
+                         <?php } ?>
+
+                        </tbody>
+                        </table>
+                     
+                    </div> 
                   </div>
                 </div>
-
-
-
-
-
               </div>
             </div>
-          </div>
         </div>
-       
+        <!-- /page content -->
+
+        <!-- footer content -->
         <footer>
           
           <div class="clearfix"></div>
@@ -143,7 +138,7 @@
       </div>
     </div>
 
-   
+
     <!-- Bootstrap -->
     <script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- FastClick -->

@@ -12,7 +12,7 @@
 
       if($username && $password)
       {
-        $this->db->select('*');
+        $this->db->select('emp_details.*,employee.*');
         $this->db->where('username',$username);
         //$this->db->where('password',md5($pass));
         $this->db->where('password',$password);
@@ -29,7 +29,7 @@
             }
             else
             {
-               
+               $this->session->set_userdata('name',$result1['name']);
                $this->session->set_userdata('uid',$result1['Eid']);
                $this->session->set_userdata('role',$result1['role']);
                  $this->session->set_userdata('emp_name',$result1['username']);
@@ -49,7 +49,9 @@
           redirect(base_url());
 
       }
-    } 
+    }
+
+     
 
     public function AllEmployee()
     {
@@ -379,7 +381,18 @@
        return  $result=$res->row_array();
 
     }
-
+    public function ins_activity($data)
+    {
+      $result=$this->db->insert('bdm_activity',$data);
+      if($result)
+      {
+        return true;
+      }
+      else
+      {
+         return false;
+      }
+    }
     public function getpoint($userid,$start_date,$end_date)
     {
       
@@ -496,6 +509,16 @@
              $this->db->where($con);
              $res=$this->db->update('tbl_employee_productivity',$data);
              return $res;
+    }
+
+
+    public function bdm_activity($con1)
+    {
+       $this->db->select('*');
+       $this->db->where('Eid',$con1);
+       $this->db->order_by('b_ac_id','DESC');
+       $res=$this->db->get('bdm_activity');
+       return $res->result_array();
     }
 
     public function endbreak($data)

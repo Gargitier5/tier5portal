@@ -28,13 +28,12 @@
      <script src="vendors/jquery/dist/jquery.min.js"></script>
 
     <script type="text/javascript" src="js/lunchorderadmin.js"></script>
-
+    
 
       <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
   <script src="//code.jquery.com/jquery-1.10.2.js"></script>
   <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
   <link rel="stylesheet" href="/resources/demos/style.css">
-
 
 
   </head>
@@ -86,7 +85,10 @@
                   <div class="x_content">
 
                    
-                   <div id="msg"></div>
+                   <div id="msg">
+                    <input type="text" class="datepicker" id="date" name="date" onchange="checkdate()">
+
+                   </div>
                     <div class="table-responsive">
                       
                       <table class="table table-striped jambo_table bulk_action">
@@ -104,7 +106,7 @@
                           </tr>
                         </thead>
                          
-                        <tbody>
+                        <tbody id="lorder">
                           <?php foreach ($allorder as $value) 
                           { ?>
                             <tr>

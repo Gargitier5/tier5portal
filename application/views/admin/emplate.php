@@ -29,7 +29,23 @@
 
     <script type="text/javascript" src="js/manage_fac.js"></script>
     <!-- Custom Theme Style -->
+   <script>
+  $(function() {
+    $( ".datepicker" ).datepicker({
+      dateFormat: 'yy-mm-dd',
+    });
+  });
+  </script>
+
+
+      <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  <link rel="stylesheet" href="/resources/demos/style.css">
+   
+
     <link href="css/custom.css" rel="stylesheet">
+     
   </head>
 
   <body class="nav-md">
@@ -73,7 +89,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                 
-
+                <input type="text" class="datepicker" id="getdate" name="getdate" onchange="changedate()">
  
                   <h2>Employee Late On Clock In</h2>
                   <div class="x_content">
@@ -88,7 +104,7 @@
                           </tr>
                         </thead>
                          
-                        <tbody>
+                        <tbody id="lateclockin">
                           <?php foreach ($emplateclockin as $key) 
                           {?>
                             <tr>
@@ -123,7 +139,7 @@
                           </tr>
                         </thead>
                          
-                        <tbody>
+                        <tbody id="earlyclockout">
                           <?php foreach ($empearlyclockout as $key) 
                           {?>
                             <tr>
@@ -159,7 +175,7 @@
                           </tr>
                         </thead>
                          
-                          <tbody>
+                          <tbody id="latebreak">
                           <?php foreach ($emplatebrk as $key) 
                           {?>
                             <tr>
@@ -194,7 +210,7 @@
                             
                           </tr>
                         </thead>
-                         
+                        <tbody id="absent"> 
                        <?php foreach ($empabsent as $key) 
                           {?>
                             <tr>
@@ -202,6 +218,7 @@
                                <td>9:00:00</td>
                           </tr>
                           <?php } ?>
+                        </tbody> 
                       </table>
                     </div>
                 </div>
