@@ -118,7 +118,7 @@
                     ?>
                   <li><a><i class="fa fa-comment"></i>Chat<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="">See Chat History</a>
+                      <li><a href="<?php echo base_url();?>admin_control/admin/ChatHistory">See Chat History</a>
                       </li>
                     </ul>
                   </li>

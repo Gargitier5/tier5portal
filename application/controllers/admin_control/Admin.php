@@ -10,7 +10,7 @@ class Admin extends CI_Controller
 		$this->load->helper('url');
 		$this->load->database();
 		$this->load->model('AdminModel');
-		//$this->load->helper('custom');
+		$this->load->helper('custom');
 		$this->load->library('session');
 	}
 
@@ -32,6 +32,7 @@ class Admin extends CI_Controller
               
               $con['activation_status']=0;
               $con1['date']=date('Y-m-d');
+              $data['employee']=$this->AdminModel->AllEmployee();
               $data['total_employee']=$this->AdminModel->fetchinfo('employee',$con,'count');
               $data['total_present']=$this->AdminModel->fetchinfo('attendance',$con1,'count');
               $data['sideber']=$this->load->view('admin/includes/sideber','',true);
@@ -64,6 +65,7 @@ class Admin extends CI_Controller
               
               $con['activation_status']=0;
               $con1['date']=date('Y-m-d');
+              $data['employee']=$this->AdminModel->AllEmployee();
               $data['total_employee']=$this->AdminModel->fetchinfo('employee',$con,'count');
               $data['total_present']=$this->AdminModel->fetchinfo('attendance',$con1,'count');
               $data['sideber']=$this->load->view('admin/includes/sideber','',true);
@@ -76,6 +78,25 @@ class Admin extends CI_Controller
 
           }
         }
+    }
+
+    public function ChatHistory()
+    {
+       if ($this->session->userdata('adminid'))
+          {
+              
+             
+              $data=array();
+              $data['history']=$this->AdminModel->FnChatHistory();
+              $data['sideber']=$this->load->view('admin/includes/sideber','',true);
+              $data['header']=$this->load->view('admin/includes/header','',true);
+              $this->load->view('admin/chat_history.php',$data);
+          }
+          else
+          {
+             redirect(base_url());
+
+          }
     }
 
     public function home()

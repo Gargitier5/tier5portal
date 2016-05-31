@@ -41,3 +41,16 @@
        
 
     }
+
+
+    function FnEmployeeName($name)
+    {
+        $CI=& get_instance();
+        $CI->load->database(); 
+
+        $CI->db->select('employee.name');
+        $CI->db->join('emp_details','emp_details.Eid=employee.id');
+        $CI->db->where('emp_details.username',$name);
+        $res=$CI->db->get('employee');
+        return $res->row_array();
+    }

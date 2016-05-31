@@ -20,6 +20,7 @@
         {
            $this->session->set_userdata('adminid',$result1['Eid']);
            $this->session->set_userdata('role',$result1['role']);
+           $this->session->set_userdata('admin_user',$result1['username']);
            return $result1;
 
         }
@@ -27,6 +28,7 @@
         {
            $this->session->set_userdata('adminid',$result1['Eid']);
            $this->session->set_userdata('role',$result1['role']);
+            $this->session->set_userdata('admin_user',$result1['username']);
            return $result1;
         }
         else
@@ -35,11 +37,29 @@
         }
     }
 
+     public function AllEmployee()
+    {
+      $this->db->select('*');
+      $this->db->join('employee','employee.id=emp_details.Eid');
+      $this->db->where('employee.activation_status',0);
+      $res=$this->db->get('emp_details');
+      return $result=$res->result_array();
+
+    }
     Public function fnallemp()
     {
     	  $this->db->select('*');
         
         $res=$this->db->get('employee');
+        return $res->result_array();
+    }
+
+    public function FnChatHistory()
+    {
+        $this->db->select('*');
+        
+        $this->db->order_by('id',"desc");
+        $res=$this->db->get('chat');
         return $res->result_array();
     }
     
