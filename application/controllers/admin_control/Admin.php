@@ -119,6 +119,23 @@ class Admin extends CI_Controller
           }
        
     }
+    public function bdmactivity()
+    {
+
+      if($_POST)
+      {
+
+      }
+      else
+      {
+        $con=date('Y-m-d');
+        $data['bdmac']=$this->AdminModel->getactivity($con);
+      }
+      $data['bdm']=$this->AdminModel->get_bdm();
+      $data['sideber']=$this->load->view('admin/includes/sideber','',true);
+      $data['header']=$this->load->view('admin/includes/header','',true);
+      $this->load->view('admin/bdmactivity.php',$data);
+    }
     
 
     public function logout()
@@ -1336,6 +1353,66 @@ class Admin extends CI_Controller
         $this->load->view('admin/emplate.php',$data);
 
       }
+
+      public function emplatedatecin()
+      {
+        $con=$this->input->post('date');
+        $getattend=$this->AdminModel->emplateclockin($con);
+        $result="";
+        foreach ($getattend as $attend)
+        {
+          $result.="<tr><td>".$attend['name']."</td><td>".$attend['late_time']."</td></tr>";
+        }
+        echo $result;
+      }
+
+      public function empearlyclockout()
+      {
+        $con=$this->input->post('date');
+        $getattend=$this->AdminModel->empearlyclockout($con);
+        $result="";
+        foreach ($getattend as $attend)
+        {
+          $result.="<tr><td>".$attend['name']."</td><td>".$attend['early_time']."</td></tr>";
+        }
+        echo $result;
+      }
+
+      public function breaklatedate()
+      {
+        $con=$this->input->post('date');
+        $getattend=$this->AdminModel->emplatebrk($con);
+        $result="";
+        foreach ($getattend as $attend)
+        {
+          if($attend['type']==1)
+          {
+            $break="First Break";
+          }
+          else if($attend['type']==2)
+          {
+            $break="Second Break";
+          }
+          else 
+          {
+            $break="Third Break";
+          }
+          $result.="<tr><td>".$attend['name']."</td><td>".$break."</td><td>".$attend['time']."</td></tr>";
+        }
+        echo $result;
+      }
+      public function empabsentdate()
+      {
+        $con=$this->input->post('date');
+        $getattend=$this->AdminModel->empabsent($con);
+        $result="";
+        foreach ($getattend as $attend)
+        {
+          $result.="<tr><td>".$attend['name']."</td><td>9:00:00</td></tr>";
+        }
+        echo $result;
+      }
+
       public function getattendence()
       {
         extract($_POST);

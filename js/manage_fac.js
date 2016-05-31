@@ -88,3 +88,24 @@ function change_rank()
 {
   $('.ranking').show();
 }
+
+function changedate()
+{
+  var date=$('#getdate').val();
+  $.post('admin_control/admin/emplatedatecin', {date:date}, function(data){
+    $('#lateclockin').html(data);
+  });
+
+  $.post('admin_control/admin/empearlyclockout', {date:date}, function(data){
+    $('#earlyclockout').html(data);
+   //alert(data);
+  });
+
+  $.post('admin_control/admin/breaklatedate', {date:date}, function(data){
+    $('#latebreak').html(data);
+  });
+
+  $.post('admin_control/admin/empabsentdate', {date:date}, function(data){
+    $('#absent').html(data);
+  });
+}

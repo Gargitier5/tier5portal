@@ -88,7 +88,7 @@ class Cronjob extends CI_Controller
             $data['points']=3000;
             $data[' last_update']=date("Y-m-d");
             $result1 = $this->CronjobModel->resetattendance($data);
-            print_r($result1) ;
+            print_r($result1);
         }
     }
 //======Cron Job For Reset Lunch Bonus Monthly========================  

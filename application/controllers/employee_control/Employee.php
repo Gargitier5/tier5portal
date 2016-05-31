@@ -66,6 +66,7 @@ class Employee extends CI_Controller
                     $data['lunch_order']=$this->EmployeeModel->fetchinfo('lunchorder',$clockin,'row');
                     $data['lunch_bonus']=$this->EmployeeModel->getlunch_bonus($userid,$start_date,$end_date);
                     $data['checkmode']=$this->EmployeeModel->fetchinfo('tbl_employee_productivity',$conmode,'row');
+                    $data['header']=$this->load->view('employee/include/header','',true);
                     $this->load->view('employee/employeedashboard',$data);
                 }
                 else
@@ -111,6 +112,7 @@ class Employee extends CI_Controller
                     $data['lunch_order']=$this->EmployeeModel->fetchinfo('lunchorder',$clockin,'row');
                     $data['lunch_bonus']=$this->EmployeeModel->getlunch_bonus($user_id,$start_date,$end_date);
                     $data['checkmode']=$this->EmployeeModel->fetchinfo('tbl_employee_productivity',$conmode,'row');
+                    $data['header']=$this->load->view('employee/include/header','',true);
                     $this->load->view('employee/employeedashboard',$data);
                 }
                 else
@@ -122,8 +124,51 @@ class Employee extends CI_Controller
 
     public function bdmaccess()
     {
-      $this->load->view('employee/bdm.php');
-          
+      if ($this->session->userdata('uid'))
+      {
+          $con['status']=0;
+          $con1=$this->session->userdata('uid');
+          $data['url']=$this->EmployeeModel->fetchinfo('bdm_url',$con,'result');
+          $data['bdmactive']=$this->EmployeeModel->bdm_activity($con1);
+          $data['header']=$this->load->view('employee/include/header','',true);
+          $this->load->view('employee/bdm.php',$data);
+      }
+      else
+      {
+         redirect(base_url());
+      }   
+    }
+    public function add_activity()
+    {
+
+      $data['Eid']=$this->session->userdata('uid');
+      //print_r($data);
+      $data['date']=date('Y-m-d');
+      $data['time']=date('H:i:s');
+      $data['main_url']=$this->input->post('url_id');
+      $data['posted_url']=$this->input->post('posted');
+      $data['proposed_url']=$this->input->post('proposed');
+      $data['cover_letter']=$this->input->post('coverletter');
+       if($data['main_url'] && $data['posted_url'] && $data['proposed_url'] && $data['cover_letter'])
+       {
+
+          $activity=$this->EmployeeModel->ins_activity($data);
+          if($activity)
+          {
+             $this->session->set_userdata('succ_msg','Activity Added!!!');
+             redirect(base_url().'employee_control/employee/bdmaccess');
+          }
+          else
+          {
+             $this->session->set_userdata('err_msg','Try Again');
+           redirect(base_url().'employee_control/employee/bdmaccess');
+          }
+       }
+       else
+       {  
+           $this->session->set_userdata('err_msg','All Fields Are Needed');
+           redirect(base_url().'employee_control/employee/bdmaccess');
+       }
     }
     
     public function checklunchorder()
