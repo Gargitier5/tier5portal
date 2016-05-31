@@ -469,7 +469,7 @@
        $con['status']='1';
        
        $data['endTime']=date('H:i:s');
-       $data['status']='1';
+       $data['status']='0';
 
        $this->db->where($con);
        $res=$this->db->update('tbl_employee_productivity',$data);
