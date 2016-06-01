@@ -41,7 +41,7 @@ font-size: 13px;
   padding-left:7px;
 }
 
-.break h6{margin: 0}
+.break h6{margin: 0; text-align: left;}
 
 
 .chat{margin: 0; padding: 0}
@@ -144,7 +144,19 @@ padding: 15px 0; margin-bottom: 10px; text-transform: uppercase;
 .content4{height: 500px;}
 
 .no-margin{margin: 0 !important;}
+table.table-custom tbody tr th{background: #0B8383; font-weight: normal; color: #fff}
+table.table-custom tbody tr td{color: #000; background: #fff; font-size: 13px;}
+.connected{background: url(../images/tick.png) no-repeat left; padding: 0 0 0 20px}
+.not-connected{background: url(../images/not-connected.png) no-repeat left; padding: 0 0 0 20px}
 
+.red-marks{background: #FF0000; color: #fff; padding: 3px; border: 1px solid #FF3232;
+border-radius: 4px; display: block; text-align: center;
+}
+.green-marks{background: #10CC14; color: #fff; padding: 3px; border: 1px solid #0DA810;
+ border-radius: 4px; display: block; text-align: center;}
+
+ .yellow-marks{background: #EDC300; color: #fff; padding: 3px; border: 1px solid #BB9A00;
+ border-radius: 4px; display: block; text-align: center;}
 
 
 @media only screen and (max-width: 1910px){

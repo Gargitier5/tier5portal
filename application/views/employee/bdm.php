@@ -24,140 +24,52 @@
 
     <link rel="stylesheet" href="css/font-awesome.css">
 
-    <!-- For Chart -->
-
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load("current", {packages:["corechart"]});
-      google.charts.setOnLoadCallback(drawChart);
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Dinosaur', 'Length'],
-          ['Acrocanthosaurus (top-spined lizard)', 12.2],
-          ['Albertosaurus (Alberta lizard)', 9.1],
-          ['Allosaurus (other lizard)', 12.2],
-          ['Apatosaurus (deceptive lizard)', 22.9],
-          ['Archaeopteryx (ancient wing)', 0.9],
-          ['Argentinosaurus (Argentina lizard)', 36.6],
-          ['Baryonyx (heavy claws)', 9.1],
-          ['Brachiosaurus (arm lizard)', 30.5],
-          ['Ceratosaurus (horned lizard)', 6.1],
-          ['Coelophysis (hollow form)', 2.7],
-          ['Compsognathus (elegant jaw)', 0.9],
-          ['Deinonychus (terrible claw)', 2.7],
-          ['Diplodocus (double beam)', 27.1],
-          ['Dromicelomimus (emu mimic)', 3.4],
-          ['Gallimimus (fowl mimic)', 5.5],
-          ['Mamenchisaurus (Mamenchi lizard)', 21.0],
-          ['Megalosaurus (big lizard)', 7.9],
-          ['Microvenator (small hunter)', 1.2],
-          ['Ornithomimus (bird mimic)', 4.6],
-          ['Oviraptor (egg robber)', 1.5],
-          ['Plateosaurus (flat lizard)', 7.9],
-          ['Sauronithoides (narrow-clawed lizard)', 2.0],
-          ['Seismosaurus (tremor lizard)', 45.7],
-          ['Spinosaurus (spiny lizard)', 12.2],
-          ['Supersaurus (super lizard)', 30.5],
-          ['Tyrannosaurus (tyrant lizard)', 15.2],
-          ['Ultrasaurus (ultra lizard)', 30.5],
-          ['Velociraptor (swift robber)', 1.8]]);
-
-        var options = {
-          title: 'Lengths of dinosaurs, in meters',
-          legend: { position: 'none' },
-        };
-        var options = {
-    title: 'Country Populations',
-    legend: { position: 'none' },
-    colors: ['#fff'],
-    backgroundColor: '#466E74',
-    legendTextStyle: { color: '#FFF' },
-    titleTextStyle: { color: '#FFF' },
-    hAxis: {
-      color: '#FFF',
-    },
-
-      chartArea: {
-                backgroundColor: '#466E74'
-            },
-  };
-
-        var chart = new google.visualization.Histogram(document.getElementById('chart_div'));
-        chart.draw(data, options);
-      }
-    </script>
-
-
-     <!-- For Chart -->
-
-
-
-
   </head>
   <body>
-    <section class="header">
-      <div class="container">
-        <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-6">
-            <div class="logo"><a href="#"><img src="images/tier5.png" alt="Tier5"></a></div>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-6">
-                 <div class="dropdown">
-                  <span class="bdm"><a href="bdm.html">BDM</a></span>
-                  <span class="dropdown-toggle" type="button" data-toggle="dropdown">Welcome Arindam!
-                  <span class="caret"></span></span>
-                  <ul class="dropdown-menu">
-                      <div class="profile-pic">
-                        <img src="images/profile-pic.jpg" alt="img">
-                      </div>
-                      <button class="btn log-btn">Edit Profile</button>
-                      <button class="btn log-btn">Logout</button>
-                      
+    <!-- top navigation -->
 
-                  </ul>
-                 </div>
-
-
-            </div>
-            
-
-
-        </div>  
-      </div>  
-    </section> 
+    <?php echo $header;  ?>
+    <!-- top navigation -->
     <section class="bodypart">
       <div class="container">
        
         <div class="row">
+
           <div class="col-lg-6 col-md-6 col-sm-6">
+
+          
+             
             <div class="box work-update">
               <h2>Work Report</h2>
               <div class="form-group">
-              <div class="row">    
+              <div class="row"> 
+                <div class="col-md-6">
+                  <label>Project Name</label>
+                  <input type="text" class="form-control">
+                </div>    
                 <div class="col-md-6">
                   <label>Portal</label>
-                  <select class="form-control">
-                    <option>-Select Url-</option>
-                    <option>www.odesk.com</option>
-                    <option>www.google.com.</option>
-                    <option>www.yahoo.com</option>
+                  <form method="post" action="employee_control/employee/add_activity">
+                  <select class="form-control" id="url_id" name="url_id">
+                    <option value="">-Select Url-</option>
+                    <?php foreach ($url as $url) {?>
+                    <option value="<?php echo $url['burl_id'];?>"><?php echo $url['url'];?></option>
+                    
+                    <?php }?>
                   </select> 
                 </div>
-                <div class="col-md-6">
-                  <label>Time</label>
-                  <input type="text" class="form-control">
-                </div>  
+                   
               </div>
               </div>
               <div class="form-group">
               <div class="row">    
                 <div class="col-md-6">
                   <label>Job Posting</label>
-                  <input type="text" class="form-control"> 
+                  <input type="text" id="posted" name="posted" class="form-control"> 
                 </div>
                 <div class="col-md-6">
                   <label>Our Proposal</label>
-                  <input type="text" class="form-control">
+                  <input type="text" id="proposed" name="proposed" class="form-control">
                 </div>  
               </div>
               </div> 
@@ -165,9 +77,9 @@
                 <div class="row"> 
                 <div class="col-md-12">  
                 <label>Coverletter</label>
-                <textarea class="form-control"></textarea>
+                <textarea class="form-control" id="coverletter" name="coverletter"></textarea>
                 </div>
-                </div>>
+                </div>
               </div>
               <div class="form-group no-margin">
                 <div class="row"> 
@@ -230,6 +142,79 @@
               </div> --> 
               <div class="box work-update">
                 <h2>Bid Status</h2>
+                <div class="table-responsive">
+                  <div id="demo">
+                  <section id="examples">  
+                  <div data-mcs-theme="minimal" class="content1 mCustomScrollbar _mCS_2 mCS-autoHide">
+
+                <table class="table table-bordered  table-custom">
+                  <tr>
+                    <th>Projects Name</th>
+                    <th>Step1</th>
+                    <th>Step2</th>
+                    <th>Step3</th>
+                      
+                  </tr>
+                  <tr>
+                    <th>Econ Trcker</th>
+                    <td><span class="connected">Connected</span></td>
+                    <td><span class="green-marks">Offer</span></td>
+                    <td><span class="green-marks">Converted</span></td>
+                  </tr>
+                  <tr>
+                    <th>Interviewstandards</th>
+                    <td><span class="not-connected">Not Answered</span></td>
+                    <td><span class="red-marks">Rejected</span></td>
+                    <td><span class="red-marks">Not Converted</span></td>
+                  </tr>
+                  <tr>
+                    <th>Gathered</th>
+                    <td><span class="connected">Connected</span></td>
+                    <td><span class="yellow-marks">Hold</span></td>
+                    <td><span class="yellow-marks">Hold</span></td>
+                  </tr>
+                  <tr>
+                    <th>Econ Trcker</th>
+                    <td><span class="connected">Connected</span></td>
+                    <td><span class="green-marks">Offer</span></td>
+                    <td><span class="green-marks">Converted</span></td>
+                  </tr>
+                  <tr>
+                    <th>Interviewstandards</th>
+                    <td><span class="not-connected">Not Answered</span></td>
+                    <td><span class="red-marks">Rejected</span></td>
+                    <td><span class="red-marks">Not Converted</span></td>
+                  </tr>
+                  <tr>
+                    <th>Gathered</th>
+                    <td><span class="connected">Connected</span></td>
+                    <td><span class="yellow-marks">Hold</span></td>
+                    <td><span class="yellow-marks">Hold</span></td>
+                  </tr>
+                  <tr>
+                    <th>Econ Trcker</th>
+                    <td><span class="connected">Connected</span></td>
+                    <td><span class="green-marks">Offer</span></td>
+                    <td><span class="green-marks">Converted</span></td>
+                  </tr>
+                  <tr>
+                    <th>Interviewstandards</th>
+                    <td><span class="not-connected">Not Answered</span></td>
+                    <td><span class="red-marks">Rejected</span></td>
+                    <td><span class="red-marks">Not Converted</span></td>
+                  </tr>
+                  <tr>
+                    <th>Gathered</th>
+                    <td><span class="connected">Connected</span></td>
+                    <td><span class="yellow-marks">Hold</span></td>
+                    <td><span class="yellow-marks">Hold</span></td>
+                  </tr>
+                  
+                </table>
+              </div>
+              </section>
+              </div>
+                </div>  
               </div> 
           </div>  
 
@@ -246,6 +231,40 @@
                     
                     <div data-mcs-theme="minimal" class="content content1 mCustomScrollbar _mCS_2 mCS-autoHide" style="position: relative; overflow: visible;"><div class="mCustomScrollBox mCS-minimal mCSB_vertical mCSB_outside" id="mCSB_2" style="max-height: none;" tabindex="0"><div dir="ltr" style="position: relative; top: 0px; left: 0px;" class="mCSB_container" id="mCSB_2_container">
                      <ul>
+                      <?php foreach ($bdmactive as $key) {
+                       
+                       ?>
+                        <li>
+                          <p><strong>URL:</strong><?php echo $key['main_url'];?></p>
+                          <p>
+                            <strong>Date:</strong> <?php echo $key['date'];?>
+                          <p> 
+                            <p>
+                            <strong>Time:</strong> <?php echo $key['time'];?>
+                          <p> 
+                           <strong>Cover Letter:</strong><?php echo $key['cover_letter'];?>
+                          <p>
+
+                        </li>  
+                         <?php }?>
+                        <!-- <li>
+                          <p><strong>URL:</strong>https://www.google.co.in/?gfe_rd=cr&ei=MDdFV_uLGOiK8Qft6q2wBw&gws_rd=ssl</p>
+                          <p>
+                            <strong>Date:</strong> 25.06.2016
+                          </p> 
+                          <p> 
+                          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                          <p>
+                        </li> -->   
+                        <!-- <li>
+                          <p><strong>URL:</strong>https://www.google.co.in/?gfe_rd=cr&ei=MDdFV_uLGOiK8Qft6q2wBw&gws_rd=ssl</p>
+                          <p>
+                            <strong>Date:</strong> 25.06.2016
+                          </p> 
+                          <p> 
+                          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                          <p>
+                        </li>  
                         <li>
                           <p><strong>URL:</strong>https://www.google.co.in/?gfe_rd=cr&ei=MDdFV_uLGOiK8Qft6q2wBw&gws_rd=ssl</p>
                           <p>
@@ -263,15 +282,6 @@
                           <p> 
                           Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                           <p>
-                        </li>   
-                        <li>
-                          <p><strong>URL:</strong>https://www.google.co.in/?gfe_rd=cr&ei=MDdFV_uLGOiK8Qft6q2wBw&gws_rd=ssl</p>
-                          <p>
-                            <strong>Date:</strong> 25.06.2016
-                          </p> 
-                          <p> 
-                          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                          <p>
                         </li>  
                         <li>
                           <p><strong>URL:</strong>https://www.google.co.in/?gfe_rd=cr&ei=MDdFV_uLGOiK8Qft6q2wBw&gws_rd=ssl</p>
@@ -281,25 +291,7 @@
                           <p> 
                           Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                           <p>
-                        </li>  
-                        <li>
-                          <p><strong>URL:</strong>https://www.google.co.in/?gfe_rd=cr&ei=MDdFV_uLGOiK8Qft6q2wBw&gws_rd=ssl</p>
-                          <p>
-                            <strong>Date:</strong> 25.06.2016
-                          </p> 
-                          <p> 
-                          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                          <p>
-                        </li>  
-                        <li>
-                          <p><strong>URL:</strong>https://www.google.co.in/?gfe_rd=cr&ei=MDdFV_uLGOiK8Qft6q2wBw&gws_rd=ssl</p>
-                          <p>
-                            <strong>Date:</strong> 25.06.2016
-                          </p> 
-                          <p> 
-                          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                          <p>
-                        </li>   
+                        </li>    -->
                      
 
                      </ul> 

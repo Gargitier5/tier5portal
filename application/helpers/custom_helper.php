@@ -54,3 +54,17 @@
         $res=$CI->db->get('employee');
         return $res->row_array();
     }
+
+    function FngetChatHistory($chat_btw)
+    {
+        $CI=& get_instance();
+        $CI->load->database(); 
+
+        $CI->db->select('*');
+
+        $CI->db->where('chat_btwn',$chat_btw);
+
+        $CI->db->where('sent BETWEEN DATE_SUB(NOW(), INTERVAL 3 DAY) AND NOW()');
+        $res=$CI->db->get('chat');
+        return $res->result_array();
+    }

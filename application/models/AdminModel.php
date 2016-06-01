@@ -37,6 +37,27 @@
         }
     }
 
+    public function getactivity($con)
+    {
+
+       $this->db->select('bdm_activity.*,bdm_url.url,employee.name');
+       $this->db->join('employee','bdm_activity.Eid=employee.id');
+       $this->db->join('bdm_url','bdm_activity.main_url=bdm_url.burl_id');
+       $this->db->where('bdm_activity.date',$con);
+       $this->db->order_by('b_ac_id','DESC');
+       $res=$this->db->get('bdm_activity');
+       return $res->result_array();
+    }
+
+
+    public function get_bdm()
+    {
+      $this->db->select('*');
+      $this->db->join('employee','employee.id=emp_details.Eid');
+      $this->db->where('emp_details.role',3);
+      $res=$this->db->get('emp_details');
+      return $result=$res->result_array();
+    }
      public function AllEmployee()
     {
       $this->db->select('*');
@@ -57,7 +78,7 @@
     public function FnChatHistory()
     {
         $this->db->select('*');
-        
+        $this->db->group_by('chat_btwn');
         $this->db->order_by('id',"desc");
         $res=$this->db->get('chat');
         return $res->result_array();

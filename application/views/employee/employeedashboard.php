@@ -40,73 +40,7 @@
 
 
 
-    <!-- For Chart -->
-
-   
-
-   <!-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load("current", {packages:["corechart"]});
-      google.charts.setOnLoadCallback(drawChart);
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Dinosaur', 'Length'],
-          ['Acrocanthosaurus (top-spined lizard)', 12.2],
-          ['Albertosaurus (Alberta lizard)', 9.1],
-          ['Allosaurus (other lizard)', 12.2],
-          ['Apatosaurus (deceptive lizard)', 22.9],
-          ['Archaeopteryx (ancient wing)', 0.9],
-          ['Argentinosaurus (Argentina lizard)', 36.6],
-          ['Baryonyx (heavy claws)', 9.1],
-          ['Brachiosaurus (arm lizard)', 30.5],
-          ['Ceratosaurus (horned lizard)', 6.1],
-          ['Coelophysis (hollow form)', 2.7],
-          ['Compsognathus (elegant jaw)', 0.9],
-          ['Deinonychus (terrible claw)', 2.7],
-          ['Diplodocus (double beam)', 27.1],
-          ['Dromicelomimus (emu mimic)', 3.4],
-          ['Gallimimus (fowl mimic)', 5.5],
-          ['Mamenchisaurus (Mamenchi lizard)', 21.0],
-          ['Megalosaurus (big lizard)', 7.9],
-          ['Microvenator (small hunter)', 1.2],
-          ['Ornithomimus (bird mimic)', 4.6],
-          ['Oviraptor (egg robber)', 1.5],
-          ['Plateosaurus (flat lizard)', 7.9],
-          ['Sauronithoides (narrow-clawed lizard)', 2.0],
-          ['Seismosaurus (tremor lizard)', 45.7],
-          ['Spinosaurus (spiny lizard)', 12.2],
-          ['Supersaurus (super lizard)', 30.5],
-          ['Tyrannosaurus (tyrant lizard)', 15.2],
-          ['Ultrasaurus (ultra lizard)', 30.5],
-          ['Velociraptor (swift robber)', 1.8]]);
-
-        var options = {
-          title: 'Lengths of dinosaurs, in meters',
-          legend: { position: 'none' },
-        };
-        var options = {
-    title: 'Country Populations',
-    legend: { position: 'none' },
-    colors: ['#fff'],
-    backgroundColor: '#466E74',
-    legendTextStyle: { color: '#FFF' },
-    titleTextStyle: { color: '#FFF' },
-    hAxis: {
-      color: '#FFF',
-    },
-
-      chartArea: {
-                backgroundColor: '#466E74'
-            },
-  };
-
-        var chart = new google.visualization.Histogram(document.getElementById('chart_div'));
-        chart.draw(data, options);
-      }
-    </script>-->
-
-
-     <!-- For Chart -->
+    
 </head>
 
   <body>
@@ -114,49 +48,11 @@
   <input type="hidden" id="from_id" value="<?php echo $this->session->userdata('uid');?>">
 <button onclick="notifyMe()" id="notify" style="display:none">Notify me!</button>
 
+    <!-- top navigation -->
 
-
-    <section class="header">
-      <div class="container-fluid">
-        <div class="row">
-        <input type="hidden" id="username" value="<?php echo $this->session->userdata('emp_name');?>">
-            <div class="col-lg-6 col-md-6 col-sm-6">
-            <div class="logo"><a href="#"><img src="images/tier5.png" alt="Tier5"></a></div>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-6">
-                 <div class="dropdown">
-                  <?php 
-                   $type=$this->session->userdata('role');
-                   if($type==3)
-                   {?>
-                  <span class="bdm"><a href="employee_control/employee/bdmaccess">BDM</a></span>
-                  <?php }?>
-                  <span class="dropdown-toggle" type="button" data-toggle="dropdown">Welcome <?php echo $emp_details['name'];?>
-                  <span class="caret"></span></span>
-                  <ul class="dropdown-menu">
-
-                      <div class="profile-pic">
-                        <img src="images/profile-pic.jpg" alt="img">
-                      </div>
-                      <!-- <button class="btn log-btn">Edit Profile</button> -->
-                      <form action="employee_control/Employee/logout" method="post">
-                
-                            <input type="submit" value="logout" class="btn log-btn"></input>
-                         
-                      </form>
-                      
-
-                  </ul>
-                 </div>
-
-
-            </div>
-            
-
-
-        </div>  
-      </div>  
-    </section> 
+    <?php echo $header;  ?>
+    <!-- top navigation -->
+    
     <section class="bodypart">
       <div class="container-fluid">
         <div class="row">
