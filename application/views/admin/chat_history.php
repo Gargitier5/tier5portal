@@ -115,7 +115,7 @@
           <?php  $fetchHistory=FngetChatHistory($his['chat_btwn']); if(!empty($fetchHistory)){
           ?>
 
-<div class="chat">
+<div class="chat admin-panel-chat">
   <ul>
     
  <?php foreach($fetchHistory as $hist){ ?>
