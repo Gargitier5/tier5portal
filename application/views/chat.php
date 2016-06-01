@@ -199,10 +199,10 @@ function sendChat() {
 	   },
 EOD;
 
-
+$insert_date=date('Y-m-d H:i:s');
 	unset($_SESSION['tsChatBoxes'][$_POST['to']]);
 
-	$sql = "insert into chat (chat.from,chat.to,chat.chat_btwn,message,sent) values ('".mysql_real_escape_string($from)."', '".mysql_real_escape_string($to)."','".mysql_real_escape_string($chat_btwn)."','".mysql_real_escape_string($message)."',NOW())";
+	$sql = "insert into chat (chat.from,chat.to,chat.chat_btwn,message,sent) values ('".mysql_real_escape_string($from)."', '".mysql_real_escape_string($to)."','".mysql_real_escape_string($chat_btwn)."','".mysql_real_escape_string($message)."','".mysql_real_escape_string($insert_date)."')";
 	$query = mysql_query($sql);
 	echo "1";
 	exit(0);
