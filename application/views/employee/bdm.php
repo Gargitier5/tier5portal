@@ -34,26 +34,19 @@
       <div class="container">
        
         <div class="row">
-          <div class="col-lg-10 col-md-10">
-             <?php if($this->session->userdata('succ_msg')!=''){?>
-                      <div class="alert alert-success alert-dismissable">
-                    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-                    <h4>  <i class="icon fa fa-check"></i> Success!</h4>
-                    <?php echo $this->session->userdata('succ_msg');$this->session->set_userdata('succ_msg','');?>
-                  </div>
 
-<?php } if($this->session->userdata('err_msg')!=''){ ?>
+          <div class="col-lg-6 col-md-6 col-sm-6">
 
-<div class="alert alert-danger alert-dismissable">
-                    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-                    <h4><i class="icon fa fa-ban"></i> Sorry!</h4>
-                  <?php echo  $this->session->userdata('err_msg');$this->session->set_userdata('err_msg','');?>
-                 </div> 
-<?php }?>
+          
+             
             <div class="box work-update">
               <h2>Work Report</h2>
               <div class="form-group">
-              <div class="row">    
+              <div class="row"> 
+                <div class="col-md-6">
+                  <label>Project Name</label>
+                  <input type="text" class="form-control">
+                </div>    
                 <div class="col-md-6">
                   <label>Portal</label>
                   <form method="post" action="employee_control/employee/add_activity">
@@ -65,10 +58,7 @@
                     <?php }?>
                   </select> 
                 </div>
-               <!--  <div class="col-md-6">
-                  <label>Time</label>
-                  <input type="text" class="form-control">
-                </div>   -->
+                   
               </div>
               </div>
               <div class="form-group">
@@ -91,7 +81,7 @@
                 </div>
                 </div>
               </div>
-              <div class="form-group">
+              <div class="form-group no-margin">
                 <div class="row"> 
                   <div class="col-md-12">
                     <input type="submit" value="Submit" class="btn submit-btn">
@@ -104,6 +94,134 @@
 
 
 
+              
+       
+          </div>  
+          <div class="col-lg-6 col-md-6 col-sm-6">
+              <!-- <div class="chat">
+                <ul>
+                  <li>
+                    <div class="user-pic">
+                          <img src="images/user1.jpg" alt="img">
+                        </div>  
+                      <div class="user-name">Kingsuk Majumder</div>
+
+                  </li>
+                  <li>
+                    <div class="user-pic">
+                          <img src="images/user2.jpg" alt="img">
+                        </div>  
+                      <div class="user-name">Subhankar Roy</div>
+
+                  </li>
+                  <li>
+                    <div class="user-pic">
+                          <img src="images/user3.jpg" alt="img">
+                        </div>  
+                      <div class="user-name">Biplab Mukherjee</div>
+
+                  </li> 
+                  <li>
+                    <div class="user-pic">
+                          <img src="images/user4.jpg" alt="img">
+                        </div>  
+                      <div class="user-name">Amit Das</div>
+
+                  </li> 
+                  <li>
+                    <div class="user-pic">
+                          <img src="images/user5.jpg" alt="img">
+                        </div>  
+                      <div class="user-name">Gargi Pal</div>
+
+                  </li> 
+
+
+                </ul>  
+                <div class="clearfix"></div>
+              </div> --> 
+              <div class="box work-update">
+                <h2>Bid Status</h2>
+                <div class="table-responsive">
+                  <div id="demo">
+                  <section id="examples">  
+                  <div data-mcs-theme="minimal" class="content1 mCustomScrollbar _mCS_2 mCS-autoHide">
+
+                <table class="table table-bordered  table-custom">
+                  <tr>
+                    <th>Projects Name</th>
+                    <th>Step1</th>
+                    <th>Step2</th>
+                    <th>Step3</th>
+                      
+                  </tr>
+                  <tr>
+                    <th>Econ Trcker</th>
+                    <td><span class="connected">Connected</span></td>
+                    <td><span class="green-marks">Offer</span></td>
+                    <td><span class="green-marks">Converted</span></td>
+                  </tr>
+                  <tr>
+                    <th>Interviewstandards</th>
+                    <td><span class="not-connected">Not Answered</span></td>
+                    <td><span class="red-marks">Rejected</span></td>
+                    <td><span class="red-marks">Not Converted</span></td>
+                  </tr>
+                  <tr>
+                    <th>Gathered</th>
+                    <td><span class="connected">Connected</span></td>
+                    <td><span class="yellow-marks">Hold</span></td>
+                    <td><span class="yellow-marks">Hold</span></td>
+                  </tr>
+                  <tr>
+                    <th>Econ Trcker</th>
+                    <td><span class="connected">Connected</span></td>
+                    <td><span class="green-marks">Offer</span></td>
+                    <td><span class="green-marks">Converted</span></td>
+                  </tr>
+                  <tr>
+                    <th>Interviewstandards</th>
+                    <td><span class="not-connected">Not Answered</span></td>
+                    <td><span class="red-marks">Rejected</span></td>
+                    <td><span class="red-marks">Not Converted</span></td>
+                  </tr>
+                  <tr>
+                    <th>Gathered</th>
+                    <td><span class="connected">Connected</span></td>
+                    <td><span class="yellow-marks">Hold</span></td>
+                    <td><span class="yellow-marks">Hold</span></td>
+                  </tr>
+                  <tr>
+                    <th>Econ Trcker</th>
+                    <td><span class="connected">Connected</span></td>
+                    <td><span class="green-marks">Offer</span></td>
+                    <td><span class="green-marks">Converted</span></td>
+                  </tr>
+                  <tr>
+                    <th>Interviewstandards</th>
+                    <td><span class="not-connected">Not Answered</span></td>
+                    <td><span class="red-marks">Rejected</span></td>
+                    <td><span class="red-marks">Not Converted</span></td>
+                  </tr>
+                  <tr>
+                    <th>Gathered</th>
+                    <td><span class="connected">Connected</span></td>
+                    <td><span class="yellow-marks">Hold</span></td>
+                    <td><span class="yellow-marks">Hold</span></td>
+                  </tr>
+                  
+                </table>
+              </div>
+              </section>
+              </div>
+                </div>  
+              </div> 
+          </div>  
+
+          
+        </div>
+        <div class="row">
+          <div class="col-md-12 col-sm-12">
             <div class="box work-update">
                     <h2>Work Update</h2>
 
@@ -182,62 +300,10 @@
                   </section>
                   </div>
 
+                  </div>
 
-
-
-
-
-                  </div>  
-       
           </div>  
-          <div class="col-lg-2 col-md-2 col">
-              <div class="chat">
-                <ul>
-                  <li>
-                    <div class="user-pic">
-                          <img src="images/user1.jpg" alt="img">
-                        </div>  
-                      <div class="user-name">Kingsuk Majumder</div>
-
-                  </li>
-                  <li>
-                    <div class="user-pic">
-                          <img src="images/user2.jpg" alt="img">
-                        </div>  
-                      <div class="user-name">Subhankar Roy</div>
-
-                  </li>
-                  <li>
-                    <div class="user-pic">
-                          <img src="images/user3.jpg" alt="img">
-                        </div>  
-                      <div class="user-name">Biplab Mukherjee</div>
-
-                  </li> 
-                  <li>
-                    <div class="user-pic">
-                          <img src="images/user4.jpg" alt="img">
-                        </div>  
-                      <div class="user-name">Amit Das</div>
-
-                  </li> 
-                  <li>
-                    <div class="user-pic">
-                          <img src="images/user5.jpg" alt="img">
-                        </div>  
-                      <div class="user-name">Gargi Pal</div>
-
-                  </li> 
-
-
-                </ul>  
-                <div class="clearfix"></div>
-              </div>  
-          </div>  
-
-          
-        </div>
-            
+        </div>    
           </div>
           
             
