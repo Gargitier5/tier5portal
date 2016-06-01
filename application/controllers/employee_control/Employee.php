@@ -205,8 +205,8 @@ class Employee extends CI_Controller
        $data['Eid'] = $this->session->userdata('uid');
        $ctime=$this->EmployeeModel->clockouttime($data);
        $con['id']=$this->session->userdata('uid');
-       $data1['online_status']='0';
-       $make_online=$this->EmployeeModel->update('employee',$con,$data1);
+       $data2['online_status']='0';
+       $make_online=$this->EmployeeModel->update('employee',$con,$data2);
 
        if($ctime)
        {

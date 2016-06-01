@@ -175,11 +175,13 @@ function chatHeartbeat(){
  
 		var blinkNumber = 0;
 		var titleChanged = 0;
+		$('<audio id="chatAudio"><source src="notification/notify.mp3" type="audio/mpeg"></audio>').appendTo('body');
+		
 		for (x in newMessagesWin) {
 			if (newMessagesWin[x] == true) {
 				++blinkNumber;
 				if (blinkNumber >= blinkOrder) {
-
+$('#chatAudio')[0].play();
 					document.title = x+' says...';
 					titleChanged = 1;
 					break;	
