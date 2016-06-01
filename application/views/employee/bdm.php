@@ -17,7 +17,7 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+    
     <link rel="shortcut icon" type="image/x-icon" href="images/t5.png">
 
     <link rel="stylesheet" href="css/jquery.mCustomScrollbar.css">
@@ -117,7 +117,7 @@
                        
                        ?>
                         <li>
-                          <p><strong>URL:</strong><?php echo $key['main_url'];?></p>
+                          <p><strong>URL:</strong><?php echo $key['url'];?></p>
                           <p>
                             <strong>Date:</strong> <?php echo $key['date'];?>
                           <p> 

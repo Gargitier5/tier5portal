@@ -48,7 +48,18 @@
        $res=$this->db->get('bdm_activity');
        return $res->result_array();
     }
+    
+    public function getactivitybyname($con)
+    {
 
+       $this->db->select('bdm_activity.*,bdm_url.url,employee.name');
+       $this->db->join('employee','bdm_activity.Eid=employee.id');
+       $this->db->join('bdm_url','bdm_activity.main_url=bdm_url.burl_id');
+       $this->db->where('bdm_activity.Eid',$con);
+       $this->db->order_by('b_ac_id','DESC');
+       $res=$this->db->get('bdm_activity');
+       return $res->result_array();
+    }
 
     public function get_bdm()
     {
