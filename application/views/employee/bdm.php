@@ -129,7 +129,7 @@
       <div class="container">
        
         <div class="row">
-          <div class="col-lg-10 col-md-10">
+          <div class="col-lg-6 col-md-6 col-sm-6">
             <div class="box work-update">
               <h2>Work Report</h2>
               <div class="form-group">
@@ -169,7 +169,7 @@
                 </div>
                 </div>>
               </div>
-              <div class="form-group">
+              <div class="form-group no-margin">
                 <div class="row"> 
                   <div class="col-md-12">
                     <input type="submit" value="Submit" class="btn submit-btn">
@@ -182,6 +182,61 @@
 
 
 
+              
+       
+          </div>  
+          <div class="col-lg-6 col-md-6 col-sm-6">
+              <!-- <div class="chat">
+                <ul>
+                  <li>
+                    <div class="user-pic">
+                          <img src="images/user1.jpg" alt="img">
+                        </div>  
+                      <div class="user-name">Kingsuk Majumder</div>
+
+                  </li>
+                  <li>
+                    <div class="user-pic">
+                          <img src="images/user2.jpg" alt="img">
+                        </div>  
+                      <div class="user-name">Subhankar Roy</div>
+
+                  </li>
+                  <li>
+                    <div class="user-pic">
+                          <img src="images/user3.jpg" alt="img">
+                        </div>  
+                      <div class="user-name">Biplab Mukherjee</div>
+
+                  </li> 
+                  <li>
+                    <div class="user-pic">
+                          <img src="images/user4.jpg" alt="img">
+                        </div>  
+                      <div class="user-name">Amit Das</div>
+
+                  </li> 
+                  <li>
+                    <div class="user-pic">
+                          <img src="images/user5.jpg" alt="img">
+                        </div>  
+                      <div class="user-name">Gargi Pal</div>
+
+                  </li> 
+
+
+                </ul>  
+                <div class="clearfix"></div>
+              </div> --> 
+              <div class="box work-update">
+                <h2>Bid Status</h2>
+              </div> 
+          </div>  
+
+          
+        </div>
+        <div class="row">
+          <div class="col-md-12 col-sm-12">
             <div class="box work-update">
                     <h2>Work Update</h2>
 
@@ -253,62 +308,10 @@
                   </section>
                   </div>
 
+                  </div>
 
-
-
-
-
-                  </div>  
-       
           </div>  
-          <div class="col-lg-2 col-md-2 col">
-              <div class="chat">
-                <ul>
-                  <li>
-                    <div class="user-pic">
-                          <img src="images/user1.jpg" alt="img">
-                        </div>  
-                      <div class="user-name">Kingsuk Majumder</div>
-
-                  </li>
-                  <li>
-                    <div class="user-pic">
-                          <img src="images/user2.jpg" alt="img">
-                        </div>  
-                      <div class="user-name">Subhankar Roy</div>
-
-                  </li>
-                  <li>
-                    <div class="user-pic">
-                          <img src="images/user3.jpg" alt="img">
-                        </div>  
-                      <div class="user-name">Biplab Mukherjee</div>
-
-                  </li> 
-                  <li>
-                    <div class="user-pic">
-                          <img src="images/user4.jpg" alt="img">
-                        </div>  
-                      <div class="user-name">Amit Das</div>
-
-                  </li> 
-                  <li>
-                    <div class="user-pic">
-                          <img src="images/user5.jpg" alt="img">
-                        </div>  
-                      <div class="user-name">Gargi Pal</div>
-
-                  </li> 
-
-
-                </ul>  
-                <div class="clearfix"></div>
-              </div>  
-          </div>  
-
-          
-        </div>
-            
+        </div>    
           </div>
           
             
