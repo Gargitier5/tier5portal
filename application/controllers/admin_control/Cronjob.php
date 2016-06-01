@@ -102,7 +102,7 @@ class Cronjob extends CI_Controller
 			//print_r($key['id']);
 			      $data['Eid'] = $key['id'];
             $data['Lunch_bonus']=0;
-            $data['	last_update']=date("Y-m-d");
+            $data['last_update']=date("Y-m-d");
             $result1 = $this->CronjobModel->insertemployee($data);
             print_r($result1) ;
 		  }
