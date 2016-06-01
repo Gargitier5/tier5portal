@@ -61,7 +61,7 @@
 //======Cron Job For Reset Attendance Bonus Monthly========================     
       public function resetattendance($data)
       {
-         if($result = $this->db->insert('lunch_bonus', $data))
+         if($result = $this->db->insert('point_history', $data))
         {
           return $result;
         }
