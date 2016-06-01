@@ -67,6 +67,7 @@ Notification.requestPermission();
   <input type="hidden" id="from_id" value="<?php echo $this->session->userdata('uid');?>">
   <a id="notificationButton" class="button" style="display:none;">Notification</a>
 <input type="hidden" id="notification" value="1">
+<input type="hidden" id="notification_count" value="0">
     <!-- top navigation -->
 
     <?php echo $header;  ?>

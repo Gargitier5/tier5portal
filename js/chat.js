@@ -161,15 +161,15 @@ function chatHeartbeat(){
 				if (blinkNumber >= blinkOrder) {
 				$('#chatAudio')[0].play();
 
-					if($('#notification').val()!=x)
+					/*if($('#notification').val()!=x)
 					{
 					notifyBrowser(x);
 					}
 					else
 					{
 						$('#notification').val(1);
-					}
-
+					}*/
+					
 					document.title = x+' says...';
 					titleChanged = 1;
 					//var notification = new Notification('new mssg');
@@ -221,6 +221,7 @@ function chatHeartbeat(){
 
 		$.each(data.items, function(i,item){
 			if (item)	{ // fix strange ie bug
+				notifyBrowser(item.f);
 
 				chatboxtitle = item.f;
 
@@ -279,13 +280,21 @@ if (Notification.permission !== "granted")
 Notification.requestPermission();
 }
 else {
-	if($('#notification').val()!=name)
+	/*if($('#notification').val()!=name && $('#notification_count').val()==0)
 	{
 var notification = new Notification('new message from '+name);
 $('#notification').val(name);
-}
-// Callback function when the notification is closed.
+$('#notification_count').val(1);
 notification.onclose = function () {
+console.log('Notification closed');
+};
+
+}*/
+// Callback function when the notification is closed.
+var notification = new Notification('new message from '+name);
+
+notification.onclose = function () {
+	
 console.log('Notification closed');
 };
 
@@ -352,6 +361,8 @@ function checkChatBoxInputKey(event,chatboxtextarea,chatboxtitle) {
 		$(chatboxtextarea).focus();
 		$(chatboxtextarea).css('height','44px');
 		if (message != '') {
+			/*$('#notification').val(1);
+			$('#notification_count').val(0);*/
 			$.post("application/views/chat.php?action=sendchat", {sentfrom:sessionUser,to: chatboxtitle, message: message} , function(data){
 				message = message.replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/\"/g,"&quot;");
 				$("#chatbox_"+chatboxtitle+" .chatboxcontent").append('<div class="chatboxmessage"><span class="chatboxmessagefrom">'+username+':&nbsp;&nbsp;</span><span class="chatboxmessagecontent">'+message+'</span></div>');
