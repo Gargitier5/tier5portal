@@ -31,31 +31,7 @@ var newMessages = new Array();
 var newMessagesWin = new Array();
 var chatBoxes = new Array();
 var sessionUser=$('#session_user').val();
-function notifyMe() {
-  // Let's check if the browser supports notifications
-  if (!("Notification" in window)) {
-    alert("This browser does not support desktop notification");
-  }
 
-  // Let's check whether notification permissions have already been granted
-  else if (Notification.permission === "granted") {
-    // If it's okay let's create a notification
-    var notification = new Notification("Hi there!");
-  }
-
-  // Otherwise, we need to ask the user for permission
-  else if (Notification.permission !== 'denied') {
-    Notification.requestPermission(function (permission) {
-      // If the user accepts, let's create a notification
-      if (permission === "granted") {
-        var notification = new Notification("Hi there!");
-      }
-    });
-  }
-
-  // At last, if the user has denied notifications, and you 
-  // want to be respectful there is no need to bother them any more.
-}
 $(document).ready(function(){
 	
 	originalTitle = document.title;
@@ -67,6 +43,7 @@ $(document).ready(function(){
 		windowFocus = true;
 		document.title = originalTitle;
 	});
+
 });
 
 function restructureChatBoxes() {
@@ -178,16 +155,31 @@ function chatHeartbeat(){
 		$('<audio id="chatAudio"><source src="notification/notify.mp3" type="audio/mpeg"></audio>').appendTo('body');
 		
 		for (x in newMessagesWin) {
+
 			if (newMessagesWin[x] == true) {
 				++blinkNumber;
 				if (blinkNumber >= blinkOrder) {
-$('#chatAudio')[0].play();
+				$('#chatAudio')[0].play();
+
+					if($('#notification').val()!=x)
+					{
+					notifyBrowser(x);
+					}
+					else
+					{
+						$('#notification').val(1);
+					}
+
 					document.title = x+' says...';
 					titleChanged = 1;
+					//var notification = new Notification('new mssg');
 					break;	
 				}
 			}
+			
 		}
+
+		
 		
 		if (titleChanged == 0) {
 			document.title = originalTitle;
@@ -197,23 +189,21 @@ $('#chatAudio')[0].play();
 		}
 
 
-		if(blinkOrder>0)
-		{
-			//$('#notify').click();
-			//new Notification(x+' says...');
-		}
+		
 
 	} else {
 		for (x in newMessagesWin) {
 			newMessagesWin[x] = false;
+
 		}
+
 	}
+
 
 	for (x in newMessages) {
 		if (newMessages[x] == true) {
 			if (chatboxFocus[x] == false) {
-				
-				//$('#notify').click();
+			
 
 				//FIXME: add toggle all or none policy, otherwise it looks funny
 				$('#chatbox_'+x+' .chatboxhead').toggleClass('chatboxblink');
@@ -275,6 +265,33 @@ $('#chatAudio')[0].play();
 		setTimeout('chatHeartbeat();',chatHeartbeatTime);
 	}});
 }
+
+
+function notifyBrowser(name) 
+{
+  
+if (!Notification) {
+console.log('Desktop notifications not available in your browser..'); 
+return;
+}
+if (Notification.permission !== "granted")
+{
+Notification.requestPermission();
+}
+else {
+	if($('#notification').val()!=name)
+	{
+var notification = new Notification('new message from '+name);
+$('#notification').val(name);
+}
+// Callback function when the notification is closed.
+notification.onclose = function () {
+console.log('Notification closed');
+};
+
+}
+}
+
 
 function closeChatBox(chatboxtitle) {
 	$('#chatbox_'+chatboxtitle).css('display','none');

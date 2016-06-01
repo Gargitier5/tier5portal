@@ -16,7 +16,26 @@
          <script type="text/javascript">
       var BASE_URL = "<?php echo (is_https() ? 'https' : 'http').'://'.$_SERVER['HTTP_HOST'].substr($_SERVER['SCRIPT_NAME'], 0, strpos($_SERVER['SCRIPT_NAME'], basename($_SERVER['SCRIPT_FILENAME'])))?>";
     </script>
+    <script type="text/javascript">
 
+document.addEventListener('DOMContentLoaded', function () 
+{
+ if (Notification.permission !== "granted")
+{
+  
+Notification.requestPermission();
+} 
+
+ 
+});
+
+
+
+
+
+
+    </script>
+ 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/booking-calendar.css" rel="stylesheet">
@@ -46,8 +65,8 @@
   <body>
   <input type="hidden" id="session_user" value="<?php echo $this->session->userdata('emp_name');?>">
   <input type="hidden" id="from_id" value="<?php echo $this->session->userdata('uid');?>">
-<button onclick="notifyMe()" id="notify" style="display:none">Notify me!</button>
-
+  <a id="notificationButton" class="button" style="display:none;">Notification</a>
+<input type="hidden" id="notification" value="1">
     <!-- top navigation -->
 
     <?php echo $header;  ?>
