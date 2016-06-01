@@ -16,7 +16,26 @@
          <script type="text/javascript">
       var BASE_URL = "<?php echo (is_https() ? 'https' : 'http').'://'.$_SERVER['HTTP_HOST'].substr($_SERVER['SCRIPT_NAME'], 0, strpos($_SERVER['SCRIPT_NAME'], basename($_SERVER['SCRIPT_FILENAME'])))?>";
     </script>
+    <script type="text/javascript">
 
+document.addEventListener('DOMContentLoaded', function () 
+{
+ if (Notification.permission !== "granted")
+{
+  
+Notification.requestPermission();
+} 
+
+ 
+});
+
+
+
+
+
+
+    </script>
+ 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/booking-calendar.css" rel="stylesheet">
@@ -46,8 +65,9 @@
   <body>
   <input type="hidden" id="session_user" value="<?php echo $this->session->userdata('emp_name');?>">
   <input type="hidden" id="from_id" value="<?php echo $this->session->userdata('uid');?>">
-<button onclick="notifyMe()" id="notify" style="display:none">Notify me!</button>
-
+  <a id="notificationButton" class="button" style="display:none;">Notification</a>
+<input type="hidden" id="notification" value="1">
+<input type="hidden" id="notification_count" value="0">
     <!-- top navigation -->
 
     <?php echo $header;  ?>
@@ -119,13 +139,70 @@
                 </div>  
               </div>  --> 
 
-         
+            
+              <div class="privilege">
+              <div id="demo">
+              <section id="examples">
+              <div class="content3 mCustomScrollbar" data-mcs-theme="minimal">
+                <div class="row pre-row">
+                  <div class="col-md-4 col-sm-4">
 
+                    <div class="privilege-box active-privilege">
+                      <div class="pre-icon">
+                        <img src="images/gamepad.png" alt="img">
+                       </div>  
+                      Game
+                    </div>  
+                  </div> 
+                  <div class="col-md-4 col-sm-4">
+                    <div class="privilege-box">
+                      <div class="pre-icon">
+                        <img src="images/printer-icon.png" alt="img">
+                      </div> 
+                      Printer
+                    </div> 
+                  </div>
+                  <div class="col-md-4 col-sm-4">
+                    <div class="privilege-box">
+                      <div class="pre-icon">
+                        <img src="images/tshirt-icon.png" alt="img">
+                      </div> 
+                      T-shirt
+                    </div> 
+                  </div>  
 
+                </div>
+                <div class="row pre-row">
+                  <div class="col-md-4 col-sm-4">
+                    <div class="privilege-box">
+                      <div class="pre-icon">
+                        <img src="images/drinks-icon.png" alt="img">
+                      </div> 
+                      Drinks
+                    </div>  
+                  </div> 
+                  <div class="col-md-4 col-sm-4">
+                    <div class="privilege-box">
+                      <div class="pre-icon">
+                        <img src="images/holiday-icon.png" alt="img">
+                      </div> 
+                      Holiday
+                    </div>  
+                  </div> 
+                  <div class="col-md-4 col-sm-4">
+                    <div class="privilege-box">
+                      <div class="pre-icon">
+                        <img src="images/party-icon.png" alt="img">
+                      </div> 
+                      Office Party
+                    </div> 
+                  </div> 
 
-
-          
-          
+                </div>
+              </div>
+              </section>
+              </div>
+              </div>
                             
             </div>
             </div>
@@ -194,10 +271,6 @@
                             <?php }?>
                            </div>
                        </div>
-
-
-
-
 
 
 
@@ -537,7 +610,11 @@
           
         </div>
               <div class="col-lg-2 col-md-2 col">
-              <div class="chat employee-chat">
+
+              <div id="demo">  
+              <section id="examples">  
+                <div class="content4 mCustomScrollbar" data-mcs-theme="minimal">
+              <div class="chat ">
                 <ul>
                <?php foreach($userlist as $online):
     if($online['id']!= $this->session->userdata('uid') && $online['role']>1):
@@ -563,6 +640,10 @@
                    </ul>
               <div class="clearfix"></div>
               </div> 
+            </div>
+            </section>
+              </div>
+
               <div class="chat admin-chat">
                 <h3>Management Chat</h3>
                 <ul>

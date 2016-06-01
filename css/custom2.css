@@ -10,7 +10,9 @@ img{max-width: 100%;}
 
 
 .header{background: #20334B; padding: 21px 0}
-.dropdown{float: right; color: #fff; text-align: center; padding: 5px}
+.dropdown{float: right; color: #fff; text-align: center; padding: 5px;
+font-size: 13px;
+}
 
 .profile-pic{width: 50px; height: 50px; border-radius: 50%; overflow: hidden; margin: 15px auto; border: 1px solid #ccc;}
 .dropdown-menu{text-align: center; padding: 5px 0 15px}
@@ -39,7 +41,7 @@ img{max-width: 100%;}
   padding-left:7px;
 }
 
-.break h6{margin: 0}
+.break h6{margin: 0; text-align: left;}
 
 
 .chat{margin: 0; padding: 0}
@@ -113,6 +115,7 @@ font-family: 'Open Sans', sans-serif; margin-bottom: 15px;}
   margin-top: 3px;
   padding: 2px 6px 3px;
   text-transform: uppercase;
+  cursor: pointer;
 }
 .lunch-shop a:hover{background: #000; text-decoration: none;}
 .clock-time{margin-top: 20px;}
@@ -122,10 +125,38 @@ font-family: 'Open Sans', sans-serif; margin-bottom: 15px;}
 .cost{text-align: right;}
 .content1{height: 300px;}
 .center{text-align: center;}
-
 .center .btn-warning:hover{color: #fff;}
-
 .employee-chat{height: 500px; overflow-y:auto; }
+.btn-success:hover{color: #fff}
+.btn-link{background: #10A6A6; color: #fff; border-radius: 4px;}
+.btn-link:hover{background: #286090; color: #fff; text-decoration: none;}
+
+
+.privilege{padding-top: 71px;}
+.privilege-box{border: 1px solid #fff; min-height: 100px; text-align: center;
+padding: 15px 0; margin-bottom: 10px; text-transform: uppercase;
+}
+.privilege-box:hover{border: 1px solid #05f2f1; color: #05f2f1}
+.pre-row{padding-bottom: 15px;}
+.pre-icon{padding-bottom: 10px;}
+.content3{height: 260px;}
+.active-privilege{border: 1px solid #05f2f1; color: #05f2f1}
+.content4{height: 500px;}
+
+.no-margin{margin: 0 !important;}
+table.table-custom tbody tr th{background: #0B8383; font-weight: normal; color: #fff}
+table.table-custom tbody tr td{color: #000; background: #fff; font-size: 13px;}
+.connected{background: url(../images/tick.png) no-repeat left; padding: 0 0 0 20px}
+.not-connected{background: url(../images/not-connected.png) no-repeat left; padding: 0 0 0 20px}
+
+.red-marks{background: #FF0000; color: #fff; padding: 3px; border: 1px solid #FF3232;
+border-radius: 4px; display: block; text-align: center;
+}
+.green-marks{background: #10CC14; color: #fff; padding: 3px; border: 1px solid #0DA810;
+ border-radius: 4px; display: block; text-align: center;}
+
+ .yellow-marks{background: #EDC300; color: #fff; padding: 3px; border: 1px solid #BB9A00;
+ border-radius: 4px; display: block; text-align: center;}
 
 
 @media only screen and (max-width: 1910px){

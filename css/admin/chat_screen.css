@@ -59,12 +59,14 @@ html{
   margin-right:90px;
   margin-left:0;
   background:#def1ff;
+  word-wrap: break-word;
 }
 
 
 
 .chat ul li:nth-child(even) .message{
   background:#daffb1;
+  word-wrap: break-word;
 }
 
 
@@ -111,3 +113,4 @@ html{
   margin:0;
   border:0;
 }
+.admin-panel-chat{height: 300px; overflow-y:auto; width: 95%; padding: 15px;}
