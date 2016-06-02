@@ -10,9 +10,9 @@
     <link rel=icon href="http://tier5.us/images/favicon.ico">
     <base href="<?php echo base_url();?>">
 
-     <!--<script src="http://code.jquery.com/jquery-latest.min.js"
-        type="text/javascript"></script>-->
-         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js">
+     <script src="http://code.jquery.com/jquery-latest.min.js"
+        type="text/javascript"></script>
+       
 
          <script type="text/javascript">
       var BASE_URL = "<?php echo (is_https() ? 'https' : 'http').'://'.$_SERVER['HTTP_HOST'].substr($_SERVER['SCRIPT_NAME'], 0, strpos($_SERVER['SCRIPT_NAME'], basename($_SERVER['SCRIPT_FILENAME'])))?>";
