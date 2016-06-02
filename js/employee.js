@@ -3,6 +3,7 @@
 $(document).ready(function(){
 
 
+         
 
 setInterval(function(){ chk_time() }, 1000);
 
@@ -352,80 +353,131 @@ function Start_Break(breakid,duration)
   
   if(button=='Start Break')
   {
-    
-   
+
+
+
     $.post('employee_control/employee/startbreak',{breakid:breakid},function(data){//inserting 0 in breakstatus column in attendence table 
       
         if(data)
         {
-
-
-
-          var data2=duration.split(':'); 
-          $('#hm_timer'+breakid).countdowntimer({
-          hours : data2[0],
-          minutes :data2[1],
-          seconds:data2[2],
-          pauseButton : 'breakstart_'+breakid
-          });
-
-
-
-          $('#breakstart_'+breakid).text("Work");
-          if(breakid==1)
-          {  
-            $('#breakstart_2').attr('disabled', 'disabled');
-            $('#breakstart_3').attr('disabled', 'disabled');
-            $('#clockout_btn').attr('disabled', 'disabled');
-          }
-          else if(breakid==2)
-          {
-            $('#breakstart_1').attr('disabled', 'disabled');
-            $('#breakstart_3').attr('disabled', 'disabled');
-            $('#clockout_btn').attr('disabled', 'disabled');
+            var data2=duration.split(':'); 
+            $('#hm_timer'+breakid).countdowntimer({
+            hours : data2[0],
+            minutes :data2[1],
+            seconds:data2[2],
+            pauseButton : 'breakstart_'+breakid
+            });
             
-          }
-          else if(breakid==3)
-          {
-            $('#breakstart_1').attr('disabled', 'disabled');
-            $('#breakstart_2').attr('disabled', 'disabled');
-            $('#clockout_btn').attr('disabled', 'disabled');
-          }
-          else
-          {
-            $('#breakstart_1').removeAttr('disabled');
-            $('#breakstart_2').removeAttr('disabled');
-            $('#breakstart_3').removeAttr('disabled');
-            $('#clockout_btn').removeAttr('disabled');
+            $('#breakstart_'+breakid).text("Work");
+            if(breakid==1)
+            {  
+              $('#breakstart_2').attr('disabled', 'disabled');
+              $('#breakstart_3').attr('disabled', 'disabled');
+              $('#clockout_btn').attr('disabled', 'disabled');
+            }
+            else if(breakid==2)
+            {
+              $('#breakstart_1').attr('disabled', 'disabled');
+              $('#breakstart_3').attr('disabled', 'disabled');
+              $('#clockout_btn').attr('disabled', 'disabled');
+              
+            }
+            else if(breakid==3)
+            {
+              $('#breakstart_1').attr('disabled', 'disabled');
+              $('#breakstart_2').attr('disabled', 'disabled');
+              $('#clockout_btn').attr('disabled', 'disabled');
+            }
+            else
+            {
+              $('#breakstart_1').removeAttr('disabled');
+              $('#breakstart_2').removeAttr('disabled');
+              $('#breakstart_3').removeAttr('disabled');
+              $('#clockout_btn').removeAttr('disabled');
 
-          }
+            }
         
-        }               
+        }             
     });
 
-     $.post('employee_control/employee/checkwork',function(data){
-     
-    window.location.reload();   
-
+    $.post('employee_control/employee/checkwork',function(data1){
+      if(data1)
+      {
+        $('#timerr').html('');
+      }
     }); 
   }
   else
   {
-      $.post('employee_control/employee/checkstastuswork',function(data){
-         
-      });
-
-     $.post('employee_control/employee/endbreak', {breakid:breakid},function(data){//inserting 0 in breakstatus column in attendence table 
+        
+        $.post('employee_control/employee/endbreak', {breakid:breakid},function(data){//inserting 0 in breakstatus column in attendence table 
         if(data)
         { 
+            $('#hm_timer'+breakid).html('');      
+            $('#breakdur'+breakid).html(data);
+            
+            if(breakid==1)
+            {  
+                $('#breakstart_1').attr('disabled', 'disabled');
+                $('#breakstart_2').removeAttr('disabled');
+                $('#breakstart_3').removeAttr('disabled');
+                $('#clockout_btn').removeAttr('disabled');
+            }
+            else if(breakid==2)
+            {
+                $('#breakstart_1').attr('disabled', 'disabled');
+                $('#breakstart_2').attr('disabled', 'disabled');
+                $('#breakstart_3').removeAttr('disabled');
+                $('#clockout_btn').removeAttr('disabled');
+              
+            }
+            else if(breakid==3)
+            {
+                $('#breakstart_1').attr('disabled', 'disabled');
+                $('#breakstart_2').attr('disabled', 'disabled');
+                $('#breakstart_3').attr('disabled', 'disabled');
+                $('#clockout_btn').removeAttr('disabled');
+            }
+            else
+            {
+                $('#breakstart_1').removeAttr('disabled');
+                $('#breakstart_2').removeAttr('disabled');
+                $('#breakstart_3').removeAttr('disabled');
+                $('#clockout_btn').removeAttr('disabled');
+            }
 
-          window.location.reload();       
         }
+      });
+
+      $.post('employee_control/employee/checkstastuswork',function(data){
+                 
+      })
+              /*;
+
+               $.post('employee_control/employee/endbreak', {breakid:breakid},function(data){//inserting 0 in breakstatus column in attendence table 
+                if(data)
+                { 
+
+                
+                }
 
 
 
-     });
+             });*/
   }
+}
+
+function clockin()
+{
+   $.post('employee_control/employee/clockin',function(data){
+     if(data)
+    {
+    //alert(data);
+    $('#show_clockin_time').html(""); 
+    $('#show_clockin_time').html(data);
+     $('#clockinbtn').attr('disabled', 'disabled');
+    }
+    }); 
 }
 
        /* var totalSeconds = 0;

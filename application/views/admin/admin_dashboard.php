@@ -178,7 +178,7 @@
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-                  
+                  <h1><?php  echo $total_fbreak; ?> </h1>
                 </div>
               </div>
             </div>
@@ -199,7 +199,7 @@
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-                
+                <h1><?php  echo $total_sbreak; ?> </h1>
                   
                 </div>
               </div>
@@ -216,7 +216,7 @@
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-                  
+                  <h1><?php  echo $total_lbreak; ?> </h1>
                 </div>
               </div>
             </div>
@@ -242,7 +242,7 @@
               <div class="row">
 
 
-            <div class="col-md-4 col-sm-4 col-xs-12">
+            <!-- <div class="col-md-4 col-sm-4 col-xs-12">
               <div class="x_panel tile fixed_height_320">
                 <div class="x_title">
                   <h2>App Versions</h2>
@@ -292,7 +292,7 @@
                 </div>
               </div>
             </div>
-
+ -->
           </div>
 
 

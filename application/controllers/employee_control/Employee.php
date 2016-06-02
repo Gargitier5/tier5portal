@@ -145,11 +145,13 @@ class Employee extends CI_Controller
       //print_r($data);
       $data['date']=date('Y-m-d');
       $data['time']=date('H:i:s');
+      $data['project']=$this->input->post('pro_name');
       $data['main_url']=$this->input->post('url_id');
       $data['posted_url']=$this->input->post('posted');
       $data['proposed_url']=$this->input->post('proposed');
       $data['cover_letter']=$this->input->post('coverletter');
-       if($data['main_url'] && $data['posted_url'] && $data['proposed_url'] && $data['cover_letter'])
+
+       if($data['project'] && $data['main_url'] && $data['posted_url'] && $data['proposed_url'] && $data['cover_letter'])
        {
 
           $activity=$this->EmployeeModel->ins_activity($data);
@@ -277,15 +279,15 @@ class Employee extends CI_Controller
        $con['id']=$this->session->userdata('uid');
        $data1['online_status']='1';
        $make_online=$this->EmployeeModel->update('employee',$con,$data1);
-       if($ctime)
+        if($ctime)
        {
-           
-          redirect(base_url().'employee_control/employee');
+           echo $time;
+          //redirect(base_url().'employee_control/employee');
        }
-       else
+       /*else
        {
            redirect(base_url().'employee_control/employee');
-       }
+       }*/
     }
 
     public function clockincheck()
@@ -322,6 +324,7 @@ class Employee extends CI_Controller
         $data1['status']=0;
         $data1['endTime']=date('H:i:s');
         $stopworkingmode=$this->EmployeeModel->update('tbl_employee_productivity',$con,$data1);
+        return $stopworkingmode;
 
        } 
        else
@@ -368,7 +371,7 @@ class Employee extends CI_Controller
        $data['type']=$this->input->post('breakid');
        $data['status']='1';
        $brk_start_time=$this->EmployeeModel->startbreak($data);
-       return $brk_start_time;
+       print_r($brk_start_time);
        
 
       }

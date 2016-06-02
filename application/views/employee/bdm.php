@@ -43,13 +43,29 @@
               <h2>Work Report</h2>
               <div class="form-group">
               <div class="row"> 
+                <?php if($this->session->userdata('succ_msg')!=''){?>
+                      <div class="alert alert-success alert-dismissable">
+                    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                    <h4>  <i class="icon fa fa-check"></i> Success!</h4>
+                    <?php echo $this->session->userdata('succ_msg');$this->session->set_userdata('succ_msg','');?>
+                  </div>
+
+<?php } if($this->session->userdata('err_msg')!=''){ ?>
+
+<div class="alert alert-danger alert-dismissable">
+                    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                    <h4><i class="icon fa fa-ban"></i> Sorry!</h4>
+                  <?php echo  $this->session->userdata('err_msg');$this->session->set_userdata('err_msg','');?>
+                 </div> 
+<?php }?>
                 <div class="col-md-6">
+                  <form method="post" action="employee_control/employee/add_activity">
                   <label>Project Name</label>
-                  <input type="text" class="form-control">
+                  <input type="text" id="pro_name" name="pro_name" class="form-control">
                 </div>    
                 <div class="col-md-6">
                   <label>Portal</label>
-                  <form method="post" action="employee_control/employee/add_activity">
+                  
                   <select class="form-control" id="url_id" name="url_id">
                     <option value="">-Select Url-</option>
                     <?php foreach ($url as $url) {?>
@@ -155,7 +171,95 @@
                     <th>Step3</th>
                       
                   </tr>
-                  <tr>
+                    
+                    <?php foreach ($bdmactive as $key) 
+                    {?>
+                    <tr>
+                      <th><?php echo $key['project'];?></th>
+                      <td>
+                        <?php 
+                        if ($key['step1']==1)
+                          {  ?>
+                            <span class="connected">Contacted</span>
+                         <?php }
+                        ?>
+
+                        <?php 
+                        if ($key['step1']==2)
+                          {  ?>
+                            <span class="red-marks">Rejected</span>
+                         <?php }
+                        ?>
+
+                        <?php 
+                        if ($key['step1']==3)
+                          {  ?>
+                            <span class="green-marks">Offer</span>
+                         <?php }
+                        ?>
+
+
+
+                      </td>
+
+                      <td>
+                         <?php 
+                        if ($key['step2']=='1_1')
+                          {  ?>
+                            <span class="green-marks">Offer</span>
+                         <?php }
+                        ?>
+
+                        <?php 
+                        if ($key['step2']=='1_2')
+                          {  ?>
+                            <span class="red-marks">Rejected</span>
+                         <?php }
+                        ?>
+
+                        <?php 
+                        if ($key['step2']=='3_1')
+                          {  ?>
+                            <span class="green-marks">Accepted By Tier5</span>
+                         <?php }
+                        ?>
+
+                        <?php if ($key['step2']=='3_2')
+                          {  ?>
+                           <span class="red-marks">Rejected By Tier5</span>
+                         <?php }
+                        ?>
+
+
+
+
+
+                      </td>
+                      <td>
+                          <?php 
+                        if ($key['step3']=='1_1_1')
+                          {  ?>
+                            <span class="green-marks">Accepted By Tier5</span>
+                         <?php }
+                        ?>
+
+                        <?php if ($key['step3']=='1_1_2')
+                          {  ?>
+                            <span class="red-marks">Rejected By Tier5</span>
+                         <?php }
+                        ?>
+
+
+                      </td>
+
+                     </tr>
+                      
+                   <?php } ?>
+     
+                    
+                 
+                 
+                  <!-- <tr>
                     <th>Econ Trcker</th>
                     <td><span class="connected">Connected</span></td>
                     <td><span class="green-marks">Offer</span></td>
@@ -209,7 +313,7 @@
                     <td><span class="yellow-marks">Hold</span></td>
                     <td><span class="yellow-marks">Hold</span></td>
                   </tr>
-                  
+                   -->
                 </table>
               </div>
               </section>
@@ -235,12 +339,16 @@
                        
                        ?>
                         <li>
-                          <p><strong>URL:</strong><?php echo $key['url'];?></p>
-                          <p>
+                          <p><strong>URL:</strong><?php echo $key['url'];?>
+                             <br>
                             <strong>Date:</strong> <?php echo $key['date'];?>
-                          <p> 
-                            <p>
-                            <strong>Time:</strong> <?php echo $key['time'];?>
+                            <br>
+                            <strong>Project Name:</strong> <?php echo $key['project'];?>
+                            <br>
+                            <strong>Posted Url:</strong> <?php echo $key['posted_url'];?>
+                            <br>
+                            <strong>Proposed Url:</strong> <?php echo $key['proposed_url'];?>
+                          </p>
                           <p> 
                            <strong>Cover Letter:</strong><?php echo $key['cover_letter'];?>
                           <p>

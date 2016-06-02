@@ -85,12 +85,12 @@
             $result=$this->db->insert('attendance',$data);
             if($result)
             {
-               return true;
+               print_r ($data['clockin']);
             }
-            else
+            /*else
             {
                 return false;
-            }
+            }*/
           }
           else
           {
@@ -137,7 +137,8 @@
                      $con['P_id']=$point['P_id'];
                      $this->db->where($con);
                      $res=$this->db->update('point_history',$new);
-                     return $this->db->affected_rows();
+                     print_r ($data5['clockin']);
+                     //return $this->db->affected_rows();
 
                      
                  }
@@ -155,7 +156,8 @@
                      $con['P_id']=$point['P_id'];
                      $this->db->where($con);
                      $res=$this->db->update('point_history',$new);
-                     return $this->db->affected_rows();
+                     print_r ($data5['clockin']);
+                     //return $this->db->affected_rows();
                  }
                  else
                  {
@@ -171,7 +173,8 @@
                      $con['P_id']=$point['P_id'];
                      $this->db->where($con);
                      $res=$this->db->update('point_history',$new);
-                     return $this->db->affected_rows();
+                     print_r ($data5['clockin']);
+                     //return $this->db->affected_rows();
                  }
             }
             else
@@ -455,7 +458,7 @@
         
         if($result)
         {
-           return $this->db->last_insert_id;
+           print_r($data);
         }
         else
         {
@@ -619,7 +622,8 @@
                      $con['P_id']=$point['P_id'];
                      $this->db->where($con);
                      $res=$this->db->update('point_history',$new);
-                     return $this->db->affected_rows();
+                     //return $this->db->affected_rows();
+                     print_r($totaltime_taken);
 
                      
                  }
@@ -637,7 +641,8 @@
                      $con['P_id']=$point['P_id'];
                      $this->db->where($con);
                      $res=$this->db->update('point_history',$new);
-                     return $this->db->affected_rows();
+                     //return $this->db->affected_rows();
+                     print_r($totaltime_taken);
                  }
                  else
                  {
@@ -653,7 +658,8 @@
                      $con['P_id']=$point['P_id'];
                      $this->db->where($con);
                      $res=$this->db->update('point_history',$new);
-                     return $this->db->affected_rows();
+                     //return $this->db->affected_rows();
+                     print_r($totaltime_taken);
                  }
 
 
@@ -668,7 +674,8 @@
              $nwdata['status']='0';
              $this->db->where($data2);
              $res=$this->db->update('break_track',$nwdata);
-             return $this->db->affected_rows();
+             //return $this->db->affected_rows();
+             print_r($totaltime_taken);
           }
     }
 

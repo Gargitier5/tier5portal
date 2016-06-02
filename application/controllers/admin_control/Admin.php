@@ -30,11 +30,26 @@ class Admin extends CI_Controller
           if ($this->session->userdata('adminid'))
           {
               
+              $fbreak['date']=date('Y-m-d');
+              $fbreak['type']=1;
+              $fbreak['status']=1;
+
+              $sbreak['date']=date('Y-m-d');
+              $sbreak['type']=2;
+              $sbreak['status']=1;
+
+              $lbreak['date']=date('Y-m-d');
+              $lbreak['type']=3;
+              $lbreak['status']=1;
+             
               $con['activation_status']=0;
               $con1['date']=date('Y-m-d');
               $data['employee']=$this->AdminModel->AllEmployee();
               $data['total_employee']=$this->AdminModel->fetchinfo('employee',$con,'count');
               $data['total_present']=$this->AdminModel->fetchinfo('attendance',$con1,'count');
+              $data['total_fbreak']=$this->AdminModel->fetchinfo('break_track',$fbreak,'count');
+              $data['total_sbreak']=$this->AdminModel->fetchinfo('break_track',$sbreak,'count');
+              $data['total_lbreak']=$this->AdminModel->fetchinfo('break_track',$lbreak,'count');
               $data['sideber']=$this->load->view('admin/includes/sideber','',true);
               $data['header']=$this->load->view('admin/includes/header','',true);
               $this->load->view('admin/admin_dashboard.php',$data);
@@ -63,11 +78,26 @@ class Admin extends CI_Controller
            if ($this->session->userdata('adminid'))
           {
               
+              $fbreak['date']=date('Y-m-d');
+              $fbreak['type']=1;
+              $fbreak['status']=1;
+
+              $sbreak['date']=date('Y-m-d');
+              $sbreak['type']=2;
+              $sbreak['status']=1;
+
+              $lbreak['date']=date('Y-m-d');
+              $lbreak['type']=3;
+              $lbreak['status']=1;
+             
               $con['activation_status']=0;
               $con1['date']=date('Y-m-d');
               $data['employee']=$this->AdminModel->AllEmployee();
               $data['total_employee']=$this->AdminModel->fetchinfo('employee',$con,'count');
               $data['total_present']=$this->AdminModel->fetchinfo('attendance',$con1,'count');
+              $data['total_fbreak']=$this->AdminModel->fetchinfo('break_track',$fbreak,'count');
+              $data['total_sbreak']=$this->AdminModel->fetchinfo('break_track',$sbreak,'count');
+              $data['total_lbreak']=$this->AdminModel->fetchinfo('break_track',$lbreak,'count');
               $data['sideber']=$this->load->view('admin/includes/sideber','',true);
               $data['header']=$this->load->view('admin/includes/header','',true);
               $this->load->view('admin/admin_dashboard.php',$data);
@@ -1381,17 +1411,23 @@ class Admin extends CI_Controller
       {
 
          $con=date('Y-m-d');
+         $con1['rank']=1;
+         $con2['rank']=2;
+         $con3['rank']=3;
          $data['present_employee']=$this->AdminModel->empclock($con);
-
+          
          $data['firstbreak']=$this->AdminModel->firstbreak($con);
          $data['onfirstbreak']=$this->AdminModel->onfirstbreak($con);
+         $data['firstduration']=$this->AdminModel->fetchinfo('break',$con1,'row');
 
          
          $data['secondbreak']=$this->AdminModel->secondbreak($con);
          $data['onsecondbreak']=$this->AdminModel->onsecondbreak($con);
+         $data['secondduration']=$this->AdminModel->fetchinfo('break',$con2,'row');
          
          $data['thirdbreak']=$this->AdminModel->thirdbreak($con);
          $data['onthirdbreak']=$this->AdminModel->onthirdbreak($con);
+         $data['thirdduration']=$this->AdminModel->fetchinfo('break',$con3,'row');
 
          $data['header']=$this->load->view('admin/includes/header','',true);
          $data['sideber']=$this->load->view('admin/includes/sideber','',true);

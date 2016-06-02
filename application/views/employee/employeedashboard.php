@@ -278,7 +278,7 @@ Notification.requestPermission();
                     <!-- lunch-shop-name ends here -->
 
 
-                    <div class="lunch-shop-name" style="display:none;">
+                     <div class="lunch-shop-name" style="display:none;">
                         <div style="" id="sel_empl">
                         <center>
                         <label>Select Employee for whome you want to place order: </label>
@@ -289,7 +289,7 @@ Notification.requestPermission();
                         </div>
 
 
-                    </div> 
+                    </div>  
 
                  <div id="item_display" style="display:none;">
                     <div class="row shopname">
@@ -499,9 +499,9 @@ Notification.requestPermission();
                     <div class="break">
                     <div class="row">
                       <div class="col-md-4 col-sm-4">Clock In:</div>
-                      <div class="col-md-4 col-sm-4"><?php if($clockintime['clockin']){ echo $clockintime['clockin'];} else { echo "Please Clock In!!";} ?></div>
+                      <div class="col-md-4 col-sm-4" id="show_clockin_time"><?php if($clockintime['clockin']){ echo $clockintime['clockin'];} else { echo "Please Clock In!!";} ?></div>
                       <div class="col-md-4 col-sm-4">
-                        <button id="" class="btn break-btn" onclick="location.href='employee_control/Employee/clockin'" name="clockinbtn"  <?php if($clockintime['clockin']){ echo "disabled";} ?>>Clock In</button>
+                        <button class="btn break-btn" onclick="clockin()" name="clockinbtn" id="clockinbtn"  <?php if($clockintime['clockin']){ echo "disabled";} ?>>Clock In</button>
                       </div>
                     </div> 
                     </div> 
@@ -530,7 +530,7 @@ Notification.requestPermission();
                       <div class="col-md-4 col-sm-4 col-xs-4 time-left">
                        
 
-                        <h6 id="breakdur"> <?php  $breakinfo=breakinfo($key['break_id'],$userid); ?> <span id="hm_timer<?php echo $key['break_id']?>" class="break_span"></span><span id="counterr<?php echo $key['break_id']?>" style="color: red; font-size: 150%;"></span></h6>
+                        <h6 id="breakdur<?php echo $key['break_id']?>"> <?php  $breakinfo=breakinfo($key['break_id'],$userid); ?> <span id="hm_timer<?php echo $key['break_id']?>" class="break_span"></span><span id="counterr<?php echo $key['break_id']?>" style="color: red; font-size: 150%;"></span></h6>
 
                       </div>  
                       

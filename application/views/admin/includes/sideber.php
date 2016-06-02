@@ -126,10 +126,10 @@
                     <ul class="nav child_menu">
                       <li><a href="<?php echo base_url();?>admin_control/admin/bdmactivity">Proposals Submitted By BDM</a>
                       </li>
-                      <li><a href="">Change Status</a>
+                      <!-- <li><a href="">Change Status</a>
                       </li>
                       <li><a href="">See Progress</a>
-                      </li>
+                      </li> -->
                     </ul>
                   </li>
                  <?php } ?>

@@ -5,6 +5,8 @@ $( ".datepicker" ).datepicker({ dateFormat: 'yy-mm-dd'});
 $('#timepicker').timepicker();
 });
 
+
+
 function reset_pass(emp_id)
 {
  
@@ -171,3 +173,4 @@ function checkdate()
         });
 
 }
+
