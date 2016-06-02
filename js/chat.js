@@ -169,7 +169,7 @@ function chatHeartbeat(){
 					{
 						$('#notification').val(1);
 					}*/
-					
+					notifyBrowser(x);
 					document.title = x+' says...';
 					titleChanged = 1;
 					//var notification = new Notification('new mssg');
@@ -221,9 +221,19 @@ function chatHeartbeat(){
 
 		$.each(data.items, function(i,item){
 			if (item)	{ // fix strange ie bug
-				notifyBrowser(item.f);
+			
 
 				chatboxtitle = item.f;
+
+				var text=item.m;
+				if(isUrl(text)){
+
+
+	  var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+	  var text1=text.replace(exp, "<a href='$1'>$1</a>");
+	  var exp2 =/(^|[^\/])(www\.[\S]+(\b|$))/gim;
+	  item.m=text1.replace(exp2, '$1<a target="_blank" href="http://$2">$2</a>');
+				}
 
 				if ($("#chatbox_"+chatboxtitle).length <= 0) {
 					createChatBox(chatboxtitle);
@@ -266,7 +276,10 @@ function chatHeartbeat(){
 		setTimeout('chatHeartbeat();',chatHeartbeatTime);
 	}});
 }
-
+function isUrl(s) {
+	var regexp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&&#37;@!\-\/]))?/
+	return regexp.test(s);
+}
 
 function notifyBrowser(name) 
 {
@@ -280,21 +293,11 @@ if (Notification.permission !== "granted")
 Notification.requestPermission();
 }
 else {
-	/*if($('#notification').val()!=name && $('#notification_count').val()==0)
-	{
-var notification = new Notification('new message from '+name);
-$('#notification').val(name);
-$('#notification_count').val(1);
-notification.onclose = function () {
-console.log('Notification closed');
-};
-
-}*/
-// Callback function when the notification is closed.
-var notification = new Notification('new message from '+name);
-
-notification.onclose = function () {
 	
+var notification = new Notification('new message from '+name);
+
+notification.onclose = function () {
+
 console.log('Notification closed');
 };
 
@@ -363,9 +366,26 @@ function checkChatBoxInputKey(event,chatboxtextarea,chatboxtitle) {
 		if (message != '') {
 			/*$('#notification').val(1);
 			$('#notification_count').val(0);*/
+
+			var text=message;
+				if(isUrl(text)){
+
+					
+	  var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+	  var text1=text.replace(exp, "<a href='$1'>$1</a>");
+	  var exp2 =/(^|[^\/])(www\.[\S]+(\b|$))/gim;
+	  message1=text1.replace(exp2, '$1<a target="_blank" href="http://$2">$2</a>');
+				}
+				else
+				{
+				message1=message;
+				}
+				
+
+
 			$.post("application/views/chat.php?action=sendchat", {sentfrom:sessionUser,to: chatboxtitle, message: message} , function(data){
 				message = message.replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/\"/g,"&quot;");
-				$("#chatbox_"+chatboxtitle+" .chatboxcontent").append('<div class="chatboxmessage"><span class="chatboxmessagefrom">'+username+':&nbsp;&nbsp;</span><span class="chatboxmessagecontent">'+message+'</span></div>');
+				$("#chatbox_"+chatboxtitle+" .chatboxcontent").append('<div class="chatboxmessage"><span class="chatboxmessagefrom">'+username+':&nbsp;&nbsp;</span><span class="chatboxmessagecontent">'+message1+'</span></div>');
 				$("#chatbox_"+chatboxtitle+" .chatboxcontent").scrollTop($("#chatbox_"+chatboxtitle+" .chatboxcontent")[0].scrollHeight);
 			});
 		}
@@ -408,6 +428,16 @@ function startChatSession(){
 
 				if ($("#chatbox_"+chatboxtitle).length <= 0) {
 					createChatBox(chatboxtitle,1);
+				}
+
+				var text=item.m;
+				if(isUrl(text)){
+
+					
+	  var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+	  var text1=text.replace(exp, "<a href='$1'>$1</a>");
+	  var exp2 =/(^|[^\/])(www\.[\S]+(\b|$))/gim;
+	  item.m=text1.replace(exp2, '$1<a target="_blank" href="http://$2">$2</a>');
 				}
 				
 				if (item.s == 1) {
