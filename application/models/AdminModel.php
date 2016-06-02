@@ -398,6 +398,7 @@
       $this->db->join('employee',"break_track.Eid=employee.id");
       $this->db->where('break_track.date',$con);
       $this->db->where('break_track.type',2);
+       $this->db->where('break_track.status',0);
       $res=$this->db->get('break_track');
       
       return $res->result_array();
@@ -423,6 +424,7 @@
       $this->db->join('employee',"break_track.Eid=employee.id");
       $this->db->where('break_track.date',$con);
       $this->db->where('break_track.type',3);
+      $this->db->where('break_track.status',0);
       $res=$this->db->get('break_track');
       
       return $res->result_array();

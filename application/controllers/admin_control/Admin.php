@@ -1411,22 +1411,27 @@ class Admin extends CI_Controller
       {
 
          $con=date('Y-m-d');
-         $con1['rank']=1;
-         $con2['rank']=2;
-         $con3['rank']=3;
          $data['present_employee']=$this->AdminModel->empclock($con);
           
+
+
+         
+         
          $data['firstbreak']=$this->AdminModel->firstbreak($con);
          $data['onfirstbreak']=$this->AdminModel->onfirstbreak($con);
+         $con1['rank']=1;
          $data['firstduration']=$this->AdminModel->fetchinfo('break',$con1,'row');
 
          
          $data['secondbreak']=$this->AdminModel->secondbreak($con);
          $data['onsecondbreak']=$this->AdminModel->onsecondbreak($con);
+         $con2['rank']=2;
          $data['secondduration']=$this->AdminModel->fetchinfo('break',$con2,'row');
          
          $data['thirdbreak']=$this->AdminModel->thirdbreak($con);
          $data['onthirdbreak']=$this->AdminModel->onthirdbreak($con);
+
+         $con3['rank']=3;
          $data['thirdduration']=$this->AdminModel->fetchinfo('break',$con3,'row');
 
          $data['header']=$this->load->view('admin/includes/header','',true);
