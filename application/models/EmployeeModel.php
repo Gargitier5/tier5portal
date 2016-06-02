@@ -25,7 +25,8 @@
             if($result1['role']==0)
             {
              
-              return false;
+              $this->session->set_userdata('e_message','Hi!!! Admin,  you donot have the permission of employee panel');
+              redirect(base_url());
             }
             else
             {
