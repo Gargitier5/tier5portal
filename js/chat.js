@@ -44,7 +44,19 @@ $(document).ready(function(){
 		document.title = originalTitle;
 	});
 
+
+
+/*$(document).delegate("#chatbox_gargi","click",function(){
+alert( "Handler for .click() called." );
+
+})*/
 });
+
+function Fntoggler(chatuser)
+{
+	//alert(chatuser);
+	toggleChatBoxGrowth(chatuser);
+}
 
 function restructureChatBoxes() {
 	align = 0;
@@ -65,11 +77,57 @@ function restructureChatBoxes() {
 
 function chatWith(chatuser) {
 	
+	
+	ChatOldhistory(chatuser);
 	createChatBox(chatuser);
 	$("#chatbox_"+chatuser+" .chatboxtextarea").focus();
 }
 
+
+function ChatOldhistory(chatuser)
+{
+	
+
+	$.ajax({
+	  url: "application/views/chat.php?action=chatOldhistory",
+	  type:"post",
+	  data:"current_user="+sessionUser+"& touser="+chatuser,
+	  cache: false,
+	  dataType: "json",
+	  success: function(data) {
+
+		$.each(data.items, function(i,item){
+			if (item)	{ 
+
+
+
+			// fix strange ie bug
+			
+//alert(item.f);
+				
+
+				var text=item.m;
+				if(isUrl(text)){
+
+
+	  var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+	  var text1=text.replace(exp, "<a href='$1'>$1</a>");
+	  var exp2 =/(^|[^\/])(www\.[\S]+(\b|$))/gim;
+	  item.m=text1.replace(exp2, '$1<a target="_blank" href="http://$2">$2</a>');
+				}
+				chatboxtitle=chatuser;
+				$("#chatbox_"+chatboxtitle+" .chatboxcontent").append('<div class="chatboxmessage"><span class="chatboxmessagefrom">'+item.f+':&nbsp;&nbsp;</span><span class="chatboxmessagecontent">'+item.m+'</span></div><div class="chatboxmessage"><span class="chatboxinfo">'+item.t+'</span></div>');
+				
+			}
+		});
+	
+		
+		
+	} });
+}
+
 function createChatBox(chatboxtitle,minimizeChatBox) {
+
 	if ($("#chatbox_"+chatboxtitle).length > 0) {
 		if ($("#chatbox_"+chatboxtitle).css('display') == 'none') {
 			$("#chatbox_"+chatboxtitle).css('display','block');
@@ -81,7 +139,7 @@ function createChatBox(chatboxtitle,minimizeChatBox) {
 
 	$(" <div />" ).attr("id","chatbox_"+chatboxtitle)
 	.addClass("chatbox")
-	.html('<div class="chatboxhead"><div class="chatboxtitle">'+chatboxtitle+'</div><div class="chatboxoptions"><a href="javascript:void(0)" onclick="javascript:toggleChatBoxGrowth(\''+chatboxtitle+'\')">-</a> <a href="javascript:void(0)" onclick="javascript:closeChatBox(\''+chatboxtitle+'\')">X</a></div><br clear="all"/></div><div class="chatboxcontent"></div><div class="chatboxinput"><textarea class="chatboxtextarea" onkeydown="javascript:return checkChatBoxInputKey(event,this,\''+chatboxtitle+'\');"></textarea></div>')
+	.html('<div class="chatboxhead" data-title="'+chatboxtitle+'" onclick=Fntoggler("'+chatboxtitle.toString()+'");><div class="chatboxtitle">'+chatboxtitle+'</div><div class="chatboxoptions"><a href="javascript:void(0)" onclick=Fntoggler("'+chatboxtitle.toString()+'">-</a> <a href="javascript:void(0)" onclick="javascript:closeChatBox(\''+chatboxtitle+'\')">X</a></div><br clear="all"/></div><div class="chatboxcontent"></div><div class="chatboxinput"><textarea class="chatboxtextarea" onkeydown="javascript:return checkChatBoxInputKey(event,this,\''+chatboxtitle+'\');"></textarea></div>')
 	.appendTo($( "body" ));
 			   
 	$("#chatbox_"+chatboxtitle).css('bottom', '0px');
@@ -117,6 +175,7 @@ function createChatBox(chatboxtitle,minimizeChatBox) {
 		}
 
 		if (minimize == 1) {
+
 			$('#chatbox_'+chatboxtitle+' .chatboxcontent').css('display','none');
 			$('#chatbox_'+chatboxtitle+' .chatboxinput').css('display','none');
 		}
@@ -146,6 +205,8 @@ function createChatBox(chatboxtitle,minimizeChatBox) {
 
 function chatHeartbeat(){
 
+
+	
 	var itemsfound = 0;
 	
 	if (windowFocus == false) {
@@ -293,8 +354,11 @@ if (Notification.permission !== "granted")
 Notification.requestPermission();
 }
 else {
-	
-var notification = new Notification('new message from '+name);
+	 var options = {
+      body: '',
+      icon: "images/logo.png"
+  }
+var notification = new Notification('new message from '+name,options);
 
 notification.onclose = function () {
 

@@ -15,6 +15,7 @@ mysql_selectdb(DBNAME,$dbh);*/
 
 
 if ($_GET['action'] == "chatheartbeat") { chatHeartbeat(); } 
+if ($_GET['action'] == "chatOldhistory") { chatOldHistory(); } 
 if ($_GET['action'] == "sendchat") { sendChat(); } 
 if ($_GET['action'] == "closechat") { closeChat(); } 
 if ($_GET['action'] == "startchatsession") { startChatSession(); } 
@@ -28,6 +29,55 @@ if (!isset($_SESSION['openChatBoxes'])) {
 	$_SESSION['openChatBoxes'] = array();	
 }
 
+function chatOldHistory()
+{
+	$from=$_POST['current_user'];
+	$to=$_POST['touser'];
+	if(strlen($from) < strlen($to))
+	{
+		$chat_btwn=$from."-".$to;
+	}
+	else
+	{
+		$chat_btwn=$to."-".$from;
+	}
+	$sql = "select * from chat where (chat.chat_btwn = '".mysql_real_escape_string($chat_btwn)."' AND recd = 1) order by id ASC";
+	$query = mysql_query($sql);
+	$items = '';
+while ($chat = mysql_fetch_array($query)) {
+
+		
+
+		$chat['message'] = sanitize($chat['message']);
+
+		$items .= <<<EOD
+					   {
+			"s": "0",
+			"f": "{$chat['from']}",
+			"m": "{$chat['message']}",
+			"t": "{$chat['sent']}"
+	   },
+EOD;
+
+	
+	}
+
+	if ($items != '') {
+		$items = substr($items, 0, -1);
+	}
+header('Content-type: application/json');
+?>
+{
+		"items": [
+			<?php echo $items;?>
+        ]
+}
+
+<?php
+			exit(0);
+
+
+}
 
 function chatHeartbeat() {
 	if (!isset($_SESSION['username'])) {
