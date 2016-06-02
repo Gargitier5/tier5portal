@@ -56,26 +56,30 @@
                 }else{
                     console.log('Check in: ' + start);
                     console.log('Check out: ' + end)
-                    
-                    var modal = $('#booking_modal');
-                    modal.modal();                           
-                    /*$.ajax({
-                        url: BASE_URL + '/ajax/requests/getVillaPrice',
+                    var event_id = $(this).data('event');
+                    //alert(event_id);
+                    /*var modal = $('#booking_modal');*/
+                    /*modal.modal();*/                           
+                    $.ajax({
+                        url: BASE_URL + '/ajax/requests/get_event',
                         type: 'POST',
-                        data: {villa_id: villa.id, start: start, end: end, villa_min_price: villa.min_price},
+                        data: {event_id: event_id},
                         success: function(response){
-    //                        console.log(response);
+                           console.log(response);
+                           response = $.parseJSON(response);
                             var modal = $('#booking_modal');
-                            modal.find('form input[type=hidden][name=checkinHidden]').val(start);
+                           /* modal.find('form input[type=hidden][name=checkinHidden]').val(start);
                             modal.find('form input[type=hidden][name=checkoutHidden]').val(end);
                             modal.find('form input[type=hidden][name=villaidHidden]').val(villa.id);
                             modal.find('form input[type=hidden][name=villaMinPriceHidden]').val(villa.min_price);
                             modal.find('form input[type=text][name=check_in]').val(moment(start).format('MMMM DD, YYYY'));
                             modal.find('form input[type=text][name=check_out]').val(moment(end).format('MMMM DD, YYYY'));
-                            modal.find('form .estimate').text('Total: $' + response);
+                            modal.find('form .estimate').text('Total: $' + response);*/
+                            modal.find('#emp_name').text(response.data.name);
+                            modal.find('#event_info').text(response.data.event_informations);
                             modal.modal();
                         }
-                    });*/
+                    });
                 }
             }else{
                 $(this).addClass('date-selected start');

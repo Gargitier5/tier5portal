@@ -309,11 +309,12 @@ class Villa_booking_calendar {
                 $class = (strtotime(date('Y-m-d')) > strtotime($currentDate)) ? 'bc-past' : 'bc-current';
                 $class .= (date('Y-m-d') == $currentDate) ? ' bc-today' : '';
                 $class .= (strtotime(date('Y-m-d')) > strtotime($currentDate)) ? '' : ' date_cell';
-                $html .= '<li data-date="'.$currentDate.'" class="'.$class.' bc-available">';
+                $html .= '<li data-event="'.$this->check_date($event_date, $dateMonth, $dayCount).'" data-date="'.$currentDate.'" class="'.$class.' bc-available">';
                 $html .= "<span>$dayCount</span>";
                 //var_dump($this->check_date($event_date, $dateMonth, $dayCount));
                 if($event = $this->check_date($event_date, $dateMonth, $dayCount)){
-                    $html .= "<span class='event-show'>Event</span>";                   
+                    //$html .= "<span class='event-show'>Event</span>";   
+                    $html .= "<img src= images/birthday.gif / width='30' height='22'>";           
                 }
                 $html .= '</li>';
                 $dayCount++;
