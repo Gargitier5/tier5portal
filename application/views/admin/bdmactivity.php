@@ -27,6 +27,7 @@
     <!-- jQuery -->
   
      <script src="vendors/jquery/dist/jquery.min.js"></script>
+     <script type="text/javascript" src="js/bdm.js"></script>
       <style type="text/css">
       .dateclass
       {
@@ -89,31 +90,66 @@
                   <div class="x_content">
                     <br>
                     <br>
-                    <strong>Select Name:</strong><select><option value="">--Select--</option><?php foreach ($bdm as $value) {?><option value="<?php echo $value['Eid'];?>"><?php echo $value['name'];?></option>
+                    <strong>Select Name:</strong><select id="name" name="name" onchange="getname()"><option value="">--Select--</option><?php foreach ($bdm as $value) {?><option value="<?php echo $value['Eid'];?>"><?php echo $value['name'];?></option>
                      
                     <?php }?></select>
-                    <div class="dateclass"><strong>Date:</strong><input type="text" id="sdate" name="sdate" class="datepicker"></div>
+                    <div class="dateclass"><strong>Date:</strong><input type="text" onchange="getdate()" id="sdate" name="sdate" class="datepicker"></div>
                      <br>
                     <br>
                      <div class="table-responsive">
                          <table class="table table-striped jambo_table bulk_action">
                         <thead>
+                            <tr>
                               <th class="column-title">Date</th>
                               <th class="column-title">Time</th>
                               <th class="column-title">BDM Name</th>
+                              <th class="column-title">Project Name</th>
                               <th class="column-title">Portal</th>
                               <th class="column-title">Posted Link</th>
                               <th class="column-title">Proposal Link</th>
+                              <th class="column-title">Cover Letter</th>
+                              <th class="column-title" colspan="3">Outstanding Proposal</th>
+                           </tr>
+                           <tr>
+                              <th class="column-title" colspan="8"></th>
+                              <th class="column-title">Contacted</th>
+                              <th class="column-title">Offer</th>
+                              <th class="column-title">End Status</th>
+                            </tr> 
                         </thead>
-                        <tbody>
+                        <tbody id="bdmact">
                          <?php foreach ($bdmac as $key) {?>
                           <tr>
+
+                              <?php if($key['step1']==1){ $step1="Contacted";}
+                                    else if($key['step1']==2){ $step1="Rejected";}
+                                    else if($key['step1']==3){ $step1="Offer";}
+                                    else { $step1="No Status";}
+
+                                    if($key['step2']=="1_1"){ $step2="Offer";}
+                                    else if($key['step2']=="1_2"){ $step2="Rejected";}
+                                    else if($key['step2']=="3_1"){ $step2="Accepted";}
+                                    else if($key['step2']=="3_2"){ $step2="Rejected";}
+                                    else { $step2="No Status";}
+
+                                    if($key['step3']=="1_2_1"){ $step3="Offer";}
+                                    else if($key['step3']=="1_2_2"){ $step3="Rejected";}
+                                    else { $step3="No Status";}
+
+                              ?>
+                              
                               <td><?php echo $key['date'];?></td>
                               <td><?php echo $key['time'];?></td>
                               <td><?php echo $key['name'];?></td>
+                              <td><?php echo $key['project'];?></td>
                               <td><?php echo $key['url'];?></td>
                               <td><?php echo $key['posted_url'];?></td>
                               <td><?php echo $key['proposed_url'];?></td>
+                              <td><a href='admin_control/Admin/show_cover/<?php echo $key['b_ac_id']?>'>View Details</a></td>
+                              <td><?php echo $step1 ;?></td>
+                              <td><?php echo $step2 ;?></td>
+                              <td><?php echo $step3 ;?></td>
+                              
                               
                           </tr>
                          <?php } ?>

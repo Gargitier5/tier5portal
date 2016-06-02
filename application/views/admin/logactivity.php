@@ -99,7 +99,7 @@
                         <tr role="row" class="odd">
                           <td class="sorting_1"><?php echo $value['name']; ?></td>
                           <td><?php echo $value['point']; ?></td>
-                          <td><?php if ($value['point']==1 ){ echo "Added";}else{echo "Deducted";}?></td>
+                          <td><?php if ($value['action']==1 ){ echo "Added";}else{echo "Deducted";}?></td>
                           <td><?php $str=$value['date']; $date = DateTime::createFromFormat('Y-m-d', $str);
 $datee=$date->format('d/m/Y');
 echo $datee; ?></td>

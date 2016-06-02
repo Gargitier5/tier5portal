@@ -48,7 +48,18 @@
        $res=$this->db->get('bdm_activity');
        return $res->result_array();
     }
+    
+    public function getactivitybyname($con)
+    {
 
+       $this->db->select('bdm_activity.*,bdm_url.url,employee.name');
+       $this->db->join('employee','bdm_activity.Eid=employee.id');
+       $this->db->join('bdm_url','bdm_activity.main_url=bdm_url.burl_id');
+       $this->db->where('bdm_activity.Eid',$con);
+       $this->db->order_by('b_ac_id','DESC');
+       $res=$this->db->get('bdm_activity');
+       return $res->result_array();
+    }
 
     public function get_bdm()
     {
@@ -387,6 +398,7 @@
       $this->db->join('employee',"break_track.Eid=employee.id");
       $this->db->where('break_track.date',$con);
       $this->db->where('break_track.type',2);
+       $this->db->where('break_track.status',0);
       $res=$this->db->get('break_track');
       
       return $res->result_array();
@@ -412,6 +424,7 @@
       $this->db->join('employee',"break_track.Eid=employee.id");
       $this->db->where('break_track.date',$con);
       $this->db->where('break_track.type',3);
+      $this->db->where('break_track.status',0);
       $res=$this->db->get('break_track');
       
       return $res->result_array();

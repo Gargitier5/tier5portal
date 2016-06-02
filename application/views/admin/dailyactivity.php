@@ -194,11 +194,51 @@
                         <?php foreach ($onfirstbreak as $onfbreak ){?>
                         <tr>
                           <td><?php echo $onfbreak['name'];?></td>
-                          <td></td>
+                         <td>
+                           <?php
+                               $time1 = $onfbreak['starttime'];
+                               $time2 = date('H:i:s');
+                               $time3=$firstduration['duration'];
+
+                               list($hours, $minutes, $seconds) = explode(':', $time1);
+                                $startTimestamp = mktime($hours, $minutes, $seconds);
+
+                               list($hours, $minutes, $seconds) = explode(':', $time2);
+                               $endTimestamp = mktime($hours, $minutes, $seconds);
+
+                               
+                                $time3 = explode(':', $time3);
+                                $sectime= ($time3[0]*3600) + ($time3[1]*60) + $time3[2];
+
+
+                               $timetaken = $endTimestamp - $startTimestamp;
+                              
+                               //echo $sectime; 
+                               if($sectime>$timetaken)
+                               {
+                                  $startcount=$sectime-$timetaken;
+                                  //echo "CountDown";
+                                  //echo "<span>CountDown</span>";
+                                
+                               }
+                               else
+                               {
+                                 $startcount=$timetaken-$sectime;
+                                  //echo "CountUp";
+                                   //echo "<span id='countuptimer'></span>";
+                               }
+
+
+                            ?>
+     
+
+
+
+                          </td>
                         </tr>
                           <?php }?>
                       </tbody>
-
+              
                     </table>
                   </div>
                 </div>

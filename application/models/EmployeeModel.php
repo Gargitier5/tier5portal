@@ -25,7 +25,8 @@
             if($result1['role']==0)
             {
              
-              return false;
+              $this->session->set_userdata('e_message','Hi!!! Admin,  you donot have the permission of employee panel');
+              redirect(base_url());
             }
             else
             {
@@ -85,12 +86,12 @@
             $result=$this->db->insert('attendance',$data);
             if($result)
             {
-               return true;
+               print_r ($data['clockin']);
             }
-            else
+            /*else
             {
                 return false;
-            }
+            }*/
           }
           else
           {
@@ -137,7 +138,8 @@
                      $con['P_id']=$point['P_id'];
                      $this->db->where($con);
                      $res=$this->db->update('point_history',$new);
-                     return $this->db->affected_rows();
+                     print_r ($data5['clockin']);
+                     //return $this->db->affected_rows();
 
                      
                  }
@@ -155,7 +157,8 @@
                      $con['P_id']=$point['P_id'];
                      $this->db->where($con);
                      $res=$this->db->update('point_history',$new);
-                     return $this->db->affected_rows();
+                     print_r ($data5['clockin']);
+                     //return $this->db->affected_rows();
                  }
                  else
                  {
@@ -171,7 +174,8 @@
                      $con['P_id']=$point['P_id'];
                      $this->db->where($con);
                      $res=$this->db->update('point_history',$new);
-                     return $this->db->affected_rows();
+                     print_r ($data5['clockin']);
+                     //return $this->db->affected_rows();
                  }
             }
             else
@@ -455,7 +459,7 @@
         
         if($result)
         {
-           return $this->db->last_insert_id;
+           print_r($data);
         }
         else
         {
@@ -529,11 +533,14 @@
 
     public function bdm_activity($con1)
     {
-       $this->db->select('*');
+
+        $this->db->select('bdm_activity.*,bdm_url.url');
+       $this->db->join('bdm_url','bdm_activity.main_url=bdm_url.burl_id');
        $this->db->where('Eid',$con1);
        $this->db->order_by('b_ac_id','DESC');
        $res=$this->db->get('bdm_activity');
        return $res->result_array();
+    
     }
 
     public function endbreak($data)
@@ -616,7 +623,8 @@
                      $con['P_id']=$point['P_id'];
                      $this->db->where($con);
                      $res=$this->db->update('point_history',$new);
-                     return $this->db->affected_rows();
+                     //return $this->db->affected_rows();
+                     print_r($totaltime_taken);
 
                      
                  }
@@ -634,7 +642,8 @@
                      $con['P_id']=$point['P_id'];
                      $this->db->where($con);
                      $res=$this->db->update('point_history',$new);
-                     return $this->db->affected_rows();
+                     //return $this->db->affected_rows();
+                     print_r($totaltime_taken);
                  }
                  else
                  {
@@ -650,7 +659,8 @@
                      $con['P_id']=$point['P_id'];
                      $this->db->where($con);
                      $res=$this->db->update('point_history',$new);
-                     return $this->db->affected_rows();
+                     //return $this->db->affected_rows();
+                     print_r($totaltime_taken);
                  }
 
 
@@ -665,7 +675,8 @@
              $nwdata['status']='0';
              $this->db->where($data2);
              $res=$this->db->update('break_track',$nwdata);
-             return $this->db->affected_rows();
+             //return $this->db->affected_rows();
+             print_r($totaltime_taken);
           }
     }
 

@@ -64,7 +64,7 @@
 
         $CI->db->where('chat_btwn',$chat_btw);
 
-        $CI->db->where('sent BETWEEN DATE_SUB(NOW(), INTERVAL 3 DAY) AND NOW()');
+        //$CI->db->where('sent BETWEEN DATE_SUB(NOW(), INTERVAL 3 DAY) AND NOW()');
         $res=$CI->db->get('chat');
         return $res->result_array();
     }

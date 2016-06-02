@@ -30,11 +30,26 @@ class Admin extends CI_Controller
           if ($this->session->userdata('adminid'))
           {
               
+              $fbreak['date']=date('Y-m-d');
+              $fbreak['type']=1;
+              $fbreak['status']=1;
+
+              $sbreak['date']=date('Y-m-d');
+              $sbreak['type']=2;
+              $sbreak['status']=1;
+
+              $lbreak['date']=date('Y-m-d');
+              $lbreak['type']=3;
+              $lbreak['status']=1;
+             
               $con['activation_status']=0;
               $con1['date']=date('Y-m-d');
               $data['employee']=$this->AdminModel->AllEmployee();
               $data['total_employee']=$this->AdminModel->fetchinfo('employee',$con,'count');
               $data['total_present']=$this->AdminModel->fetchinfo('attendance',$con1,'count');
+              $data['total_fbreak']=$this->AdminModel->fetchinfo('break_track',$fbreak,'count');
+              $data['total_sbreak']=$this->AdminModel->fetchinfo('break_track',$sbreak,'count');
+              $data['total_lbreak']=$this->AdminModel->fetchinfo('break_track',$lbreak,'count');
               $data['sideber']=$this->load->view('admin/includes/sideber','',true);
               $data['header']=$this->load->view('admin/includes/header','',true);
               $this->load->view('admin/admin_dashboard.php',$data);
@@ -63,11 +78,26 @@ class Admin extends CI_Controller
            if ($this->session->userdata('adminid'))
           {
               
+              $fbreak['date']=date('Y-m-d');
+              $fbreak['type']=1;
+              $fbreak['status']=1;
+
+              $sbreak['date']=date('Y-m-d');
+              $sbreak['type']=2;
+              $sbreak['status']=1;
+
+              $lbreak['date']=date('Y-m-d');
+              $lbreak['type']=3;
+              $lbreak['status']=1;
+             
               $con['activation_status']=0;
               $con1['date']=date('Y-m-d');
               $data['employee']=$this->AdminModel->AllEmployee();
               $data['total_employee']=$this->AdminModel->fetchinfo('employee',$con,'count');
               $data['total_present']=$this->AdminModel->fetchinfo('attendance',$con1,'count');
+              $data['total_fbreak']=$this->AdminModel->fetchinfo('break_track',$fbreak,'count');
+              $data['total_sbreak']=$this->AdminModel->fetchinfo('break_track',$sbreak,'count');
+              $data['total_lbreak']=$this->AdminModel->fetchinfo('break_track',$lbreak,'count');
               $data['sideber']=$this->load->view('admin/includes/sideber','',true);
               $data['header']=$this->load->view('admin/includes/header','',true);
               $this->load->view('admin/admin_dashboard.php',$data);
@@ -98,45 +128,93 @@ class Admin extends CI_Controller
 
           }
     }
-
-    public function home()
-    {  
-          
-          if ($this->session->userdata('adminid'))
-          {
-              
-              $con['activation_status']=0;
-              $con1['date']=date('Y-m-d');
-              $data['total_employee']=$this->AdminModel->fetchinfo('employee',$con,'count');
-              $data['total_present']=$this->AdminModel->fetchinfo('attendance',$con1,'count');
-              $data['sideber']=$this->load->view('admin/includes/sideber','',true);
-              $data['header']=$this->load->view('admin/includes/header','',true);
-              $this->load->view('admin/admin_dashboard.php',$data);
-          }
-          else
-          {
-             redirect(base_url());
-          }
-       
-    }
     public function bdmactivity()
     {
 
-      if($_POST)
-      {
-
-      }
-      else
-      {
+      
         $con=date('Y-m-d');
         $data['bdmac']=$this->AdminModel->getactivity($con);
-      }
+      
       $data['bdm']=$this->AdminModel->get_bdm();
       $data['sideber']=$this->load->view('admin/includes/sideber','',true);
       $data['header']=$this->load->view('admin/includes/header','',true);
       $this->load->view('admin/bdmactivity.php',$data);
     }
-    
+
+    public function getbdmbydate()
+    {
+        $con=$this->input->post('getdate');
+        $activity=$this->AdminModel->getactivity($con);
+        $result="";
+        foreach ($activity as $key)
+        {
+          if($key['step1']==1){ $step1="Contacted";}
+                        else if($key['step1']==2){ $step1="Rejected";}
+                        else if($key['step1']==3){ $step1="Offer";}
+                        else { $step1="No Status";}
+
+                        if($key['step2']=="1_1"){ $step2="Offer";}
+                        else if($key['step2']=="1_2"){ $step2="Rejected";}
+                        else if($key['step2']=="3_1"){ $step2="Accepted";}
+                        else if($key['step2']=="3_2"){ $step2="Rejected";}
+                        else { $step2="No Status";}
+
+                        if($key['step3']=="1_2_1"){ $step3="Offer";}
+                        else if($key['step3']=="1_2_2"){ $step3="Rejected";}
+                        else { $step3="No Status";}
+          $result.="<tr><td>". $key['date']."</td>
+                         <td>".$key['time']."</td>
+                         <td>".$key['name']."</td>
+                         <td>". $key['project']."</td>
+                         <td>".$key['url']."</td>
+                         <td>".$key['posted_url']."</td>
+                         <td>".$key['proposed_url']."</td>
+                         <td><a href='admin_control/Admin/show_cover/".$key['b_ac_id'].">View Details</a></td>
+                         <td>".$step1 ."</td>
+                         <td>".$step2 ."</td>
+                         <td>". $step3 ."</td></tr>";
+                         
+    }
+    echo $result;
+    }
+    public function getbdmbyname()
+    { 
+      $con=$this->input->post('getname');
+        $activity=$this->AdminModel->getactivitybyname($con);
+        $result="";
+        foreach ($activity as $key)
+        {
+          if($key['step1']==1){ $step1="Contacted";}
+                        else if($key['step1']==2){ $step1="Rejected";}
+                        else if($key['step1']==3){ $step1="Offer";}
+                        else { $step1="No Status";}
+
+                        if($key['step2']=="1_1"){ $step2="Offer";}
+                        else if($key['step2']=="1_2"){ $step2="Rejected";}
+                        else if($key['step2']=="3_1"){ $step2="Accepted";}
+                        else if($key['step2']=="3_2"){ $step2="Rejected";}
+                        else { $step2="No Status";}
+
+                        if($key['step3']=="1_2_1"){ $step3="Offer";}
+                        else if($key['step3']=="1_2_2"){ $step3="Rejected";}
+                        else { $step3="No Status";}
+          $result.="<tr><td>". $key['date']."</td>
+                         <td>".$key['time']."</td>
+                         <td>".$key['name']."</td>
+                         <td>". $key['project']."</td>
+                         <td>".$key['url']."</td>
+                         <td>".$key['posted_url']."</td>
+                         <td>".$key['proposed_url']."</td>
+                         <td>View Details</td>
+                         <td>".$step1 ."</td>
+                         <td>".$step2 ."</td>
+                         <td>". $step3 ."</td></tr>";
+                         
+    }
+    echo $result;
+    }
+
+     
 
     public function logout()
     {
@@ -152,6 +230,16 @@ class Admin extends CI_Controller
       $data['sideber']=$this->load->view('admin/includes/sideber','',true);
       $data['header']=$this->load->view('admin/includes/header','',true);
       $this->load->view('admin/setbonus.php',$data);
+    }
+
+     public function show_cover($id)
+    {
+
+      $con['b_ac_id']=$id;
+      $data['get']=$this->AdminModel->fetchinfo('bdm_activity',$con,'row');
+      $data['sideber']=$this->load->view('admin/includes/sideber','',true);
+      $data['header']=$this->load->view('admin/includes/header','',true);
+      $this->load->view('admin/showcover.php',$data);
     }
 
     public function editprof($id)
@@ -1324,16 +1412,27 @@ class Admin extends CI_Controller
 
          $con=date('Y-m-d');
          $data['present_employee']=$this->AdminModel->empclock($con);
+          
 
+
+         
+         
          $data['firstbreak']=$this->AdminModel->firstbreak($con);
          $data['onfirstbreak']=$this->AdminModel->onfirstbreak($con);
+         $con1['rank']=1;
+         $data['firstduration']=$this->AdminModel->fetchinfo('break',$con1,'row');
 
          
          $data['secondbreak']=$this->AdminModel->secondbreak($con);
          $data['onsecondbreak']=$this->AdminModel->onsecondbreak($con);
+         $con2['rank']=2;
+         $data['secondduration']=$this->AdminModel->fetchinfo('break',$con2,'row');
          
          $data['thirdbreak']=$this->AdminModel->thirdbreak($con);
          $data['onthirdbreak']=$this->AdminModel->onthirdbreak($con);
+
+         $con3['rank']=3;
+         $data['thirdduration']=$this->AdminModel->fetchinfo('break',$con3,'row');
 
          $data['header']=$this->load->view('admin/includes/header','',true);
          $data['sideber']=$this->load->view('admin/includes/sideber','',true);
