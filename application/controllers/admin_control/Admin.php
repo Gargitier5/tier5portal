@@ -97,6 +97,8 @@ class Admin extends CI_Controller
               $data['employee']=$this->AdminModel->AllEmployee();
               $data['total_employee']=$this->AdminModel->fetchinfo('employee',$con,'count');
               $data['total_present']=$this->AdminModel->fetchinfo('attendance',$con1,'count');
+              $break1['rank']=1;
+              $data['fbreakduration']=$this->AdminModel->fetchinfo('break',$break1,'row');
               $data['total_fbreak']=$this->AdminModel->onfirstbreak($datee);
               $data['total_sbreak']=$this->AdminModel->fetchinfo('break_track',$sbreak,'count');
               $data['total_lbreak']=$this->AdminModel->fetchinfo('break_track',$lbreak,'count');
@@ -937,6 +939,152 @@ class Admin extends CI_Controller
       $data['header']=$this->load->view('admin/includes/header','',true);
       $data['sideber']=$this->load->view('admin/includes/sideber','',true);
       $this->load->view('admin/add_employee.php',$data);
+
+    }
+
+    public function firstbreaktimer()
+    {
+      $datee=date('Y-m-d');
+      $break1['rank']=1;
+      $fbreakduration=$this->AdminModel->fetchinfo('break',$break1,'row');
+      $total_fbreak=$this->AdminModel->onfirstbreak($datee);
+      $result="";
+      foreach ($total_fbreak as $key)
+      {
+            $default_time=$fbreakduration['duration'];
+
+            $nowtime = new DateTime('now');
+            $diff = $nowtime->diff(new DateTime($key['starttime']));
+            $time_spend = ((($diff->h*60)+$diff->i)*60)+$diff->s;
+                          
+            $time = explode(':', $default_time);
+            $default=($time[0]*3600) + ($time[1]*60) + $time[2]; 
+            if($default>$time_spend)
+            {
+              $remainingtime = $default - $time_spend;
+              $sec=($remainingtime % 60);
+              if($sec<10){ $sec="0".$sec;}
+              $minutes = ($remainingtime / 60) % 60;
+              if($minutes<10){ $minutes="0".$minutes;}
+              $hours = floor($remainingtime / (60 * 60));
+              if($hours<10){ $hours="0".$hours;}
+
+              $time_left="<span  style='color:green;'>$hours:$minutes:$sec</span>";
+            }
+            else
+            {
+              $remainingtime = $time_spend - $default;
+              $sec=($remainingtime % 60);
+              if($sec<10){ $sec="0".$sec;}
+              $minutes = ($remainingtime / 60) % 60;
+              if($minutes<10){ $minutes="0".$minutes; }
+              $hours = floor($remainingtime / (60 * 60));
+              if($hours<10){ $hours="0".$hours;}
+
+              $time_left="<span  style='color:red;'>$hours:$minutes:$sec</span>";                    
+            }
+
+            $result .="<tr><td>".$key['name']."</td><td>".$time_left."</td></tr>";
+           
+      }
+      echo $result;
+    }
+
+    public function secondbreaktimer()
+    {
+      $datee=date('Y-m-d');
+      $break1['rank']=2;
+      $fbreakduration=$this->AdminModel->fetchinfo('break',$break1,'row');
+      $total_fbreak=$this->AdminModel->onsecondbreak($datee);
+      $result="";
+      foreach ($total_fbreak as $key)
+      {
+            $default_time=$fbreakduration['duration'];
+
+            $nowtime = new DateTime('now');
+            $diff = $nowtime->diff(new DateTime($key['starttime']));
+            $time_spend = ((($diff->h*60)+$diff->i)*60)+$diff->s;
+                          
+            $time = explode(':', $default_time);
+            $default=($time[0]*3600) + ($time[1]*60) + $time[2]; 
+            if($default>$time_spend)
+            {
+              $remainingtime = $default - $time_spend;
+              $sec=($remainingtime % 60);
+              if($sec<10){ $sec="0".$sec;}
+              $minutes = ($remainingtime / 60) % 60;
+              if($minutes<10){ $minutes="0".$minutes;}
+              $hours = floor($remainingtime / (60 * 60));
+              if($hours<10){ $hours="0".$hours;}
+
+              $time_left="<span  style='color:green;'>$hours:$minutes:$sec</span>";
+            }
+            else
+            {
+              $remainingtime = $time_spend - $default;
+              $sec=($remainingtime % 60);
+              if($sec<10){ $sec="0".$sec;}
+              $minutes = ($remainingtime / 60) % 60;
+              if($minutes<10){ $minutes="0".$minutes; }
+              $hours = floor($remainingtime / (60 * 60));
+              if($hours<10){ $hours="0".$hours;}
+
+              $time_left="<span  style='color:red;'>$hours:$minutes:$sec</span>";                    
+            }
+
+            $result .="<tr><td>".$key['name']."</td><td>".$time_left."</td></tr>";
+           
+      }
+      echo $result;
+
+    }
+
+    public function thirdbreaktimer()
+    {
+      $datee=date('Y-m-d');
+      $break1['rank']=3;
+      $fbreakduration=$this->AdminModel->fetchinfo('break',$break1,'row');
+      $total_fbreak=$this->AdminModel->onthirdbreak($datee);
+      $result="";
+      foreach ($total_fbreak as $key)
+      {
+            $default_time=$fbreakduration['duration'];
+
+            $nowtime = new DateTime('now');
+            $diff = $nowtime->diff(new DateTime($key['starttime']));
+            $time_spend = ((($diff->h*60)+$diff->i)*60)+$diff->s;
+                          
+            $time = explode(':', $default_time);
+            $default=($time[0]*3600) + ($time[1]*60) + $time[2]; 
+            if($default>$time_spend)
+            {
+              $remainingtime = $default - $time_spend;
+              $sec=($remainingtime % 60);
+              if($sec<10){ $sec="0".$sec;}
+              $minutes = ($remainingtime / 60) % 60;
+              if($minutes<10){ $minutes="0".$minutes;}
+              $hours = floor($remainingtime / (60 * 60));
+              if($hours<10){ $hours="0".$hours;}
+
+              $time_left="<span  style='color:green;'>$hours:$minutes:$sec</span>";
+            }
+            else
+            {
+              $remainingtime = $time_spend - $default;
+              $sec=($remainingtime % 60);
+              if($sec<10){ $sec="0".$sec;}
+              $minutes = ($remainingtime / 60) % 60;
+              if($minutes<10){ $minutes="0".$minutes; }
+              $hours = floor($remainingtime / (60 * 60));
+              if($hours<10){ $hours="0".$hours;}
+
+              $time_left="<span  style='color:red;'>$hours:$minutes:$sec</span>";                    
+            }
+
+            $result .="<tr><td>".$key['name']."</td><td>".$time_left."</td></tr>";
+           
+      }
+      echo $result;
 
     }
 

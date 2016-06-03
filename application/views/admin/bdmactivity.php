@@ -142,9 +142,9 @@
                               <td><?php echo $key['time'];?></td>
                               <td><?php echo $key['name'];?></td>
                               <td><?php echo $key['project'];?></td>
-                              <td><?php echo $key['url'];?></td>
-                              <td><?php echo $key['posted_url'];?></td>
-                              <td><?php echo $key['proposed_url'];?></td>
+                              <td><a href="<?php echo $key['url'];?>" ><?php echo $key['url'];?></a></td>
+                              <td><a href="<?php echo $key['posted_url'];?>" ><?php echo $key['posted_url'];?></a></td>
+                              <td><a href="<?php echo $key['proposed_url'];?>" ><?php echo $key['proposed_url'];?></a></td>
                               <td><a href='admin_control/Admin/show_cover/<?php echo $key['b_ac_id']?>'>View Details</a></td>
                               <td><?php echo $step1 ;?></td>
                               <td><?php echo $step2 ;?></td>
