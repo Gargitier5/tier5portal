@@ -196,9 +196,15 @@ class Employee extends CI_Controller
 
     public function logout()
     {
-     $this->session->unset_userdata('uid');
-      redirect(base_url());
+      //print_r($_SESSION['openChatBoxes']);exit;
+      $this->session->unset_userdata('uid');
+      $_SESSION['username']='';
+      $_SESSION['openChatBoxes']='';
       $this->session->sess_destroy();
+      session_unset();
+      session_destroy();
+      redirect(base_url());
+      
     }
 
     public function clockout()

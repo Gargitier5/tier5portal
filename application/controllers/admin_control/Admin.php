@@ -219,8 +219,9 @@ class Admin extends CI_Controller
     public function logout()
     {
       $this->session->unset_userdata('adminid');
-      redirect(base_url());
       $this->session->sess_destroy();
+      redirect(base_url());
+      
     }
     
     public function setbonus()
@@ -568,11 +569,22 @@ class Admin extends CI_Controller
     {
          if($_POST)
       {
-         
-
            $start_date=$this->input->post('datecheck');
            $end_date=$this->input->post('endofmonth');
-           $data['current']=$this->input->post('myDate');
+           if($start_date && $end_date)
+           {
+              $start_date=$this->input->post('datecheck');
+              $end_date=$this->input->post('endofmonth');
+              $data['current']=$this->input->post('myDate');
+           }
+           else
+           {
+              
+              $data['current']=$this->input->post('myDate');
+              $datee=$data['current'];
+              $start_date= date('Y-m-01', strtotime($datee));
+              $end_date=date('Y-m-t', strtotime($datee));
+           }
       }
       else
       {
@@ -616,13 +628,22 @@ class Admin extends CI_Controller
 
        if($_POST)
       {   
-           $start_date=date('Y-m-d',strtotime('first day of this month'));
-           $end_date=date('Y-m-d',strtotime('last day of this month'));
-         
-           $data['allpoints']=$this->AdminModel->fnallpoint($start_date,$end_date);
            $start_date=$this->input->post('datecheck');
            $end_date=$this->input->post('endofmonth');
-           $data['current']=$this->input->post('myDate');
+           if($start_date && $end_date)
+           {
+              $start_date=$this->input->post('datecheck');
+              $end_date=$this->input->post('endofmonth');
+              $data['current']=$this->input->post('myDate');
+           }
+           else
+           {
+              
+              $data['current']=$this->input->post('myDate');
+              $datee=$data['current'];
+              $start_date= date('Y-m-01', strtotime($datee));
+              $end_date=date('Y-m-t', strtotime($datee));
+           }
       }
       else
       {
@@ -1109,8 +1130,10 @@ class Admin extends CI_Controller
             }
             else
             {
-                $start_date=date("m/d/Y", strtotime(date('m').'/01/'.date('Y')));
-                $end_date=date("Y-m-d");
+                $data['current']=$this->input->post('myDate');
+                $datee=$data['current'];
+                $start_date= date('Y-m-01', strtotime($datee));
+               $end_date=date('Y-m-t', strtotime($datee));
             }
         }
         else
@@ -1378,7 +1401,6 @@ class Admin extends CI_Controller
             $data['salary']=$this->input->post('salary');
             $data['activation_status ']='2';
 
-            
 
             if($data['name'] && $data['personal_email'] && $data['address'] && $data['phon_no'] && $data['alt_ph_no'] && $data['gender'] && $data['m_status'] && $data['dob'] && $data['joining_date'] && $data['designation'] && $data['salary'])
             {

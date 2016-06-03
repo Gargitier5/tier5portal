@@ -54,12 +54,13 @@
                     $('.date_cell').removeClass('date-selected');
                     $('.bc-booked').removeClass('date-selected');
                 }else{
-                    //console.log('Check in: ' + start);
-                    //console.log('Check out: ' + end)
+
                     var event_id = $(this).data('event');
-                   // alert(event_id);
+                   //alert(event_id);
                     /*var modal = $('#booking_modal');*/
-                    /*modal.modal();*/                           
+                    /*modal.modal();*/  
+                    if(event_id!='')
+                    {                         
                     $.ajax({
                         url: BASE_URL + '/ajax/requests/get_event',
                         type: 'POST',
@@ -81,6 +82,7 @@
                             modal.modal();
                         }
                     });
+                    }
                 }
             }else{
                 $(this).addClass('date-selected start');
