@@ -54,8 +54,8 @@
                     $('.date_cell').removeClass('date-selected');
                     $('.bc-booked').removeClass('date-selected');
                 }else{
-                    console.log('Check in: ' + start);
-                    console.log('Check out: ' + end)
+                    //console.log('Check in: ' + start);
+                    //console.log('Check out: ' + end)
                     var event_id = $(this).data('event');
                    // alert(event_id);
                     /*var modal = $('#booking_modal');*/
@@ -65,6 +65,7 @@
                         type: 'POST',
                         data: {event_id: event_id},
                         success: function(response){
+                          
                            console.log(response);
                            response = $.parseJSON(response);
                             var modal = $('#booking_modal');
