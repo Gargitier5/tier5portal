@@ -37,7 +37,7 @@ class Cronjob extends CI_Controller
         {
 
             $data['Eid'] = $key['id'];
-            $data['date']='2016-06-02';
+            $data['date']=date("Y-m-d");
             $check_clock_in = $this->CronjobModel->fetchinfo('attendance',$data,'result');
             if(!$check_clock_in)
             {
@@ -123,7 +123,7 @@ class Cronjob extends CI_Controller
 
 		       $emp=$key['id'];
            $data['Eid'] = $key['id'];
-           $data['date'] = '2016-06-02';
+           $data['date'] = date("Y-m-d");
            $check_clock_in = $this->CronjobModel->fetchinfo('attendance',$data,'row');
            
            if($check_clock_in)
