@@ -132,7 +132,7 @@
                   <div class="row">
 
 
-            <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="col-md-6 col-sm-6 col-xs-12">
               <div class="x_panel tile fixed_height_320">
                 <div class="x_title">
                   <h2>Total Employee</h2>
@@ -148,7 +148,7 @@
               </div>
             </div>
 
-            <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="col-md-6 col-sm-6 col-xs-12">
               <div class="x_panel tile fixed_height_320 overflow_hidden">
                 <div class="x_title">
                   <h2>Today Present</h2>
@@ -166,8 +166,10 @@
               </div>
             </div>
 
+          </div>
 
-            <div class="col-md-4 col-sm-4 col-xs-12">
+              <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-12">
               <div class="x_panel tile fixed_height_320">
                 <div class="x_title">
                   <h2>First Break</h2>
@@ -183,12 +185,10 @@
               </div>
             </div>
 
-          </div>
-
-              <div class="row">
+          
 
 
-            <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="col-md-6 col-sm-6 col-xs-12">
               <div class="x_panel tile fixed_height_320">
                 <div class="x_title">
                   <h2>Second Break</h2>
@@ -204,8 +204,10 @@
                 </div>
               </div>
             </div>
+        </div>
 
-            <div class="col-md-4 col-sm-4 col-xs-12">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-12">
               <div class="x_panel tile fixed_height_320 overflow_hidden">
                 <div class="x_title">
                   <h2>Last Break</h2>
@@ -222,7 +224,7 @@
             </div>
 
 
-            <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="col-md-6 col-sm-6 col-xs-12">
               <div class="x_panel tile fixed_height_320">
                 <div class="x_title">
                   <h2>Today's Event</h2>
