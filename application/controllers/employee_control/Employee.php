@@ -68,7 +68,9 @@ class Employee extends CI_Controller
                     $data['checkmode']=$this->EmployeeModel->fetchinfo('tbl_employee_productivity',$conmode,'row');
                     $data['header']=$this->load->view('employee/include/header','',true);
                     $this->load->view('employee/employeedashboard',$data);
+                    ////unset($_POST);                    
                 }
+
                 else
                 {
                      redirect(base_url());
@@ -122,6 +124,7 @@ class Employee extends CI_Controller
         }
     }
 
+    
     public function bdmaccess()
     {
       if ($this->session->userdata('uid'))

@@ -255,19 +255,36 @@ class Villa_booking_calendar {
 
     public function check_date($results, $cur_month, $cur_date)
     {
-      if(!empty($results)){
-        foreach ($results as $result) {
-            # code...
+      if(!empty($results))
+      {
+ /*print_r($results);*/
+ $arr_ev=array();
+        foreach ($results as $result)
+        {
+         
             $date_arr = explode('-', $result['date']);
             /*print_r($date_arr);*/
             /*$month = $date_arr[1];
             $date = $date_arr[2];*/
-            if($cur_month == $date_arr[1] && $cur_date == $date_arr[2]){
-                return $result['EventId'];
-                break;
+            
+            if($cur_month == $date_arr[1] && $cur_date == $date_arr[2])
+            {
+                if(!in_array($result['EventId'],$arr_ev))
+                {
+                array_push($arr_ev,$result['EventId']);
+                }
+                
+               // return $str;
+                //return $result['EventId'];
+               
             }
-
         }
+               
+                if(!empty($arr_ev))
+                {
+                return $str=implode("-",$arr_ev);
+                }
+
       } 
       return false;
     }
@@ -309,11 +326,12 @@ class Villa_booking_calendar {
                 $class = (strtotime(date('Y-m-d')) > strtotime($currentDate)) ? 'bc-past' : 'bc-current';
                 $class .= (date('Y-m-d') == $currentDate) ? ' bc-today' : '';
                 $class .= (strtotime(date('Y-m-d')) > strtotime($currentDate)) ? '' : ' date_cell';
-                $html .= '<li data-date="'.$currentDate.'" class="'.$class.' bc-available">';
+                $html .= '<li data-event="'.$this->check_date($event_date, $dateMonth, $dayCount).'" data-date="'.$currentDate.'" class="'.$class.' bc-available">';
                 $html .= "<span>$dayCount</span>";
                 //var_dump($this->check_date($event_date, $dateMonth, $dayCount));
                 if($event = $this->check_date($event_date, $dateMonth, $dayCount)){
-                    $html .= "<span class='event-show'>Event</span>";                   
+                    //$html .= "<span class='event-show'>Event</span>";   
+                    $html .= "<img src= images/birthday.gif / width='30' height='22'>";           
                 }
                 $html .= '</li>';
                 $dayCount++;

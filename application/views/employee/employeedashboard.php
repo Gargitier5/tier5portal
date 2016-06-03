@@ -10,9 +10,9 @@
     <link rel=icon href="http://tier5.us/images/favicon.ico">
     <base href="<?php echo base_url();?>">
 
-     <!--<script src="http://code.jquery.com/jquery-latest.min.js"
-        type="text/javascript"></script>-->
-         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js">
+     <script src="http://code.jquery.com/jquery-latest.min.js"
+        type="text/javascript"></script>
+       
 
          <script type="text/javascript">
       var BASE_URL = "<?php echo (is_https() ? 'https' : 'http').'://'.$_SERVER['HTTP_HOST'].substr($_SERVER['SCRIPT_NAME'], 0, strpos($_SERVER['SCRIPT_NAME'], basename($_SERVER['SCRIPT_FILENAME'])))?>";
@@ -684,14 +684,15 @@ Notification.requestPermission();
 
 <div class="modal booking-popup" id="booking_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
     <div class="modal-dialog" role="document">
-        <div class="modal-content">
+        <div class="modal-content birthday-popup" style="background: #fff url(images/long.gif) no-repeat; background-size:100% 100%; height: 500px;">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="exampleModalLabel">Book Now</h4>
+                <h1 class="modal-title" id="exampleModalLabel" style="text-align:center">Event</h1>
             </div>
-            <form role="form" name="booking_form" action="" id="booking_form" method="POST">
-                <input type="text" name="" value=""/>
-            </form>
+
+            <h2 id="emp_name" style="text-align:center"></h2>
+
+            <h4 id="event_info" style="text-align:center"></h4>
         </div>
     </div>
 </div>

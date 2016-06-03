@@ -680,6 +680,18 @@
           }
     }
 
+    public function get_event($event_id){        
+        $this->db->select('*');
+        $this->db->from('tbl_event_informations');
+        $this->db->join('employee', 'tbl_event_informations.Eid = employee.id', 'left');
+        $this->db->where('EventId', $event_id);
+        $result = $this->db->get();
+        if($result->num_rows() == 1){
+            return $result->row();
+        }
+        return false;
+    }
+
   }
 
   ?>
