@@ -193,7 +193,7 @@
                         <tr>
                         <td><?php echo $key['name']; ?></td>
 
-                        <td></td>
+                        <td><?php ?></td>
 
                         </tr>
                          <?php }
