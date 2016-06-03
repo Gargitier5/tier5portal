@@ -13,7 +13,7 @@ Class CronjobModel extends CI_Model
     {
       $this->db->select('emp_details.*,employee.*');
       $this->db->where('employee.activation_status',0);
-      $this->db->where('emp_details.role >',0);
+      //$this->db->where('emp_details.role >',0);
       $result = $this->db->get('employee');
       return $result->result_array();
     }

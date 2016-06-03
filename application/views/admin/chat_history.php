@@ -30,6 +30,7 @@
     <!-- Custom Theme Style -->
     <link href="css/custom.css" rel="stylesheet">
     <link href="css/admin/chat_screen.css" rel="stylesheet">
+        <script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <style>
     .hilighted-text
     {
@@ -157,7 +158,7 @@
 
 
     <!-- Bootstrap -->
-    <script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+
     <!-- FastClick -->
     <script src="vendors/fastclick/lib/fastclick.js"></script>
     <!-- NProgress -->
