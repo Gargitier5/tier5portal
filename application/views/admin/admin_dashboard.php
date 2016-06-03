@@ -180,7 +180,28 @@
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-                  <h1><?php  echo $total_fbreak; ?> </h1>
+                  <table>
+                    <thead>
+                       <th>Name</th>
+                       <th>Time Left</th>
+                    <thead>
+                    <tbody>
+
+                       <?php foreach ($total_fbreak as $key) {
+                         
+                        ?>
+                        <tr>
+                        <td><?php echo $key['name']; ?></td>
+
+                        <td></td>
+
+                        </tr>
+                         <?php }
+                         
+                        ?>
+
+                    </tbody>
+                </table>
                 </div>
               </div>
             </div>

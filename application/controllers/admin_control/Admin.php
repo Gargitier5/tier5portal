@@ -47,7 +47,7 @@ class Admin extends CI_Controller
               $data['employee']=$this->AdminModel->AllEmployee();
               $data['total_employee']=$this->AdminModel->fetchinfo('employee',$con,'count');
               $data['total_present']=$this->AdminModel->fetchinfo('attendance',$con1,'count');
-              $data['total_fbreak']=$this->AdminModel->fetchinfo('break_track',$fbreak,'count');
+              $data['total_fbreak']=$this->AdminModel->onfirstbreak($con1);
               $data['total_sbreak']=$this->AdminModel->fetchinfo('break_track',$sbreak,'count');
               $data['total_lbreak']=$this->AdminModel->fetchinfo('break_track',$lbreak,'count');
               $data['sideber']=$this->load->view('admin/includes/sideber','',true);
@@ -92,10 +92,11 @@ class Admin extends CI_Controller
              
               $con['activation_status']=0;
               $con1['date']=date('Y-m-d');
+              $datee=date('Y-m-d');
               $data['employee']=$this->AdminModel->AllEmployee();
               $data['total_employee']=$this->AdminModel->fetchinfo('employee',$con,'count');
               $data['total_present']=$this->AdminModel->fetchinfo('attendance',$con1,'count');
-              $data['total_fbreak']=$this->AdminModel->fetchinfo('break_track',$fbreak,'count');
+              $data['total_fbreak']=$this->AdminModel->onfirstbreak($datee);
               $data['total_sbreak']=$this->AdminModel->fetchinfo('break_track',$sbreak,'count');
               $data['total_lbreak']=$this->AdminModel->fetchinfo('break_track',$lbreak,'count');
               $data['sideber']=$this->load->view('admin/includes/sideber','',true);
