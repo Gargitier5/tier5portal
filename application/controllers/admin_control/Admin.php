@@ -43,7 +43,7 @@ class Admin extends CI_Controller
               $lbreak['status']=1;
              
               $con['activation_status']=0;
-              //$con1['date']=date('Y-m-d');
+              $con1['date']=date('Y-m-d');
               $data['employee']=$this->AdminModel->AllEmployee();
               $data['total_employee']=$this->AdminModel->fetchinfo('employee',$con,'count');
               $data['total_present']=$this->AdminModel->fetchinfo('attendance',$con1,'count');
