@@ -687,7 +687,7 @@ Notification.requestPermission();
         <div class="modal-content birthday-popup" style="background: #fff url(images/long.gif) no-repeat; background-size:100% 100%; height: 500px;">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h1 class="modal-title" id="exampleModalLabel">Event</h1>
+                <h1 class="modal-title" id="exampleModalLabel" style="text-align:center">Event</h1>
             </div>
 
             <h2 id="emp_name" style="text-align:center"></h2>

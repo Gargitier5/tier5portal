@@ -57,7 +57,7 @@
                     console.log('Check in: ' + start);
                     console.log('Check out: ' + end)
                     var event_id = $(this).data('event');
-                    //alert(event_id);
+                   // alert(event_id);
                     /*var modal = $('#booking_modal');*/
                     /*modal.modal();*/                           
                     $.ajax({
