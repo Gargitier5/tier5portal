@@ -202,6 +202,16 @@ if($this->session->userdata('succ_msg')!=''){?>
                       </div>
 
                       <div class="form-group">
+                        <label for="photoupload" class="control-label col-md-3 col-sm-3 col-xs-12">Upload Photo <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <div id="filediv">
+                              <input type="file" id="image" name="image" accept="image/*" title="Select Image To Be Uploaded">
+                          </div>
+                      
+                      </div>
+
+                      <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">
                         </label>
                       </div>

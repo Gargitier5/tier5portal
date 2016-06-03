@@ -189,6 +189,7 @@ function startChatSession() {
 }*/
 	$items = '';
 	if (!empty($_SESSION['openChatBoxes'])) {
+		
 		foreach ($_SESSION['openChatBoxes'] as $chatbox => $void) {
 			$items .= chatBoxSession($chatbox);
 		}
