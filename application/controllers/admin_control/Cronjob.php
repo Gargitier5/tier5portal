@@ -118,10 +118,10 @@ class Cronjob extends CI_Controller
 		{  
 
 
-		   $today=date("Y-m-d");
+		       $today=date("Y-m-d");
            $first_day=date('d-m-Y', strtotime('first day of this month'));  
 
-		   $emp=$key['id'];
+		       $emp=$key['id'];
            $data['Eid'] = $key['id'];
            $data['date'] = date("Y-m-d");
            $check_clock_in = $this->CronjobModel->fetchinfo('attendance',$data,'row');

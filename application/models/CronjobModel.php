@@ -11,7 +11,7 @@ Class CronjobModel extends CI_Model
 
     public function showTable()
     {
-      $this->db->select('emp_details.*,employee.*');
+      $this->db->select('*');
       $this->db->where('employee.activation_status',0);
       //$this->db->where('emp_details.role >',0);
       $result = $this->db->get('employee');
