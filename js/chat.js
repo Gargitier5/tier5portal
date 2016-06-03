@@ -342,6 +342,8 @@ function isUrl(s) {
 	return regexp.test(s);
 }
 
+
+
 function notifyBrowser(name) 
 {
   
@@ -440,6 +442,7 @@ function checkChatBoxInputKey(event,chatboxtextarea,chatboxtitle) {
 	  var exp2 =/(^|[^\/])(www\.[\S]+(\b|$))/gim;
 	  message1=text1.replace(exp2, '$1<a target="_blank" href="http://$2">$2</a>');
 				}
+
 				else
 				{
 				message1=message;

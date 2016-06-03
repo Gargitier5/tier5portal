@@ -322,7 +322,7 @@
                           <?php }?>
 
                         </div>  
-                      <div class="user-name"><span onclick="javascript:chatWith('<?php echo $online['username'];?>')" data-id="<?php echo $online['id'];?>" class="user_spc" style="cursor:pointer;"><?php echo $online['username'];?></span></div>
+                      <div class="user-name"><span onclick="javascript:chatWith('<?php echo $online['username'];?>')" data-id="<?php echo $online['id'];?>" class="user_spc" style="cursor:pointer;"><?php echo $online['name'];?></span></div>
 
                   </li>
                   <?php endif;endforeach;?>

@@ -74,6 +74,7 @@
 }
 
 .chatboxmessagecontent {
+	word-wrap: break-word;
 }
 
 .chatboxoptions {
