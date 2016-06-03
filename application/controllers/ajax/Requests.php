@@ -23,7 +23,7 @@ class Requests extends CI_Controller{
 			for($k=0;$k<count($str_explode);$k++)
 			{
 			$tot_info=$this->EmployeeModel->get_event($str_explode[$k]);
-			$name.=$tot_info->name.'&nbsp &nbsp';
+			$name.=$tot_info->name.'  ';
 			$event_name=$tot_info->event_informations;
 			}
 			rtrim($name,' & ');
