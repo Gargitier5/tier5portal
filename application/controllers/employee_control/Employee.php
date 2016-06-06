@@ -458,7 +458,11 @@ class Employee extends CI_Controller
                    $minutes="0".$minutes;
                    }
                   $hours = floor($remainingtime / (60 * 60));
-
+                   
+                                if($hours<10)
+                                {
+                                  $hours="0".$hours;
+                                }
                   $time_left="$hours:$minutes:$sec";
 
                   echo $time_left.",".$key['type']."+"."0"."+".$remainingtime;
@@ -479,7 +483,10 @@ class Employee extends CI_Controller
                    $minutes="0".$minutes;
                    }
                   $hours = floor($remainingtime / (60 * 60));
-
+                                if($hours<10)
+                                {
+                                  $hours="0".$hours;
+                                }
                   $time_left="$hours:$minutes:$sec";
 
                   echo $time_left.",".$key['type']."+"."1"."+".$remainingtime;

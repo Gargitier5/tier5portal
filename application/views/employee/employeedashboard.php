@@ -257,7 +257,7 @@ Notification.requestPermission();
                             <?php foreach($allshop as $shop){?>
                            
                            
-                               <div class="col-md-4 col-md-4">
+                               <div class="col-md-4 col-md-4 col-sm-4">
                                   <div class="lunch-shop">
                                     <div class="lunch-icon"><img src="images/lunch-icon.png" alt="img"></div>
                                     <h4><?php echo $shop['item'];?></h4>
@@ -606,7 +606,7 @@ Notification.requestPermission();
 
           
         </div>
-              <div class="col-lg-2 col-md-2 col">
+              <div class="col-lg-2 col-md-2 col-sm-2">
 
               <div id="demo">  
               <section id="examples">  

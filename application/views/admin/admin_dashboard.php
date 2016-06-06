@@ -26,10 +26,10 @@
 
     <!-- Custom Theme Style -->
     <link href="css/custom.css" rel="stylesheet">
-
+     <script type="text/javascript" src="js/adminhome.js"></script>    
     <!-- Bootstrap -->
     <script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-
+    
 
   </head>
 
@@ -181,25 +181,10 @@
                 </div>
                 <div class="x_content">
                   <table>
-                    <thead>
-                       <th>Name</th>
-                       <th>Time Left</th>
-                    <thead>
-                    <tbody>
+                    
+                    <tbody  id="firstbreak">
 
-                       <?php foreach ($total_fbreak as $key) {
-                         
-                        ?>
-                        <tr>
-                        <td><?php echo $key['name']; ?></td>
-
-                        <td></td>
-
-                        </tr>
-                         <?php }
-                         
-                        ?>
-
+                       
                     </tbody>
                 </table>
                 </div>
@@ -220,7 +205,13 @@
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-                <h1><?php  echo $total_sbreak; ?> </h1>
+               <table>
+                    
+                    <tbody  id="secondbreak">
+
+                       
+                    </tbody>
+                </table>
                   
                 </div>
               </div>
@@ -239,7 +230,13 @@
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-                  <h1><?php  echo $total_lbreak; ?> </h1>
+                  <table>
+                    
+                    <tbody  id="thirdbreak">
+
+                       
+                    </tbody>
+                </table>
                 </div>
               </div>
             </div>
