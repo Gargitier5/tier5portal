@@ -12,7 +12,7 @@
 
      <script src="http://code.jquery.com/jquery-latest.min.js"
         type="text/javascript"></script>
-       
+        <!-- <script type="text/javascript" src="js/drop.js"></script>-->
 
          <script type="text/javascript">
       var BASE_URL = "<?php echo (is_https() ? 'https' : 'http').'://'.$_SERVER['HTTP_HOST'].substr($_SERVER['SCRIPT_NAME'], 0, strpos($_SERVER['SCRIPT_NAME'], basename($_SERVER['SCRIPT_FILENAME'])))?>";
@@ -30,9 +30,11 @@ Notification.requestPermission();
  
 });
 
-
     </script>
- 
+
+    <link rel="stylesheet" type="text/css" href="css/dropzone.css" />
+    <script type="text/javascript" src="js/dropzone.js"></script>
+
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/booking-calendar.css" rel="stylesheet">
@@ -98,7 +100,10 @@ Notification.requestPermission();
 
               </div>
              
-                    
+                <div class="image_upload_div">
+  <form action="upload.php" class="dropzone">
+    </form>
+</div>  
 
               <!-- <div class="row dashboard-details">
                 <div class="col-md-9 col-xs-9">
@@ -711,13 +716,17 @@ Notification.requestPermission();
       });
     })(jQuery);
   </script>
+
   <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
   <link type="text/css" rel="stylesheet" media="all" href="css/chat/chat.css" />
     <link type="text/css" rel="stylesheet" media="all" href="css/chat/screen.css" />
 
     <script type="text/javascript" src="js/jquery.js"></script>
-    <script type="text/javascript" src="js/countdowntimer.js"></script>
 
+    <script type="text/javascript" src="js/countdowntimer.js"></script>
+         
     <script type="text/javascript" src="js/chat.js"></script>
+
+
   </body>
 </html>
