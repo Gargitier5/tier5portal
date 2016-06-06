@@ -99,11 +99,11 @@ Notification.requestPermission();
                 </div>
 
               </div>
-             
-                <div class="image_upload_div">
-  <form action="upload.php" class="dropzone">
-    </form>
-</div>  
+         <!--     
+            <div class="image_upload_div">
+           <form action="upload.php" class="dropzone">
+             </form>
+         </div>   -->
 
               <!-- <div class="row dashboard-details">
                 <div class="col-md-9 col-xs-9">

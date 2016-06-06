@@ -289,10 +289,10 @@ function chatHeartbeat(){
 
 				chatboxtitle = item.f;
 
-				if(item.m)
+				/*if(item.m)
 				{
 				notifyBrowser(item.f);	
-				}
+				}*/
 				//notifyBrowser('msggg');
 				var text=item.m;
 				if(isUrl(text)){
@@ -328,8 +328,13 @@ function chatHeartbeat(){
 				$("#chatbox_"+chatboxtitle+" .chatboxcontent").scrollTop($("#chatbox_"+chatboxtitle+" .chatboxcontent")[0].scrollHeight);
 				itemsfound += 1;
 			}
-		});
 
+			/*if(itemsfound > 0)
+			{
+				notifyBrowser(item.f);	
+			}*/
+		});
+		
 		chatHeartbeatCount++;
 
 		if (itemsfound > 0) {
