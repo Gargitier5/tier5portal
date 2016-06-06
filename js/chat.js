@@ -192,6 +192,7 @@ function createChatBox(chatboxtitle,minimizeChatBox) {
 		chatboxFocus[chatboxtitle] = true;
 		newMessages[chatboxtitle] = false;
 		$('#chatbox_'+chatboxtitle+' .chatboxhead').removeClass('chatboxblink');
+		
 		$("#chatbox_"+chatboxtitle+" .chatboxtextarea").addClass('chatboxtextareaselected');
 	});
 
@@ -289,10 +290,10 @@ function chatHeartbeat(){
 
 				chatboxtitle = item.f;
 
-				/*if(item.m)
+				if(item.m)
 				{
 				notifyBrowser(item.f);	
-				}*/
+				}
 				//notifyBrowser('msggg');
 				var text=item.m;
 				if(isUrl(text)){
