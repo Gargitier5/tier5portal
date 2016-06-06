@@ -131,7 +131,7 @@ class Employee extends CI_Controller
       {
           $con['status']=0;
           $con1=$this->session->userdata('uid');
-          $data['url']=$this->EmployeeModel->fetchinfo('bdm_url',$con,'result');
+          //$data['url']=$this->EmployeeModel->fetchinfo('bdm_url',$con,'result');
           $data['bdmactive']=$this->EmployeeModel->bdm_activity($con1);
           $data['header']=$this->load->view('employee/include/header','',true);
           $this->load->view('employee/bdm.php',$data);
@@ -148,13 +148,13 @@ class Employee extends CI_Controller
       //print_r($data);
       $data['date']=date('Y-m-d');
       $data['time']=date('H:i:s');
-      $data['project']=$this->input->post('pro_name');
-      $data['main_url']=$this->input->post('url_id');
+      //$data['project']=$this->input->post('pro_name');
+     // $data['main_url']=$this->input->post('url_id');
       $data['posted_url']=$this->input->post('posted');
       $data['proposed_url']=$this->input->post('proposed');
       $data['cover_letter']=$this->input->post('coverletter');
 
-       if($data['project'] && $data['main_url'] && $data['posted_url'] && $data['proposed_url'] && $data['cover_letter'])
+       if($data['posted_url'] && $data['proposed_url'] && $data['cover_letter'])
        {
 
           $activity=$this->EmployeeModel->ins_activity($data);
