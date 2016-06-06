@@ -7,6 +7,11 @@ class Employee extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
+		if(!$this->session->userdata('uid'))
+		{
+		   redirect(base_url());
+		   exit;
+		}
 		$this->load->helper('url');
 		$this->load->database();
 		$this->load->model('EmployeeModel');
