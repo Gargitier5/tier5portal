@@ -75,7 +75,14 @@ class App extends CI_Controller
 		              else
 		              {
 		              	$remainingtime = $time_spend - $default;
-		              	 $response['data']['count']='out time';
+		              	/*$response['data']['count']='out time';*/
+						$data['id']=$user_id;
+						$get_details=$this->AppModel->fetchinfo('employee',$data,'row');
+						$response['data']['name']=$get_details['name'];
+						$response['status']="error";
+						$response['messege']="You Are Late";
+						echo json_encode($response);
+						exit;
 		              }
 		           	 
 		           	$response['status']="success";
