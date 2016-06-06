@@ -48,6 +48,13 @@
        $res=$this->db->get('bdm_activity');
        return $res->result_array();
     }
+
+    public function allportal()
+    {
+      $this->db->select('*');
+      $res=$this->db->get('bdm_url');
+      return $res->result_array();
+    }
     
     public function getactivitybyname($con)
     {
