@@ -93,10 +93,7 @@
                     <strong>Select Name:</strong><select id="name" name="name" onchange="getname()"><option value="">--Select--</option><?php foreach ($bdm as $value) {?><option value="<?php echo $value['Eid'];?>"><?php echo $value['name'];?></option>
                      
                     <?php }?></select>
-                    <form  method="post" action="employee_control/employee/search"  id="searchform"> 
-       <input  type="text" name="search"> 
-      <input  type="submit" name="submit" value="Search"> 
-     </form> 
+              
                     <div class="dateclass"><strong>Date:</strong><input type="text" onchange="getdate()" id="sdate" name="sdate" class="datepicker"></div>
                      <br>
                     <br>

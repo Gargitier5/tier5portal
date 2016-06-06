@@ -9,8 +9,7 @@ class Employee extends CI_Controller
 		parent::__construct();
     if(!$this->session->userdata('uid'))
     {
-      redirect(base_url());
-      exit;
+      
     }
 
 		$this->load->helper('url');
@@ -19,8 +18,6 @@ class Employee extends CI_Controller
 		$this->load->helper('custom');
 		$this->load->library('session');
     $this->load->library('villa_booking_calendar');
-
-
 	}
 
 
