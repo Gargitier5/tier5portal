@@ -32,6 +32,10 @@ var newMessagesWin = new Array();
 var chatBoxes = new Array();
 var sessionUser=$('#session_user').val();
 
+
+
+
+
 $(document).ready(function(){
 	
 	originalTitle = document.title;
@@ -45,12 +49,10 @@ $(document).ready(function(){
 	});
 
 
-
-/*$(document).delegate("#chatbox_gargi","click",function(){
-alert( "Handler for .click() called." );
-
-})*/
 });
+
+
+
 
 function Fntoggler(chatuser)
 {
@@ -139,7 +141,7 @@ function createChatBox(chatboxtitle,minimizeChatBox) {
 
 	$(" <div />" ).attr("id","chatbox_"+chatboxtitle)
 	.addClass("chatbox")
-	.html('<div class="chatboxhead" data-title="'+chatboxtitle+'" onclick=Fntoggler("'+chatboxtitle.toString()+'");><div class="chatboxtitle">'+chatboxtitle+'</div><div class="chatboxoptions"><a href="javascript:void(0)" onclick=Fntoggler("'+chatboxtitle.toString()+'">-</a> <a href="javascript:void(0)" onclick="javascript:closeChatBox(\''+chatboxtitle+'\')">X</a></div><br clear="all"/></div><div class="chatboxcontent"></div><div class="chatboxinput"><textarea class="chatboxtextarea" onkeydown="javascript:return checkChatBoxInputKey(event,this,\''+chatboxtitle+'\');"></textarea></div>')
+	.html('<div class="chatboxhead" data-title="'+chatboxtitle+'" onclick=Fntoggler("'+chatboxtitle.toString()+'");><div class="chatboxtitle">'+chatboxtitle+'</div><div class="chatboxoptions"><a href="javascript:void(0)" onclick=Fntoggler("'+chatboxtitle.toString()+'">-</a> <a href="javascript:void(0)" onclick="javascript:closeChatBox(\''+chatboxtitle+'\')">X</a></div><br clear="all"/></div><div class="chatboxcontent" ></div><div class="chatboxinput"><textarea class="chatboxtextarea" onkeydown="javascript:return checkChatBoxInputKey(event,this,\''+chatboxtitle+'\');"></textarea></div>')
 	.appendTo($( "body" ));
 			   
 	$("#chatbox_"+chatboxtitle).css('bottom', '0px');
@@ -230,7 +232,7 @@ function chatHeartbeat(){
 					{
 						$('#notification').val(1);
 					}*/
-					notifyBrowser(x);
+					//notifyBrowser(x);
 					document.title = x+' says...';
 					titleChanged = 1;
 					//var notification = new Notification('new mssg');
@@ -286,6 +288,11 @@ function chatHeartbeat(){
 
 				chatboxtitle = item.f;
 
+				if(item.m)
+				{
+				notifyBrowser(item.f);	
+				}
+				//notifyBrowser('msggg');
 				var text=item.m;
 				if(isUrl(text)){
 
@@ -311,6 +318,7 @@ function chatHeartbeat(){
 				if (item.s == 2) {
 					$("#chatbox_"+chatboxtitle+" .chatboxcontent").append('<div class="chatboxmessage"><span class="chatboxinfo">'+item.m+'</span></div>');
 				} else {
+					
 					newMessages[chatboxtitle] = true;
 					newMessagesWin[chatboxtitle] = true;
 					$("#chatbox_"+chatboxtitle+" .chatboxcontent").append('<div class="chatboxmessage"><span class="chatboxmessagefrom">'+item.f+':&nbsp;&nbsp;</span><span class="chatboxmessagecontent">'+item.m+'</span></div>');
@@ -324,6 +332,7 @@ function chatHeartbeat(){
 		chatHeartbeatCount++;
 
 		if (itemsfound > 0) {
+
 			chatHeartbeatTime = minChatHeartbeat;
 			chatHeartbeatCount = 1;
 		} else if (chatHeartbeatCount >= 10) {
@@ -362,10 +371,10 @@ else {
   }
 var notification = new Notification('new message from '+name,options);
 
-notification.onclose = function () {
+/*notification.onclose = function () {
 
 console.log('Notification closed');
-};
+};*/
 
 }
 }
@@ -581,3 +590,7 @@ jQuery.cookie = function(name, value, options) {
         return cookieValue;
     }
 };
+
+
+
+
