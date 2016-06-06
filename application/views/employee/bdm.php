@@ -17,6 +17,9 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>   
+  <script src="js/jquery.validate.js"></script>
     
     <link rel="shortcut icon" type="image/x-icon" href="images/t5.png">
 
@@ -65,13 +68,19 @@
                     <h4><i class="icon fa fa-ban"></i> Sorry!</h4>
                   <?php echo  $this->session->userdata('err_msg');$this->session->set_userdata('err_msg','');?>
                  </div> 
-<?php }?>      <form role="form" id="workprogress" method="post" action="employee_control/employee/add_activity">
+
+<?php }?> 
+     <form role="form" id="workprogress" method="post" action="employee_control/employee/add_activity">
                 
                    
               </div>
               </div>
+      
+
               <div class="form-group">
-              <div class="row">    
+              <div class="row"> 
+
+
                 <div class="col-md-6">
                   <label>Job Posting</label>
                   <input type="text" id="posted" name="posted" class="form-control required"> 
@@ -85,8 +94,10 @@
               <div class="form-group">
                 <div class="row"> 
                 <div class="col-md-12">  
+
                 <label>Cover Letter</label>
                 <textarea class="form-control" id="coverletter" name="coverletter" class="form-control required"></textarea>
+
                 </div>
                 </div>
               </div>
@@ -413,18 +424,27 @@
       </div>  
     </section>  
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<<<<<<< HEAD
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
+=======
+    
+>>>>>>> 1fe72db1c4c4978fa550caf5b8388f93762a3ab7
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
 
     <!-- Google CDN jQuery with fallback to local -->
+<<<<<<< HEAD
  
+=======
+  
+>>>>>>> 1fe72db1c4c4978fa550caf5b8388f93762a3ab7
     <script>
 $(document).ready(function(){
+   $('#bdm_activity').validate();
     $('[data-toggle="tooltip"]').tooltip(); 
 });
 </script>
-  <script>window.jQuery || document.write('<script src="../js/minified/jquery-1.11.0.min.js"><\/script>')</script>
+ 
   
   <!-- custom scrollbar plugin -->
   <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>

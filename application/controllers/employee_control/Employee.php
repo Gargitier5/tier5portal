@@ -7,10 +7,6 @@ class Employee extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-    if(!$this->session->userdata('uid'))
-    {
-      
-    }
 
 		$this->load->helper('url');
 		$this->load->database();
@@ -136,7 +132,11 @@ class Employee extends CI_Controller
           $con['status']=0;
           $con1=$this->session->userdata('uid');
           //$data['url']=$this->EmployeeModel->fetchinfo('bdm_url',$con,'result');
+
+          //$data['bdmactive']=$this->EmployeeModel->bdm_activity($con1);
+
           $data['bdmactive']=$this->EmployeeModel->bdm_activity($con1);
+
           $data['header']=$this->load->view('employee/include/header','',true);
           $this->load->view('employee/bdm.php',$data);
       }
