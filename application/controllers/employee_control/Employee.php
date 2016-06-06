@@ -7,12 +7,19 @@ class Employee extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
+    if(!$this->session->userdata('uid'))
+    {
+      redirect(base_url());
+      exit;
+    }
+
 		$this->load->helper('url');
 		$this->load->database();
 		$this->load->model('EmployeeModel');
 		$this->load->helper('custom');
 		$this->load->library('session');
     $this->load->library('villa_booking_calendar');
+
 
 	}
 
@@ -340,6 +347,14 @@ class Employee extends CI_Controller
        {
         return false;
        }
+    }
+
+    public function search_link()
+    {
+      $search=$this->input->post('search');
+      $s=$this->AdminModel->search_link($search);
+      print_r($s);
+
     }
 
     public function checkstastuswork()

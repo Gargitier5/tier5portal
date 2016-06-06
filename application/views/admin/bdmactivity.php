@@ -93,6 +93,10 @@
                     <strong>Select Name:</strong><select id="name" name="name" onchange="getname()"><option value="">--Select--</option><?php foreach ($bdm as $value) {?><option value="<?php echo $value['Eid'];?>"><?php echo $value['name'];?></option>
                      
                     <?php }?></select>
+                    <form  method="post" action="employee_control/employee/search"  id="searchform"> 
+       <input  type="text" name="search"> 
+      <input  type="submit" name="submit" value="Search"> 
+     </form> 
                     <div class="dateclass"><strong>Date:</strong><input type="text" onchange="getdate()" id="sdate" name="sdate" class="datepicker"></div>
                      <br>
                     <br>
@@ -103,15 +107,13 @@
                               <th class="column-title">Date</th>
                               <th class="column-title">Time</th>
                               <th class="column-title">BDM Name</th>
-                              <th class="column-title">Project Name</th>
-                              <th class="column-title">Portal</th>
                               <th class="column-title">Posted Link</th>
                               <th class="column-title">Proposal Link</th>
                               <th class="column-title">Cover Letter</th>
                               <th class="column-title" colspan="3">Outstanding Proposal</th>
                            </tr>
                            <tr>
-                              <th class="column-title" colspan="8"></th>
+                              <th class="column-title" colspan="6"></th>
                               <th class="column-title">Contacted</th>
                               <th class="column-title">Offer</th>
                               <th class="column-title">End Status</th>
@@ -141,8 +143,6 @@
                               <td><?php echo $key['date'];?></td>
                               <td><?php echo $key['time'];?></td>
                               <td><?php echo $key['name'];?></td>
-                              <td><?php echo $key['project'];?></td>
-                              <td><a href="<?php echo $key['url'];?>" ><?php echo $key['url'];?></a></td>
                               <td><a href="<?php echo $key['posted_url'];?>" ><?php echo $key['posted_url'];?></a></td>
                               <td><a href="<?php echo $key['proposed_url'];?>" ><?php echo $key['proposed_url'];?></a></td>
                               <td><a href='admin_control/Admin/show_cover/<?php echo $key['b_ac_id']?>'>View Details</a></td>

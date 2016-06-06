@@ -23,7 +23,15 @@
     <link rel="stylesheet" href="css/jquery.mCustomScrollbar.css">
 
     <link rel="stylesheet" href="css/font-awesome.css">
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+       
+     <script src="js/jquery.validate.js"></script>
+     <script type="text/javascript">
+ 
+  $(document).ready(function() {
+    $('#workprogress').validate();
+  });
+     </script>
   </head>
   <body>
     <!-- top navigation -->
@@ -57,23 +65,8 @@
                     <h4><i class="icon fa fa-ban"></i> Sorry!</h4>
                   <?php echo  $this->session->userdata('err_msg');$this->session->set_userdata('err_msg','');?>
                  </div> 
-<?php }?>      <form method="post" action="employee_control/employee/add_activity">
-                <!-- <div class="col-md-6">
-                  <form method="post" action="employee_control/employee/add_activity">
-                  <label>Project Name</label>
-                  <input type="text" id="pro_name" name="pro_name" class="form-control">
-                </div>    
-                <div class="col-md-6">
-                  <label>Portal</label>
-                  
-                  <select class="form-control" id="url_id" name="url_id">
-                    <option value="">-Select Url-</option>
-                    <?php// foreach ($url as $url) {?>
-                    <option value="<?php// echo $url['burl_id'];?>"><?php //echo $url['url'];?></option>
-                    
-                    <?php }?>
-                  </select> 
-                </div> -->
+<?php }?>      <form role="form" id="workprogress" method="post" action="employee_control/employee/add_activity">
+                
                    
               </div>
               </div>
@@ -81,19 +74,19 @@
               <div class="row">    
                 <div class="col-md-6">
                   <label>Job Posting</label>
-                  <input type="text" id="posted" name="posted" class="form-control"> 
+                  <input type="text" id="posted" name="posted" class="form-control required"> 
                 </div>
                 <div class="col-md-6">
                   <label>Our Proposal</label>
-                  <input type="text" id="proposed" name="proposed" class="form-control">
+                  <input type="text" id="proposed" name="proposed" class="form-control required">
                 </div>  
               </div>
               </div> 
               <div class="form-group">
                 <div class="row"> 
                 <div class="col-md-12">  
-                <label>Coverletter</label>
-                <textarea class="form-control" id="coverletter" name="coverletter"></textarea>
+                <label>Cover Letter</label>
+                <textarea class="form-control" id="coverletter" name="coverletter" class="form-control required"></textarea>
                 </div>
                 </div>
               </div>
@@ -420,12 +413,12 @@
       </div>  
     </section>  
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
 
     <!-- Google CDN jQuery with fallback to local -->
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+ 
     <script>
 $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip(); 
