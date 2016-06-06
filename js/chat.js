@@ -217,6 +217,7 @@ function chatHeartbeat(){
 		var titleChanged = 0;
 		$('<audio id="chatAudio"><source src="notification/notify.mp3" type="audio/mpeg"></audio>').appendTo('body');
 		
+		//alert(newMessagesWin);
 		for (x in newMessagesWin) {
 
 			if (newMessagesWin[x] == true) {

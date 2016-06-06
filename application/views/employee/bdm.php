@@ -60,28 +60,13 @@
                     <h4><i class="icon fa fa-ban"></i> Sorry!</h4>
                   <?php echo  $this->session->userdata('err_msg');$this->session->set_userdata('err_msg','');?>
                  </div> 
+
 <?php }?>
-                <div class="col-md-6">
-                  <form method="post" action="employee_control/employee/add_activity" id="bdm_activity">
-                  <!-- <label>Project Name</label>
-                  <input type="text" id="pro_name" name="pro_name" class="form-control"> -->
-                </div>    
- <!--                <div class="col-md-6">
-   <label>Portal</label>
-   
-   <select class="form-control" id="url_id" name="url_id">
-     <option value="">-Select Url-</option>
-     <?php foreach ($url as $url) {?>
-     <option value="<?php echo $url['burl_id'];?>"><?php echo $url['url'];?></option>
-     
-     <?php }?>
-   </select> 
- </div> -->
-                   
-              </div>
-              </div>
+                
               <div class="form-group">
-              <div class="row">    
+              <div class="row"> 
+              <form method="post" action="employee_control/employee/add_activity" id="bdm_activity">
+
                 <div class="col-md-6">
                   <label>Job Posting</label>
                   <input type="text" id="posted" name="posted" class="form-control required"> 
@@ -178,7 +163,7 @@
                     <?php foreach ($bdmactive as $key) 
                     {?>
                     <tr>
-                      <th><?php echo $key['project'];?></th>
+                      <th><?php echo $key['posted_url'];?></th>
                       <td>
                         <?php 
                         if ($key['step1']==1)
@@ -342,11 +327,10 @@
                        
                        ?>
                         <li>
-                          <p><strong>URL:</strong><?php echo $key['url'];?>
-                             <br>
+                          <p>
                             <strong>Date:</strong> <?php echo $key['date'];?>
-                            <br>
-                            <strong>Project Name:</strong> <?php echo $key['project'];?>
+                           
+                       
                             <br>
                             <strong>Posted Url:</strong> <?php echo $key['posted_url'];?>
                             <br>

@@ -534,8 +534,8 @@
     public function bdm_activity($con1)
     {
 
-        $this->db->select('bdm_activity.*,bdm_url.url');
-       $this->db->join('bdm_url','bdm_activity.main_url=bdm_url.burl_id');
+        $this->db->select('*');
+      // $this->db->join('bdm_url','bdm_activity.main_url=bdm_url.burl_id');
        $this->db->where('Eid',$con1);
        $this->db->order_by('b_ac_id','DESC');
        $res=$this->db->get('bdm_activity');

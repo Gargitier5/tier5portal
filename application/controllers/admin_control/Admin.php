@@ -227,6 +227,15 @@ class Admin extends CI_Controller
       redirect(base_url());
       
     }
+
+    public function add_portal()
+    {
+      $data['portal']=$this->AdminModel->allportal();
+      $data['sideber']=$this->load->view('admin/includes/sideber','',true);
+      $data['header']=$this->load->view('admin/includes/header','',true);
+      $this->load->view('admin/add_portal.php',$data);
+
+    }
     
     public function setbonus()
     {
