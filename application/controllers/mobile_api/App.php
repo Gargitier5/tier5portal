@@ -46,25 +46,51 @@ class App extends CI_Controller
 
 	public function breakcheck()
 	{
-		$user=$this->input->post('username');
-		if($user)
+		$user_id=$this->input->post('userid');
+		if($user_id)
 		{
-			$userid=$user;
+			$userid=$user_id;
 			$date=date('Y-m-d');
 			$status='1';
 			$check=$this->AppModel->breakcheck($userid,$date,$status);
 			if($check)
-           {
-       
-           	$response['starttime']=$data;
+            {
+		             $data['rank']=$check['type'];
+		             $breakduration=$this->AppModel->fetchinfo('break',$data,'row');
+		             $default=$breakduration['duration'];
+		        
+		             $nowtime = new DateTime('now');
+		             $diff = $nowtime->diff(new DateTime($check['starttime']));
 
-           	echo json_encode($response);
+		             $time_spend = ((($diff->h*60)+$diff->i)*60)+$diff->s;
+
+		           	 $time = explode(':', $default);
+		             $default=($time[0]*3600) + ($time[1]*60) + $time[2];
+
+		             if($default >$time_spend)
+		             {
+		                $remainingtime = $default - $time_spend;
+		                $response['data']['count']='in time';
+		              }
+		              else
+		              {
+		              	$remainingtime = $time_spend - $default;
+		              	 $response['data']['count']='out time';
+		              }
+		           	 
+		           	$response['status']="success";
+		           	$response['messege']="on break";
+		           	$response['data']['remainingtime']=$remainingtime;
+		           	$response['data']['name']=$check['name'];
+		           	$response['data']['break']=$check['type'];
+
+                 	echo json_encode($response);
 
            }
            else
            {
-           	$response['status']="error";
-           	$response['messege']="Invalied UserId And Password";
+           	  $response['status']="error";
+           	  $response['messege']="not in break";
            	echo json_encode($response);
            }
 
