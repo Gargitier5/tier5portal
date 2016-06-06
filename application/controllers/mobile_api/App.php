@@ -89,9 +89,12 @@ class App extends CI_Controller
            }
            else
            {
+              $data['id']=$user_id;
+           	  $get_details=$this->AppModel->fetchinfo('employee',$data,'row');
+           	  $response['data']['name']=$get_details['name'];
            	  $response['status']="error";
-           	  $response['messege']="not in break";
-           	echo json_encode($response);
+           	  $response['messege']="Not in break";
+           	  echo json_encode($response);
            }
 
 		}

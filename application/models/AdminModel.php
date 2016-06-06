@@ -40,9 +40,9 @@
     public function getactivity($con)
     {
 
-       $this->db->select('bdm_activity.*,bdm_url.url,employee.name');
+       $this->db->select('bdm_activity.*,employee.name');
        $this->db->join('employee','bdm_activity.Eid=employee.id');
-       $this->db->join('bdm_url','bdm_activity.main_url=bdm_url.burl_id');
+       //$this->db->join('bdm_url','bdm_activity.main_url=bdm_url.burl_id');
        $this->db->where('bdm_activity.date',$con);
        $this->db->order_by('b_ac_id','DESC');
        $res=$this->db->get('bdm_activity');
