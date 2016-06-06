@@ -225,7 +225,16 @@ function sendChat() {
 	$from = $_POST['sentfrom'];
 	$to = $_POST['to'];
 	$message = $_POST['message'];
-	if(strlen($from) < strlen($to))
+
+	$sql_from = "select `Eid` from emp_details where emp_details.username = '".mysql_real_escape_string($from)."'";
+	$query_from = mysql_query($sql_from);
+	$fid_fetch=mysql_fetch_row($query_from);
+
+	$sql_to = "select `Eid` from emp_details where emp_details.username = '".mysql_real_escape_string($to)."'";
+	$query_to = mysql_query($sql_to);
+	$tid_fetch=mysql_fetch_row($query_to);
+
+	if($fid_fetch[0] < $tid_fetch[0])
 	{
 		$chat_btwn=$from."-".$to;
 	}
