@@ -71,6 +71,14 @@ class App extends CI_Controller
 		             {
 		                $remainingtime = $default - $time_spend;
 		                $response['data']['count']='in time';
+		                $response['status']="success";
+		              	$response['messege']="on break";
+		             	$response['data']['remainingtime']=$remainingtime;
+		             	$response['data']['name']=$check['name'];
+		            	$response['data']['break']=$check['type'];
+
+                 	    echo json_encode($response);
+                 	    exit;
 		              }
 		              else
 		              {
@@ -87,13 +95,7 @@ class App extends CI_Controller
 
 		              }
 		           	 
-		           	$response['status']="success";
-		           	$response['messege']="on break";
-		           	$response['data']['remainingtime']=$remainingtime;
-		           	$response['data']['name']=$check['name'];
-		           	$response['data']['break']=$check['type'];
-
-                 	echo json_encode($response);
+		           	
 
            }
            else
@@ -104,6 +106,7 @@ class App extends CI_Controller
            	  $response['status']="error";
            	  $response['messege']="Not in break";
            	  echo json_encode($response);
+           	  exit;
            }
 
 		}
