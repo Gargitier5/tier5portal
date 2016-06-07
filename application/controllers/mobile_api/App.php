@@ -89,7 +89,7 @@ class App extends CI_Controller
 						$get_details=$this->AppModel->fetchinfo('employee',$data,'row');
 						$response['data']['name']=$get_details['name'];
 						$response['status']="error";
-						$response['messege']="You Are Late";
+						$response['messege']="Your time is up";
 						echo json_encode($response);
 						exit;
 
