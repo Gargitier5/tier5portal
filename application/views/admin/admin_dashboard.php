@@ -180,13 +180,16 @@
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
+                  <div class="scroll-bar">
                   <table>
                     
                     <tbody  id="firstbreak">
-
+                      
                        
                     </tbody>
+
                 </table>
+                </div> 
                 </div>
               </div>
             </div>
@@ -205,6 +208,7 @@
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
+                   <div class="scroll-bar">
                <table>
                     
                     <tbody  id="secondbreak">
@@ -212,7 +216,7 @@
                        
                     </tbody>
                 </table>
-                  
+                  </div>
                 </div>
               </div>
             </div>
@@ -230,6 +234,7 @@
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
+                   <div class="scroll-bar">
                   <table>
                     
                     <tbody  id="thirdbreak">
@@ -237,6 +242,7 @@
                        
                     </tbody>
                 </table>
+                 </div>
                 </div>
               </div>
             </div>

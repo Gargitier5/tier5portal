@@ -4710,6 +4710,10 @@ width: 27px; height: 27px; text-align: center;
 .user-pic img{max-width: 100%;}
 .employe-chat{height: 500px; overflow-y:auto; }
 
+.scroll-bar{height: 230px; overflow-y:auto;  }
+
+
+
 
 @media (max-width: 649px) {
     .chat ul li{width: 50%; float: left;}

@@ -96,64 +96,59 @@
                         
                         <tr><td><strong>Cover Letter</strong></td><td><?php echo $get['cover_letter'];?></td><td></td></tr>
                         <tr><td><strong>Change Outstanding Proposal Status</strong><td></td><td></td></tr>
-                        <tr><td>Contacted</td><td>Offered</td><td>Ended</td></tr>
+                        <tr><td><strong>Contacted</strong></td><td><strong>Offered</strong></td><td><strong>Ended</strong></td></tr>
                         <tr>
                           <td>
-                                 <input type="radio" name="contact" id="contacted" value="1" <?php if($get['step1']==1){ echo "checked"; }?>> Contacted<br>
-                                 <input type="radio" name="contact" id="rejected" value="2" <?php if($get['step1']==2){ echo "checked"; }?>> Rejected<br>
-                                 <input type="radio" name="contact" id="offer" value="3" <?php if($get['step1']==3){ echo "checked"; }?>> Offer<br>
-                                 <input type="radio" name="contact" id="pending" value="4" <?php if($get['step1']==0){ echo "checked"; }?>> Pending  
+                                 <input type="radio" class="con" name="contact" id="contacted" value="1" <?php if($get['step1']==1){ echo "checked"; }?>> Contacted<br>
+                                 <input type="radio" class="con" name="contact" id="rejected" value="2" <?php if($get['step1']==2){ echo "checked"; }?>> Rejected<br>
+                                 <input type="radio" class="con" name="contact" id="offer" value="3" <?php if($get['step1']==3){ echo "checked"; }?>> Offer<br>
+                                 <input type="radio" class="con" name="contact" id="pending" value="0" <?php if($get['step1']==0){ echo "checked"; }?>> Pending  
                           </td>
-                          <td id="step2">
+                          <td>
                                
-                             
+                              <?php 
+                              if($get['step1']==1)
+                                {?>
+                              
+                                 <input type='radio'  id='status2_1_1' name='status2' value='1_1'<?php if($get['step2']=='1_1'){ echo "checked"; }?> >Offer<br>
+                                 <input type='radio'  id='status2_1_2' name='status2' value='1_2'<?php if($get['step2']=='1_2'){ echo "checked"; }?> >Rejected
+
+                             <?php }?>
+
+                              <?php 
+                              if($get['step1']==3)
+                                {?>
+                              
+                                 <input type='radio'  id='status2_1_1' name='status2' value='3_1' <?php if($get['step2']=='3_1'){ echo "checked"; }?>>Acceptecd By Tier5<br>
+                                 <input type='radio'  id='status2_1_2' name='status2' value='3_2' <?php if($get['step2']=='3_2'){ echo "checked"; }?>>Rejected By Tier5
+
+                             <?php }?>
 
                           </td>
-                          <td></td>
-                        </tr>
+                          <td>
+                            <?php 
+                              if($get['step2']=="1_1")
+                                {?>
+                              
+                                 <input type='radio'  id='status3_1_1' name='status3' value='1_1_1' <?php if($get['step3']=='1_1_1'){ echo "checked"; }?> >Acceptecd By Tier5<br>
+                                 <input type='radio'  id='status3_1_2' name='status3' value='1_1_2' <?php if($get['step3']=='1_1_2'){ echo "checked"; }?>>Rejected By Tier5
 
-                        <!-- <tr>
-                          <td>
-                            <td rowspan="2" valign="center"><input type="checkbox" id="status1_1" name="status_1_1" value="1" <?php echo ($get['step1']==1 ? 'checked' : '');?> >Contact
-                            </td>
-                            <td>
-                                 <input type="checkbox" id="status2_1_1" name="status2_1_1" value="1_1" <?php echo ($get['step2']=='1_1' ? 'checked' : '');?>>Offer
-                            </td>
-                            <td>
-                                 <input type="checkbox" id="status2_1_1" name="status2_1_1" value="1_1"<?php echo ($get['step3']=='1_1_1' ? 'checked' : '');?> >Accepted By Tier5
-                                 <br>
-                                 <input type="checkbox" id="status2_1_2" name="status2_1_2" value="1_2"<?php echo ($get['step3']=='1_1_2' ? 'checked' : '');?> >Rejected By Tier5
-                            </td>
-                          </td>
-                        </tr> 
-                        <tr style="background:#fff;">
-                          <td>
-                            
-                            <td>
-                                 <input type="checkbox" id="status2_1_2" name="status2_1_2" value="1_2" <?php echo ($get['step2']=='1_2' ? 'checked' : '');?>>Rejected
-                            </td>
-                            <td></td>
+                             <?php }?>
+
+
                           </td>
                         </tr>
                         <tr>
                           <td>
-                            <td><input type="checkbox" id="status1_2" name="status_1_2" value="2"<?php echo ($get['step1']==2 ? 'checked' : '');?> >Reject</td>
-                            <td></td>
-                            <td></td>
+                            <input type="submit" value="Change Status" onclick="changestep1(<?php echo $get['b_ac_id'];?>)">
                           </td>
-                        </tr> 
-                        <td>
-                            <td><input type="checkbox" id="status1_3" name="status_1_3" value="3"<?php echo ($get['step1']==3 ? 'checked' : '');?> >Offer</td>
-                            <td>
-                              <input type="checkbox" id="status2_3_1" name="status2_3_1" value="3_1" <?php echo ($get['step2']=='3_1' ? 'checked' : '');?>>Accepted By Tier5
-                              <br>
-                              <input type="checkbox" id="status2_3_2" name="status2_3_2" value="3_2" <?php echo ($get['step2']=='3_2' ? 'checked' : '');?>>Rejected By Tier5
-
-
-                            </td>
-                            <td></td>
+                          <td>
+                            <input type="submit" value="Change Status" onclick="changestep2(<?php echo $get['b_ac_id'];?>)">
                           </td>
-                        </tr> -->
+                          <td>
+                            <input type="submit" value="Change Status" onclick="changestep3(<?php echo $get['b_ac_id'];?>)">
+                          </td></tr>
+
 
                   
    

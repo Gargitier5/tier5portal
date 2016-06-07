@@ -126,7 +126,7 @@
                     <ul class="nav child_menu">
                       <li><a href="<?php echo base_url();?>admin_control/admin/bdmactivity">Proposals Submitted By BDM</a>
                       </li>
-                      <!-- <li><a href="<?php //echo base_url();?>admin_control/admin/add_portal">Manage Portal</a>
+                       <!-- <li><a href="<?php// echo base_url();?>admin_control/admin/monthly_progress">Manage Portal</a>
                       </li> -->
                       <!--  <li><a href="">See Progress</a>
                       </li> -->

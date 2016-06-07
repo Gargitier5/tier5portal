@@ -170,8 +170,8 @@ class Admin extends CI_Controller
                          $result.="<tr><td>". $key['date']."</td>
                                    <td>".$key['time']."</td>
                                    <td>".$key['name']."</td>
-                                   <td>".$key['posted_url']."</td>
-                                   <td>".$key['proposed_url']."</td>
+                                   <td><a href='".$key['posted_url']."' target='_blank'>".$key['posted_url']."</a></td>
+                                   <td><a href='".$key['proposed_url']."' target='_blank'>".$key['proposed_url']."</a></td>
                                    <td><a href='admin_control/Admin/show_cover/".$key['b_ac_id']."'>View Details</a></td>
                                    <td>".$step1 ."</td>
                                    <td>".$step2 ."</td>
@@ -180,6 +180,43 @@ class Admin extends CI_Controller
     }
     echo $result;
     }
+
+    public function changestep1()
+    {
+      $con['b_ac_id']=$this->input->post('id');
+      $data['step1']=$this->input->post('step1');
+      $data['step2']=0;
+      $data['step3']=0;
+      $updatestatus=$this->AdminModel->update('bdm_activity',$con,$data);
+      if($updatestatus)
+      {
+        return true;
+      }
+    }
+    public function changestep2()
+    {
+      $con['b_ac_id']=$this->input->post('id');
+      $data['step2']=$this->input->post('step2');
+      $data['step3']=0;
+      $updatestatus=$this->AdminModel->update('bdm_activity',$con,$data);
+      if($updatestatus)
+      {
+        return true;
+      }
+    }
+
+    public function changestep3()
+    {
+      $con['b_ac_id']=$this->input->post('id');
+      $data['step3']=$this->input->post('step3');
+      $updatestatus=$this->AdminModel->update('bdm_activity',$con,$data);
+      if($updatestatus)
+      {
+        return true;
+      }
+    }
+
+
     public function getbdmbyname()
     { 
       $con=$this->input->post('getname');
@@ -1531,6 +1568,8 @@ class Admin extends CI_Controller
 
       }
 
+      
+
       public function add_new_employee()
       {
 
@@ -1619,12 +1658,32 @@ class Admin extends CI_Controller
         //print_r($srch);
         foreach ($srch as $value) 
         {
+          if($value['step1']==1){ $step1="Contacted";}
+                        else if($value['step1']==2){ $step1="Rejected";}
+                        else if($value['step1']==3){ $step1="Offer";}
+                        else if($value['step1']==0){ $step1="pending";}
+                        else { $value=" ";}
+
+                        if($value['step2']=="1_1"){ $step2="Offer";}
+                        else if($value['step2']=="1_2"){ $step2="Rejected";}
+                        else if($value['step2']=="3_1"){ $step2="Accepted";}
+                        else if($value['step2']=="3_2"){ $step2="Rejected";}
+                        else { $step2=" ";}
+
+                        if($value['step3']=="1_2_1"){ $step3="Offer";}
+                        else if($value['step3']=="1_2_2"){ $step3="Rejected";}
+                        else { $step3=" ";}
+
           $result.="<tr>
                       <td>".$value['date']."</td>
                       <td>".$value['time']."</td>
                       <td>".$value['name']."</td>
-                      <td>".$value['posted_url']."</td>
-                      <td>".$value['posted_url']."</td>
+                      <td><a href='".$value['posted_url']."' target='_blank'>".$value['posted_url']."</a></td>
+                      <td><a href='".$value['proposed_url']."' target='_blank'>".$value['proposed_url']."</a></td>
+                      <td><a href='admin_control/Admin/show_cover/".$value['b_ac_id']."'>View Details</a></td>
+                      <td>".$step1 ."</td>
+                      <td>".$step2 ."</td>
+                      <td>". $step3 ."</td>
                    </tr>";
         }
         echo  $result;

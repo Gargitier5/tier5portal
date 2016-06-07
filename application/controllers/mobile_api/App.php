@@ -22,26 +22,34 @@ class App extends CI_Controller
 		$password=$this->input->post('password');
 		if($username && $password)
 		{
-           $check=$this->AppModel->login($username,$password);
-           if($check)
-           {
-           	$data['user_id']=$check;
-           	$response['status']="success";
-           	$response['messege']="Logged In Successfully";
-           	$response['data']=$data;
+	           $check=$this->AppModel->login($username,$password);
+	           if($check)
+	           {
+	           	$data['user_id']=$check;
+	           	$response['status']="success";
+	           	$response['messege']="Logged In Successfully";
+	           	$response['data']=$data;
 
-           	echo json_encode($response);
+	           	echo json_encode($response);
 
-           }
-           else
-           {
-           	$response['status']="error";
-           	$response['messege']="Invalied UserId And Password";
-           	echo json_encode($response);
-           }
+	           }
+	           else
+	           {
+	           	$response['status']="error";
+	           	$response['messege']="Invalied UserId And Password";
+	           	echo json_encode($response);
+	           }
            
 		}
+		else
+	    {
+	           	$response['status']="error";
+	           	$response['messege']="Enter Username And Password";
+	           	echo json_encode($response);
+	    }
 	}
+
+
 
 
 	public function breakcheck()

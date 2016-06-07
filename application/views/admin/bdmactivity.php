@@ -110,7 +110,7 @@
                               <th class="column-title">BDM Name</th>
                               <th class="column-title">Posted Link</th>
                               <th class="column-title">Proposal Link</th>
-                              <th class="column-title">Cover Letter</th>
+                              <th class="column-title">Change Status</th>
                               <th class="column-title" colspan="3">Outstanding Proposal</th>
                            </tr>
                            <tr>
