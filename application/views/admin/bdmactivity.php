@@ -88,11 +88,15 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_content">
-                    <br>
-                    <br>
-                    <strong>Select Name:</strong><select id="name" name="name" onchange="getname()"><option value="">--Select--</option><?php foreach ($bdm as $value) {?><option value="<?php echo $value['Eid'];?>"><?php echo $value['name'];?></option>
+                   <!--  <form action="admin_control/admin/searchbox" method="post"> -->
+                        Search: <input type="text" name="search" id="search">
+                        <input type="button" onclick="getvalue()" value="Search">
+                    <!-- </form> -->
+                    
+                    <!-- <strong>Select Name:</strong><select id="name" name="name" onchange="getname()"><option value="">Select</option><?php foreach ($bdm as $value) {?><option value="<?php //echo $value['Eid'];?>"><?php echo $value['name'];?></option>
                      
-                    <?php }?></select>
+                    <?php }?></select> -->
+
               
                     <div class="dateclass"><strong>Date:</strong><input type="text" onchange="getdate()" id="sdate" name="sdate" class="datepicker"></div>
                      <br>
@@ -123,25 +127,26 @@
                               <?php if($key['step1']==1){ $step1="Contacted";}
                                     else if($key['step1']==2){ $step1="Rejected";}
                                     else if($key['step1']==3){ $step1="Offer";}
+                                    else if($key['step1']==0){ $step1="pending";}
                                     else { $step1="No Status";}
 
                                     if($key['step2']=="1_1"){ $step2="Offer";}
                                     else if($key['step2']=="1_2"){ $step2="Rejected";}
                                     else if($key['step2']=="3_1"){ $step2="Accepted";}
                                     else if($key['step2']=="3_2"){ $step2="Rejected";}
-                                    else { $step2="No Status";}
+                                    else { $step2="";}
 
                                     if($key['step3']=="1_2_1"){ $step3="Offer";}
                                     else if($key['step3']=="1_2_2"){ $step3="Rejected";}
-                                    else { $step3="No Status";}
+                                    else { $step3="";}
 
                               ?>
                               
                               <td><?php echo $key['date'];?></td>
                               <td><?php echo $key['time'];?></td>
                               <td><?php echo $key['name'];?></td>
-                              <td><a href="<?php echo $key['posted_url'];?>" ><?php echo $key['posted_url'];?></a></td>
-                              <td><a href="<?php echo $key['proposed_url'];?>" ><?php echo $key['proposed_url'];?></a></td>
+                              <td><a href="<?php echo $key['posted_url'];?>" target="_blank">Click To View</a></td>
+                              <td><a href="<?php echo $key['proposed_url'];?>" target="_blank" >Click To View</a></td>
                               <td><a href='admin_control/Admin/show_cover/<?php echo $key['b_ac_id']?>'>View Details</a></td>
                               <td><?php echo $step1 ;?></td>
                               <td><?php echo $step2 ;?></td>

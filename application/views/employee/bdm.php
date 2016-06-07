@@ -424,20 +424,12 @@
       </div>  
     </section>  
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<<<<<<< HEAD
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
-=======
-    
->>>>>>> 1fe72db1c4c4978fa550caf5b8388f93762a3ab7
+
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
 
     <!-- Google CDN jQuery with fallback to local -->
-<<<<<<< HEAD
- 
-=======
-  
->>>>>>> 1fe72db1c4c4978fa550caf5b8388f93762a3ab7
+
     <script>
 $(document).ready(function(){
    $('#bdm_activity').validate();

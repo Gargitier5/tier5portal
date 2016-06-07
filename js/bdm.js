@@ -19,3 +19,16 @@ function getdate()
 	});
 	//alert(getdate);
 }
+
+function getvalue()
+{
+	var search=$('#search').val();
+	if(search)
+	{
+		$.post('admin_control/admin/searchbox', {search:search}, function(data){
+           //alert(data);
+           $('#bdmact').html(data);
+	    });
+	}
+}
+

@@ -92,19 +92,27 @@
                     <br>
                     <div class="table-responsive">
                     <table class="table table-striped jambo_table bulk_action">
-                        <tr><td><strong>Project Name</strong></td><td><?php echo $get['project'];?></td><td></td><td></td></tr>
                         
-                        <tr><td><strong>Cover Letter</strong></td><td><?php echo $get['cover_letter'];?></td><td></td><td></td></tr>
+                        
+                        <tr><td><strong>Cover Letter</strong></td><td><?php echo $get['cover_letter'];?></td><td></td></tr>
+                        <tr><td><strong>Change Outstanding Proposal Status</strong><td></td><td></td></tr>
+                        <tr><td>Contacted</td><td>Offered</td><td>Ended</td></tr>
                         <tr>
-                          <td >
-                            <strong>Change Outstanding Proposal Status</strong>
-                            <td>Step One</td>
-                            <td>Step Two</td>
-                            <td>Step Three</td>
+                          <td>
+                                 <input type="radio" name="contact" id="contacted" value="1" <?php if($get['step1']==1){ echo "checked"; }?>> Contacted<br>
+                                 <input type="radio" name="contact" id="rejected" value="2" <?php if($get['step1']==2){ echo "checked"; }?>> Rejected<br>
+                                 <input type="radio" name="contact" id="offer" value="3" <?php if($get['step1']==3){ echo "checked"; }?>> Offer<br>
+                                 <input type="radio" name="contact" id="pending" value="4" <?php if($get['step1']==0){ echo "checked"; }?>> Pending  
                           </td>
+                          <td id="step2">
+                               
+                             
+
+                          </td>
+                          <td></td>
                         </tr>
 
-                        <tr>
+                        <!-- <tr>
                           <td>
                             <td rowspan="2" valign="center"><input type="checkbox" id="status1_1" name="status_1_1" value="1" <?php echo ($get['step1']==1 ? 'checked' : '');?> >Contact
                             </td>
@@ -145,51 +153,9 @@
                             </td>
                             <td></td>
                           </td>
-                        </tr>
-
-                        <!-- <tr>
-                          <td>
-                            <td><input type="checkbox" id="status1_1" name="status_1_1" value="1" >Contact
-                            </td>
-                            <td>
-                                 <input type="checkbox" id="status2_1_1" name="status2_1_1" value="1_1" >Offer
-                            </td>
-                            <td>
-                                 <input type="checkbox" id="status2_1_1" name="status2_1_1" value="1_1" >Offer
-                                 <br>
-                                 <input type="checkbox" id="status2_1_2" name="status2_1_2" value="1_2" >Rejected
-                            </td>
-                          </td>
-                        </tr> 
-                        <tr style="background:#fff;">
-                          <td>
-                            <td></td>
-                            <td>
-                                 <input type="checkbox" id="status2_1_2" name="status2_1_2" value="1_2" >Rejected
-                            </td>
-                            <td></td>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <td><input type="checkbox" id="status1_2" name="status_1_2" value="2" >Reject</td>
-                            <td></td>
-                            <td></td>
-                          </td>
-                        </tr> 
-                        <td>
-                            <td><input type="checkbox" id="status1_3" name="status_1_3" value="3" >Offer</td>
-                            <td>
-                              <input type="checkbox" id="status2_3_1" name="status2_3_1" value="3_1" >Accepted By Tier5
-                              <br>
-                              <input type="checkbox" id="status2_3_2" name="status2_3_2" value="3_2" >Rejected By Tier5
-
-
-                            </td>
-                            <td></td>
-                          </td>
                         </tr> -->
-                       
+
+                  
    
                     </table>     
                     </div> 

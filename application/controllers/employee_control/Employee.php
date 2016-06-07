@@ -157,20 +157,21 @@ class Employee extends CI_Controller
       $data['posted_url']=$this->input->post('posted');
       $data['proposed_url']=$this->input->post('proposed');
       $data['cover_letter']=$this->input->post('coverletter');
+      $data['step1']=0;
 
-       if($data['posted_url'] && $data['proposed_url'] && $data['cover_letter'])
+       if($data['posted_url'] && $data['proposed_url'] )
        {
 
           $activity=$this->EmployeeModel->ins_activity($data);
           if($activity)
           {
-             $this->session->set_userdata('succ_msg','Activity Added!!!');
-             redirect(base_url().'employee_control/employee/bdmaccess');
+            $this->session->set_userdata('succ_msg','Activity Added!!!');
+            redirect(base_url().'employee_control/employee/bdmaccess');
           }
           else
           {
-             $this->session->set_userdata('err_msg','Try Again');
-           redirect(base_url().'employee_control/employee/bdmaccess');
+            $this->session->set_userdata('err_msg','Try Again');
+            redirect(base_url().'employee_control/employee/bdmaccess');
           }
        }
        else

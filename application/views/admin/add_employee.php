@@ -25,7 +25,8 @@
      
     <!-- jQuery -->
      <script src="vendors/jquery/dist/jquery.min.js"></script>
-
+     
+      
       <script>
   $(function() {
     $( ".datepicker" ).datepicker({
@@ -38,6 +39,14 @@
       <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
   <script src="//code.jquery.com/jquery-1.10.2.js"></script>
   <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  <script src="js/jquery.validate.js"></script>
+     <script type="text/javascript">
+ 
+  $(document).ready(function() {
+    $('#addemployee').validate();
+  });
+     </script>
+
   <link rel="stylesheet" href="/resources/demos/style.css">
 
 
@@ -104,7 +113,7 @@ if($this->session->userdata('succ_msg')!=''){?>
                   <div class="x_content">
                     <div class="ln_solid"></div>
                           
-                   <form class="form-horizontal form-label-left" data-parsley-validate="" id="demo-form2" novalidate="" method="post" action="admin_control/Admin/add_new_employee">
+                   <form class="form-horizontal form-label-left" data-parsley-validate="" novalidate="" method="post" id="addemployee" action="admin_control/Admin/add_new_employee">
 
                       <div class="form-group">
                         <label for="name" class="control-label col-md-3 col-sm-3 col-xs-12" >Name <span class="required">*</span>
@@ -146,8 +155,8 @@ if($this->session->userdata('succ_msg')!=''){?>
                        <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Gender<span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                                  <input type="radio" name="gender" value="Male"> Male<br>
-                                  <input type="radio" name="gender" value="Female"> Female<br>
+                                  <input type="radio" name="gender" value="Male" required="required"> Male<br>
+                                  <input type="radio" name="gender" value="Female" required="required"> Female<br>
                         </div>
                       </div>
 
@@ -155,8 +164,8 @@ if($this->session->userdata('succ_msg')!=''){?>
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Marital Status<span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                                  <input type="radio" name="marrige" value="Married"> Married<br>
-                                  <input type="radio" name="marrige" value="Unmarried"> Unmarried<br>
+                                  <input type="radio" name="marrige" value="Married" class="required"> Married<br>
+                                  <input type="radio" name="marrige" value="Unmarried" class="required"> Unmarried<br>
                                  
                         </div>
                       </div>

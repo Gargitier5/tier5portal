@@ -155,28 +155,27 @@ class Admin extends CI_Controller
           if($key['step1']==1){ $step1="Contacted";}
                         else if($key['step1']==2){ $step1="Rejected";}
                         else if($key['step1']==3){ $step1="Offer";}
-                        else { $step1="No Status";}
+                        else if($key['step1']==0){ $step1="pending";}
+                        else { $step1=" ";}
 
                         if($key['step2']=="1_1"){ $step2="Offer";}
                         else if($key['step2']=="1_2"){ $step2="Rejected";}
                         else if($key['step2']=="3_1"){ $step2="Accepted";}
                         else if($key['step2']=="3_2"){ $step2="Rejected";}
-                        else { $step2="No Status";}
+                        else { $step2=" ";}
 
                         if($key['step3']=="1_2_1"){ $step3="Offer";}
                         else if($key['step3']=="1_2_2"){ $step3="Rejected";}
-                        else { $step3="No Status";}
-          $result.="<tr><td>". $key['date']."</td>
-                         <td>".$key['time']."</td>
-                         <td>".$key['name']."</td>
-                         <td>". $key['project']."</td>
-                         <td>".$key['url']."</td>
-                         <td>".$key['posted_url']."</td>
-                         <td>".$key['proposed_url']."</td>
-                         <td><a href='admin_control/Admin/show_cover/".$key['b_ac_id'].">View Details</a></td>
-                         <td>".$step1 ."</td>
-                         <td>".$step2 ."</td>
-                         <td>". $step3 ."</td></tr>";
+                        else { $step3=" ";}
+                         $result.="<tr><td>". $key['date']."</td>
+                                   <td>".$key['time']."</td>
+                                   <td>".$key['name']."</td>
+                                   <td>".$key['posted_url']."</td>
+                                   <td>".$key['proposed_url']."</td>
+                                   <td><a href='admin_control/Admin/show_cover/".$key['b_ac_id']."'>View Details</a></td>
+                                   <td>".$step1 ."</td>
+                                   <td>".$step2 ."</td>
+                                   <td>". $step3 ."</td></tr>";
                          
     }
     echo $result;
@@ -226,15 +225,6 @@ class Admin extends CI_Controller
       $this->session->sess_destroy();
       redirect(base_url());
       
-    }
-
-    public function add_portal()
-    {
-      $data['portal']=$this->AdminModel->allportal();
-      $data['sideber']=$this->load->view('admin/includes/sideber','',true);
-      $data['header']=$this->load->view('admin/includes/header','',true);
-      $this->load->view('admin/add_portal.php',$data);
-
     }
     
     public function setbonus()
@@ -1561,7 +1551,7 @@ class Admin extends CI_Controller
             $data['activation_status ']='2';
 
 
-            if($data['name'] && $data['personal_email'] && $data['address'] && $data['phon_no'] && $data['alt_ph_no'] && $data['gender'] && $data['m_status'] && $data['dob'] && $data['joining_date'] && $data['designation'] && $data['salary'])
+            if($data['name'])
             {
 
               $new_emp=$this->AdminModel->insert('employee',$data);
@@ -1587,7 +1577,7 @@ class Admin extends CI_Controller
          }
 
       }
-
+       
       public function dailyactivity()
       {
 
@@ -1619,6 +1609,25 @@ class Admin extends CI_Controller
          $data['sideber']=$this->load->view('admin/includes/sideber','',true);
          $this->load->view('admin/dailyactivity.php',$data);
 
+      }
+
+      public function searchbox()
+      {
+        $searchitem=$this->input->post('search');
+        $srch=$this->AdminModel->search($searchitem);
+        $result="";
+        //print_r($srch);
+        foreach ($srch as $value) 
+        {
+          $result.="<tr>
+                      <td>".$value['date']."</td>
+                      <td>".$value['time']."</td>
+                      <td>".$value['name']."</td>
+                      <td>".$value['posted_url']."</td>
+                      <td>".$value['posted_url']."</td>
+                   </tr>";
+        }
+        echo  $result;
       }
 
       public function emplate()

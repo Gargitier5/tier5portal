@@ -2,13 +2,13 @@
   Class AdminModel extends CI_Model 
   { 
     
-    Public function __construct() 
+    public function __construct() 
     { 
       parent::__construct(); 
       $this->load->database();
     } 
 
-     Public function login($username,$password)
+     public function login($username,$password)
     {
         $this->db->select('*');
         $this->db->where('username',$username);
@@ -47,6 +47,17 @@
        $this->db->order_by('b_ac_id','DESC');
        $res=$this->db->get('bdm_activity');
        return $res->result_array();
+    }
+    public function search($searchitem)
+    {
+      $this->db->select('bdm_activity.*,employee.name');
+      $this->db->join('employee','bdm_activity.Eid=employee.id');
+      $this->db->like('posted_url',$searchitem,'both');
+      $this->db->or_like('proposed_url',$searchitem,'both'); 
+      $this->db->order_by('b_ac_id','DESC');
+      $res=$this->db->get('bdm_activity');
+      return $res->result_array();
+
     }
 
     public function allportal()
@@ -88,7 +99,6 @@
     Public function fnallemp()
     {
     	  $this->db->select('*');
-        
         $res=$this->db->get('employee');
         return $res->result_array();
     }
