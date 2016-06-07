@@ -170,9 +170,9 @@
                 <table class="table table-bordered  table-custom">
                   <tr>
                     <th>Projects Name</th>
-                    <th>Step1</th>
-                    <th>Step2</th>
-                    <th>Step3</th>
+                    <th>Contact</th>
+                    <th>Offered</th>
+                    <th>Ended</th>
                       
                   </tr>
                     
@@ -201,7 +201,12 @@
                             <span class="green-marks">Offer</span>
                          <?php }
                         ?>
-
+                        <?php 
+                        if ($key['step1']==0)
+                          {  ?>
+                            <span class="yellow-marks">Pending</span>
+                         <?php }
+                        ?>
 
 
                       </td>
