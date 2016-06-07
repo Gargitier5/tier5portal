@@ -53,6 +53,17 @@
         return  $result=$res->result_array();
         }
   }
+  
+  public function getinfo($user,$date)
+  {
+        $this->db->select('break_track.*,employee.name');
+        $this->db->join('employee','employee.id=break_track.Eid');
+        $this->db->where('break_track.Eid',$user);
+        $this->db->where('break_track.date',$date);
+        $this->db->where('break_track.status',1);
+        $res=$this->db->get('break_track');
+        return $res->row_array();
+  }
 
 
 }
