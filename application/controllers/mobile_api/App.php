@@ -77,16 +77,16 @@ class App extends CI_Controller
 		             	$response['data']['name']=$check['name'];
 		            	$response['data']['break']=$check['type'];
 
-                 	    echo json_encode($response);
-                 	    exit;
+                 	         echo json_encode($response);
+                 	         exit;
 		              }
 		              else
 		              {
 
-		              	$remainingtime = $time_spend - $default;
+		              	//$remainingtime = $time_spend - $default;
 		              	/*$response['data']['count']='out time';*/
-						$data['id']=$user_id;
-						$get_details=$this->AppModel->fetchinfo('employee',$data,'row');
+						$user=$user_id;
+						$get_details=$this->AppModel->getinfo($user,$date);
 						$response['data']['name']=$get_details['name'];
 						$response['status']="error";
 						$response['messege']="Your time is up";
