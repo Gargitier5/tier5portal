@@ -33,7 +33,16 @@ function chatOldHistory()
 {
 	$from=$_POST['current_user'];
 	$to=$_POST['touser'];
-	if(strlen($from) < strlen($to))
+	
+	$sql_from = "select `Eid` from emp_details where emp_details.username = '".mysql_real_escape_string($from)."'";
+	$query_from = mysql_query($sql_from);
+	$fid_fetch=mysql_fetch_row($query_from);
+
+	$sql_to = "select `Eid` from emp_details where emp_details.username = '".mysql_real_escape_string($to)."'";
+	$query_to = mysql_query($sql_to);
+	$tid_fetch=mysql_fetch_row($query_to);
+
+	if($fid_fetch[0] < $tid_fetch[0])
 	{
 		$chat_btwn=$from."-".$to;
 	}
@@ -41,6 +50,7 @@ function chatOldHistory()
 	{
 		$chat_btwn=$to."-".$from;
 	}
+	
 	$sql = "select * from chat where (chat.chat_btwn = '".mysql_real_escape_string($chat_btwn)."' AND recd = 1) order by id ASC";
 	$query = mysql_query($sql);
 	$items = '';
