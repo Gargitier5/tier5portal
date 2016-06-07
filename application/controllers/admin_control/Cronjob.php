@@ -28,7 +28,13 @@ class Cronjob extends CI_Controller
 		$this->resetPoints();		
 	}*/
 
+//=======Cronjob For chat history delete======================================
 
+public function delete_history()
+{
+  $fetchinfo=$this->CronjobModel->FetchChatHistory();
+ // echo '<pre>';print_r($fetchinfo);
+}
 //=======Cronjob For Autometic Absent======================================
   public function autoabsent()
   {
