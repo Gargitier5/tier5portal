@@ -186,7 +186,7 @@ function chatBoxSession($chatbox) {
 function startChatSession() {
 	/*if (!isset($_SESSION['username'])) {
 	$_SESSION['username'] = 'sudipta';	
-}*/
+	}*/
 	$items = '';
 	if (!empty($_SESSION['openChatBoxes'])) {
 		

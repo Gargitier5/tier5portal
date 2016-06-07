@@ -60,6 +60,17 @@ function Fntoggler(chatuser)
 	toggleChatBoxGrowth(chatuser);
 }
 
+/*function allowDrop(event) {
+    event.preventDefault();
+}
+
+function drop(event) {
+    event.preventDefault();
+    var data = event.dataTransfer.getData("Text");
+    event.target.appendChild(document.getElementById(data));
+    document.getElementById("demo").innerHTML = "The p element was dropped";
+}*/
+
 function restructureChatBoxes() {
 	align = 0;
 	for (x in chatBoxes) {
@@ -141,7 +152,7 @@ function createChatBox(chatboxtitle,minimizeChatBox) {
 
 	$(" <div />" ).attr("id","chatbox_"+chatboxtitle)
 	.addClass("chatbox")
-	.html('<div class="chatboxhead" data-title="'+chatboxtitle+'" onclick=Fntoggler("'+chatboxtitle.toString()+'");><div class="chatboxtitle">'+chatboxtitle+'</div><div class="chatboxoptions"><a href="javascript:void(0)" onclick=Fntoggler("'+chatboxtitle.toString()+'">-</a> <a href="javascript:void(0)" onclick="javascript:closeChatBox(\''+chatboxtitle+'\')">X</a></div><br clear="all"/></div><div class="chatboxcontent" ></div><div class="chatboxinput"><textarea class="chatboxtextarea" onkeydown="javascript:return checkChatBoxInputKey(event,this,\''+chatboxtitle+'\');"></textarea></div>')
+	.html('<div class="chatboxhead" data-title="'+chatboxtitle+'" onclick=Fntoggler("'+chatboxtitle.toString()+'");><div class="chatboxtitle">'+chatboxtitle+'</div><div class="chatboxoptions"><a href="javascript:void(0)" onclick=Fntoggler("'+chatboxtitle.toString()+'">-</a> <a href="javascript:void(0)" onclick="javascript:closeChatBox(\''+chatboxtitle+'\')">X</a></div><br clear="all"/></div><div class="chatboxcontent"  ondrop="drop(event)" ondragover="allowDrop(event)"></div><div class="chatboxinput"><textarea class="chatboxtextarea" onkeydown="javascript:return checkChatBoxInputKey(event,this,\''+chatboxtitle+'\');"></textarea></div>')
 	.appendTo($( "body" ));
 			   
 	$("#chatbox_"+chatboxtitle).css('bottom', '0px');
@@ -192,6 +203,7 @@ function createChatBox(chatboxtitle,minimizeChatBox) {
 		chatboxFocus[chatboxtitle] = true;
 		newMessages[chatboxtitle] = false;
 		$('#chatbox_'+chatboxtitle+' .chatboxhead').removeClass('chatboxblink');
+		
 		$("#chatbox_"+chatboxtitle+" .chatboxtextarea").addClass('chatboxtextareaselected');
 	});
 
@@ -289,10 +301,10 @@ function chatHeartbeat(){
 
 				chatboxtitle = item.f;
 
-				/*if(item.m)
+				if(item.m)
 				{
 				notifyBrowser(item.f);	
-				}*/
+				}
 				//notifyBrowser('msggg');
 				var text=item.m;
 				if(isUrl(text)){

@@ -17,6 +17,14 @@ Class CronjobModel extends CI_Model
       $result = $this->db->get('employee');
       return $result->result_array();
     }
+    public function FetchChatHistory()
+    {
+     // $sql="SELECT * FROM `chat` WHERE `sent` BETWEEN DATE_SUB(NOW(), INTERVAL 3 DAY) AND NOW()";
+     $sql="delete FROM `chat` WHERE `sent` < DATE_SUB(NOW(), INTERVAL 3 DAY)";
+      
+      $result=$this->db->query($sql);
+     // return $result->result_array();
+    }
 
 
     public function fetchinfo($tbl,$con,$type)
