@@ -67,7 +67,6 @@ class Admin extends CI_Controller
     public function bdmactivity()
     {
 
-      
         $con=date('Y-m-d');
         $data['bdmac']=$this->AdminModel->getactivity($con);
       

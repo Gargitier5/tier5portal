@@ -529,8 +529,15 @@
                $sec="0".$sec;
                }
               $minutes = ($seconds / 60) % 60;
+              if($minutes<10)
+               {
+               $minutes="0".$minutes;
+               }
               $hours = floor($seconds / (60 * 60));
-
+              if($hours<10)
+               {
+               $hours="0".$hours;
+               }
               $totaltime_taken="$hours:$minutes:$sec";
 
 

@@ -526,6 +526,7 @@ class Employee extends CI_Controller
                          {
                          $minutes="0".$minutes;
                          }
+                         
                         $hours = floor($remainingtime / (60 * 60));
                          
                                       if($hours<10)

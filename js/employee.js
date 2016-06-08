@@ -1,15 +1,15 @@
 $(document).ready(function(){
 
-    disfirstbreak(); // This will run on page load
-    dissecondbreak(); // This will run on page load
-    disthird(); // This will run on page load
-    setInterval(function(){ disfirstbreak() }, 1000); // this will run after every seconds
-    setInterval(function(){ dissecondbreak() }, 1000);
-    setInterval(function(){ disthird() }, 1000);
-    setInterval(function(){ chk_time() }, 1000);
+    //disfirstbreak(); // This will run on page load
+    //dissecondbreak(); // This will run on page load
+    //disthird(); // This will run on page load
+    //setInterval(function(){ disfirstbreak() }, 1000); // this will run after every seconds
+    //setInterval(function(){ dissecondbreak() }, 1000);
+   // setInterval(function(){ disthird() }, 1000);
+    setInterval(function(){ chk_time() }, 10000);
 
        
-    function disfirstbreak()
+    /*function disfirstbreak()
     {
    
          var startTime="12:00:00"; 
@@ -39,9 +39,9 @@ $(document).ready(function(){
         {
           $('#breakstart_1').attr('disabled', 'disabled');
         }
-    }
+    }*/
 
-    function dissecondbreak()
+    /*function dissecondbreak()
     {
         var startTime="14:00:00";
         var endTime ="16:00:00";  
@@ -76,9 +76,9 @@ $(document).ready(function(){
         {  
             $('#breakstart_2').attr('disabled', 'disabled');
         }  
-    }
+    }*/
 
-    function disthird()
+    /*function disthird()
     {
         var startTime="17:30:00";
         var endTime ="19:00:00";
@@ -115,7 +115,7 @@ $(document).ready(function(){
           
           $('#breakstart_3').attr('disabled', 'disabled');
         }
-    }
+    }*/
 
     function chk_time()
     {
@@ -135,7 +135,7 @@ $(document).ready(function(){
                 $('#breakstart_'+data1[1]).text("Work");
                 var data2=data1[0].split(':');         
             
-               /*if(data1[1]==1)
+               if(data1[1]==1)
                 {
                   $('#breakstart_2').attr('disabled', 'disabled');
                   $('#breakstart_3').attr('disabled', 'disabled');   
@@ -155,7 +155,7 @@ $(document).ready(function(){
                   $('#breakstart_1').removeAttr('disabled');
                   $('#breakstart_2').removeAttr('disabled');
                   $('#breakstart_3').removeAttr('disabled');
-                }*/
+                }
 
                 if(dataa[1]==0)
                 {
@@ -234,7 +234,7 @@ $(document).ready(function(){
           $('#breakstart_'+data1[1]).text("Work");
           var data2=data1[0].split(':');         
             
-         /*if(data1[1]==1)
+         if(data1[1]==1)
           {
             $('#breakstart_2').attr('disabled', 'disabled');
             $('#breakstart_3').attr('disabled', 'disabled');   
@@ -254,7 +254,7 @@ $(document).ready(function(){
             $('#breakstart_1').removeAttr('disabled');
             $('#breakstart_2').removeAttr('disabled');
             $('#breakstart_3').removeAttr('disabled');
-          }*/
+          }
 
           if(dataa[1]==0)
           {
@@ -292,7 +292,7 @@ $(document).ready(function(){
       }  
     });
 
-    /*$.post('employee_control/employee/breakdis',function(data){
+    $.post('employee_control/employee/breakdis',function(data){
         var data1=data.split(",");
         for(i=0; i<data1.length-1; i++)
         { 
@@ -302,7 +302,7 @@ $(document).ready(function(){
           $('#breakstart_'+x).attr("disabled", 'disabled');
           }
         }
-    });*/
+    });
 
 
 
@@ -453,7 +453,7 @@ function Start_Break(breakid,duration)
             
             $('#breakstart_'+breakid).text("Work");
             $('#clockout_btn').attr('disabled', 'disabled');
-            /*if(breakid==1)
+            if(breakid==1)
             {  
               $('#breakstart_2').attr('disabled', 'disabled');
               $('#breakstart_3').attr('disabled', 'disabled');
@@ -479,7 +479,7 @@ function Start_Break(breakid,duration)
               $('#breakstart_3').removeAttr('disabled');
               $('#clockout_btn').removeAttr('disabled');
 
-            }*/
+            }
         
         }             
     });
@@ -502,7 +502,7 @@ function Start_Break(breakid,duration)
             $('#clockout_btn').removeAttr('disabled');
             $('#breakstart_'+breakid).text("Start Break");
             
-            /*if(breakid==1)
+            if(breakid==1)
             {  
                 $('#breakstart_1').attr('disabled', 'disabled');
                 $('#breakstart_2').removeAttr('disabled');
@@ -530,26 +530,21 @@ function Start_Break(breakid,duration)
                 $('#breakstart_2').removeAttr('disabled');
                 $('#breakstart_3').removeAttr('disabled');
                 $('#clockout_btn').removeAttr('disabled');
-            }*/
+            }
 
         }
       });
 
       $.post('employee_control/employee/checkstastuswork',function(data){
                  
-      })
-              /*;
-
-               $.post('employee_control/employee/endbreak', {breakid:breakid},function(data){//inserting 0 in breakstatus column in attendence table 
-                if(data)
-                { 
+      });
+      $.post('employee_control/employee/endbreak', {breakid:breakid},function(data){//inserting 0 in breakstatus column in attendence table 
+      if(data)
+      { 
 
                 
-                }
-
-
-
-             });*/
+      }
+      });
   }
 }
 

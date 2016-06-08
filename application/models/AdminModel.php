@@ -67,7 +67,7 @@
       return $res->result_array();
     }
     
-    public function getactivitybyname($con)
+    /*public function getactivitybyname($con)
     {
 
        $this->db->select('bdm_activity.*,bdm_url.url,employee.name');
@@ -77,7 +77,7 @@
        $this->db->order_by('b_ac_id','DESC');
        $res=$this->db->get('bdm_activity');
        return $res->result_array();
-    }
+    }*/
 
     public function get_bdm()
     {

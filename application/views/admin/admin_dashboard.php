@@ -9,9 +9,7 @@
     <title>Tier5</title>
     <link rel=icon href="http://tier5.us/images/favicon.ico">
     <base href="<?php echo base_url();?>">
-    
-      <script src="http://code.jquery.com/jquery-latest.min.js"
-        type="text/javascript"></script>
+    <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
 
     <!-- Bootstrap -->
     <link href="vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -38,47 +36,9 @@
       <div class="main_container">
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
-            <div class="navbar nav_title" style="border: 0;">
-              
-            </div>
-
-            <div class="clearfix"></div>
-
-            <!-- menu profile quick info -->
-            <!-- <div class="profile">
-              <div class="profile_pic">
-                <img src="images/img.jpg" alt="..." class="img-circle profile_img">
-              </div>
-              <div class="profile_info">
-                <span>Welcome,</span>
-                <h2>John Doe</h2>
-              </div>
-            </div> -->
-            <!-- /menu profile quick info -->
-
-            <br />
-
             <!-- sidebar menu -->
            <?php echo $sideber;?>
            <!-- sidebar menu -->
-
-
-            <!-- /menu footer buttons -->
-            <!-- <div class="sidebar-footer hidden-small">
-              <a data-toggle="tooltip" data-placement="top" title="Settings">
-                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="Lock">
-                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="Logout">
-                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-              </a>
-            </div> -->
-            <!-- /menu footer buttons -->
           </div>
         </div>
 
@@ -86,358 +46,160 @@
         <?php echo $header;?>
         <!-- /top navigation -->
 
-
         <!-- page content -->
         <div class="right_col" role="main">
-<input type="hidden" id="session_user" value="<?php echo $this->session->userdata('admin_user');?>">
-
-          <!-- top tiles -->
-         <!--  <div class="row tile_count">
-            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-user"></i> Total Users</span>
-              <div class="count">2500</div>
-              <span class="count_bottom"><i class="green">4% </i> From last Week</span>
-            </div>
-            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-clock-o"></i> Average Time</span>
-              <div class="count">123.50</div>
-              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> From last Week</span>
-            </div>
-            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-user"></i> Total Males</span>
-              <div class="count green">2,500</div>
-              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
-            </div>
-            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-user"></i> Total Females</span>
-              <div class="count">4,567</div>
-              <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>12% </i> From last Week</span>
-            </div>
-            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-user"></i> Total Collections</span>
-              <div class="count">2,315</div>
-              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
-            </div>
-            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-user"></i> Total Connections</span>
-              <div class="count">7,325</div>
-              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
-            </div>
-          </div> -->
-          <!-- /top tiles -->
-
-          <div class="row">
-          <div class="col-md-9 col-sm-9 col-xs-12">
-
-          <div class="row">
-            <div class="col-md-6 col-sm-6 col-xs-12">
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                 <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="x_panel">
-                  <div align="center">
-                    <h2>Total Employee</h2>
-                    <!-- <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul> -->
-                    <div class="clearfix"></div>
-                  </div>
-                  <div class="x_content" align="center">
-                    <h1><?php  echo $total_employee; ?> </h1>
-                  </div>
-                </div>
-              </div>
-             </div>
-            </div>
-
-            <div class="col-md-6 col-sm-6 col-xs-12">
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                 <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="x_panel">
-                  <div  align="center">
-                    <h2>Today Present</h2>
-                    <!-- <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul> -->
-                    <div class="clearfix"></div>
-                  </div>
-                  <div class="x_content" align="center">
-                   
-                    <h1><?php  echo $total_present; ?> </h1>
-                  </div>
-                </div>
-              </div>
-             </div>
-            </div>
-
-          </div>
-
-          <div class="row">
-             <div class="col-md-6 col-sm-6 col-xs-12">
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                 <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="x_panel">
-                  <div align="center">
-                    <h2>Employees On <br> First Break</h2>
-                    <!-- <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul> -->
-                    <div class="clearfix"></div>
-                  </div>
-                  <div class="x_content">
-                   
-                    <table id="datatable" class="table table-striped table-bordered">
-                      
-
-
-                       <tbody  id="firstbreak">
-                      
-                       
-                       </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-             </div>
-            </div>
-
-            <div class="col-md-6 col-sm-6 col-xs-12">
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                 <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="x_panel">
-                  <div align="center">
-                    <h2>Employees On <br> Second Break</h2>
-                    <!-- <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul> -->
-                    <div class="clearfix"></div>
-                  </div>
-                  <div class="x_content">
-                   
-                    <table id="datatable" class="table table-striped table-bordered">
-                      
-
-
-                       <tbody  id="secondbreak">
-                      
-                       
-                       </tbody>
-
-                    </table>
-                  </div>
-                </div>
-              </div>
-             </div>
-            </div>
-           
-        </div>
-
-        <div class="row">
-          <div class="col-md-6 col-sm-6 col-xs-12">
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                 <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="x_panel">
-                  <div align="center">
-                    <h2>Employees On <br>Third Break</h2>
-                    
-                    <div class="clearfix"></div>
-                  </div>
-                  <div class="x_content">
-                   
-                    <table id="datatable" class="table table-striped table-bordered">
-                      
-
-
-                        <tbody  id="thirdbreak">
-
-                       
-                       </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-             </div>
-            </div>
-
-            <div class="col-md-6 col-sm-6 col-xs-12">
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                 <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="x_panel">
-                  <div align="center">
-                   
-                    <h2>Today's <br>Event</h2>
-                    <!-- <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul> -->
-                    <div class="clearfix"></div>
-                  </div>
-                  <div class="x_content">
-                   <table id="datatable" class="table table-striped table-bordered">
-                      
-
-
-                        <tbody>
-
-                       
-                       </tbody>
-                    </table>
-                    
-                  </div>
-                </div>
-              </div>
-             </div>
-            </div>
-           <!--  <div class="col-md-6 col-sm-6 col-xs-12">
-              <div class="x_panel tile fixed_height_320 overflow_hidden">
-                <div class="x_title">
-                  <h2>Last Break</h2>
-                  <ul class="nav navbar-right panel_toolbox">
-                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                    </li>
-                  </ul>
-                  <div class="clearfix"></div>
-                </div>
-                <div class="x_content">
-                   <div class="scroll-bar">
-                  <table>
-                    
-                    <tbody  id="thirdbreak">
-
-                       
-                    </tbody>
-                </table>
-                 </div>
-                </div>
-              </div>
-            </div>
-
-
-            <div class="col-md-6 col-sm-6 col-xs-12">
-              <div class="x_panel tile fixed_height_320">
-                <div class="x_title">
-                  <h2>Today's Event</h2>
-                  <ul class="nav navbar-right panel_toolbox">
-                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                    </li>
-                  </ul>
-                  <div class="clearfix"></div>
-                </div>
-                <div class="x_content">
-            
-                </div>
-              </div>
-            </div>
- -->
-          </div>
+           <input type="hidden" id="session_user" value="<?php echo $this->session->userdata('admin_user');?>">
+           <div class="row">
+          <!-- Notification -->
+           <div class="col-md-9 col-sm-9 col-xs-12">
               <div class="row">
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                      <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="x_panel">
+                          <div align="center">
+                            <h2>Total Employee</h2>
+                            <div class="clearfix"></div>
+                          </div>
+                          <div class="x_content" align="center">
+                            <h1><?php  echo $total_employee; ?> </h1>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                      <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="x_panel">
+                          <div  align="center">
+                             <h2>Today Present</h2>
+                             <div class="clearfix"></div>
+                          </div>
+                          <div class="x_content" align="center">
+                           <h1><?php  echo $total_present; ?> </h1>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              </div>
 
 
-            <!-- <div class="col-md-4 col-sm-4 col-xs-12">
-              <div class="x_panel tile fixed_height_320">
-                <div class="x_title">
-                  <h2>App Versions</h2>
-                  <ul class="nav navbar-right panel_toolbox">
-                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                    </li>
-                  </ul>
-                  <div class="clearfix"></div>
+              <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                      <div class="x_panel">
+                        <div align="center">
+                          <h2>Employees On <br> First Break</h2>
+                          <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                             <table id="datatable" class="table table-striped table-bordered">
+                                <tbody  id="firstbreak">
+                                </tbody>
+                             </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div class="x_content">
-                
-            
 
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                      <div class="x_panel">
+                        <div align="center">
+                          <h2>Employees On <br> Second Break</h2>
+                          <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                          <table id="datatable" class="table table-striped table-bordered">
+                            <tbody  id="secondbreak">
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div class="col-md-4 col-sm-4 col-xs-12">
-              <div class="x_panel tile fixed_height_320 overflow_hidden">
-                <div class="x_title">
-                  <h2>Device Usage</h2>
-                  <ul class="nav navbar-right panel_toolbox">
-                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                    </li>
-                  </ul>
-                  <div class="clearfix"></div>
+              <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                      <div class="x_panel">
+                        <div align="center">
+                          <h2>Employees On <br>Third Break</h2>
+                          <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                          <table id="datatable" class="table table-striped table-bordered">
+                            <tbody  id="thirdbreak">
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div class="x_content">
-                  
+
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                      <div class="x_panel">
+                        <div align="center">
+                          <h2>Today's <br>Event</h2>
+                          <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                          <table id="datatable" class="table table-striped table-bordered">
+                            <tbody>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-
-
-            <div class="col-md-4 col-sm-4 col-xs-12">
-              <div class="x_panel tile fixed_height_320">
-                <div class="x_title">
-                  <h2>Quick Settings</h2>
-                  <ul class="nav navbar-right panel_toolbox">
-                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                    </li>
-                  </ul>
-                  <div class="clearfix"></div>
-                </div>
-                <div class="x_content">
-                 
-                </div>
-              </div>
-            </div>
- -->
-          </div>
-
-
-
-               </div>
-               <!-- half -->
-
-               <div class="col-md-3 col-sm-3 col-xs-12">
+           </div>
+           <!-- Notification -->
+           <!-- Admin Chat -->
+           <div class="col-md-3 col-sm-3 col-xs-12">
               <div class="chat employe-chat">
-                 <ul>
-               <?php foreach($employee as $online):
-    if($online['id']!= $this->session->userdata('adminid') && $online['role']>1):
-    ?>
-                  <li>
-                    <div class="user-pic">
-                    <?php if($online['gender']=="Male" && $online['online_status']==1){?>
-                          <img src="images/male_online.png" alt="img">
-                          <?php } if($online['gender']=="Male" && $online['online_status']==0){ ?>
-                          <img src="images/male_offline.png" alt="img">
-                          <?php } if($online['gender']=="Female" && $online['online_status']==1){ ?>
-                          <img src="images/female_online.png" alt="img">
-                          <?php }
-                           if($online['gender']=="Female" && $online['online_status']==0){ ?>
-                          <img src="images/female_offline.png" alt="img">
-                          <?php }?>
-
-                        </div>  
+                <ul>
+                   <?php foreach($employee as $online):
+                   if($online['id']!= $this->session->userdata('adminid') && $online['role']>1):
+                   ?>
+                   <li>
+                      <div class="user-pic">
+                      <?php if($online['gender']=="Male" && $online['online_status']==1){?>
+                            <img src="images/male_online.png" alt="img">
+                            <?php } if($online['gender']=="Male" && $online['online_status']==0){ ?>
+                            <img src="images/male_offline.png" alt="img">
+                            <?php } if($online['gender']=="Female" && $online['online_status']==1){ ?>
+                            <img src="images/female_online.png" alt="img">
+                            <?php }
+                             if($online['gender']=="Female" && $online['online_status']==0){ ?>
+                            <img src="images/female_offline.png" alt="img">
+                            <?php }?>
+                      </div>  
                       <div class="user-name"><span onclick="javascript:chatWith('<?php echo $online['username'];?>')" data-id="<?php echo $online['id'];?>" class="user_spc" style="cursor:pointer;"><?php echo $online['name'];?></span></div>
-
-                  </li>
+                   </li>
                   <?php endif;endforeach;?>
-                   </ul> 
+                </ul> 
                 <div class="clearfix"></div>
               </div> 
-
               <div class="chat admin-chat">
                 <h4>Management Chat</h4>
                 <ul>
-                 <?php foreach($employee as $online):
-    if($online['id']!= $this->session->userdata('adminid') && $online['role']<=1):
-    ?>
+                  <?php foreach($employee as $online):
+                  if($online['id']!= $this->session->userdata('adminid') && $online['role']<=1):
+                  ?>
                   <li>
                     <div class="user-pic">
                     <?php if($online['role']==1){?>
@@ -454,36 +216,16 @@
                         <?php }?>
                   </li>
                   <?php endif;endforeach;?>
-                  
-                 
                 </ul>  
               </div>
-
-               </div>
-                
-
-
-          
-
-          </div>
-
-          
-
-         
-         
-
-
-          
-
-
-          
+            </div>
+          </div> 
         </div>
         <!-- /page content -->
 
         <!-- footer content -->
         <footer>
-          <div class="pull-right">
-            
+          <div class="pull-right"> 
           </div>
           <div class="clearfix"></div>
         </footer>
