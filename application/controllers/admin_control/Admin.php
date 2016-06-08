@@ -172,7 +172,8 @@ class Admin extends CI_Controller
                                    <td>".$key['name']."</td>
                                    <td><a href='".$key['posted_url']."' target='_blank'>".$key['posted_url']."</a></td>
                                    <td><a href='".$key['proposed_url']."' target='_blank'>".$key['proposed_url']."</a></td>
-                                   <td><a href='admin_control/Admin/show_cover/".$key['b_ac_id']."'>View Details</a></td>
+                                   <td></td>
+                                   <td><a href='admin_control/Admin/show_cover/".$key['b_ac_id']."'>Click To Change</a></td>
                                    <td>".$step1 ."</td>
                                    <td>".$step2 ."</td>
                                    <td>". $step3 ."</td></tr>";
@@ -1680,7 +1681,8 @@ class Admin extends CI_Controller
                       <td>".$value['name']."</td>
                       <td><a href='".$value['posted_url']."' target='_blank'>".$value['posted_url']."</a></td>
                       <td><a href='".$value['proposed_url']."' target='_blank'>".$value['proposed_url']."</a></td>
-                      <td><a href='admin_control/Admin/show_cover/".$value['b_ac_id']."'>View Details</a></td>
+                      <td></td>
+                      <td><a href='admin_control/Admin/show_cover/".$value['b_ac_id']."'>Click To Change</a></td>
                       <td>".$step1 ."</td>
                       <td>".$step2 ."</td>
                       <td>". $step3 ."</td>

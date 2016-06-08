@@ -94,7 +94,7 @@
                     <table class="table table-striped jambo_table bulk_action">
                         
                         
-                        <tr><td><strong>Cover Letter</strong></td><td><?php echo $get['cover_letter'];?></td><td></td></tr>
+
                         <tr><td><strong>Change Outstanding Proposal Status</strong><td></td><td></td></tr>
                         <tr><td><strong>Contacted</strong></td><td><strong>Offered</strong></td><td><strong>Ended</strong></td></tr>
                         <tr>

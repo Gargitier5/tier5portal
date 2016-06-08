@@ -110,11 +110,12 @@
                               <th class="column-title">BDM Name</th>
                               <th class="column-title">Posted Link</th>
                               <th class="column-title">Proposal Link</th>
+                              <th class="column-title">Cover Letter</th>
                               <th class="column-title">Change Status</th>
                               <th class="column-title" colspan="3">Outstanding Proposal</th>
                            </tr>
                            <tr>
-                              <th class="column-title" colspan="6"></th>
+                              <th class="column-title" colspan="7"></th>
                               <th class="column-title">Contacted</th>
                               <th class="column-title">Offer</th>
                               <th class="column-title">End Status</th>
@@ -147,7 +148,8 @@
                               <td><?php echo $key['name'];?></td>
                               <td><a href="<?php echo $key['posted_url'];?>" target="_blank">Click To View</a></td>
                               <td><a href="<?php echo $key['proposed_url'];?>" target="_blank" >Click To View</a></td>
-                              <td><a href='admin_control/Admin/show_cover/<?php echo $key['b_ac_id']?>'>View Details</a></td>
+                              <td></td>
+                              <td><a href='admin_control/Admin/show_cover/<?php echo $key['b_ac_id']?>'>Click To Change</a></td>
                               <td><?php echo $step1 ;?></td>
                               <td><?php echo $step2 ;?></td>
                               <td><?php echo $step3 ;?></td>
