@@ -2,8 +2,170 @@
 
 $(document).ready(function(){
 
+//disfirstbreak(); // This will run on page load
+//setInterval(function(){
+    //disfirstbreak() // this will run after every seconds
+//}, 10000);
 
+//dissecondbreak(); // This will run on page load
+//setInterval(function(){
+    //dissecondbreak() // this will run after every seconds
+//}, 10000);
+
+//disthird(); // This will run on page load
+//setInterval(function(){
+   // disthird() // this will run after every seconds
+//}, 10000);
          
+/*function disfirstbreak()
+{
+
+
+  var startTime="12:00:00"; // or 12:34
+  var endTime ="13:30:00";  // or 1:34 
+  var dt = new Date();
+  if(dt.getHours()<10)
+  {
+    var hour="0"+dt.getHours();
+  }
+  else
+  {
+    var hour=dt.getHours();
+  }
+
+  if(dt.getMinutes()<10)
+  {
+    var minute="0"+dt.getMinutes();
+  }
+  else
+  {
+    var minute=dt.getMinutes();
+  }
+
+  if(dt.getSeconds()<10)
+  {
+    var sec="0"+dt.getSeconds();
+  }
+  else
+  {
+    var sec=dt.getSeconds();
+  }
+
+  var time = hour + ":" + minute + ":" + sec;
+
+  if(time>startTime && time<endTime)
+  {
+   $('#breakstart_1').removeAttr('disabled');
+  }
+  else
+  {
+    $('#breakstart_1').attr('disabled', 'disabled');
+  }
+
+  
+}*/
+
+/*function dissecondbreak()
+{
+  var startTime="14:00:00"; // or 12:34
+  var endTime ="16:00:00";  // or 1:34 
+  var dt = new Date();
+  if(dt.getHours()<10)
+  {
+    var hour="0"+dt.getHours();
+  }
+  else
+  {
+    var hour=dt.getHours();
+  }
+
+  if(dt.getMinutes()<10)
+  {
+    var minute="0"+dt.getMinutes();
+  }
+  else
+  {
+    var minute=dt.getMinutes();
+  }
+
+  if(dt.getSeconds()<10)
+  {
+    var sec="0"+dt.getSeconds();
+  }
+  else
+  {
+    var sec=dt.getSeconds();
+  }
+
+  var time = hour + ":" + minute + ":" + sec;
+
+  if(time >startTime  && time < endTime)
+  {
+   
+   $('#breakstart_2').removeAttr('disabled');
+  }
+  else
+  {
+    
+    $('#breakstart_2').attr('disabled', 'disabled');
+  }
+
+  
+}*/
+
+/*function disthird()
+{
+  var startTime="17:30:00"; // or 12:34
+  var endTime ="20:00:00";  // or 1:34 
+  var dt = new Date();
+  if(dt.getHours()<10)
+  {
+    var hour="0"+dt.getHours();
+  }
+  else
+  {
+    var hour=dt.getHours();
+  }
+
+  if(dt.getMinutes()<10)
+  {
+    var minute="0"+dt.getMinutes();
+  }
+  else
+  {
+    var minute=dt.getMinutes();
+  }
+
+  if(dt.getSeconds()<10)
+  {
+    var sec="0"+dt.getSeconds();
+  }
+  else
+  {
+    var sec=dt.getSeconds();
+  }
+
+  var time = hour + ":" + minute + ":" + sec;
+  
+  if(time >startTime  && time < endTime)
+  {
+   
+   $('#breakstart_3').removeAttr('disabled');
+  }
+  else
+  {
+    
+    $('#breakstart_3').attr('disabled', 'disabled');
+  }
+
+  
+}
+
+*/
+
+
+
+
 
 setInterval(function(){ chk_time() }, 1000);
 
@@ -235,6 +397,8 @@ $('#prev').click(function(){
 
 
 $('#show_lunch').click(function(){
+  //var btnval=$('#show_lunch').text();
+  //alert(btnval);
   $('#myModal').modal('show');
    $('#shop_display').show();
     $('#succmsg').html('');
@@ -252,12 +416,13 @@ $('#show_lunch').click(function(){
       $.post('employee_control/employee/submitlunchorder',{item:item, cost:cost, shopname:shopname, shopid:shopid},function(data){
        if(data)
        {
-       $('#total_cost').html('00');
-       $('#total_item').html('');
-       $('#item_display').hide();
+         $('#total_cost').html('00');
+         $('#total_item').html('');
+         $('#item_display').hide();
 
          $('#succmsg').html(data);
          $('#succmsg').css('color','red');
+          
       }
       });
     }

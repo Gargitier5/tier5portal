@@ -238,11 +238,11 @@ Notification.requestPermission();
                  
 
 
-                  <a href="#" class="lunch-btn" data-toggle="modal" data-target="#myModal" id="show_lunch" <?php if(date('H:i:s')<="13:15:00"){ echo "style=display:block;";} else {echo "style=display:none;";}?> >Lunch Order</a>
+                  <a href="#" class="lunch-btn" data-toggle="modal"  data-target="#myModal" id="show_lunch" <?php if(date('H:i:s')<="13:15:00"){ echo "style=display:block;";} else {echo "style=display:none;";}?>><?php if(!$lunch_order){ echo "Lunch Order";}else{echo "View order";}?></a>
 
            <!--    <a href="#" class="lunch-btn" data-toggle="modal" id="show_lunch" >Lunch Order</a> -->
-              <br>
-              <a class="lunch-btn" data-toggle="modal"  id="view_lunch" data-target="#lunch_modal" <?php if(date('H:i:s')<="13:15:00"){ echo "style=display:block;";} else {echo "style=display:none;";}?>>View Order</a>
+              <!-- <br>
+              <a class="lunch-btn" data-toggle="modal"  id="view_lunch" data-target="#lunch_modal" <?php //if(date('H:i:s')<="13:15:00"){ echo "style=display:block;";} else {echo "style=display:none;";}?>>View Order</a> -->
 
            
               <!-- Modal -->
@@ -251,6 +251,41 @@ Notification.requestPermission();
 
                 <!-- Modal content-->
                 <div class="modal-content">
+                 <?php if($lunch_order){?>
+                   <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Your Lunch Odred For Today!!!</h4>
+                  </div>
+                    
+                  <div class="modal-body">
+                    <table class="table table-bordered table-hover table-responsive center">
+                        <thead>
+                          <tr>
+                            <th>Employee Name</th>
+                            <th>Date</th>
+                            <th>Shop Name</th>
+                            <th>Items</th>
+                            <th>Cost</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <th><?php echo $placedorder['name'];?></th>
+                            <th><?php echo $placedorder['date'];?></th>
+                            <th><?php echo $placedorder['shopname'];?></th>
+                            <th><?php echo $placedorder['items'];?></th>
+                            <th><?php echo $placedorder['cost'];?></th>
+                            <th><button class="btn btn-success" onclick="location.href='employee_control/Employee/deletelunch/<?php echo $placedorder['Liid'];?>';">Delete</button></th>
+                        </tbody>
+                      </table> 
+
+
+                  </div>
+                  
+
+                   <?php }else{?>
+                  
+
                   <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Lunch Order</h4>
@@ -348,6 +383,7 @@ Notification.requestPermission();
                     </div>  
                   </div>
                   </div>
+                   <?php }?>
                   <!-- <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                   </div> -->
