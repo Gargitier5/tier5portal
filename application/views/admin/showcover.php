@@ -25,30 +25,17 @@
     <link href="css/custom.css" rel="stylesheet">
      
     <!-- jQuery -->
-  
-     <script src="vendors/jquery/dist/jquery.min.js"></script>
-     <script type="text/javascript" src="js/bdm.js"></script>
-      <style type="text/css">
-      .dateclass
-      {
-        float: right;
-      }
-
-
-      </style>
-      <script>
-  $(function() {
-    $( ".datepicker" ).datepicker({
-      dateFormat: 'yy-mm-dd',
-    });
-  });
-  </script>
-
-
-      <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
   <script src="//code.jquery.com/jquery-1.10.2.js"></script>
   <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
   <link rel="stylesheet" href="/resources/demos/style.css">
+  
+     <script src="vendors/jquery/dist/jquery.min.js"></script>
+     <script type="text/javascript" src="js/bdm.js"></script>
+      
+
+
+      
 
 
   </head> 
@@ -65,8 +52,6 @@
             <div class="clearfix"></div>
 
             
-
-            <br />
 
             <!-- sidebar menu -->
             <?php echo $sideber;?>
@@ -87,15 +72,21 @@
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
+                  
                   <div class="x_content">
+                    
                     <br>
                     <br>
                     <div class="table-responsive">
                     <table class="table table-striped jambo_table bulk_action">
                         
-                        
-
-                        <tr><td><strong>Change Outstanding Proposal Status</strong><td></td><td></td></tr>
+                         
+                        <tr><td><strong>Date  (mm/dd/yyyy)</strong></td><td colspan="2"><?php $date = $get['date']; echo date('m/d/Y', strtotime($date));?></td><td></td></tr>
+                        <tr><td><strong>Time</strong></td><td colspan="2"><?php $time = $get['time']; echo date('h:i:s A', strtotime($time));?></td><td></td></tr>
+                        <tr><td><strong>Posted Link</strong></td><td colspan="2"><a href="<?php echo $get['posted_url'];?>" target="_blank"><?php echo $get['posted_url'];?></a></td><td></td></tr>
+                        <tr><td><strong>Proposal Link</strong></td><td colspan="2"><a href="<?php echo $get['proposed_url'];?>" target="_blank"><?php echo $get['proposed_url'];?></a></td><td></td></tr>
+                        <tr><td><strong>Cover Letter</strong></td><td colspan="2"><?php echo $get['cover_letter'];?></td><td></td></tr>
+                        <tr><td colspan="3"><strong>Change Outstanding Proposal Status</strong></td></tr>
                         <tr><td><strong>Contacted</strong></td><td><strong>Offered</strong></td><td><strong>Ended</strong></td></tr>
                         <tr>
                           <td>

@@ -15,18 +15,7 @@ class Admin extends CI_Controller
 	}
 
    public function index()
-    {  
-
-          if($_POST)
-          {
-          $username=$this->input->post('adminid');
-          $password=$this->input->post('adminpass');
-         
-      if($username && $password)
-      {         
-        $check=$this->AdminModel->login($username,$password);
-        if($check)
-        {
+   {   
           if ($this->session->userdata('adminid'))
           {
               
@@ -54,64 +43,7 @@ class Admin extends CI_Controller
               $data['sideber']=$this->load->view('admin/includes/sideber','',true);
               $data['header']=$this->load->view('admin/includes/header','',true);
               $this->load->view('admin/admin_dashboard.php',$data);
-          }
-          else
-          {
-             redirect(base_url());
-
-          }
-        }
-        else
-        {
-          $this->session->set_userdata('e_message','Invalid Username or Password');
-          redirect(base_url());
-        }
-      }
-      else
-      {
-        $this->session->set_userdata('e_message','Enter Username And Password');
-          redirect(base_url());
-      }
-
-        }
-        else
-        {
-           if ($this->session->userdata('adminid'))
-          {
-              
-              $fbreak['date']=date('Y-m-d');
-              $fbreak['type']=1;
-              $fbreak['status']=1;
-
-              $sbreak['date']=date('Y-m-d');
-              $sbreak['type']=2;
-              $sbreak['status']=1;
-
-              $lbreak['date']=date('Y-m-d');
-              $lbreak['type']=3;
-              $lbreak['status']=1;
-             
-              $con['activation_status']=0;
-              $con1['date']=date('Y-m-d');
-              $datee=date('Y-m-d');
-              $data['employee']=$this->AdminModel->AllEmployee();
-              $data['total_employee']=$this->AdminModel->fetchinfo('employee',$con,'count');
-              $data['total_present']=$this->AdminModel->fetchinfo('attendance',$con1,'count');
-              $break1['rank']=1;
-              $data['fbreakduration']=$this->AdminModel->fetchinfo('break',$break1,'row');
-              $data['total_fbreak']=$this->AdminModel->onfirstbreak($datee);
-              $data['total_sbreak']=$this->AdminModel->fetchinfo('break_track',$sbreak,'count');
-              $data['total_lbreak']=$this->AdminModel->fetchinfo('break_track',$lbreak,'count');
-              $data['sideber']=$this->load->view('admin/includes/sideber','',true);
-              $data['header']=$this->load->view('admin/includes/header','',true);
-              $this->load->view('admin/admin_dashboard.php',$data);
-          }
-          else
-          {
-             redirect(base_url());
-
-          }
-        }
+          }      
     }
 
     public function ChatHistory()
@@ -152,6 +84,10 @@ class Admin extends CI_Controller
         $result="";
         foreach ($activity as $key)
         {
+
+          $date =date('m/d/Y', strtotime($key['date']));
+          $time =date('h:i:s A', strtotime($key['time']));
+          if ($key['cover_letter']){$cov="<i class='fa fa-check'></i>";}else{$cov="<i class='fa fa-times'></i>";}
           if($key['step1']==1){ $step1="Contacted";}
                         else if($key['step1']==2){ $step1="Rejected";}
                         else if($key['step1']==3){ $step1="Offer";}
@@ -167,13 +103,13 @@ class Admin extends CI_Controller
                         if($key['step3']=="1_2_1"){ $step3="Offer";}
                         else if($key['step3']=="1_2_2"){ $step3="Rejected";}
                         else { $step3=" ";}
-                         $result.="<tr><td>". $key['date']."</td>
-                                   <td>".$key['time']."</td>
+                         $result.="<tr><td>". $date."</td>
+                                   <td>".$time."</td>
                                    <td>".$key['name']."</td>
-                                   <td><a href='".$key['posted_url']."' target='_blank'>".$key['posted_url']."</a></td>
-                                   <td><a href='".$key['proposed_url']."' target='_blank'>".$key['proposed_url']."</a></td>
-                                   <td></td>
-                                   <td><a href='admin_control/Admin/show_cover/".$key['b_ac_id']."'>Click To Change</a></td>
+                                   <td><a href='".$key['posted_url']."' target='_blank'>Click To View</a></td>
+                                   <td><a href='".$key['proposed_url']."' target='_blank'>Click To View</a></td>
+                                   <td>".$cov."</td>
+                                   <td><a href='admin_control/Admin/show_cover/".$key['b_ac_id']."'>View Details</a></td>
                                    <td>".$step1 ."</td>
                                    <td>".$step2 ."</td>
                                    <td>". $step3 ."</td></tr>";
@@ -1659,6 +1595,9 @@ class Admin extends CI_Controller
         //print_r($srch);
         foreach ($srch as $value) 
         {
+          $date =date('m/d/Y', strtotime($value['date']));
+          $time =date('h:i:s A', strtotime($value['time']));
+          if ($value['cover_letter']){$cov="<i class='fa fa-check'></i>";}else{$cov="<i class='fa fa-times'></i>";}
           if($value['step1']==1){ $step1="Contacted";}
                         else if($value['step1']==2){ $step1="Rejected";}
                         else if($value['step1']==3){ $step1="Offer";}
@@ -1676,13 +1615,13 @@ class Admin extends CI_Controller
                         else { $step3=" ";}
 
           $result.="<tr>
-                      <td>".$value['date']."</td>
-                      <td>".$value['time']."</td>
+                      <td>".$date."</td>
+                      <td>".$time."</td>
                       <td>".$value['name']."</td>
-                      <td><a href='".$value['posted_url']."' target='_blank'>".$value['posted_url']."</a></td>
-                      <td><a href='".$value['proposed_url']."' target='_blank'>".$value['proposed_url']."</a></td>
-                      <td></td>
-                      <td><a href='admin_control/Admin/show_cover/".$value['b_ac_id']."'>Click To Change</a></td>
+                      <td><a href='".$value['posted_url']."' target='_blank'>Click To View</a></td>
+                      <td><a href='".$value['proposed_url']."' target='_blank'>Click To View</a></td>
+                      <td>".$cov."</td>
+                      <td><a href='admin_control/Admin/show_cover/".$value['b_ac_id']."'>View Details</a></td>
                       <td>".$step1 ."</td>
                       <td>".$step2 ."</td>
                       <td>". $step3 ."</td>

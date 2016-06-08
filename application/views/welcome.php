@@ -131,7 +131,7 @@ setInterval( function() {
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4>Admin Login</h4>
 
-        <form role="form" method="post" action="admin_control/Admin" novalidate="novalidate">
+        <form role="form" method="post" action="Welcome/adminlogin" novalidate="novalidate">
 <div class="form-group">
 <input type="text" placeholder="user_name" class="form-control input-lg required" id="adminid" name="adminid" aria-required="true">
 </div>
@@ -196,7 +196,7 @@ setInterval( function() {
       <div class="modal-body">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4>Employee Login</h4>
-        <form role="form" method="post" action="employee_control/Employee">
+        <form role="form" method="post" action="Welcome/emplogin">
 <div class="form-group">
 <input type="text" placeholder="user_name" class="form-control input-lg required" id="empid" name="empid" aria-required="true">
 </div>

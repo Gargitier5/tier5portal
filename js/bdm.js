@@ -32,6 +32,8 @@ function getvalue()
 	}
 }
 
+
+
 function changestep1(act_id)
 {
 	
