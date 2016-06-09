@@ -436,9 +436,6 @@ function Start_Break(breakid,duration)
   
   if(button=='Start Break')
   {
-
-
-
     $.post('employee_control/employee/startbreak',{breakid:breakid},function(data){//inserting 0 in breakstatus column in attendence table 
       
         if(data)
@@ -480,16 +477,18 @@ function Start_Break(breakid,duration)
               $('#clockout_btn').removeAttr('disabled');
 
             }
+
+            $.post('employee_control/employee/checkwork',function(data1){
+            if(data1)
+            {
+              $('#timerr').html('');
+            }
+            }); 
         
         }             
     });
 
-    $.post('employee_control/employee/checkwork',function(data1){
-      if(data1)
-      {
-        $('#timerr').html('');
-      }
-    }); 
+    
   }
   else
   {
@@ -497,6 +496,8 @@ function Start_Break(breakid,duration)
         $.post('employee_control/employee/endbreak', {breakid:breakid},function(data){//inserting 0 in breakstatus column in attendence table 
         if(data)
         { 
+
+
             $('#hm_timer'+breakid).html('');      
             $('#breakdur'+breakid).html(data);
             $('#clockout_btn').removeAttr('disabled');
@@ -535,16 +536,9 @@ function Start_Break(breakid,duration)
         }
       });
 
-      $.post('employee_control/employee/checkstastuswork',function(data){
+      /*$.post('employee_control/employee/checkstastuswork',function(data){
                  
-      });
-      $.post('employee_control/employee/endbreak', {breakid:breakid},function(data){//inserting 0 in breakstatus column in attendence table 
-      if(data)
-      { 
-
-                
-      }
-      });
+      });*/
   }
 }
 
@@ -561,38 +555,6 @@ function clockin()
     }); 
 }
 
-       /* var totalSeconds = 0;
-        var hoursLabel = document.getElementById("hours");
-        var minutesLabel = document.getElementById("minutes");
-        var secondsLabel = document.getElementById("seconds");
-      function workingmode()
-      {
-        
-      
-        setInterval(setTime, 1000);
-      }
-
-        function setTime()
-        {
-            ++totalSeconds;
-            secondsLabel.innerHTML = pad(totalSeconds%60);
-            minutesLabel.innerHTML = pad(parseInt(totalSeconds/60));
-            hoursLabel.innerHTML = pad(parseInt(totalSeconds/3600));
-            
-        }
-
-        function pad(val)
-        {
-            var valString = val + "";
-            if(valString.length < 2)
-            {
-                return "0" + valString;
-            }
-            else
-            {
-                return valString;
-            }
-        }*/
-
+       
 
 

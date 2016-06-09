@@ -509,6 +509,7 @@
        $data2['Eid']=$data['Eid'];
        $data2['date']=$data['date'];
        $data2['type']=$data['type'];
+       $data2['status']='1';
 
        $break_end=$this->db->get_where('break_track',$data2);
        $result1=$break_end->row_array();
@@ -549,28 +550,29 @@
               $default_time_sec= mktime($hours, $minutes, $seconds);
               
 
+         
+          if($time_taken_sec>$default_time_sec)
+          {
+
               $letseconds = $time_taken_sec - $default_time_sec;
               $sec=($letseconds % 60);
-               if($sec<10)
-               {
-               $sec="0".$sec;
-               }
+              if($sec<10)
+              {
+                $sec="0".$sec;
+              }
               $minutes = ($letseconds / 60) % 60;
               $hours = floor($letseconds / (60 * 60));
 
               $extra_taken="$hours:$minutes:$sec";
-         
-          if($time_taken_sec>$default_time_sec)
-          {
              
               $nwdata['endtime']=$data['endtime'];
               $nwdata['action']='1';
               $nwdata['time']=$extra_taken;
               $nwdata['status']='0';
-             $this->db->where($data2);
-             $res=$this->db->update('break_track',$nwdata);
-             if($res)
-             {
+              $this->db->where($data2);
+              $res=$this->db->update('break_track',$nwdata);
+              if($res)
+              {
 
                   if($letseconds<=7200)
                  {

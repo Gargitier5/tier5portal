@@ -432,7 +432,14 @@ class Employee extends CI_Controller
              $data['type']=$this->input->post('breakid');
              $data['status']='1';
              $brk_start_time=$this->EmployeeModel->startbreak($data);
-             print_r($brk_start_time);
+             if($brk_start_time)
+             {
+               print_r($brk_start_time);
+             }
+             else
+             {
+               return false;
+             }
           }
       }
       else
@@ -449,7 +456,7 @@ class Employee extends CI_Controller
           $data['endtime']=date("H:i:s");
           $data['date']=date("Y-m-d");
           $data['type']=$this->input->post('breakid');
-          $data['status']='0';
+          $data['status']='1';
           $brk_end_time=$this->EmployeeModel->endbreak($data);
           print_r($brk_end_time);
         }
