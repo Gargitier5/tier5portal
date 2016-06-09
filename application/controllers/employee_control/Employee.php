@@ -346,7 +346,7 @@ class Employee extends CI_Controller
       {
          $data['date']=date("Y-m-d");
          $data['Eid'] = $this->session->userdata('uid');
-         $data['status']=1;
+         $data['status']='1';
 
          $checkmode=$this->EmployeeModel->fetchinfo('tbl_employee_productivity',$data,'row');
 

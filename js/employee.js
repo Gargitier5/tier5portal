@@ -536,9 +536,9 @@ function Start_Break(breakid,duration)
         }
       });
 
-      /*$.post('employee_control/employee/checkstastuswork',function(data){
+      $.post('employee_control/employee/checkstastuswork',function(data){
                  
-      });*/
+      });
   }
 }
 
