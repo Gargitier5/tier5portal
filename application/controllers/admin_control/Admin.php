@@ -294,6 +294,7 @@ class Admin extends CI_Controller
     public function logout()
     {
       $this->session->unset_userdata('adminid');
+       $_SESSION['username']='';
       $this->session->sess_destroy();
       redirect(base_url());
       
@@ -1474,6 +1475,26 @@ class Admin extends CI_Controller
           $this->session->set_userdata('err_msg','Cost More Than Rs 100/-');
           redirect(base_url().'admin_control/admin/placelunch');
       }
+
+
+    }
+
+    public function edittpoint()
+    {
+      $con['badges_id']=$this->input->post('bid');
+      $data['tpoint']=$this->input->post('newinput');
+      $update=$this->AdminModel->update('badges',$con,$data);
+      print_r($con);
+      /*if($update)
+      {
+          redirect(base_url().'admin_control/admin/badges');
+          $this->session->set_userdata('succ_msg','');
+      }
+      else
+      {
+         redirect(base_url().'admin_control/admin/badges');
+          $this->session->set_userdata('err_msg','Try Again');
+      }*/
 
 
     }

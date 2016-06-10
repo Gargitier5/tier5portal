@@ -140,7 +140,7 @@ Notification.requestPermission();
 
                 </div>  
               </div>  --> 
-
+               
             
               <div class="privilege">
               <div id="demo">

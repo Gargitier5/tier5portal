@@ -406,7 +406,6 @@
      $data1['Eid']=$data['Eid'];
      $data1['date']=$data['date'];
      $data1['type']=$data['type'];
-     $data1['status']='1';
 
       $this->db->select('*');
       $this->db->where($data1);
@@ -423,14 +422,15 @@
         
         if($result)
         {
-           print_r($data);
+           print_r($result);
         }
         else
         {
-        return false;
+           return false;
         }
       }
     }
+
     public function stopactiv($data)
     {
        $con['Eid']=$data['Eid'];
@@ -506,8 +506,119 @@
        return $res->result_array();
     
     }
-
+    
     public function endbreak($data)
+    {
+        $data1['rank']=$data['type'];
+        $break_end=$this->db->get_where('break',$data1);
+        $default_time=$break_end->row_array();
+
+        $break_end=$this->db->get_where('break_track',$data);
+        $result1=$break_end->row_array();
+
+        $time1=$result1['starttime'];
+        $time2=date('H:i:s');
+
+        $start_time = strtotime($time1);
+        $end_time=strtotime($time2);
+
+        $time_taken_sec=$end_time-$start_time;
+
+        $a = explode(":", $default_time['duration']);
+        $default_in_sec = (($a[0] * 3600)+ ($a[1] * 60) + $a[2]);
+
+        if($default_in_sec>$time_taken_sec)
+        {
+             $nwdata['endtime']=$time2;
+             $nwdata['status']='0';
+             $this->db->where($data);
+             $res=$this->db->update('break_track',$nwdata);
+             if($res)
+             {
+                
+                 $break= $time_taken_sec;
+                 $sec=($break % 60);
+                 if($sec<10){ $sec="0".$sec;}
+                 $minutes = ($break / 60) % 60;
+                 if($minutes<10){ $minutes="0".$minutes;}
+                 $hours = floor($break / (60 * 60));
+                 if($hours<10){$hours="0".$hours;}
+                 $totaltime_taken="$hours:$minutes:$sec";
+                 echo $totaltime_taken;
+             }
+             else
+             {
+               return false;
+             }
+        }
+        else
+        {
+              $letseconds=$time_taken_sec-$default_in_sec;
+              $secnd=($letseconds % 60);
+              if($secnd<10){ $secnd="0".$secnd;}
+              $min = ($letseconds / 60) % 60;
+              if($min<10){ $min="0".$min;}
+              $hour = floor($letseconds / (60 * 60));
+              if($hour<10){ $hour="0".$hour;}
+              $extra_taken="$hour:$min:$secnd";
+
+              $nwdata['endtime']=$time2;
+              $nwdata['status']='0';
+              $nwdata['time']=$extra_taken;
+              $nwdata['status']='0';
+              
+              $this->db->where($data);
+              $res=$this->db->update('break_track',$nwdata);
+              if($res)
+              {
+          
+                      $start_date=date("Y-m-d", strtotime(date('m').'/01/'.date('Y')));
+                      $end_date=date("Y-m-d");
+
+                      $this->db->select('*');
+                      $this->db->where('Eid',$data['Eid']);
+                      $this->db->where('last_update BETWEEN "'. date('Y-m-d', strtotime($start_date)). '" and "'. date('Y-m-d', strtotime($end_date)).'"');
+                      $res = $this->db->get('point_history');
+                      $point=$res->row_array();
+                      if($letseconds<=7200)
+                      {
+                                $new['points']=$point['points']-250;
+                      }
+                      else if($letseconds>=7200 && $letseconds<=14400)
+                      {
+                               $new['points']=$point['points']-500;
+                      }
+                      else if($letseconds>=14400)
+                      {
+                                $new['points']=$point['points']-1000;
+                      }
+                      else
+                      {
+                                $new['points']=$point['points'];
+                      }
+                      $con['P_id']=$point['P_id'];
+                      $this->db->where($con);
+                      $res=$this->db->update('point_history',$new);
+                      
+                      $break= $time_taken_sec;
+                      $sec=($break % 60);
+                      if($sec<10){ $sec="0".$sec;}
+                      $minutes = ($break / 60) % 60;
+                      if($minutes<10){ $minutes="0".$minutes;}
+                      $hours = floor($break / (60 * 60));
+                      if($hours<10){$hours="0".$hours;}
+                      $totaltime_taken="$hours:$minutes:$sec";
+                      echo $totaltime_taken."/".$new['points']; 
+              }
+              else
+              {
+                return false;
+              }
+
+        }
+        
+    }
+    /*public function endbreak($data)
     {
        $data1['rank']=$data['type'];
        $break_end=$this->db->get_where('break',$data1);
@@ -655,7 +766,7 @@
              //return $this->db->affected_rows();
              print_r($totaltime_taken);
           }
-    }
+    }*/
 
     public function get_event($event_id){        
         $this->db->select('*');

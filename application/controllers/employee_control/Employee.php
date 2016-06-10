@@ -20,6 +20,7 @@ class Employee extends CI_Controller
 
     public function index()
     {  
+     
       if ($this->session->userdata('uid'))
       {
           /* chat introduce */
@@ -361,7 +362,7 @@ class Employee extends CI_Controller
           $data1['status']=0;
           $data1['endTime']=date('H:i:s');
           $stopworkingmode=$this->EmployeeModel->update('tbl_employee_productivity',$con,$data1);
-          return $stopworkingmode;
+          echo $stopworkingmode;
          } 
          else
          {
@@ -414,7 +415,7 @@ class Employee extends CI_Controller
       }
     }
 
-    public function startbreak()
+    /*public function startbreak()
     {
 
       if ($this->session->userdata('uid'))
@@ -447,25 +448,66 @@ class Employee extends CI_Controller
          redirect(base_url());
       }
     }
-
+*/
     public function endbreak()
     {
         if ($this->session->userdata('uid'))
         {
           $data['Eid']=$this->session->userdata('uid');
-          $data['endtime']=date("H:i:s");
           $data['date']=date("Y-m-d");
           $data['type']=$this->input->post('breakid');
           $data['status']='1';
           $brk_end_time=$this->EmployeeModel->endbreak($data);
-          print_r($brk_end_time);
+           if($brk_end_time)
+           {
+               echo $brk_end_time;
+           }
+           else
+           {
+             return false;
+           }
         }
         else
         {
            redirect(base_url());
         }
     }
+    public function startbreak()
+    {
+        if ($this->session->userdata('uid'))
+        {
+            $con['Eid'] = $this->session->userdata('uid');
+            $con['date']=date("Y-m-d");
+            $check_clockin=$this->EmployeeModel->fetchinfo('attendance',$con,'count');
+            if($check_clockin>0)
+            {
+              
+               $data['Eid'] = $this->session->userdata('uid');
+               $data['starttime']=date("H:i:s");
+               $data['date']=date("Y-m-d");
+               $data['type']=$this->input->post('breakid');
+               $data['status']='1';
+               $start_break=$this->EmployeeModel->startbreak($data);
+               if($start_break)
+               {
+                 print_r($start_break);
+               }
+               else
+               {
+                 return false;
+               }
+            }
+            else
+            {
+               return false;
 
+            }
+        }
+        else
+        {
+         redirect(base_url());
+        }
+    }
     public function submitlunchorder()
     {
         if ($this->session->userdata('uid'))

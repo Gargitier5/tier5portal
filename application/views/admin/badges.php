@@ -93,10 +93,19 @@
               <tbody>
                 <?php foreach ($badges as $key){?>
                  <td><?php echo $key['badge']; ?></td>
-                 <td><?php echo $key['tpoint']; ?></td>
+                 <td>
+                     <div id="badge_<?php echo $key['badges_id']; ?>"><?php echo $key['tpoint']; ?></div>
+                     <div>
+                        <form method="post" action="admin_control/admin/edittpoint">
+                           <input type="text" style="display:none" name="bid" value="<php echo $key['badges_id']; ?>">
+                           <input type="number" style="display:none" id="input<?php echo $key['badges_id']; ?>" name="newinput">
+                           <input type="submit" id="sub<?php echo $key['badges_id']; ?>" style="display:none" value="Change">
+                        </form>
+                     </div>
+                 </td>
                  <!-- <td></td> -->
                  <td><?php if($key['status']==0) { echo "Active";}else if($key['status']==1){ echo "Inactive";} else {echo "";} ?></td>
-                 <td><button class="btn btn-success glyphicon glyphicon-edit" title="Edit"></button><!-- <button title="Delete" class="btn btn-danger glyphicon glyphicon-trash"></button> --><button title="Change Status" onclick="changestatus(<?php echo $key['badges_id']; ?>)" class="btn btn-primary glyphicon glyphicon-off"></button></td>
+                 <td><!--<button class="btn btn-success glyphicon glyphicon-edit" title="Edit" onclick="edit_badge(<?php echo $key['badges_id']; ?>)"></button> <button title="Delete" class="btn btn-danger glyphicon glyphicon-trash"></button> --><button title="Change Status" onclick="changestatus(<?php echo $key['badges_id']; ?>)" class="btn btn-primary glyphicon glyphicon-off"></button></td>
                   
                 <?php }?>
               </tbody>

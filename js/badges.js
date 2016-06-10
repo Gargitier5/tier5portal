@@ -20,3 +20,13 @@ $(document).ready(function(){
    });
 	
  }
+
+ function edit_badge(budget)
+ {
+  
+  $('#badge_'+budget).hide();
+  $('#input'+budget).show();
+  $('#sub'+budget).show();
+  
+    //alert(budget);
+ }

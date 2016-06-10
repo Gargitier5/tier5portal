@@ -301,7 +301,7 @@ function chatHeartbeat(){
 
 				chatboxtitle = item.f;
 
-				if(item.m)
+				if(item.m && item.f !=sessionUser && item.s ==0)
 				{
 				notifyBrowser(item.f);	
 				}
