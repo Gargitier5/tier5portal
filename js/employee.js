@@ -479,11 +479,11 @@ function Start_Break(breakid,duration)
                }
 
                 $.post('employee_control/employee/checkwork',function(data1){
-               if(data1)
-               {
-                alert(data1);
-                 setTimeout(function(){ chk_time() }, 1000);
-               }
+               //if(data1)
+               //{
+                //alert(data1);
+                 //setTimeout(function(){ chk_time() }, 1000);
+               //}
                });
 
            }
