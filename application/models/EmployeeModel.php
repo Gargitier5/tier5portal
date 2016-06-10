@@ -116,10 +116,10 @@
                      print_r ($data5['clockin']);
                      //return $this->db->affected_rows();
                  }
-                 else
+                 else if($letseconds>=14400)
                  {
-                      $start_date=date("Y-m-d", strtotime(date('m').'/01/'.date('Y')));
-                      $end_date=date("Y-m-d");
+                    $start_date=date("Y-m-d", strtotime(date('m').'/01/'.date('Y')));
+                    $end_date=date("Y-m-d");
 
                      $this->db->select('*');
                      $this->db->where('Eid',$data['Eid']);
@@ -133,6 +133,10 @@
                      print_r ($data5['clockin']);
                      //return $this->db->affected_rows();
                  }
+                 else
+                 {
+                     print_r ($data5['clockin']);
+                 } 
             }
             else
             {
@@ -227,7 +231,7 @@
                      $res=$this->db->update('point_history',$new1);
                      return $this->db->affected_rows();
                  }
-                 else
+                 else if($letseconds>=14400)
                  {
                       $start_date=date("Y-m-d", strtotime(date('m').'/01/'.date('Y')));
                       $end_date=date("Y-m-d");
@@ -242,6 +246,10 @@
                      $this->db->where($con1);
                      $res=$this->db->update('point_history',$new);
                      return $this->db->affected_rows();
+                 }
+                 else
+                 {
+                   return $this->db->affected_rows();
                  }
                }
                
@@ -610,7 +618,7 @@
                      //return $this->db->affected_rows();
                      print_r($totaltime_taken);
                  }
-                 else
+                 else if($letseconds>=14400)
                  {
                       $start_date=date("Y-m-d", strtotime(date('m').'/01/'.date('Y')));
                       $end_date=date("Y-m-d");
@@ -626,6 +634,10 @@
                      $res=$this->db->update('point_history',$new);
                      //return $this->db->affected_rows();
                      print_r($totaltime_taken);
+                 }
+                 else
+                 {
+                  print_r($totaltime_taken);
                  }
 
 

@@ -1,4 +1,4 @@
-$(document).ready(function(){
+ $(document).ready(function(){
 
     //disfirstbreak(); // This will run on page load
     //dissecondbreak(); // This will run on page load
@@ -135,7 +135,7 @@ $(document).ready(function(){
                 $('#breakstart_'+data1[1]).text("Work");
                 var data2=data1[0].split(':');         
             
-               if(data1[1]==1)
+               /*if(data1[1]==1)
                 {
                   $('#breakstart_2').attr('disabled', 'disabled');
                   $('#breakstart_3').attr('disabled', 'disabled');   
@@ -155,7 +155,7 @@ $(document).ready(function(){
                   $('#breakstart_1').removeAttr('disabled');
                   $('#breakstart_2').removeAttr('disabled');
                   $('#breakstart_3').removeAttr('disabled');
-                }
+                }*/
 
                 if(dataa[1]==0)
                 {
@@ -437,7 +437,7 @@ function Start_Break(breakid,duration)
   if(button=='Start Break')
   {
     $.post('employee_control/employee/startbreak',{breakid:breakid},function(data){//inserting 0 in breakstatus column in attendence table 
-      
+      console.log(data);
         if(data)
         {
             var data2=duration.split(':'); 
@@ -478,12 +478,12 @@ function Start_Break(breakid,duration)
 
             }
 
-            $.post('employee_control/employee/checkwork',function(data1){
+            /*$.post('employee_control/employee/checkwork',function(data1){
             if(data1)
             {
               $('#timerr').html('');
             }
-            }); 
+            }); */
         
         }             
     });
@@ -556,5 +556,14 @@ function clockin()
 }
 
        
+
+
+
+
+
+
+
+
+
 
 

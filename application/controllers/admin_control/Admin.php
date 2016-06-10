@@ -46,6 +46,29 @@ class Admin extends CI_Controller
           }      
     }
 
+    public function changebudget()
+    {
+      $budget['badges_id']=$this->input->post('budget');
+      $get=$this->AdminModel->fetchinfo('badges',$budget,'row');
+      //echo ($budget['badges_id']);
+      if($get['status']==0)
+      {
+         $data['status']="1";
+      }
+      else if($get['status']==1)
+      {
+         $data['status']="0";
+      }
+      else
+      {
+        $data['status']="0";
+      }
+      //print_r($data1['status']);
+      $update=$this->AdminModel->update('badges',$budget,$data);
+      return $update;
+
+    }
+
     public function ChatHistory()
     {
        if ($this->session->userdata('adminid'))
@@ -63,6 +86,82 @@ class Admin extends CI_Controller
              redirect(base_url());
 
           }
+    }
+
+    public function lbadd()
+    {
+      //print_r($_POST);
+      $point=$this->input->post('bonus');
+      $action=$this->input->post('action_taken');
+      $bonus['Lb_id']=$this->input->post('b_id');
+      if($point && $action )
+      {
+        $gpoint=$this->AdminModel->fetchinfo('lunch_bonus',$bonus,'row');
+      
+        if($action==1)
+        {
+           $newpoint=$gpoint['Lunch_bonus']+$point;
+        }
+        else
+        {
+          $newpoint=$gpoint['Lunch_bonus']-$point;
+        }
+        $data['Lunch_bonus']=$newpoint;
+        $update=$this->AdminModel->update('lunch_bonus',$bonus,$data);
+        if($update)
+        {
+             $data1['Eid']=$gpoint['Eid'];
+             $data1['action']=$action;
+             $data1['field']='2';
+             $data1['point']=$point;
+             $data1['date']=date('Y-m-d');
+             $data1['time']=date('H:i:s');
+             $updatelog=$this->AdminModel->insert('log_book',$data1);
+             $this->session->set_userdata('succ_msg','Lunch Bonus Edited Successfully');
+             redirect(base_url().'admin_control/admin/addlunchbonus');
+        }
+        else
+        {
+            $this->session->set_userdata('err_msg','Try Again');
+            redirect(base_url().'admin_control/admin/addlunchbonus');
+
+        }
+      }
+      else
+      {
+
+          $this->session->set_userdata('err_msg','All Fields Needed');
+          redirect(base_url().'admin_control/admin/addlunchbonus');
+
+      }
+
+    }
+
+    public function addlunchbonus()
+    {     
+          $con=date('Y-m-d');
+          $data['alllunchbonus']=$this->AdminModel->alllunchbonus($con);
+          
+          $data['sideber']=$this->load->view('admin/includes/sideber','',true);
+          $data['header']=$this->load->view('admin/includes/header','',true);
+          $this->load->view('admin/addlunchbonus.php',$data);
+
+    }
+
+    public function badges()
+    {
+      if ($this->session->userdata('adminid'))
+      {
+          $data['badges']=$this->AdminModel->getbadges();
+          $data['sideber']=$this->load->view('admin/includes/sideber','',true);
+          $data['header']=$this->load->view('admin/includes/header','',true);
+          $this->load->view('admin/badges.php',$data);
+      
+      }
+      else
+      {
+          redirect(base_url());
+      }
     }
     public function bdmactivity()
     {
@@ -286,8 +385,15 @@ class Admin extends CI_Controller
             $update=$this->AdminModel->update('employee',$con1,$data1);
             if($update)
             {
-             $this->session->set_userdata('succ_msg','User Created Successfully!!The Employee Is Active Now');
-             redirect(base_url().'admin_control/admin/setbonus');
+
+              $logbook['Eid']=$data['Eid'];
+              $logbook['action']='1';
+              $logbook['field']='3';
+              $logbook['date']=date('Y-m-d');
+              $logbook['time']=date('H:i:s');
+              $log=$this->AdminModel->insert('log_book',$logbook);
+              $this->session->set_userdata('succ_msg','User Created Successfully!!The Employee Is Active Now');
+              redirect(base_url().'admin_control/admin/setbonus');
             }
             else
             {
@@ -661,6 +767,7 @@ class Admin extends CI_Controller
           $data2['point']=$this->input->post('npoint');
           $data2['date']=date('Y-m-d');
           $data2['time']=date('H:i:s');
+          $data2['field']='1';
           //print_r($data2);
           $update_log=$this->AdminModel->insert('log_book',$data2);
           if($update_log)

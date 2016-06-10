@@ -51,6 +51,8 @@
                       </li>
                       <li><a href="<?php echo base_url();?>admin_control/admin/addlunchitem">Add New Shop/Item</a>
                       </li>
+                      <li><a href="<?php echo base_url();?>admin_control/admin/addlunchbonus">Add/Deduct Lunch Bonus</a>
+                      </li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-image"></i>Event Management<span class="fa fa-chevron-down"></span></a>
@@ -130,6 +132,12 @@
                       </li> -->
                       <!--  <li><a href="">See Progress</a>
                       </li> -->
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-trophy"></i>Badges<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="<?php echo base_url();?>admin_control/admin/badges">Manage Badges</a>
+                      </li>
                     </ul>
                   </li>
                  <?php } ?>

@@ -59,11 +59,10 @@
                   <div class="x_content">
                     <div align="right"><h2><a href="admin_control/admin/bdmactivity"><span><<<span>Back</a><h2></div>
                     
-                    <!-- <div>
+                    <div>
                           Search: <input type="text" name="search" id="search">
                           <input type="button" onclick="getvalue()" value="Search">
-                    </div> -->
-                    <br>
+                    </div>                    <br>
                         <div class="table-responsive">
                           <h2 align="center">Details Of Proposal</h2>
                           <div class="clearfix"></div>

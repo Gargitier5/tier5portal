@@ -76,24 +76,24 @@
                   <div class="x_content">
                     
                     <div id="datatable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer"><div class="row"><div class="col-sm-6"><div class="dataTables_length" id="datatable_length"></div></div><div class="col-sm-6"><div id="datatable_filter" class="dataTables_filter"></div></div></div><div class="row"><div class="col-sm-12"><table class="table table-striped table-bordered dataTable no-footer" id="datatable" role="grid" aria-describedby="datatable_info">
-                      <thead>
-                        <tr role="row"><th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" style="width: 100.883px;" aria-sort="ascending" aria-label="Name: activate to sort column descending">Employee Name</th><th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" style="width: 175.883px;" aria-label="Position: activate to sort column ascending">Points</th><th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" style="width: 72.8833px;" aria-label="Office: activate to sort column ascending">Action</th><th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" style="width: 31.8833px;" >Date</th><th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" style="width: 72.8833px;" aria-label="Start date: activate to sort column ascending">Time</th></tr>
-                      </thead>
-
+                     <!--  <thead>
+                        <tr role="row"><th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" style="width: 100.883px;" aria-sort="ascending" aria-label="Name: activate to sort column descending">Employee Name</th><th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" style="width: 175.883px;" aria-label="Position: activate to sort column ascending">Points</th><th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" style="width: 72.8833px;" aria-label="Office: activate to sort column ascending">Action</th><th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" style="width: 72.8833px;" aria-label="Office: activate to sort column ascending">Action</th><th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" style="width: 31.8833px;" >Date</th><th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" style="width: 72.8833px;" aria-label="Start date: activate to sort column ascending">Time</th></tr>
+                      </thead> -->
+                     <table>
 
                       <tbody>
                         
                         
                       <?php foreach ($all_log as $value)
                        {?>
-                        <tr role="row" class="odd">
-                          <td class="sorting_1"><?php echo $value['name']; ?></td>
-                          <td><?php echo $value['point']; ?></td>
-                          <td><?php if ($value['action']==1 ){ echo "Added";}else{echo "Deducted";}?></td>
-                          <td><?php $str=$value['date']; $date = DateTime::createFromFormat('Y-m-d', $str);
-$datee=$date->format('d/m/Y');
-echo $datee; ?></td>
-                          <td><?php echo $value['time']; ?></td>
+                       
+                      <tr>
+                        <td><i class="glyphicon glyphicon-tags"></i> &nbsp;<?php echo $value['name']; ?> &nbsp;</td>
+                        <td><?php if ($value['action']==1 ){ echo "Added";}else{echo "Deducted";}?> &nbsp;</td>
+                        <td><?php echo $value['point']; ?> <?php if($value['point']) {echo "Points";}else{echo"";}?>&nbsp;&nbsp;</td>
+                        <td>as <?php if ($value['field']==1){ echo "Attendance Bonus";}else if($value['field']==2 ){echo "Lunch Bonus";} else if($value['field']==3 ) { echo "New Employee";} else { echo "";}?> &nbsp;</td>
+                        <td>on &nbsp; <?php echo $value['date']; ?> &nbsp;</td>
+                        <td>at &nbsp; <?php echo $value['time']; ?> &nbsp;</td>
                       </tr>
                     <?php
                      }

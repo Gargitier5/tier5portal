@@ -52,21 +52,21 @@
         if( $result1)
         {
            // $result=$res->num_rows();
-            if($result1['role']==0)
-            {
+            //if($result1['role']==0)
+            //{
              
-              $this->session->set_userdata('e_message','Hi!!! Admin,  you donot have the permission of employee panel');
-              redirect(base_url());
-            }
-            else
-            {
+              //$this->session->set_userdata('e_message','Hi!!! Admin,  you donot have the permission of employee panel');
+              //redirect(base_url());
+            //}
+            //else
+            //{
                $this->session->set_userdata('name',$result1['name']);
                $this->session->set_userdata('uid',$result1['Eid']);
                $this->session->set_userdata('role',$result1['role']);
                  $this->session->set_userdata('emp_name',$result1['username']);
               //$this->session->set_userdata('uname',$result['Eid']);
               return $result1;
-            }
+            //}
         }
         else
         {

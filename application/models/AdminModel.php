@@ -8,7 +8,7 @@
       $this->load->database();
     } 
 
-     public function login($username,$password)
+     /*public function login($username,$password)
     {
         $this->db->select('*');
         $this->db->where('username',$username);
@@ -35,6 +35,13 @@
         {
           return false;
         }
+    }*/
+
+    public function getbadges()
+    {
+      $this->db->select('*');
+      $res=$this->db->get('badges');
+      return $res->result_array();
     }
 
     public function getactivity($con)
@@ -59,14 +66,20 @@
       return $res->result_array();
 
     }
-
-    public function allportal()
-    {
-      $this->db->select('*');
-      $res=$this->db->get('bdm_url');
-      return $res->result_array();
-    }
     
+    public function alllunchbonus($con)
+    {
+
+      $start_date=date('Y-m-d',strtotime('first day of this month'));
+      $end_date=$con;
+      $this->db->select('lunch_bonus.*,employee.name');
+      $this->db->join('employee','lunch_bonus.Eid=employee.id');
+      $this->db->where('last_update BETWEEN "'. date('Y-m-d', strtotime($start_date)). '" and "'. date('Y-m-d', strtotime($end_date)).'"');
+      $res=$this->db->get('lunch_bonus');
+      return $res->result_array();
+
+
+    }
     /*public function getactivitybyname($con)
     {
 
