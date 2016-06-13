@@ -107,23 +107,7 @@ Notification.requestPermission();
                <div class="content3 mCustomScrollbar" data-mcs-theme="minimal">
                 <div class="row pre-row">
                   <?php  
-                   //$privilege=privilege($points['points'],$points['Eid']);
-                    
-                    //print_r($privilege)
-                   /*  foreach ($privilege as $key)
-                     {?>
-
-                      <div class="col-md-4 col-sm-4">
-                        <div class="privilege-box active-privilege">
-                          <div class="pre-icon">
-                           <img src="<?php echo $key['icon']; ?>" alt="img">
-                          </div>  
-                          <?php echo $key['badge']; ?>
-                        </div>  
-                      </div>
-                       
-                    <?php }*/
-                   //echo '<pre>';print_r($privilege);
+                  
                     for($i=0; $i<count($privilege); $i++)
                     {
                       $split=explode(':',$privilege[$i]);

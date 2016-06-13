@@ -38,7 +38,7 @@
             $this->db->where('status',0);
             $res=$this->db->get('empbadge');
             $count=$res->row_array();
-            if($count)
+            if(!$count)
             {
                 array_push($badgesarr,$value['badge'].':'.$value['icon']);
             }
