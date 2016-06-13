@@ -473,7 +473,7 @@ class Employee extends CI_Controller
         }
         else
         {
-           redirect(base_url());
+           return false;
         }
     }
     public function startbreak()
@@ -509,7 +509,7 @@ class Employee extends CI_Controller
         }
         else
         {
-         redirect(base_url());
+         return false;
         }
     }
     public function submitlunchorder()
