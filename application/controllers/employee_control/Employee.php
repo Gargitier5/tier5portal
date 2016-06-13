@@ -8,7 +8,7 @@ class Employee extends CI_Controller
 	{
 		parent::__construct();
 
-    $this->output->cache(1);
+    
 		$this->load->helper('url');
 		$this->load->database();
 		$this->load->model('EmployeeModel');

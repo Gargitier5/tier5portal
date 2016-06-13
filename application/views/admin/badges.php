@@ -58,29 +58,22 @@
             <div class="clearfix"></div>
 
             <div class="row">
-            
+            <!-- <div class="col-md-12 col-sm-12 col-xs-12">
+               <button class="btn btn-primary">Click To Add New Badges</button>
+               <div id="add_div">
+
+               </div>
+
+            </div> -->
 
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                  
-      <?php if($this->session->userdata('succ_msg')!=''){?>
-                      <div class="alert alert-success alert-dismissable">
-                    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-                    <h4>  <i class="icon fa fa-check"></i> Success!</h4>
-                    <?php echo $this->session->userdata('succ_msg');$this->session->set_userdata('succ_msg','');?>
-                  </div>
 
-<?php } if($this->session->userdata('err_msg')!=''){ ?>
-
-<div class="alert alert-danger alert-dismissable">
-                    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-                    <h4><i class="icon fa fa-ban"></i> Sorry!</h4>
-                  <?php echo  $this->session->userdata('err_msg');$this->session->set_userdata('err_msg','');?>
-                 </div> 
-<?php }?>
-                             <div class="ln_solid"></div>
+                        
                   <div class="x_content">
-
+             
+          
                    <div class="row">
             <table class="table table-striped jambo_table bulk_action">
               <thead>
