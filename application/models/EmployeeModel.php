@@ -533,7 +533,8 @@
              $nwdata['status']='0';
              $this->db->where($data);
              $res=$this->db->update('break_track',$nwdata);
-             if($res)
+             $result= $this->db->affected_rows();
+             if($result>0)
              {
                 
                  $break= $time_taken_sec;
@@ -569,7 +570,8 @@
               
               $this->db->where($data);
               $res=$this->db->update('break_track',$nwdata);
-              if($res)
+              $result= $this->db->affected_rows();
+              if($result>0)
               {
           
                       $start_date=date("Y-m-d", strtotime(date('m').'/01/'.date('Y')));
@@ -608,7 +610,14 @@
                       $hours = floor($break / (60 * 60));
                       if($hours<10){$hours="0".$hours;}
                       $totaltime_taken="$hours:$minutes:$sec";
-                      echo $totaltime_taken."/".$new['points']; 
+                      if($res)
+                      {
+                      echo $totaltime_taken."/".$new['points'];
+                      }
+                      else
+                      {
+                        echo $totaltime_taken;
+                      } 
               }
               else
               {

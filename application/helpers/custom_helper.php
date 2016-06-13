@@ -76,3 +76,37 @@
         $res=$CI->db->get('chat');
         return $res->result_array();
     }
+
+
+    function privilege($point,$Eid)
+    {
+        $CI=& get_instance();
+        $CI->load->database(); 
+
+        $CI->db->select('*');
+
+        $CI->db->where('tpoint<=',$point);
+        $CI->db->where('status',0);
+        $res=$CI->db->get('badges');
+        $result= $res->result_array();
+        return $result;
+        $getprev="";
+        /*foreach ($result as $value)
+        {
+            
+            $this->db->select('*');
+            $CI->db->select('*');
+            $CI->db->where('Eid',$Eid);
+            $CI->db->where('Bid',$result['badges_id']);
+            $res=$CI->db->get('empbadge');
+            $count=$res->num_rows();
+            if($count>0)
+            {
+                $getprev.=$value;
+            }
+
+
+        }
+        
+          return $getprev;*/
+    }

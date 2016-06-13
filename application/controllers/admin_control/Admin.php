@@ -69,6 +69,64 @@ class Admin extends CI_Controller
 
     }
 
+    public function badgesemployee()
+    {
+        $data['allempbadge']=$this->AdminModel->allempbadge();
+        $data['allbadges']=$this->AdminModel->allbadges();
+        $data['allemployee']=$this->AdminModel->AllEmployee();
+        $data['sideber']=$this->load->view('admin/includes/sideber','',true);
+        $data['header']=$this->load->view('admin/includes/header','',true);
+        $this->load->view('admin/badgesemployee.php',$data);
+    }
+
+    public function addempbadges()
+    {
+       $data['Eid']=$this->input->post('empid');
+       $data['Bid']=$this->input->post('badges');
+       $data['status']=0;
+       $update=$this->AdminModel->insert('empbadge',$data);
+       if($update)
+       {
+             $this->session->set_userdata('succ_msg','Badges Are Added');
+             redirect(base_url().'admin_control/admin/badgesemployee');
+        }
+        else
+        {
+            $this->session->set_userdata('err_msg','Try Again');
+            redirect(base_url().'admin_control/admin/badgesemployee');
+
+        }
+    }
+
+    public function delete_epmbad()
+    {
+      $con['E_b_id']=$this->input->post('budget_id');
+      $delete=$this->AdminModel->delete($con,'empbadge');
+      if($delete)
+      {
+        return $delete;
+      }
+      else
+      {
+        return false;
+      }
+    }
+
+    public function delete_badge()
+    {
+      $con['badges_id']=$this->input->post('budget_id');
+      $delete=$this->AdminModel->delete($con,'empbadge');
+      if($delete)
+      {
+        return $delete;
+      }
+      else
+      {
+        return false;
+      }
+
+    }
+
     public function ChatHistory()
     {
        if ($this->session->userdata('adminid'))
@@ -1484,8 +1542,8 @@ class Admin extends CI_Controller
       $con['badges_id']=$this->input->post('bid');
       $data['tpoint']=$this->input->post('newinput');
       $update=$this->AdminModel->update('badges',$con,$data);
-      print_r($con);
-      /*if($update)
+      
+      if($update)
       {
           redirect(base_url().'admin_control/admin/badges');
           $this->session->set_userdata('succ_msg','');
@@ -1494,7 +1552,7 @@ class Admin extends CI_Controller
       {
          redirect(base_url().'admin_control/admin/badges');
           $this->session->set_userdata('err_msg','Try Again');
-      }*/
+      }
 
 
     }

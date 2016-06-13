@@ -109,13 +109,30 @@
       return $result=$res->result_array();
 
     }
-    Public function fnallemp()
+
+    public function allempbadge()
     {
-    	  $this->db->select('*');
-        $res=$this->db->get('employee');
-        return $res->result_array();
+       /*$this->db->select('empbadge.*,employee.name,badges.badge');
+       $this->db->join('employee','employee.id=empbadge.Eid');
+       $this->db->join('badges','badges.badge=empbadge.Bid');
+       $res=$this->db->get('empbadge');
+       return $result=$res->result_array();*/
+        $this->db->select('empbadge.*,employee.name,badges.badge');
+        $this->db->join('employee','employee.id=empbadge.Eid');
+        $this->db->join('badges','badges.badges_id=empbadge.Bid');
+        $res=$this->db->get('empbadge');
+        return $result=$res->result_array();
     }
 
+    public function allbadges()
+    {
+        $this->db->select('*');
+        $this->db->where('status',0);
+        $res=$this->db->get('badges');
+        return $result=$res->result_array();
+    }
+
+    
     public function FnChatHistory()
     {
         $this->db->select('*');

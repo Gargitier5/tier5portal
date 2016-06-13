@@ -99,72 +99,49 @@ Notification.requestPermission();
                 </div>
 
               </div>
-         <!--     
-            <div class="image_upload_div">
-           <form action="upload.php" class="dropzone">
-             </form>
-         </div>   -->
-
-              <!-- <div class="row dashboard-details">
-                <div class="col-md-9 col-xs-9">
-                  Extra hours
-                </div>
-                <div class="col-md-3 col-xs-3 dashboard-right">
-                  5 Hrs
-                </div>
-
-              </div> -->
-              <!-- <div class="row dashboard-details">
-                <div class="col-md-9 col-xs-9">
-                  Total hours
-                </div>
-                <div class="col-md-3 col-xs-3 dashboard-right">
-                  45 Hrs
-                </div>
-
-              </div> -->
-              <!-- <div class="row dashboard-details">
-                <div class="col-md-9 col-xs-9">
-                  Holiday list
-                </div>
-                <div class="col-md-3 col-xs-3 dashboard-right">
-                  <a href="images/phocapdf-demo.pdf" target="blank"><img src="images/pdf.png" alt="PDF"></a>
-                </div>
-
-              </div> -->
-
-            <!--   <div class="row dashboard-details">
-                <div class="col-md-12">
-                    <div id="chart_div" style="width: 100%; height: 190px;"></div>
-
-
-                </div>  
-              </div>  --> 
-               
             
               <div class="privilege">
               <div id="demo">
               <section id="examples">
-              <div class="content3 mCustomScrollbar" data-mcs-theme="minimal">
+                
+               <div class="content3 mCustomScrollbar" data-mcs-theme="minimal">
                 <div class="row pre-row">
-                  <div class="col-md-4 col-sm-4">
+                  <?php  
+                   $privilege=privilege($points['points'],$points['Eid']);
+                    
+                    //print_r($privilege)
+                     foreach ($privilege as $key)
+                     {?>
 
+                      <div class="col-md-4 col-sm-4">
+                        <div class="privilege-box active-privilege">
+                          <div class="pre-icon">
+                           <img src="<?php echo $key['icon']; ?>" alt="img">
+                          </div>  
+                          <?php echo $key['badge']; ?>
+                        </div>  
+                      </div>
+                       
+                    <?php }
+
+                 ?>
+                  <!-- <div class="col-md-4 col-sm-4">
                     <div class="privilege-box active-privilege">
                       <div class="pre-icon">
                         <img src="images/gamepad.png" alt="img">
                        </div>  
                       Game
                     </div>  
-                  </div> 
-                  <div class="col-md-4 col-sm-4">
+                  </div>  -->
+                  <!-- <div class="col-md-4 col-sm-4">
                     <div class="privilege-box">
                       <div class="pre-icon">
                         <img src="images/printer-icon.png" alt="img">
                       </div> 
                       Printer
                     </div> 
-                  </div>
-                  <div class="col-md-4 col-sm-4">
+                  </div> -->
+                  <!-- <div class="col-md-4 col-sm-4">
                     <div class="privilege-box">
                       <div class="pre-icon">
                         <img src="images/tshirt-icon.png" alt="img">
@@ -172,9 +149,10 @@ Notification.requestPermission();
                       T-shirt
                     </div> 
                   </div>  
+                </div> -->
 
-                </div>
-                <div class="row pre-row">
+
+                <!-- <div class="row pre-row">
                   <div class="col-md-4 col-sm-4">
                     <div class="privilege-box">
                       <div class="pre-icon">
@@ -199,9 +177,11 @@ Notification.requestPermission();
                       Office Party
                     </div> 
                   </div> 
+                </div> -->
 
-                </div>
-              </div>
+
+
+              </div> 
               </section>
               </div>
               </div>

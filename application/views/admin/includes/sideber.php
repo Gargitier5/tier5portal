@@ -138,6 +138,9 @@
                     <ul class="nav child_menu">
                       <li><a href="<?php echo base_url();?>admin_control/admin/badges">Manage Badges</a>
                       </li>
+                      <li><a href="<?php echo base_url();?>admin_control/admin/badgesemployee">Deactivate For Perticuler Employee</a>
+                      </li>
+
                     </ul>
                   </li>
                  <?php } ?>

@@ -30,3 +30,25 @@ $(document).ready(function(){
   
     //alert(budget);
  }
+
+ function delete_epmbad(budget_id)
+ {
+   $.post('admin_control/admin/delete_epmbad',{budget_id:budget_id}, function(data){
+     if(data)
+      {
+        //alert(data);
+        window.location.reload();
+      }
+   });
+ }
+
+ function delete_badge(budget_id)
+ {
+   $.post('admin_control/admin/delete_badge',{budget_id:budget_id}, function(data){
+     if(data)
+      {
+        //alert(data);
+        window.location.reload();
+      }
+   });
+ }

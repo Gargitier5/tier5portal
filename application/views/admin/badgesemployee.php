@@ -62,8 +62,11 @@
 
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
-                 
-      <?php if($this->session->userdata('succ_msg')!=''){?>
+                  <h2>Add Badges For Employee</h2>
+                  <div class="ln_solid"></div>
+                  <div class="x_content">
+                    <?php 
+if($this->session->userdata('succ_msg')!=''){?>
                       <div class="alert alert-success alert-dismissable">
                     <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
                     <h4>  <i class="icon fa fa-check"></i> Success!</h4>
@@ -76,45 +79,74 @@
                     <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
                     <h4><i class="icon fa fa-ban"></i> Sorry!</h4>
                   <?php echo  $this->session->userdata('err_msg');$this->session->set_userdata('err_msg','');?>
-                 </div> 
+                  </div>
 <?php }?>
-                             <div class="ln_solid"></div>
+                   <div class="row">
+                     <table class="table table-striped jambo_table bulk_action">
+                       <thead>
+                         <th class="headings">Select Name</th>
+                         <th class="headings">Select Badges</th>
+                         <th class="headings">Action</th>
+                       </thead>
+                       <tbody>
+                          <tr>
+                           <td>
+                            <form method="post" action="admin_control/admin/addempbadges">
+                            <select id="empid" name="empid">
+                              <option value="">--Select</option>
+                            <?php foreach ($allemployee as $key)
+                            { ?>
+                              <option value="<?php echo $key['Eid']; ?>"><?php echo $key['name']; ?></option>
+                            <?php } ?>
+                            <select>
+                           </td>
+                           <td>
+                            <select id="badges" name="badges">
+                              <option value="">--Select</option>
+                            <?php foreach ($allbadges as $key)
+                            { ?>
+                              <option value="<?php echo $key['badges_id']; ?>"><?php echo $key['badge']; ?></option>
+                            <?php } ?>
+                            <select>
+                           </td>
+                           <td>
+                             <input type="submit" class="btn btn-primary btn btn-sm" value="Add">
+
+                             </form>
+                           </td>
+                          </tr>
+                       </tbody>
+                     </table>
+                   </div>
+                  </div>  
+                </div>
+                <br>
+                <div class="x_panel">
+                  <h2>See Disable Bages</h2>
+                  <div class="ln_solid"></div>
                   <div class="x_content">
 
                    <div class="row">
-            <table class="table table-striped jambo_table bulk_action">
-              <thead>
-                <th class="headings">Badges</th>
-                <th class="headings">Point Threshold</th>
-               <!--  <th class="headings">Icon</th> -->
-                <th class="headings">Status</th>
-                <th class="headings">Action</th>
-              </thead>
-              <tbody>
-                <?php foreach ($badges as $key){?>
-                <tr>
-                 <td><?php echo $key['badge']; ?></td>
-                 <td>
-                     <div id="badge_<?php echo $key['badges_id']; ?>"><?php echo $key['tpoint']; ?></div>
-                     <div>
-                        <form method="post" action="admin_control/admin/edittpoint">
-                           <input type="text" style="display:none;" name="bid" value="<?php echo $key['badges_id']; ?>">
-                           <input type="number" style="display:none" id="input<?php echo $key['badges_id']; ?>" name="newinput">
-                           <input type="submit" id="sub<?php echo $key['badges_id']; ?>" style="display:none" value="Change">
-                        </form>
-                     </div>
-                 </td>
-                 <!-- <td></td> -->
-                 <td><?php if($key['status']==0) { echo "Active";}else if($key['status']==1){ echo "Inactive";} else {echo "";} ?></td>
-                 <td><button class="btn btn-success glyphicon glyphicon-edit" title="Edit" onclick="edit_badge(<?php echo $key['badges_id']; ?>)"></button> <button title="Delete" class="btn btn-danger glyphicon glyphicon-trash" onclick="delete_badge(<?php echo $key['badges_id']; ?>)"></button><button title="Change Status" onclick="changestatus(<?php echo $key['badges_id']; ?>)" class="btn btn-primary glyphicon glyphicon-off"></button></td>
-                 </tr> 
-                <?php }?>
-              </tbody>
-            </table>
-          </div>
-
-
-
+                      <table class="table table-striped jambo_table bulk_action">
+                       <thead>
+                         <th class="headings">Employee Name</th>
+                         <th class="headings">Select Badges</th>
+                         <th class="headings">Action</th>
+                       </thead>
+                       <tbody>
+                        
+                          <?php foreach ($allempbadge as $value)
+                          { ?>
+                            <tr>
+                              <td><?php echo $value['name'];?></td>
+                              <td><?php echo $value['badge'];?></td>
+                              <td><button class="btn btn-danger glyphicon glyphicon-trash" onclick="delete_epmbad(<?php echo $value['E_b_id'];?>)"></button></td>
+                            </tr>
+                          <?php }?> 
+                         
+                       </tbody>
+                      </table>
+                   </div>
                   </div>  
                 </div>
               </div>
