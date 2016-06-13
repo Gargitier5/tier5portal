@@ -8,12 +8,14 @@ class Employee extends CI_Controller
 	{
 		parent::__construct();
 
+    $this->output->cache(1);
 		$this->load->helper('url');
 		$this->load->database();
 		$this->load->model('EmployeeModel');
 		$this->load->helper('custom');
 		$this->load->library('session');
     $this->load->library('villa_booking_calendar');
+    
 	}
 
 
@@ -48,7 +50,9 @@ class Employee extends CI_Controller
           $start_date=date("Y-m-d", strtotime(date('m').'/01/'.date('Y')));
           $end_date=date("Y-m-d");
           $user_id=$this->session->userdata('uid');
+          
           $data['points']=$this->EmployeeModel->getpoint($user_id,$start_date,$end_date);
+          $data['privilege']=$this->EmployeeModel->privilege($data['points']['points']);
           $data['placedorder']=$this->EmployeeModel->placedorder($user_id,$end_date);
           $data['userid']=$this->session->userdata('uid');
           $data['empofmonth']=$this->EmployeeModel->getempofmonth();

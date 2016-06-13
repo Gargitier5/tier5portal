@@ -19,6 +19,35 @@
       return $result=$res->result_array();
     }
     
+    public function privilege($point)
+    {
+        $Eid=$this->session->userdata('uid');
+        $this->db->select('*');
+        $this->db->where('tpoint<=',$point);
+        $this->db->where('status',0);
+        $res=$this->db->get('badges');
+        $result=$res->result_array();
+        //return $result;
+        $badgesarr=array();
+        foreach ($result as $value)
+        {
+            
+            $this->db->select('*');
+            $this->db->where('Eid',$Eid);
+            $this->db->where('Bid',$value['badges_id']);
+            $this->db->where('status',0);
+            $res=$this->db->get('empbadge');
+            $count=$res->row_array();
+            if($count)
+            {
+                array_push($badgesarr,$value['badge'].':'.$value['icon']);
+            }
+
+
+        }
+        return $badgesarr;
+        
+    }
     public function clockintime($data)
     {
         $data2['Eid'] = $data['Eid'];

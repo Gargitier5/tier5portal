@@ -47,11 +47,6 @@ public function delete_history()
             $check_clock_in = $this->CronjobModel->fetchinfo('attendance',$data,'result');
             if(!$check_clock_in)
             {
-             
-
-                $day=date('D');
-                if($day!='Sun' or $day!='Sat')
-                {
                 
                    $data1['date']=date("Y-m-d");
                    $check_holiday= $this->CronjobModel->fetchinfo('holiday',$data1,'count');
@@ -75,8 +70,6 @@ public function delete_history()
                         }
                       }
                     }
-                   
-                }
             }
         }
   }

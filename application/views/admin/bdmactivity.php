@@ -87,7 +87,7 @@
                 <div class="x_panel">
                   <div class="x_content">
                    <!--  <form action="admin_control/admin/searchbox" method="post"> -->
-                        Search: <input type="text" name="search" id="search">
+                        Search: <input type="text" name="search" id="search" value="<?php if(!empty($post_search)){ echo $post_search;}?>">
                         <input type="button" onclick="getvalue()" value="Search">
                     <!-- </form> -->
                     

@@ -117,6 +117,8 @@
 
     setInterval(function(){ chk_time() }, 1000);
 
+ 
+
        
     
 

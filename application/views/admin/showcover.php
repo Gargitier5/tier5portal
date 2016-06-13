@@ -60,8 +60,11 @@
                     <div align="right"><h2><a href="admin_control/admin/bdmactivity"><span><<<span>Back</a><h2></div>
                     
                     <div>
+                      <form action="admin_control/admin/Postshowcover" method="post">
                           Search: <input type="text" name="search" id="search">
-                          <input type="button" onclick="getvalue()" value="Search">
+                          <input type='hidden' name="token" value="<?php echo $this->uri->segment(4);?>">
+                          <input type="submit" value="Search">
+                      </form>
                     </div>                    <br>
                         <div class="table-responsive">
                           <h2 align="center">Details Of Proposal</h2>

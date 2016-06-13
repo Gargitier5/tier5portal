@@ -78,7 +78,7 @@
     }
 
 
-    function privilege($point,$Eid)
+   /* function privilege($point,$Eid)
     {
         $CI=& get_instance();
         $CI->load->database(); 
@@ -89,24 +89,25 @@
         $CI->db->where('status',0);
         $res=$CI->db->get('badges');
         $result= $res->result_array();
-        return $result;
+        //return $result;
         $getprev="";
-        /*foreach ($result as $value)
+        $badgesarr=array();
+        foreach ($result as $value)
         {
             
-            $this->db->select('*');
             $CI->db->select('*');
             $CI->db->where('Eid',$Eid);
-            $CI->db->where('Bid',$result['badges_id']);
+            $CI->db->where('Bid',$value['badges_id']);
+            $CI->db->where('status',0);
             $res=$CI->db->get('empbadge');
-            $count=$res->num_rows();
-            if($count>0)
+            $count=$res->row_array();
+            if($count)
             {
-                $getprev.=$value;
+                array_push($badgesarr,$value['badges_id']);
             }
 
 
         }
         
-          return $getprev;*/
-    }
+          return $getprev;
+    }*/

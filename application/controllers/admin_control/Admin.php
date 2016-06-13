@@ -226,11 +226,31 @@ class Admin extends CI_Controller
 
         $con=date('Y-m-d');
         $data['bdmac']=$this->AdminModel->getactivity($con);
-      
+      $data['post_search']='';
       $data['bdm']=$this->AdminModel->get_bdm();
       $data['sideber']=$this->load->view('admin/includes/sideber','',true);
       $data['header']=$this->load->view('admin/includes/header','',true);
       $this->load->view('admin/bdmactivity.php',$data);
+    }
+
+    public function Postshowcover()
+    {
+      //echo '<pre>';print_r($_POST);exit;
+      if($_POST && $this->input->post('search')!='')
+      {
+      $searchitem=$this->input->post('search');
+      $srch=$this->AdminModel->search($searchitem);
+      $data['bdmac']=$srch;
+      $data['post_search']=$searchitem;
+      $data['sideber']=$this->load->view('admin/includes/sideber','',true);
+      $data['header']=$this->load->view('admin/includes/header','',true);
+      $this->load->view('admin/bdmactivity.php',$data);
+      }
+      else
+      {
+        $token=$this->input->post('token');
+        redirect(base_url().'admin_control/admin/show_cover/'.$token);
+      }
     }
 
     public function getbdmbydate()
