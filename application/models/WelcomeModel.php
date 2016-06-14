@@ -63,6 +63,7 @@
                $this->session->set_userdata('name',$result1['name']);
                $this->session->set_userdata('uid',$result1['Eid']);
                $this->session->set_userdata('role',$result1['role']);
+               $this->session->set_userdata('picture',$result1['pic']);
                  $this->session->set_userdata('emp_name',$result1['username']);
               //$this->session->set_userdata('uname',$result['Eid']);
               return $result1;

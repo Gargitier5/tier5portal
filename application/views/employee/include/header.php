@@ -18,7 +18,11 @@
                   <ul class="dropdown-menu">
 
                       <div class="profile-pic">
-                        <img src="images/profile-pic.jpg" alt="img">
+                        <?php if ( $this->session->userdata('picture')){?>
+                          <img src="images/profile/<?php echo $this->session->userdata('picture');?>" alt="img">
+                        <?php } else { ?>
+                         <img src="images/profile-pic.jpg" alt="img">
+                        <?php } ?>
                       </div>
                       <!-- <button class="btn log-btn">Edit Profile</button> -->
                       <form action="employee_control/Employee/logout" method="post">
