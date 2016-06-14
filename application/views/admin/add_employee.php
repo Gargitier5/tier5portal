@@ -104,7 +104,7 @@ if($this->session->userdata('succ_msg')!=''){?>
                   <div class="x_content">
                     <div class="ln_solid"></div>
                           
-                   <form class="form-horizontal form-label-left" data-parsley-validate="" novalidate="" method="post" id="addemployee" action="admin_control/Admin/add_new_employee">
+                   <form class="form-horizontal form-label-left" data-parsley-validate="" novalidate="" enctype='multipart/form-data' method="post" id="addemployee" action="admin_control/Admin/add_new_employee">
 
                       <div class="form-group">
                         <label for="name" class="control-label col-md-3 col-sm-3 col-xs-12" >Name <span class="required">*</span>
@@ -202,15 +202,17 @@ if($this->session->userdata('succ_msg')!=''){?>
                       </div>
 
                       <div class="form-group">
-                        <label for="photoupload" class="control-label col-md-3 col-sm-3 col-xs-12">Upload Photo <span class="required">*</span>
+                        <label for="photoupload" class="control-label col-md-3 col-sm-3 col-xs-12">Upload Photo
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <div id="filediv">
-                              <input type="file" id="image" name="image" accept="image/*" title="Select Image To Be Uploaded">
+                              <input type="file" id="user_file" name="user_file" title="Select Image To Be Uploaded">
+                             <br>
+                             (maximum size 2 MB, 250 x 350 pixels)
                           </div>
-                      
+                        </div> 
                       </div>
-
+                 
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">
                         </label>

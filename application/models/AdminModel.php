@@ -8,34 +8,7 @@
       $this->load->database();
     } 
 
-     /*public function login($username,$password)
-    {
-        $this->db->select('*');
-        $this->db->where('username',$username);
-        //$this->db->where('password',md5($pass));
-        $this->db->where('password',$password);
-        $res=$this->db->get('emp_details');
-        $result1=$res->row_array();
-        if($result1['role']==0)
-        {
-           $this->session->set_userdata('adminid',$result1['Eid']);
-           $this->session->set_userdata('role',$result1['role']);
-           $this->session->set_userdata('admin_user',$result1['username']);
-           return $result1;
-
-        }
-        else if ($result1['role']==1)
-        {
-           $this->session->set_userdata('adminid',$result1['Eid']);
-           $this->session->set_userdata('role',$result1['role']);
-            $this->session->set_userdata('admin_user',$result1['username']);
-           return $result1;
-        }
-        else
-        {
-          return false;
-        }
-    }*/
+  
 
     public function getbadges()
     {
@@ -65,6 +38,13 @@
       $res=$this->db->get('bdm_activity');
       return $res->result_array();
 
+    }
+
+    public function fnallemp()
+    {
+      $this->db->select('*');
+       $res=$this->db->get('employee');
+      return $result=$res->result_array();
     }
     
     public function alllunchbonus($con)

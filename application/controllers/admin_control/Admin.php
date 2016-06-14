@@ -12,6 +12,7 @@ class Admin extends CI_Controller
 		$this->load->model('AdminModel');
 		$this->load->helper('custom');
 		$this->load->library('session');
+    $this->load->library('upload');
 	}
 
    public function index()
@@ -44,6 +45,74 @@ class Admin extends CI_Controller
               $data['header']=$this->load->view('admin/includes/header','',true);
               $this->load->view('admin/admin_dashboard.php',$data);
           }      
+    }
+
+    public function addbadges()
+    {
+        
+      $files = $_FILES['user_file'];
+     
+      $time=time();
+      // next we pass the upload path for the images
+      $config['upload_path'] = 'images/badges';
+      $config['file_name']=$time;
+      $config['overwrite']='TRUE';
+      $config['allowed_types']='jpg|jpeg|gif|png|PNG';
+      $config['max_size']='1';
+      $config['max_width'] = '35';
+      $config['max_height'] = '35';
+        
+        $_FILES['user_file']['name'] = $files['name'];
+        $_FILES['user_file']['type'] = $files['type'];
+        $_FILES['user_file']['tmp_name'] = $files['tmp_name'];
+        $_FILES['user_file']['error'] = $files['error'];
+        $_FILES['user_file']['size'] = $files['size'];
+        //now we initialize the upload library
+        $this->upload->initialize($config);
+        // we retrieve the number of files that were uploaded
+        if ($this->upload->do_upload('user_file'))
+        {
+          $data['uploads']= $this->upload->data();
+          $f_resize=$data['uploads']['file_name'];
+          $data1['badge']=$this->input->post('bname');
+          $data1['tpoint']=$this->input->post('tpoint');
+          $data1['icon']=$f_resize;
+          $data1['status']=0;
+          if($data1['badge'] && $data1['tpoint'] && $data1['badge'])
+          {
+            $update=$this->AdminModel->insert('badges',$data1);
+            if($update)
+            {
+               $this->session->set_userdata('succ_msg','Badges Added Successfully!!');
+               redirect(base_url().'admin_control/admin/badges');
+            }
+            else
+            {
+              $this->session->set_userdata('err_msg','Try Again');
+              redirect(base_url().'admin_control/admin/badges');
+            }
+          }
+          else
+          {
+            $this->session->set_userdata('err_msg','All Fields Are Needed');
+            redirect(base_url().'admin_control/admin/badges');
+          }
+          //print_r($data);
+        }
+        else
+        {
+          $data['upload_errors'] = $this->upload->display_errors();
+          $this->session->set_userdata('err_msg',$this->upload->display_errors());
+          redirect(base_url().'admin_control/admin/badges');
+          
+        }
+            
+        
+              
+        
+         
+          
+      //print_r($_POST);
     }
 
     public function changebudget()
@@ -115,7 +184,7 @@ class Admin extends CI_Controller
     public function delete_badge()
     {
       $con['badges_id']=$this->input->post('budget_id');
-      $delete=$this->AdminModel->delete($con,'empbadge');
+      $delete=$this->AdminModel->delete($con,'badges');
       if($delete)
       {
         return $delete;
@@ -409,8 +478,49 @@ class Admin extends CI_Controller
 
     public function editoldemployee()
     {
-       $con['id']=$this->input->post('empid');
 
+
+               $files = $_FILES['user_file'];
+
+               if( $_FILES['user_file']['name']!='')
+               {
+                 $time=time();
+                 // next we pass the upload path for the images
+                 $config['upload_path'] = 'images/profile';
+                 $config['file_name']=$time;
+                 $config['overwrite']='TRUE';
+                 $config['allowed_types']='jpg|jpeg|gif|png|PNG';
+                 $config['max_size']='2048';
+                 $config['max_width'] = '350';
+                 $config['max_height'] = '250';
+            
+                 $_FILES['user_file']['name'] = $files['name'];
+                 $_FILES['user_file']['type'] = $files['type'];
+                 $_FILES['user_file']['tmp_name'] = $files['tmp_name'];
+                 $_FILES['user_file']['error'] = $files['error'];
+                 $_FILES['user_file']['size'] = $files['size'];
+                 //now we initialize the upload library
+                 $this->upload->initialize($config);
+                 // we retrieve the number of files that were uploaded
+                 if ($this->upload->do_upload('user_file'))
+                 {
+                   $data1['uploads']= $this->upload->data();
+                   $f_resize=$data1['uploads']['file_name'];
+                   $data['pic']=$f_resize;
+                 }
+                 else
+                 {
+                    $data1['upload_errors'] = $this->upload->display_errors();
+                    $this->session->set_userdata('err_msg',$this->upload->display_errors());
+                    redirect(base_url().'admin_control/admin/allemp'); 
+                  }
+                }
+                else
+                {
+                  $data['pic']=$this->input->post('picture');
+                }
+        $con['id']=$this->input->post('empid');
+    
         $data['name']=$this->input->post('name');
         $data['personal_email']=$this->input->post('peremail');
         $data['address']=$this->input->post('address');
@@ -1714,22 +1824,55 @@ class Admin extends CI_Controller
 
       public function add_new_employee()
       {
-
          if($_POST)
          {
-            $data['name']=$this->input->post('name');
-            $data['personal_email']=$this->input->post('peremail');
-            $data['address']=$this->input->post('address');
-            $data['phon_no']=$this->input->post('phno');
-            $data['alt_ph_no']=$this->input->post('altphno');
-            $data['gender']=$this->input->post('gender');
-            $data['m_status']=$this->input->post('marrige');
-            $data['dob']=$this->input->post('dob');
-            $data['joining_date']=$this->input->post('doj');
-            $data['comemail']=$this->input->post('coemail');
-            $data['designation']=$this->input->post('deg');
-            $data['salary']=$this->input->post('salary');
-            $data['activation_status ']='2';
+               $files = $_FILES['user_file'];
+               if($files)
+               {
+                 $time=time();
+                 // next we pass the upload path for the images
+                 $config['upload_path'] = 'images/profile';
+                 $config['file_name']=$time;
+                 $config['overwrite']='TRUE';
+                 $config['allowed_types']='jpg|jpeg|gif|png|PNG';
+                 $config['max_size']='2048';
+                 $config['max_width'] = '350';
+                 $config['max_height'] = '250';
+            
+                 $_FILES['user_file']['name'] = $files['name'];
+                 $_FILES['user_file']['type'] = $files['type'];
+                 $_FILES['user_file']['tmp_name'] = $files['tmp_name'];
+                 $_FILES['user_file']['error'] = $files['error'];
+                 $_FILES['user_file']['size'] = $files['size'];
+                 //now we initialize the upload library
+                 $this->upload->initialize($config);
+                 // we retrieve the number of files that were uploaded
+                 if ($this->upload->do_upload('user_file'))
+                 {
+                   $data1['uploads']= $this->upload->data();
+                   $f_resize=$data1['uploads']['file_name'];
+                   $data['pic']=$f_resize;
+                 }
+                 else
+                 {
+                    $data1['upload_errors'] = $this->upload->display_errors();
+                    $this->session->set_userdata('err_msg',$this->upload->display_errors());
+                    redirect(base_url().'admin_control/admin/add_employee'); 
+                  }
+                }
+                $data['name']=$this->input->post('name');
+                $data['personal_email']=$this->input->post('peremail');
+                $data['address']=$this->input->post('address');
+                $data['phon_no']=$this->input->post('phno');
+                $data['alt_ph_no']=$this->input->post('altphno');
+                $data['gender']=$this->input->post('gender');
+                $data['m_status']=$this->input->post('marrige');
+                $data['dob']=$this->input->post('dob');
+                $data['joining_date']=$this->input->post('doj');
+                $data['comemail']=$this->input->post('coemail');
+                $data['designation']=$this->input->post('deg');
+                $data['salary']=$this->input->post('salary');
+                $data['activation_status ']='2';
 
 
             if($data['name'])

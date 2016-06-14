@@ -58,14 +58,51 @@
             <div class="clearfix"></div>
 
             <div class="row">
-            <!-- <div class="col-md-12 col-sm-12 col-xs-12">
-               <button class="btn btn-primary">Click To Add New Badges</button>
-               <div id="add_div">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+               <button class="btn btn-primary" id="click">Click To Add New Badges</button>
+               <?php 
+if($this->session->userdata('succ_msg')!=''){?>
+                      <div class="alert alert-success alert-dismissable">
+                    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                    <h4>  <i class="icon fa fa-check"></i> Success!</h4>
+                    <?php echo $this->session->userdata('succ_msg');$this->session->set_userdata('succ_msg','');?>
+                  </div>
 
+<?php } if($this->session->userdata('err_msg')!=''){ ?>
+
+<div class="alert alert-danger alert-dismissable">
+                    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                    <h4><i class="icon fa fa-ban"></i> Sorry!</h4>
+                  <?php echo  $this->session->userdata('err_msg');$this->session->set_userdata('err_msg','');?>
+                  </div>
+<?php }?>
+
+               <div id="add_div" style="display:none">
+
+                 <table class="table table-striped jambo_table bulk_action">
+                   <thead>
+                         <th class="headings">Badges Name</th>
+                         <th class="headings">Point Threshold</th>
+                         <th class="headings">Icon</th>
+                         <th class="headings">Action</th>
+                   </thead>
+                    </tbody>
+                         <tr>
+                          <form action="admin_control/admin/addbadges" method="post" enctype='multipart/form-data'>
+                             <td><input type="text" id="bname" name="bname"></td>
+                             <td><input type="number" id="tpoint" name="tpoint"></td>
+                             <td> <input type="file" name="user_file" id="user_file">
+                              <br>
+                              (maximum size 1 KB, 35 x 35 pixels)
+                             </td>
+                             <td><input type="submit" value="Add Badges"></td>
+                         </tr>
+                       </form >
+                   </table>
                </div>
 
-            </div> -->
-
+            </div>
+            </div>
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                  

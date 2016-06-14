@@ -50,7 +50,7 @@
 
 .bc-booked {color: #DD6464;}
 .bc-available {color: #68BA68;}
-.bc-today {color: #FFA500}
+.bc-today {background: #00DDE3 !important;}
 .grey{ background-color:#DDDDDD !important; }
 .light_sky{ background-color:#B9FFFF !important; }
 

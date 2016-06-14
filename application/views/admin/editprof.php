@@ -71,7 +71,7 @@
                   <div class="x_content">
                     <div class="ln_solid"></div>
                           
-                   <form action="admin_control/Admin/editoldemployee" method="post" novalidate="" id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left">
+                   <form action="admin_control/Admin/editoldemployee" method="post" novalidate="" id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left" enctype='multipart/form-data'>
                       <input type="text" style="display:none" id="empid" name="empid" value="<?php echo $emp_info['id'];?>">
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Name <span class="required">*</span>
@@ -172,7 +172,19 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">
                         </label>
                       </div>
-
+                      
+                       <div class="form-group">
+                        <label for="photoupload" class="control-label col-md-3 col-sm-3 col-xs-12">Upload Photo
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <div id="filediv">
+                              <input type="file" id="user_file" name="user_file" title="Select Image To Be Uploaded" >
+                              <input type="hidden" value="<?php echo  $emp_info['pic']?>" name="picture">
+                             <br>
+                             (maximum size 2 MB, 250 x 350 pixels)
+                          </div>
+                        </div> 
+                      </div>
 
 
                       <div class="ln_solid"></div>

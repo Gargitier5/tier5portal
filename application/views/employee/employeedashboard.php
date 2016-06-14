@@ -638,19 +638,25 @@ Notification.requestPermission();
     if($online['id']!= $this->session->userdata('uid') && $online['role']>1):
     ?>
                   <li>
-                    <div class="user-pic">
-                    <?php if($online['gender']=="Male" && $online['online_status']==1){?>
-                          <img src="images/male_online.png" alt="img">
-                          <?php } if($online['gender']=="Male" && $online['online_status']==0){ ?>
-                          <img src="images/male_offline.png" alt="img">
-                          <?php } if($online['gender']=="Female" && $online['online_status']==1){ ?>
-                          <img src="images/female_online.png" alt="img">
-                          <?php }
-                           if($online['gender']=="Female" && $online['online_status']==0){ ?>
-                          <img src="images/female_offline.png" alt="img">
-                          <?php }?>
-
-                        </div>  
+                     <div class="user-pic">
+                    <?php if($online['pic']) { ?> 
+                       <?php if($online['online_status']==1) { ?>
+                       <img src="images/online.png" style="width:7px;height:7px;" alt="img"/><img src="images/profile/<?php echo $online['pic'];?>" style="width:15px;height:15px;" alt="img"/>
+                      <?php } else { ?>
+                      <img src="images/profile/<?php echo $online['pic'];?>" style="width:15px;height:15px;" alt="img">
+                      <?php } ?>
+                    <?php } else { ?>
+                           
+                           <?php if($online['online_status']==1) { ?>
+                       <img src="images/online.png" style="width:7px;height:7px;" alt="img"/><img src="images/employee.png"  style="width:15px;height:15px;">
+                      <?php } else { ?>
+                      <img src="images/employee.png"  style="width:15px;height:15px;">
+                      <?php } ?>
+                            
+                          
+                          
+                     <?php } ?>
+                      </div>
                       <div class="user-name"><span onclick="javascript:chatWith('<?php echo $online['username'];?>')" data-id="<?php echo $online['id'];?>" class="user_spc" style="cursor:pointer;"><?php echo $online['name'];?></span></div>
 
                   </li>

@@ -1,13 +1,14 @@
 $(document).ready(function(){
-
-  /*$("#click").click(function(){
+$("#click").click(function(){
         $("#add_div").toggle();
-    });*/
-
+    });
+ 
 
   
 });
 
+  
+ 
  function changestatus(budget)
  {
 
@@ -44,6 +45,10 @@ $(document).ready(function(){
 
  function delete_badge(budget_id)
  {
+
+  var conf=confirm("You Want To Delete This Badges !");
+  if(conf)
+  {
    $.post('admin_control/admin/delete_badge',{budget_id:budget_id}, function(data){
      if(data)
       {
@@ -51,4 +56,5 @@ $(document).ready(function(){
         window.location.reload();
       }
    });
+  } 
  }

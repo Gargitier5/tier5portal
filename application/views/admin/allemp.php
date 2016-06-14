@@ -96,6 +96,7 @@ if($this->session->userdata('succ_msg')!=''){?>
                       <table class="table table-striped jambo_table bulk_action">
                         <thead>
                           <tr class="headings">
+                              <th class="column-title">Employee</th>
                               <th class="column-title">Name</th>
                               <th class="column-title">Gender</th>
                               <th class="column-title">Phon Number</th>
@@ -119,6 +120,7 @@ if($this->session->userdata('succ_msg')!=''){?>
                         <tbody>
                           <?php foreach ($allemployee as $value) { ?>
                           <tr>
+                              <td><?php if($value['pic']) {?><img src="images/profile/<?php echo $value['pic'];?>"  style="width:25px;height:25px;"> <?php } else { ?> <img src="images/employee.png"  style="width:25px;height:25px;"> <?php } ?></td>
                               <td><?php echo $value['name'];?></td>
                               <td><?php echo $value['gender'];?></td>
                               <td><?php echo $value['phon_no'];?></td>
