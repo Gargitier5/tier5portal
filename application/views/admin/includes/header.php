@@ -13,7 +13,9 @@
                     <span class=" fa fa-angle-down"></span>
                   </a> 
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                     <li><a href="">Change Password</a>
+                     <li><button type="button" class="btn btn-defaultd btn-sm" data-toggle="modal" data-target="#myModal">Change Password</button>
+
+
                     </li> 
                     <!-- <li>
                       <a href="javascript:;">
@@ -29,11 +31,44 @@
                     </li>
                   </ul>
                 </li>
-
-               
-
               </ul>
             </nav>
           </div>
 
+                    <div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h3 class="modal-title" align="center">Change Your Password</h3>
+      </div>
+      <div class="modal-body" align="center">
+        <form method="post" action="admin_control/admin/changepass">
+        <p><input type="password" name= "oldpass" placeholder="Enter Old Password"></p>
+        <p><input type="password" name="newpass" id="txtNewPassword" placeholder="Enter New Password"></p>
+        <p><input type="password" name="confpass" id="txtConfirmPassword" placeholder="Confirm Password"></p>
+        <div class="registrationFormAlert" id="divCheckPasswordMatch"></div>
+        <p><input type="submit" value="Click To Change" class="btn btn-primary"></p>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<script>
+   $("#txtConfirmPassword").keyup(function() {
+        var password = $("#txtNewPassword").val();
+        $("#divCheckPasswordMatch").html(password == $(this).val()
+            ? "<span style='color:green;font-weight:bold'>New Password And Confirm Password Match.</span>"
+            : "<span style='color:red;font-weight:bold'>New Password And Confirm Password do not match!</span>"
+        );
+    });
+
+</script>
         </div>
+

@@ -638,20 +638,21 @@ Notification.requestPermission();
     if($online['id']!= $this->session->userdata('uid') && $online['role']>1):
     ?>
                   <li>
+                    <span class="online-buddy">
+                     <?php if ($online['online_status']==1) {?>
+                     <img src="images/online.png" style="width:7px;height:7px;" alt="img"> 
+                     <?php } ?>
+                     </span>
                      <div class="user-pic">
                     <?php if($online['pic']) { ?> 
-                       <?php if($online['online_status']==1) { ?>
-                       <img src="images/online.png" style="width:7px;height:7px;" alt="img"/><img src="images/profile/<?php echo $online['pic'];?>" style="width:15px;height:15px;" alt="img"/>
-                      <?php } else { ?>
-                      <img src="images/profile/<?php echo $online['pic'];?>" style="width:15px;height:15px;" alt="img">
-                      <?php } ?>
+                       
+                       <img src="images/profile/<?php echo $online['pic'];?>"  alt="img">
+                      
                     <?php } else { ?>
                            
-                           <?php if($online['online_status']==1) { ?>
-                       <img src="images/online.png" style="width:7px;height:7px;" alt="img"/><img src="images/employee.png"  style="width:15px;height:15px;">
-                      <?php } else { ?>
-                      <img src="images/employee.png"  style="width:15px;height:15px;">
-                      <?php } ?>
+                           
+                       <img src="images/employee.png"  style="width:15px;height:15px;">
+                      
                             
                           
                           

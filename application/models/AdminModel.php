@@ -40,6 +40,15 @@
 
     }
 
+    public function admincheck($username,$password)
+    {
+       $this->db->select('*');
+       $this->db->where('Eid',$username);
+       $this->db->where('password',$password);
+       $res=$this->db->get('emp_details');
+       return $result=$res->row_array();
+    }
+
     public function fnallemp()
     {
       $this->db->select('*');

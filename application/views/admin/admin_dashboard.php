@@ -53,6 +53,21 @@
           <!-- Notification -->
            <div class="col-md-9 col-sm-9 col-xs-12">
               <div class="row">
+                 <?php if($this->session->userdata('succ_msg')!=''){?>
+                      <div class="alert alert-success alert-dismissable">
+                    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                    <h4>  <i class="icon fa fa-check"></i> Success!</h4>
+                    <?php echo $this->session->userdata('succ_msg');$this->session->set_userdata('succ_msg','');?>
+                  </div>
+
+<?php } if($this->session->userdata('err_msg')!=''){ ?>
+
+<div class="alert alert-danger alert-dismissable">
+                    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                    <h4><i class="icon fa fa-ban"></i> Sorry!</h4>
+                  <?php echo  $this->session->userdata('err_msg');$this->session->set_userdata('err_msg','');?>
+                 </div> 
+<?php }?>
                   <div class="col-md-6 col-sm-6 col-xs-12">
                     <div class="col-md-12 col-sm-12 col-xs-12">
                       <div class="col-md-12 col-sm-12 col-xs-12">
@@ -176,18 +191,15 @@
                    if($online['id']!= $this->session->userdata('adminid') && $online['role']>1):
                    ?>
                    <li>
-                      <div class="user-pic">
-                      <?php if($online['gender']=="Male" && $online['online_status']==1){?>
-                            <img src="images/male_online.png" alt="img">
-                            <?php } if($online['gender']=="Male" && $online['online_status']==0){ ?>
-                            <img src="images/male_offline.png" alt="img">
-                            <?php } if($online['gender']=="Female" && $online['online_status']==1){ ?>
-                            <img src="images/female_online.png" alt="img">
-                            <?php }
-                             if($online['gender']=="Female" && $online['online_status']==0){ ?>
-                            <img src="images/female_offline.png" alt="img">
-                            <?php }?>
-                      </div>  
+
+                    <div class="user-pic">
+                       <?php if($online['pic']){?>
+                          <img src="images/profile/<?php echo $online['pic'];?>" alt="img">
+                       <?php } else {?>
+                           <img src="images/employee.png"  style="width:15px;height:15px;">
+                       <?php }?>
+                    </div>
+                      
                       <div class="user-name"><span onclick="javascript:chatWith('<?php echo $online['username'];?>')" data-id="<?php echo $online['id'];?>" class="user_spc" style="cursor:pointer;"><?php echo $online['name'];?></span></div>
                    </li>
                   <?php endif;endforeach;?>

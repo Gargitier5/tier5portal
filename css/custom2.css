@@ -54,6 +54,8 @@ width: 27px; height: 27px; text-align: center;
 }
 .user-pic img{max-width: 100%;}
 
+
+
 .box h2{color: #fff; border-bottom: 1px solid #fff; margin: 0 0 15px 0; padding: 0; font-size: 14px;
 /*font-family: 'Fira Sans', sans-serif;*/ font-weight: 300; font-size: 14px;
 }
@@ -157,6 +159,9 @@ border-radius: 4px; display: block; text-align: center;
 
  .yellow-marks{background: #EDC300; color: #fff; padding: 3px; border: 1px solid #BB9A00;
  border-radius: 4px; display: block; text-align: center;}
+
+.online-buddy{position: absolute; left: 0}
+
 
 
 @media only screen and (max-width: 1910px){

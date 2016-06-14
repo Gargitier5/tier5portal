@@ -115,6 +115,53 @@ class Admin extends CI_Controller
       //print_r($_POST);
     }
 
+    public function changepass()
+    {
+        if ($this->session->userdata('adminid'))
+        {
+          $username=$this->session->userdata('adminid');
+          $password=$this->input->post('oldpass');
+          $check=$this->AdminModel->admincheck($username,$password);
+          if($check)
+          {
+             $new=$this->input->post('newpass');
+             $conf=$this->input->post('confpass');
+             if($new && $conf)
+             {
+                 $con['Eid']=$this->session->userdata('adminid');
+                 $data['password']=$this->input->post('newpass');
+                 $update=$this->AdminModel->update('emp_details',$con,$data);
+                 if($update)
+                 {
+                    $this->session->set_userdata('succ_msg','Password Changed Successfully!!!');
+                    redirect(base_url().'admin_control/admin');
+                 }
+                 else
+                 {
+                   $this->session->set_userdata('err_msg','Try Again');
+                   redirect(base_url().'admin_control/admin');
+                 }
+             }
+             else
+             {
+                $this->session->set_userdata('err_msg','New Password and Confirm Are Different');
+                redirect(base_url().'admin_control/admin');
+             }
+          }
+          else
+          {
+            $this->session->set_userdata('err_msg','Password Wrong!!');
+            redirect(base_url().'admin_control/admin');
+          }
+
+        }
+        else
+        {
+           redirect(base_url());
+        }
+
+    }
+
     public function changebudget()
     {
       $budget['badges_id']=$this->input->post('budget');
