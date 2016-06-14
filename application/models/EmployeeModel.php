@@ -15,6 +15,7 @@
       $this->db->select('*');
       $this->db->join('employee','employee.id=emp_details.Eid');
       $this->db->where('employee.activation_status',0);
+      $this->db->order_by("employee.name");
       $res=$this->db->get('emp_details');
       return $result=$res->result_array();
     }

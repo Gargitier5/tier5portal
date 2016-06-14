@@ -94,6 +94,7 @@
       $this->db->select('*');
       $this->db->join('employee','employee.id=emp_details.Eid');
       $this->db->where('employee.activation_status',0);
+      $this->db->order_by("name");
       $res=$this->db->get('emp_details');
       return $result=$res->result_array();
 
@@ -315,8 +316,7 @@
           {
 
           $this->db->select('*');
-        
-          $res=$this->db->get('employee');
+                   $res=$this->db->get('employee');
           return $res->result_array();
 
           }
