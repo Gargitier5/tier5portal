@@ -10,10 +10,11 @@
 
     public function adminlogin($username,$password)
     {
-        $this->db->select('*');
-        $this->db->where('username',$username);
+        $this->db->select('emp_details.*,employee.*');
+        $this->db->join('employee','employee.id=emp_details.Eid');
+        $this->db->where('emp_details.username',$username);
         //$this->db->where('password',md5($pass));
-        $this->db->where('password',$password);
+        $this->db->where('emp_details.password',$password);
         $res=$this->db->get('emp_details');
         $result1=$res->row_array();
         if($result1['role']==0)
@@ -21,6 +22,8 @@
            $this->session->set_userdata('adminid',$result1['Eid']);
            $this->session->set_userdata('role',$result1['role']);
            $this->session->set_userdata('admin_user',$result1['username']);
+           $this->session->set_userdata('name',$result1['name']);
+           $this->session->set_userdata('picture',$result1['pic']);
            return $result1;
 
         }
@@ -28,7 +31,9 @@
         {
            $this->session->set_userdata('adminid',$result1['Eid']);
            $this->session->set_userdata('role',$result1['role']);
-            $this->session->set_userdata('admin_user',$result1['username']);
+           $this->session->set_userdata('admin_user',$result1['username']);
+           $this->session->set_userdata('name',$result1['name']);
+           $this->session->set_userdata('picture',$result1['pic']);
            return $result1;
         }
         else
@@ -43,10 +48,12 @@
       if($username && $password)
       {
         $this->db->select('emp_details.*,employee.*');
-        $this->db->where('username',$username);
+        $this->db->join('employee','employee.id=emp_details.Eid');
+        $this->db->where('emp_details.username',$username);
         //$this->db->where('password',md5($pass));
-        $this->db->where('password',$password);
-		    $this->db->join('employee','employee.id=emp_details.Eid');
+        $this->db->where('emp_details.password',$password);
+        $this->db->where('employee.activation_status',0);
+		    
         $res=$this->db->get('emp_details');
         $result1=$res->row_array();
         if( $result1)
@@ -64,7 +71,7 @@
                $this->session->set_userdata('uid',$result1['Eid']);
                $this->session->set_userdata('role',$result1['role']);
                $this->session->set_userdata('picture',$result1['pic']);
-                 $this->session->set_userdata('emp_name',$result1['username']);
+               $this->session->set_userdata('emp_name',$result1['username']);
               //$this->session->set_userdata('uname',$result['Eid']);
               return $result1;
             //}

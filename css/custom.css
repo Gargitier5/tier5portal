@@ -570,6 +570,8 @@ a:hover, a:focus {
   margin-left: 0 !important;
   line-height: 32px;
 }
+
+
 .site_title {
   text-overflow: ellipsis;
   overflow: hidden;
@@ -738,6 +740,10 @@ article.media {
   display: block;
   padding: 15px;
   overflow: hidden;
+}
+
+.user-pic{background: #fff; border-radius:50%; overflow: hidden; float: left; margin-right: 5px;
+width: 27px; height: 27px; text-align: center;
 }
 #integration-list ul:last-child {
   border-bottom: 1px solid #ddd;

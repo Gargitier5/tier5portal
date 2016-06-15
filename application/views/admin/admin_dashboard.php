@@ -51,7 +51,7 @@
            <input type="hidden" id="session_user" value="<?php echo $this->session->userdata('admin_user');?>">
            <div class="row">
           <!-- Notification -->
-           <div class="col-md-9 col-sm-9 col-xs-12">
+           <div class="col-md-8 col-sm-8 col-xs-12">
               <div class="row">
                  <?php if($this->session->userdata('succ_msg')!=''){?>
                       <div class="alert alert-success alert-dismissable">
@@ -184,17 +184,20 @@
            </div>
            <!-- Notification -->
            <!-- Admin Chat -->
-           <div class="col-md-3 col-sm-3 col-xs-12">
+           <div class="col-md-4 col-sm-4 col-xs-12">
               <div class="chat employe-chat">
                 <ul>
                    <?php foreach($employee as $online):
                    if($online['id']!= $this->session->userdata('adminid') && $online['role']>1):
                    ?>
                    <li>
-
+                    
                     <div class="user-pic">
+                       <?php if ($online['online_status']==1) {?>
+                     <img src="images/online.png" style="width:7px;height:7px;" alt="img"> 
+                     <?php } ?>
                        <?php if($online['pic']){?>
-                          <img src="images/profile/<?php echo $online['pic'];?>" alt="img">
+                          <img src="images/profile/<?php echo $online['pic'];?>" style="width:15px;height:15px;" alt="img">
                        <?php } else {?>
                            <img src="images/employee.png"  style="width:15px;height:15px;">
                        <?php }?>
@@ -214,11 +217,14 @@
                   ?>
                   <li>
                     <div class="user-pic">
-                    <?php if($online['role']==1){?>
-                          <img src="images/hr.png" alt="img">
-                          <?php } if($online['role']==0){ ?>
-                          <img src="images/admin.png" alt="img">
-                          <?php } ?>
+                    <?php if ($online['online_status']==1) {?>
+                     <img src="images/online.png" style="width:7px;height:7px;" alt="img"> 
+                     <?php } ?>
+                       <?php if($online['pic']){?>
+                          <img src="images/profile/<?php echo $online['pic'];?>" style="width:15px;height:15px;" alt="img">
+                       <?php } else {?>
+                           <img src="images/admin1.jpeg"  style="width:15px;height:15px;">
+                       <?php }?>
 
                         </div> 
                         <?php if($online['role']==1){?> 

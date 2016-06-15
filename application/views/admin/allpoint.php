@@ -91,7 +91,7 @@
                      <br> -->
 
                        <form method="post" action="admin_control/admin/allpoint" >
-               <br><input type="hidden" id="datecheck" name="datecheck" value="">
+               <br>Choose Month:<input type="hidden" id="datecheck" name="datecheck" value="">
                <input type="hidden" id="endofmonth" name="endofmonth" value="">
                <input id="myDate" name="myDate" class="monthYearPicker" value="<?php echo $current;?>" />
                <button type="submit"> Submit Month</button>

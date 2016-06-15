@@ -22,6 +22,8 @@
                       </li>
                       <li><a href="<?php echo base_url();?>admin_control/admin/emplate">Employee Late/Absent</a>
                       </li>
+                      <li><a href="<?php echo base_url();?>admin_control/admin/empproductivity">Employee Productivity</a>
+                      </li>
                     </ul>
                   </li>
                    <?php 

@@ -109,8 +109,8 @@
                         <?php foreach($present_employee as $emp) {?>
                         <tr>
                           <td><?php echo $emp['name'];?></td>
-                          <td><?php echo $emp['clockin'];?></td>
-                          <td><?php echo $emp['clockout'];?></td>             
+                          <td><?php if($emp['clockin_late']==0) { echo $emp['clockin']; } else { echo "<font color='red'>".$emp['clockin']."</font>";}?></td>
+                          <td><?php if($emp['clockout_early']==0) { echo $emp['clockout']; } else { echo "<font color='red'>".$emp['clockout']."</font>";}?></td>             
                         </tr>
                         <?php }?>
                       </tbody>
@@ -154,33 +154,38 @@
                             <?php
 
                                  $time1 = $emp['starttime'];
-             $time2 = $emp['endtime'];
+                                 $time2 = $emp['endtime'];
 
-             list($hours, $minutes, $seconds) = explode(':', $time1);
-             $startTimestamp = mktime($hours, $minutes, $seconds);
+                                 list($hours, $minutes, $seconds) = explode(':', $time1);
+                                 $startTimestamp = mktime($hours, $minutes, $seconds);
 
-             list($hours, $minutes, $seconds) = explode(':', $time2);
-             $endTimestamp = mktime($hours, $minutes, $seconds);
+                                 list($hours, $minutes, $seconds) = explode(':', $time2);
+                                 $endTimestamp = mktime($hours, $minutes, $seconds);
 
-             $seconds = $endTimestamp - $startTimestamp;
-             $sec=($seconds % 60);
-             if($sec<10)
-             {
-             $sec="0".$sec;
-             }
-             $minutes = ($seconds / 60) % 60;
-             if($minutes<10)
-             {
-             $minutes="0".$minutes;
-             }
-            $hours = floor($seconds / (60 * 60));
-            if($hours<10)
-             {
-             $hours="0".$hours;
-             }
-
-            echo $hours.":".$minutes.":".$sec;
-
+                                 $seconds = $endTimestamp - $startTimestamp;
+                                 $sec=($seconds % 60);
+                                 if($sec<10)
+                                 {
+                                 $sec="0".$sec;
+                                 }
+                                 $minutes = ($seconds / 60) % 60;
+                                 if($minutes<10)
+                                 {
+                                 $minutes="0".$minutes;
+                                 }
+                                $hours = floor($seconds / (60 * 60));
+                                if($hours<10)
+                                 {
+                                 $hours="0".$hours;
+                                 }
+                                if($emp['action']==0)
+                                {
+                                echo $hours.":".$minutes.":".$sec;
+                                }
+                                else
+                                {
+                                  echo "<font color='red'>".$hours.":".$minutes.":".$sec."</font>";
+                                }
                             ?>
 
                           </td>            
@@ -257,7 +262,14 @@
              $hours="0".$hours;
              }
 
-            echo $hours.":".$minutes.":".$sec;
+            if($emp['action']==0)
+                                {
+                                echo $hours.":".$minutes.":".$sec;
+                                }
+                                else
+                                {
+                                  echo "<font color='red'>".$hours.":".$minutes.":".$sec."</font>";
+                                }
 
                             ?>
 </td>            
@@ -330,7 +342,14 @@
              $hours="0".$hours;
              }
 
-            echo $hours.":".$minutes.":".$sec;
+            if($emp['action']==0)
+                                {
+                                echo $hours.":".$minutes.":".$sec;
+                                }
+                                else
+                                {
+                                  echo "<font color='red'>".$hours.":".$minutes.":".$sec."</font>";
+                                }
 
                             ?>
 

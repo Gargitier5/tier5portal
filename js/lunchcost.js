@@ -1,7 +1,21 @@
-//$(document).ready(function(){
+$(document).ready(function(){
 
-//});
+	//alert('hi');
 
-$('#selectshop_id').on('change', function() {
-  alert( "HI" ); // or $(this).val()
 });
+
+function myFunction() {
+	var date=$('#demo-1').val();
+	$.post('admin_control/admin/productivitymonth', {date:date}, function(data){    
+      if(data)
+      {
+      	
+      	//alert(data);
+         
+      	$('#monthproductivity').html(data);
+      	
+      }
+           
+    });
+
+}

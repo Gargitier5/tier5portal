@@ -79,7 +79,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                 
-                <input type="text" class="datepicker" id="getdate" name="getdate" onchange="changedate()">
+                 Choose Date:<input type="text" class="datepicker" id="getdate" name="getdate" onchange="changedate()">
  
                   <h2>Employee Late On Clock In</h2>
                   <div class="x_content">

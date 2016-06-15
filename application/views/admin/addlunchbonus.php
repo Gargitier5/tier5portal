@@ -68,9 +68,9 @@
                       <table class="table table-striped jambo_table bulk_action">
                         <thead>
                           <tr>
+                              <td>Date</td>
                               <td>Employee Name</td>
                               <td>Lunch Bonus</td>
-                              <td>Action</td>
                               <td id="action" style="display:none">Take Action</td>
                           </tr>
                         </thead>

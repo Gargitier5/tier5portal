@@ -677,11 +677,11 @@ Notification.requestPermission();
     ?>
                   <li>
                     <div class="user-pic">
-                    <?php if($online['role']==1){?>
-                          <img src="images/hr.png" alt="img">
-                          <?php } if($online['role']==0){ ?>
-                          <img src="images/admin.png" alt="img">
-                          <?php } ?>
+                       <?php if($online['pic']) { ?>
+                          <img src="images/profile/<?php echo $online['pic']; ?>" alt="img">
+                       <?php } else {?>
+                         <img src="images/admin1.jpeg" alt="img">
+                       <?php }?>
 
                         </div> 
                         <?php if($online['role']==1){?> 

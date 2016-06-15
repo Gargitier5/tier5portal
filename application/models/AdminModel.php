@@ -49,11 +49,83 @@
        return $result=$res->row_array();
     }
 
+    public function FngetProductivity($con)
+    {
+            $this->db->select('tbl_employee_productivity.*,employee.name,attendance.*');
+            $this->db->where('tbl_employee_productivity.date',$con);
+            $this->db->where('attendance.date',$con);
+            $this->db->join('employee','employee.id=tbl_employee_productivity.Eid');
+            $this->db->join('attendance','employee.id=attendance.Eid');
+            $this->db->order_by('employee.name');
+            $res=$this->db->get('tbl_employee_productivity');
+            return $res->result_array(); 
+    }
+
+    public function FnMonthwiseProductivity($l_time,$month)
+    {
+     
+      $sql="SELECT `tbl_employee_productivity`.*,sum(TIME_TO_SEC(TIMEDIFF(`endTime`,`startTime` ))) AS DiffTime, `employee`.`name` FROM `tbl_employee_productivity` JOIN `employee` ON `employee`.`id` = `tbl_employee_productivity`.`Eid`  WHERE `date` >= '2016-".$month."-01'
+            AND `date` <= '".$l_time."' and `status`='0' group by `Eid`,`type`";
+            $res=$this->db->query($sql);
+            $result=$res->result_array();
+            
+      
+      $return1='';
+      if(!empty($result))
+      {
+          $return1.=" <thead><tr><td><strong>NAME</strong></td><td><strong>Field</strong></td><td><strong>Total time <br>(hh:mm:ss)</strong></td></tr></thead><tbody>";
+          foreach($result as $res)
+          {
+              if($res['type']==1){  $field='Production';}
+              elseif($res['type']==2){ $field='R&D'; }
+              elseif ($res['type']==3) { $field='Traning'; }
+              else { $field='Administrative'; }
+
+              if($res['DiffTime']>=3600) {
+                $h=round($res['DiffTime']/3600);
+                $m=round(($res['DiffTime']%3600)/60);
+                $s=round(($res['DiffTime']%3600)%60);
+                if($h<10){ $h='0'.$h;}
+                if($m<10){ $m='0'.$m;}
+                if($s<10){ $s='0'.$s;}
+                $time=$h.':'.$m.':'.$s;
+              }
+              else
+              {
+                $h='00';
+                $m=round($res['DiffTime']/60);
+                $s=round($res['DiffTime']%60);
+                if($m<10){ $m='0'.$m;}
+                if($s<10){ $s='0'.$s;}
+                $time=$h.':'.$m.':'.$s;
+              }
+              $return1.="<tr><td>".$res['name']."</td><td>".$field."</td><td>".$time."</td></tr>";               
+          }
+          $return1.="</tbody>";
+          echo $return1;
+      }
+      else
+      {
+        echo "No result Found.";
+      }
+    }
+
     public function fnallemp()
     {
-      $this->db->select('*');
+       $this->db->select('employee.*,emp_details.*');
+       $this->db->join('emp_details','employee.id=emp_details.Eid');
+       $this->db->order_by('employee.name');
        $res=$this->db->get('employee');
-      return $result=$res->result_array();
+       return $result=$res->result_array();
+    }
+    public function fnallemphr()
+    {
+       $this->db->select('employee.*,emp_details.*');
+       $this->db->join('emp_details','employee.id=emp_details.Eid');
+       $this->db->order_by('employee.name');
+       $this->db->where('emp_details.role>',0);
+       $res=$this->db->get('employee');
+       return $result=$res->result_array();
     }
     
     public function alllunchbonus($con)
@@ -221,7 +293,20 @@
 
       $this->db->select('emp_details.*,employee.name');
       $this->db->join('emp_details',"emp_details.Eid=employee.id");
+      $this->db->order_by('employee.name');
+      $res=$this->db->get('employee');
+      
+        return $res->result_array();
+    }
+
+    public function showemphr()
+    {
+
+      $this->db->select('emp_details.*,employee.name');
+      $this->db->join('emp_details',"emp_details.Eid=employee.id");
+      $this->db->where('emp_details.role>',0);
       $this->db->where('employee.activation_status',0);
+      $this->db->order_by('employee.name');
       $res=$this->db->get('employee');
       
         return $res->result_array();
@@ -312,14 +397,13 @@
       }
 
 
-         public function fetchallemployee()
-          {
+     public function fetchallemployee()
+     {
 
-          $this->db->select('*');
-                   $res=$this->db->get('employee');
-          return $res->result_array();
-
-          }
+        $this->db->select('*');
+        $res=$this->db->get('employee');
+        return $res->result_array();
+      }
 
           public function allordercost($shop_id,$start_date,$end_date)
       {

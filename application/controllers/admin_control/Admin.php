@@ -17,35 +17,53 @@ class Admin extends CI_Controller
 
    public function index()
    {   
-          if ($this->session->userdata('adminid'))
-          {
-              
-              $fbreak['date']=date('Y-m-d');
-              $fbreak['type']=1;
-              $fbreak['status']=1;
+      if ($this->session->userdata('adminid'))
+      {
+        $fbreak['date']=date('Y-m-d');
+        $fbreak['type']=1;
+        $fbreak['status']=1;
 
-              $sbreak['date']=date('Y-m-d');
-              $sbreak['type']=2;
-              $sbreak['status']=1;
+        $sbreak['date']=date('Y-m-d');
+        $sbreak['type']=2;
+        $sbreak['status']=1;
 
-              $lbreak['date']=date('Y-m-d');
-              $lbreak['type']=3;
-              $lbreak['status']=1;
+        $lbreak['date']=date('Y-m-d');
+        $lbreak['type']=3;
+        $lbreak['status']=1;
              
-              $con['activation_status']=0;
-              $con1['date']=date('Y-m-d');
-              $datee=date('Y-m-d');
-              $data['employee']=$this->AdminModel->AllEmployee();
-              $data['total_employee']=$this->AdminModel->fetchinfo('employee',$con,'count');
-              $data['total_present']=$this->AdminModel->fetchinfo('attendance',$con1,'count');
-              $data['total_fbreak']=$this->AdminModel->onfirstbreak($datee);
-              $data['total_sbreak']=$this->AdminModel->fetchinfo('break_track',$sbreak,'count');
-              $data['total_lbreak']=$this->AdminModel->fetchinfo('break_track',$lbreak,'count');
-              $data['sideber']=$this->load->view('admin/includes/sideber','',true);
-              $data['header']=$this->load->view('admin/includes/header','',true);
-              $this->load->view('admin/admin_dashboard.php',$data);
-          }      
+        $con['activation_status']=0;
+        $con1['date']=date('Y-m-d');
+        $datee=date('Y-m-d');
+        $data['employee']=$this->AdminModel->AllEmployee();
+        $data['total_employee']=$this->AdminModel->fetchinfo('employee',$con,'count');
+        $data['total_present']=$this->AdminModel->fetchinfo('attendance',$con1,'count');
+        $data['total_fbreak']=$this->AdminModel->onfirstbreak($datee);
+        $data['total_sbreak']=$this->AdminModel->fetchinfo('break_track',$sbreak,'count');
+        $data['total_lbreak']=$this->AdminModel->fetchinfo('break_track',$lbreak,'count');
+        $data['sideber']=$this->load->view('admin/includes/sideber','',true);
+        $data['header']=$this->load->view('admin/includes/header','',true);
+        $this->load->view('admin/admin_dashboard.php',$data);
+      }      
     }
+    
+    public function empproductivity()
+    {
+      if($_POST)
+      {
+        $date=$this->input->post('date');
+        if($date) { $con=$date; }
+        else { $con=date('Y-m-d'); }
+      }
+      else
+      {
+        $con=date('Y-m-d');
+      }
+      $data['All_product']=$this->AdminModel->FngetProductivity($con);
+      $data['sideber']=$this->load->view('admin/includes/sideber','',true);
+      $data['header']=$this->load->view('admin/includes/header','',true);
+      $this->load->view('admin/empproductivity.php',$data);
+    }
+
 
     public function addbadges()
     {
@@ -107,12 +125,22 @@ class Admin extends CI_Controller
           
         }
             
-        
-              
-        
-         
-          
       //print_r($_POST);
+    }
+
+    public function productivitymonth()
+    {
+      $date=$this->input->post('date');
+      $newdate=explode("/",$date);
+      $get_month=$newdate[0];
+      $year=$newdate[1];
+      $date1=$year."-".$get_month;
+
+      if($get_month<10) { $get_month='0'.$get_month; } else { $get_month=$get_month; }
+      $last_day=date('Y-m-t', strtotime($date1));
+      $total=$this->AdminModel->FnMonthwiseProductivity($last_day,$get_month);
+      print_r($total);
+      
     }
 
     public function changepass()
@@ -979,8 +1007,14 @@ class Admin extends CI_Controller
 
     public function allemp()
     {
-
-          $data['allemployee']=$this->AdminModel->fnallemp();
+          if($this->session->userdata('role')==0)
+          {
+            $data['allemployee']=$this->AdminModel->fnallemp();
+          }
+          else
+          {
+              $data['allemployee']=$this->AdminModel->fnallemphr();
+          }
           $data['sideber']=$this->load->view('admin/includes/sideber','',true);
           $data['header']=$this->load->view('admin/includes/header','',true);
        
@@ -1066,7 +1100,17 @@ class Admin extends CI_Controller
     }
     public function empinfo()
     {
-          $data['showemp']=$this->AdminModel->showemp();
+          if($this->session->userdata('role')==0)
+          {
+              $data['showemp']=$this->AdminModel->showemp();
+          }
+          else
+          {
+             $data['showemp']=$this->AdminModel->showemphr();
+          }
+
+
+          
           $data['sideber']=$this->load->view('admin/includes/sideber','',true);
           $data['header']=$this->load->view('admin/includes/header','',true);
        
@@ -2105,7 +2149,24 @@ class Admin extends CI_Controller
         $result="";
         foreach ($getattend as $key)
         {
-          $result.="<tr><td>".$key['name']."</td><td>".$key['clockin']."</td><td>".$key['clockout']."</td></tr>";
+          if($key['clockin_late']==0)
+          { 
+            $clockin= $key['clockin']; 
+          } 
+          else 
+          { 
+            $clockin= "<font color='red'>".$key['clockin']."</font>";
+          }
+
+          if($key['clockout_early']==0)
+          { 
+            $clockout= $key['clockout']; 
+          } 
+          else 
+          { 
+            $clockout= "<font color='red'>".$key['clockout']."</font>";
+          }
+          $result.="<tr><td>".$key['name']."</td><td>".$clockin."</td><td>".$clockout."</td></tr>";
         }
         //$attend="<tr><td>".$getattend['name']."</td><td>""</td><td>""</td></tr>";
         print_r($result);
@@ -2140,7 +2201,17 @@ class Admin extends CI_Controller
                $minutes="0".$minutes;
                }
               $hours = floor($letseconds / (60 * 60));
-          $result.="<tr><td>".$key['name']."</td><td>".$hours.":".$minutes.":".$sec."</td></tr>";
+
+
+               if($key['action']==0)
+                                {
+                                $time= $hours.":".$minutes.":".$sec;
+                                }
+                                else
+                                {
+                                  $time= "<font color='red'>".$hours.":".$minutes.":".$sec."</font>";
+                                }
+          $result.="<tr><td>".$key['name']."</td><td>".$time."</td></tr>";
         }
         //$attend="<tr><td>".$getattend['name']."</td><td>""</td><td>""</td></tr>";
         print_r($result);
@@ -2176,7 +2247,15 @@ class Admin extends CI_Controller
                $minutes="0".$minutes;
                }
               $hours = floor($letseconds / (60 * 60));
-          $result.="<tr><td>".$key['name']."</td><td>".$hours.":".$minutes.":".$sec."</td></tr>";
+          if($key['action']==0)
+                                {
+                                $time= $hours.":".$minutes.":".$sec;
+                                }
+                                else
+                                {
+                                  $time= "<font color='red'>".$hours.":".$minutes.":".$sec."</font>";
+                                }
+          $result.="<tr><td>".$key['name']."</td><td>".$time."</td></tr>";
         }
         //$attend="<tr><td>".$getattend['name']."</td><td>""</td><td>""</td></tr>";
         print_r($result);
@@ -2212,7 +2291,15 @@ class Admin extends CI_Controller
                $minutes="0".$minutes;
                }
               $hours = floor($letseconds / (60 * 60));
-          $result.="<tr><td>".$key['name']."</td><td>".$hours.":".$minutes.":".$sec."</td></tr>";
+          if($key['action']==0)
+                                {
+                                $time= $hours.":".$minutes.":".$sec;
+                                }
+                                else
+                                {
+                                  $time= "<font color='red'>".$hours.":".$minutes.":".$sec."</font>";
+                                }
+          $result.="<tr><td>".$key['name']."</td><td>".$time."</td></tr>";
         }
         //$attend="<tr><td>".$getattend['name']."</td><td>""</td><td>""</td></tr>";
         print_r($result);

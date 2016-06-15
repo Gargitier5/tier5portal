@@ -9,7 +9,19 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                    <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/employee.png" alt="">Welcome Admin
+                   
+                     <?php 
+                       if($this->session->userdata('picture'))
+                       {?>
+                        <img src="images/profile/<?php echo $this->session->userdata('picture');?>" alt="img">
+
+                     <?php } else {
+                     ?>
+                      <img src="images/employee.png" alt="img">
+                      <?php }
+                     ?>
+
+                    Welcome <?php echo $this->session->userdata('name');?>
                     <span class=" fa fa-angle-down"></span>
                   </a> 
                   <ul class="dropdown-menu dropdown-usermenu pull-right">

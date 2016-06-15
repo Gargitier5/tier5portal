@@ -97,6 +97,19 @@ return true;
 
 }
 
+public function offline($con,$data)
+{
+   
+ $this->db->where($con);
+ $res=$this->db->update('employee',$data);
+
+ if($res)
+ {
+ return true;
+ }
+}
+
+
 public function insertabsent($data3)
 {
 

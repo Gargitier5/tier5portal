@@ -76,7 +76,7 @@
 
                    
                    <div id="msg">
-                    <input type="text" class="datepicker" id="date" name="date" onchange="checkdate()">
+                    Choose Date:<input type="text" class="datepicker" id="date" name="date" onchange="checkdate()">
 
                    </div>
                     <div class="table-responsive">

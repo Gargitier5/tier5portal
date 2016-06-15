@@ -74,7 +74,20 @@ public function delete_history()
         }
   }
 
-
+//======Cron Job For Reset For Make Offline========================  
+    public function offline()
+    {   
+        $result = $this->CronjobModel->showTable();
+        foreach ($result as $key)
+        {
+          //print_r($key['id']);
+            $con['id'] = $key['id'];
+        
+            $data['online_status']='0';
+            $make_offline=$this->CronjobModel->offline($con,$data);
+            print_r($make_offline);
+        }
+    }
 
 //======Cron Job For Reset Attendance Bonus Monthly========================  
     public function resetattendance()
