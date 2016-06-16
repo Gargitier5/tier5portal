@@ -1,5 +1,14 @@
  $(document).ready(function(){
 
+    point();
+    lbonus();
+    lorder();
+
+    setInterval(function(){ chk_time() }, 1000);
+    setInterval(function(){ point() }, 2000);
+    setInterval(function(){ lbonus() }, 500000);
+    setInterval(function(){ lorder() }, 1000);
+
 /*    disfirstbreak(); // This will run on page load
     dissecondbreak(); // This will run on page load
     disthird(); // This will run on page load
@@ -118,7 +127,61 @@
     setInterval(function(){ chk_time() }, 1000);
 
  
+   function point()
+    {
+    $.post('employee_control/employee/emppoint',function(data){
+      if(data)
+        {
+          $('#points').html(data);
+        }
+    });
+    }
 
+
+    
+    function lbonus()
+    {
+      $.post('employee_control/employee/emplbonus',function(data){
+      if(data)
+        {
+          $('#lbonus').html(data);
+        }
+     
+      });
+
+    }
+    
+    function lorder()
+    {
+        var d = new Date(); // current time
+        var hours = d.getHours();
+        var mins = d.getMinutes();
+      if(hours <= 13 && mins <=15)
+      {
+       
+        $.post('employee_control/employee/emplorder',function(data){
+          if(data)
+          {
+            $('#show_lunch').hide(200);
+            $('#view_lunch').show(200);
+            $('#orderid').html(data); 
+          }
+          else
+          { 
+            $('#view_lunch').hide(200);
+            $('#show_lunch').show(200);
+            
+          }
+        });
+      }
+      else
+      {
+
+          $('#view_lunch').hide();
+          $('#show_lunch').hide();
+      }
+
+    }
        
     
 

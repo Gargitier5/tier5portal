@@ -1109,17 +1109,17 @@ class Admin extends CI_Controller
              $data['showemp']=$this->AdminModel->showemphr();
           }
 
-
-          
+          $con['status']='0';
+          $data['badges']=$this->AdminModel->fetchinfo('badges',$con,'result');
           $data['sideber']=$this->load->view('admin/includes/sideber','',true);
           $data['header']=$this->load->view('admin/includes/header','',true);
        
           $this->load->view('admin/empinfo.php',$data);
     }
 
-    public function reset_password()
+    public function badgedisa()
     {
-      alert('HI');
+        $emp=$this->input->post();
     }
 
     public function allbreak()

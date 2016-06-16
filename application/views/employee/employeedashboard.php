@@ -86,7 +86,7 @@ Notification.requestPermission();
                     Your total points 
                 </div>
                 <div class="col-md-3 col-sm-3 col-xs-3 dashboard-right">
-                  <span class="points"><?php echo $points['points'] ?></span>
+                  <span class="points" id="points"></span>
                 </div>
 
               </div> 
@@ -95,7 +95,7 @@ Notification.requestPermission();
                   Monthly lunch allowance
                 </div>
                 <div class="col-md-3 col-xs-3 dashboard-right">
-                  Rs <?php echo $lunch_bonus['Lunch_bonus'] ?>
+                  Rs  <span id="lbonus"></span>
                 </div>
 
               </div>
@@ -106,16 +106,16 @@ Notification.requestPermission();
                 
                <div class="content3 mCustomScrollbar" data-mcs-theme="minimal">
                 <div class="row pre-row">
-                  <?php  
+                <?php  
                   
-                    for($i=0; $i<count($privilege); $i++)
+                   for($i=0; $i<count($privilege); $i++)
                     {
                       $split=explode(':',$privilege[$i]);
                       ?>
                        <div class="col-md-4 col-sm-4">
                         <div class="privilege-box active-privilege">
                           <div class="pre-icon">
-                           <img src="images/badges/<?php echo $split[1]; ?>" alt="img">
+                           <img src="images/badges/<?php //echo $split[1]; ?>" alt="img">
                           </div>  
                           <?php echo $split[0]; ?>
                         </div>  
@@ -124,24 +124,27 @@ Notification.requestPermission();
                     }
 
 
-                 ?>
-                  <!-- <div class="col-md-4 col-sm-4">
-                    <div class="privilege-box active-privilege">
+                 ?></div> 
+
+
+
+                   <!-- <div class="col-md-4 col-sm-4">
+                    <div class="privilege-box">
                       <div class="pre-icon">
                         <img src="images/gamepad.png" alt="img">
                        </div>  
                       Game
                     </div>  
-                  </div>  -->
-                  <!-- <div class="col-md-4 col-sm-4">
+                  </div>  
+                   <div class="col-md-4 col-sm-4">
                     <div class="privilege-box">
                       <div class="pre-icon">
                         <img src="images/printer-icon.png" alt="img">
                       </div> 
                       Printer
                     </div> 
-                  </div> -->
-                  <!-- <div class="col-md-4 col-sm-4">
+                  </div> 
+                   <div class="col-md-4 col-sm-4">
                     <div class="privilege-box">
                       <div class="pre-icon">
                         <img src="images/tshirt-icon.png" alt="img">
@@ -149,10 +152,10 @@ Notification.requestPermission();
                       T-shirt
                     </div> 
                   </div>  
-                </div> -->
+                </div> 
 
 
-                <!-- <div class="row pre-row">
+                 <div class="row pre-row">
                   <div class="col-md-4 col-sm-4">
                     <div class="privilege-box">
                       <div class="pre-icon">
@@ -177,11 +180,11 @@ Notification.requestPermission();
                       Office Party
                     </div> 
                   </div> 
-                </div> -->
+                </div> 
 
 
 
-              </div> 
+              </div>  -->
               </section>
               </div>
               </div>
@@ -218,11 +221,11 @@ Notification.requestPermission();
                  
 
 
-                  <a href="#" class="lunch-btn" data-toggle="modal"  data-target="#myModal" id="show_lunch" <?php if(date('H:i:s')<="13:15:00"){ echo "style=display:block;";} else {echo "style=display:none;";}?>><?php if(!$lunch_order){ echo "Lunch Order";}else{echo "View order";}?></a>
+                  <a href="#" class="lunch-btn" data-toggle="modal"  data-target="#myModal" id="show_lunch" <?php if(date('H:i:s')<="23:15:00"){ echo "style=display:block;";} else {echo "style=display:none;";}?>>Lunch Order</a>
 
            <!--    <a href="#" class="lunch-btn" data-toggle="modal" id="show_lunch" >Lunch Order</a> -->
-              <!-- <br>
-              <a class="lunch-btn" data-toggle="modal"  id="view_lunch" data-target="#lunch_modal" <?php //if(date('H:i:s')<="13:15:00"){ echo "style=display:block;";} else {echo "style=display:none;";}?>>View Order</a> -->
+              <br>
+              <a class="lunch-btn" data-toggle="modal"  id="view_lunch" data-target="#lunch_modal" <?php if(date('H:i:s')<="23:15:00"){ echo "style=display:block;";} else {echo "style=display:none;";}?>>View Order</a>
 
            
               <!-- Modal -->
@@ -231,41 +234,6 @@ Notification.requestPermission();
 
                 <!-- Modal content-->
                 <div class="modal-content">
-                 <?php if($lunch_order){?>
-                   <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Your Lunch Odred For Today!!!</h4>
-                  </div>
-                    
-                  <div class="modal-body">
-                    <table class="table table-bordered table-hover table-responsive center">
-                        <thead>
-                          <tr>
-                            <th>Employee Name</th>
-                            <th>Date</th>
-                            <th>Shop Name</th>
-                            <th>Items</th>
-                            <th>Cost</th>
-                            <th>Action</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <th><?php echo $placedorder['name'];?></th>
-                            <th><?php echo $placedorder['date'];?></th>
-                            <th><?php echo $placedorder['shopname'];?></th>
-                            <th><?php echo $placedorder['items'];?></th>
-                            <th><?php echo $placedorder['cost'];?></th>
-                            <th><button class="btn btn-success" onclick="location.href='employee_control/Employee/deletelunch/<?php echo $placedorder['Liid'];?>';">Delete</button></th>
-                        </tbody>
-                      </table> 
-
-
-                  </div>
-                  
-
-                   <?php }else{?>
-                  
-
                   <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Lunch Order</h4>
@@ -363,7 +331,7 @@ Notification.requestPermission();
                     </div>  
                   </div>
                   </div>
-                   <?php }?>
+                   
                   <!-- <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                   </div> -->
@@ -382,7 +350,7 @@ Notification.requestPermission();
           <h4 class="modal-title">Your Lunch Odred For Today!!!</h4>
         </div>
         <div class="modal-body">
-            <?php if($placedorder['Liid']){ ?>   
+             
              <table class="table table-bordered table-hover table-responsive center">
                         <thead>
                           <tr>
@@ -394,23 +362,13 @@ Notification.requestPermission();
                             <th>Action</th>
                           </tr>
                         </thead>
-                        <tbody>
-                          <th><?php echo $placedorder['name'];?></th>
-                            <th><?php echo $placedorder['date'];?></th>
-                            <th><?php echo $placedorder['shopname'];?></th>
-                            <th><?php echo $placedorder['items'];?></th>
-                            <th><?php echo $placedorder['cost'];?></th>
-                            <th><button class="btn btn-success" onclick="location.href='employee_control/Employee/deletelunch/<?php echo $placedorder['Liid'];?>';">Delete</button></th>
+                        <tbody id="orderid">
+                          
+                           
                         </tbody>
                       </table> 
          
-           <?php } else { ?>
-
-            <table class="table table-bordered table-hover table-responsive center">
-                  No Lunch Order For Today!!!
-
-            </table> 
-           <?php }?>
+<!--             <th><button class="btn btn-success" onclick="location.href='employee_control/Employee/deletelunch/<?php //echo $placedorder['Liid'];?>';">Delete</button></th> -->
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

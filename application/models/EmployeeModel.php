@@ -182,6 +182,15 @@
 
   }
 
+  public function prev()
+  {
+    $this->db->select('*');
+    $this->db->where('status',0);
+    $res = $this->db->get('badges');
+    $result=$res->result_array();
+    return $result;
+  }
+
 
 
     public function clockouttime($data)

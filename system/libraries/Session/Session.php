@@ -259,7 +259,8 @@ class CI_Session {
 	 */
 	protected function _configure(&$params)
 	{
-		$expiration = config_item('sess_expiration');
+
+		 $expiration = config_item('sess_expiration'); 
 
 		if (isset($params['cookie_lifetime']))
 		{

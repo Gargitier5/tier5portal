@@ -98,22 +98,23 @@ if($this->session->userdata('succ_msg')!=''){?>
                           <tr class="headings">
                               <th class="column-title">Employee</th>
                               <th class="column-title">Name</th>
+                              <th class="column-title">Action</th>
                               <th class="column-title">Gender</th>
-                              <th class="column-title">Phon Number</th>
+                              <!-- <th class="column-title">Phon Number</th>
                               <th class="column-title">Alternet Phon Number</th>
                               <th class="column-title">Personal Email Id</th>
                               <th class="column-title">Marital Status</th>
-                              <th class="column-title">Date Of Birth</th>
+                              <th class="column-title">Date Of Birth</th> -->
                               <th class="column-title">Joining Date</th>
                               <th class="column-title">Employment Status</th>
-                              <th class="column-title">Company Email</th>
+                              <!-- <th class="column-title">Company Email</th> -->
                               <th class="column-title">Designation</th>
-                               <th class="column-title">Salary</th>
+                               <!-- <th class="column-title">Salary</th> -->
                               <th class="column-title">Last Date Of Employment</th>
                               <th class="column-title">Reason</th>
-                              <th class="column-title">Adress</th>
-                              <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                              <th class="column-title">Action</th>
+                              <!-- <th class="column-title">Adress</th> -->
+                             <!--  <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th> -->
+                              
                           </tr>
                         </thead>
                          
@@ -122,21 +123,21 @@ if($this->session->userdata('succ_msg')!=''){?>
                           <tr>
                               <td><?php if($value['pic']) {?><img src="images/profile/<?php echo $value['pic'];?>"  style="width:25px;height:25px;"> <?php } else { ?> <img src="images/employee.png"  style="width:25px;height:25px;"> <?php } ?></td>
                               <td><?php echo $value['name'];?></td>
-                              <td><?php echo $value['gender'];?></td>
-                              <td><?php echo $value['phon_no'];?></td>
-                              <td><?php echo $value['alt_ph_no'];?></td>
-                              <td><?php echo $value['personal_email'];?></td>
-                              <td><?php if($value['m_status']==0){echo "Unmarried";}else{echo "Married";}?></td>
-                              <td><?php echo $value['dob'];?></td>
+                              <td><button class="btn btn-success glyphicon glyphicon-edit" onclick="location.href='admin_control/Admin/editprof/<?php echo $value['id'];?>';"></td>
+                              <td><?php if($value['gender']=='Male'){ echo "<i class='fa fa-male'></i>";}else{ echo "<i class='fa fa-female'></i>";} ?></td>
+                              <!-- <td><?php //echo $value['phon_no'];?></td>
+                              <td><?php //echo $value['alt_ph_no'];?></td>
+                              <td><?php //echo $value['personal_email'];?></td>
+                              <td><?php //if($value['m_status']==0){echo "Unmarried";}else{echo "Married";}?></td>
+                              <td><?php //echo $value['dob'];?></td> -->
                               <td><?php echo $value['joining_date'];?></td>
                               <td><?php if($value['activation_status']==0){echo "Working";}else{echo "Resigned";}?></td>
-                              <td><?php echo $value['comemail'];?></td>
+                              <!-- <td><?php //echo $value['comemail'];?></td> -->
                               <td><?php echo $value['designation'];?></td>
-                              <td><?php echo $value['salary'];?></td>
+                              <!-- <td><?php// echo $value['salary'];?></td> -->
                               <td><?php if($value['activation_status']==0){echo " ";}else{echo $value['resign_date'];}?></td>
                               <td><?php echo $value['reason'];?></td>
-                              <td colspan="2" ><?php echo $value['address'];?></td>
-                              <td><button class="btn btn-success glyphicon glyphicon-edit" onclick="location.href='admin_control/Admin/editprof/<?php echo $value['id'];?>';"></td>
+                              <!-- <td colspan="2" ><?php //echo $value['address'];?></td> -->
                           </tr>
                           <?php }?>
                         </tbody>

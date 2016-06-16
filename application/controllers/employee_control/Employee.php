@@ -4,19 +4,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Employee extends CI_Controller 
 {
 
-	public function __construct()
-	{
-		parent::__construct();
+  public function __construct()
+  {
+    parent::__construct();
 
     
-		$this->load->helper('url');
-		$this->load->database();
-		$this->load->model('EmployeeModel');
-		$this->load->helper('custom');
-		$this->load->library('session');
+    $this->load->helper('url');
+    $this->load->database();
+    $this->load->model('EmployeeModel');
+    $this->load->helper('custom');
+    $this->load->library('session');
     $this->load->library('villa_booking_calendar');
     
-	}
+  }
 
 
 
@@ -52,13 +52,13 @@ class Employee extends CI_Controller
           $user_id=$this->session->userdata('uid');
           
           $data['points']=$this->EmployeeModel->getpoint($user_id,$start_date,$end_date);
+          $data['prev']=$this->EmployeeModel->prev();
           $data['privilege']=$this->EmployeeModel->privilege($data['points']['points']);
           $data['placedorder']=$this->EmployeeModel->placedorder($user_id,$end_date);
           $data['userid']=$this->session->userdata('uid');
           $data['empofmonth']=$this->EmployeeModel->getempofmonth();
           $data['notice']=$this->EmployeeModel->getnotice();
           $data['lunch_order']=$this->EmployeeModel->fetchinfo('lunchorder',$clockin,'row');
-          $data['lunch_bonus']=$this->EmployeeModel->getlunch_bonus($user_id,$start_date,$end_date);
           $data['checkmode']=$this->EmployeeModel->fetchinfo('tbl_employee_productivity',$conmode,'row');
           $data['header']=$this->load->view('employee/include/header','',true);
           $this->load->view('employee/employeedashboard',$data);
@@ -92,7 +92,52 @@ class Employee extends CI_Controller
           redirect(base_url());
       }
     }
+    
+    public function emplbonus()
+    {
+      if ($this->session->userdata('uid'))
+      {
+        $start_date=date("Y-m-d", strtotime(date('m').'/01/'.date('Y')));
+        $end_date=date("Y-m-d");
+        $user_id=$this->session->userdata('uid');
+        $lunch_bonus=$this->EmployeeModel->getlunch_bonus($user_id,$start_date,$end_date);
+        print_r($lunch_bonus['Lunch_bonus']);
+      }
+      else
+      {
+         redirect(base_url());
+      } 
+    }
 
+    public function emplorder()
+    {
+      if ($this->session->userdata('uid'))
+      {
+       $user_id=$this->session->userdata('uid');
+       $end_date=date('Y-m-d');
+       $lorder=$this->EmployeeModel->placedorder($user_id,$end_date);
+       if($lorder)
+       {
+         $result="<td>".$lorder['name']."</td>
+                <td>".$lorder['date']."</td>
+                <td>".$lorder['shopname']."</td>
+                <td>".$lorder['items']."</td>
+                <td>".$lorder['cost']."</td>;
+                <td><button class='btn btn-success' onclick='location.href=`employee_control/Employee/deletelunch/".$lorder['Liid']."`;' >Delete</button></th>";
+        print_r($result);
+
+
+       }
+       else
+       {
+        return false;
+       }
+      }
+      else
+      {
+         redirect(base_url());
+      }
+    }
     
     public function bdmaccess()
     {
@@ -473,7 +518,7 @@ class Employee extends CI_Controller
         }
         else
         {
-           return false;
+           redirect(base_url());
         }
     }
     public function startbreak()
@@ -509,7 +554,7 @@ class Employee extends CI_Controller
         }
         else
         {
-         return false;
+          redirect(base_url());
         }
     }
     public function submitlunchorder()
@@ -807,6 +852,23 @@ class Employee extends CI_Controller
            {
             return false;
            }
+      }
+      else
+      {
+           redirect(base_url());
+      } 
+    }
+
+    public function emppoint()
+    {
+      if ($this->session->userdata('uid'))
+      {
+
+         $user_id=$this->session->userdata('uid');
+         $start_date=date("Y-m-d", strtotime(date('m').'/01/'.date('Y')));
+         $end_date=date("Y-m-d");
+         $point=$this->EmployeeModel->getpoint($user_id,$start_date,$end_date);
+         print_r($point['points']);
       }
       else
       {

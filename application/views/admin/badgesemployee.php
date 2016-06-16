@@ -62,7 +62,7 @@
 
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
-                  <h2>Add Badges For Employee</h2>
+                  <h2>Remove Badges For Employee</h2>
                   <div class="ln_solid"></div>
                   <div class="x_content">
                     <?php 

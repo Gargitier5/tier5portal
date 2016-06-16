@@ -174,11 +174,7 @@
 
     public function allempbadge()
     {
-       /*$this->db->select('empbadge.*,employee.name,badges.badge');
-       $this->db->join('employee','employee.id=empbadge.Eid');
-       $this->db->join('badges','badges.badge=empbadge.Bid');
-       $res=$this->db->get('empbadge');
-       return $result=$res->result_array();*/
+    
         $this->db->select('empbadge.*,employee.name,badges.badge');
         $this->db->join('employee','employee.id=empbadge.Eid');
         $this->db->join('badges','badges.badges_id=empbadge.Bid');
@@ -293,6 +289,7 @@
 
       $this->db->select('emp_details.*,employee.name');
       $this->db->join('emp_details',"emp_details.Eid=employee.id");
+      $this->db->where('employee.activation_status',0);
       $this->db->order_by('employee.name');
       $res=$this->db->get('employee');
       

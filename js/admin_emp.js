@@ -3,8 +3,24 @@ $(document).ready(function() {
 $( ".datepicker" ).datepicker({ dateFormat: 'yy-mm-dd'});
 
 $('#timepicker').timepicker();
+
+
+
+
+
 });
 
+/*function badges(emp_id)
+{
+  //alert(emp_id);
+  $('#baddge').modal('show');
+   $.post('admin_control/admin/badgedisa',{emp_id:emp_id},function(data){
+      if(data)
+        {
+          
+        }
+    });
+}*/
 
 
 function reset_pass(emp_id)
@@ -123,6 +139,7 @@ function dlt(orderid)
         });
       }
 }
+
 
 function checkdate()
 {

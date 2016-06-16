@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+ini_set('session.gc_maxlifetime', 36000);
 /*
 | -------------------------------------------------------------------
 | AUTO-LOADER
