@@ -1119,7 +1119,34 @@ class Admin extends CI_Controller
 
     public function badgedisa()
     {
-        $emp=$this->input->post();
+        $emp['Eid']=$this->input->post('emp_id');
+        $disbadges=$this->AdminModel->fetchinfo('empbadge',$emp,'result');
+          $result="";
+          $con['status']='0';
+          $badges=$this->AdminModel->fetchinfo('badges',$con,'result');
+          $mak_array=array();
+          if($disbadges)
+          {
+            foreach ($disbadges as $key)
+            {
+              array_push($mak_array,$key['Bid']);
+           
+            }
+          }
+          foreach ($badges as $bad){
+            if(in_array($bad['badges_id'],$mak_array) && !empty($mak_array)){
+
+            $result.='<input type="checkbox" onchange="see(<?php echo $bad[`badges_id`]?>)" name="badges" id="check'.$bad['badges_id'].'" value="'.$bad['badges_id'].'" checked>'.$bad['badge'];
+          }
+          else
+          {
+           $result.='<input type="checkbox" onchange="see()" name="badges" id="check'.$bad['badges_id'].'" value="'.$bad['badges_id'].'">'.$bad['badge']; 
+          }
+          }
+
+
+         echo $result;
+        
     }
 
     public function allbreak()

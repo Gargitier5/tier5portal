@@ -124,146 +124,10 @@
         }
     }*/
 
-    setInterval(function(){ chk_time() }, 1000);
+    
 
  
-   function point()
-    {
-    $.post('employee_control/employee/emppoint',function(data){
-      if(data)
-        {
-          $('#points').html(data);
-        }
-    });
-    }
-
-
-    
-    function lbonus()
-    {
-      $.post('employee_control/employee/emplbonus',function(data){
-      if(data)
-        {
-          $('#lbonus').html(data);
-        }
-     
-      });
-
-    }
-    
-    function lorder()
-    {
-        var d = new Date(); // current time
-        var hours = d.getHours();
-        var mins = d.getMinutes();
-      if(hours <= 13 && mins <=15)
-      {
-       
-        $.post('employee_control/employee/emplorder',function(data){
-          if(data)
-          {
-            $('#show_lunch').hide(200);
-            $('#view_lunch').show(200);
-            $('#orderid').html(data); 
-          }
-          else
-          { 
-            $('#view_lunch').hide(200);
-            $('#show_lunch').show(200);
-            
-          }
-        });
-      }
-      else
-      {
-
-          $('#view_lunch').hide();
-          $('#show_lunch').hide();
-      }
-
-    }
-       
-    
-
-    function chk_time()
-    {
-      var time_remains=$('.break_span').text();
-      var data2=time_remains.split(':'); 
-      if(time_remains!='')
-      {
-         if(data2[0]=="00" && data2[1]=="00" && data2[2]=="00")
-         {
-            $('.break_span').html("");
-            $.post('employee_control/employee/breakcheck',function(data){
-            if(data)
-            {
-                var dataa=data.split('+');
-                $('#clockout_btn').attr('disabled','disabled');
-                var data1=dataa[0].split(','); 
-                $('#breakstart_'+data1[1]).text("Work");
-                var data2=data1[0].split(':');         
-            
-               if(data1[1]==1)
-                {
-                  $('#breakstart_2').attr('disabled', 'disabled');
-                  $('#breakstart_3').attr('disabled', 'disabled');   
-                }
-                else if(data1[1]==2)
-                {
-                  $('#breakstart_1').attr('disabled', 'disabled');
-                  $('#breakstart_3').attr('disabled', 'disabled'); 
-                }
-                else if(data1[1]==3)
-                {
-                  $('#breakstart_1').attr('disabled', 'disabled');
-                  $('#breakstart_2').attr('disabled', 'disabled');  
-                }
-                else
-                {
-                  $('#breakstart_1').removeAttr('disabled');
-                  $('#breakstart_2').removeAttr('disabled');
-                  $('#breakstart_3').removeAttr('disabled');
-                }
-
-                if(dataa[1]==0)
-                {
-                      $('#hm_timer'+data1[1]).countdowntimer({
-                      hours : data2[0],
-                      minutes :data2[1],
-                      seconds:data2[2],
-                      pauseButton : 'breakstart_'+data1[1]
-
-                      });
-                }
-                else
-                {
-                       var counter = dataa[2],
-                       cDisplay = document.getElementById('counterr'+data1[1]);
-                       format = function(t) {
-                       var minutes = Math.floor(t/60);
-                           if(minutes>59)
-                           {
-                             minutes=Math.floor(minutes % 60);
-                           }
-                           seconds = Math.floor(t % 60);
-                           hours=Math.floor(t/3600);
-                           hours = (hours < 10) ? "0" + hours.toString() : hours.toString();
-                           minutes = (minutes < 10) ? "0" + minutes.toString() : minutes.toString();
-                           seconds = (seconds < 10) ? "0" + seconds.toString() : seconds.toString();
-                           cDisplay.innerHTML = hours + ":" +minutes + ":" + seconds ;
-                       };
-                      setInterval(function() {
-                         counter++;
-                         format(counter);
-                      },1000);
-                     
-                }
-            }  
-            });
-          }
-      }
-    }
-
+   
 
     $.post('employee_control/employee/wmodecheck',function(data){
     if(data) 
@@ -416,6 +280,147 @@
             });
           }
     });
+
+
+    function point()
+    {
+    $.post('employee_control/employee/emppoint',function(data){
+      if(data)
+        {
+          $('#points').html(data);
+        }
+    });
+    }
+
+
+    
+    function lbonus()
+    {
+      $.post('employee_control/employee/emplbonus',function(data){
+      if(data)
+        {
+          $('#lbonus').html(data);
+        }
+     
+      });
+
+    }
+    
+    function lorder()
+    {
+        var d = new Date(); // current time
+        var hours = d.getHours();
+        var mins = d.getMinutes();
+
+        hourmin=((hours*60)+mins);
+      if(hourmin <= 795)
+      {
+       
+        $.post('employee_control/employee/emplorder',function(data){
+          if(data)
+          {
+            $('#show_lunch').hide();
+            $('#view_lunch').show();
+            $('#orderid').html(data); 
+          }
+          else
+          { 
+            $('#view_lunch').hide();
+            $('#show_lunch').show();
+            
+          }
+        });
+      }
+      else
+      {
+
+          $('#view_lunch').hide();
+          $('#show_lunch').hide();
+      }
+
+    }
+       
+    
+
+    function chk_time()
+    {
+      var time_remains=$('.break_span').text();
+      var data2=time_remains.split(':'); 
+      if(time_remains!='')
+      {
+         if(data2[0]=="00" && data2[1]=="00" && data2[2]=="00")
+         {
+            $('.break_span').html("");
+            $.post('employee_control/employee/breakcheck',function(data){
+            if(data)
+            {
+                var dataa=data.split('+');
+                $('#clockout_btn').attr('disabled','disabled');
+                var data1=dataa[0].split(','); 
+                $('#breakstart_'+data1[1]).text("Work");
+                var data2=data1[0].split(':');         
+            
+               if(data1[1]==1)
+                {
+                  $('#breakstart_2').attr('disabled', 'disabled');
+                  $('#breakstart_3').attr('disabled', 'disabled');   
+                }
+                else if(data1[1]==2)
+                {
+                  $('#breakstart_1').attr('disabled', 'disabled');
+                  $('#breakstart_3').attr('disabled', 'disabled'); 
+                }
+                else if(data1[1]==3)
+                {
+                  $('#breakstart_1').attr('disabled', 'disabled');
+                  $('#breakstart_2').attr('disabled', 'disabled');  
+                }
+                else
+                {
+                  $('#breakstart_1').removeAttr('disabled');
+                  $('#breakstart_2').removeAttr('disabled');
+                  $('#breakstart_3').removeAttr('disabled');
+                }
+
+                if(dataa[1]==0)
+                {
+                      $('#hm_timer'+data1[1]).countdowntimer({
+                      hours : data2[0],
+                      minutes :data2[1],
+                      seconds:data2[2],
+                      pauseButton : 'breakstart_'+data1[1]
+
+                      });
+                }
+                else
+                {
+                       var counter = dataa[2],
+                       cDisplay = document.getElementById('counterr'+data1[1]);
+                       format = function(t) {
+                       var minutes = Math.floor(t/60);
+                           if(minutes>59)
+                           {
+                             minutes=Math.floor(minutes % 60);
+                           }
+                           seconds = Math.floor(t % 60);
+                           hours=Math.floor(t/3600);
+                           hours = (hours < 10) ? "0" + hours.toString() : hours.toString();
+                           minutes = (minutes < 10) ? "0" + minutes.toString() : minutes.toString();
+                           seconds = (seconds < 10) ? "0" + seconds.toString() : seconds.toString();
+                           cDisplay.innerHTML = hours + ":" +minutes + ":" + seconds ;
+                       };
+                      setInterval(function() {
+                         counter++;
+                         format(counter);
+                      },1000);
+                     
+                }
+            }  
+            });
+          }
+      }
+    }
+
 
 
 });

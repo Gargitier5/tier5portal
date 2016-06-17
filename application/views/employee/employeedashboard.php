@@ -221,11 +221,11 @@ Notification.requestPermission();
                  
 
 
-                  <a href="#" class="lunch-btn" data-toggle="modal"  data-target="#myModal" id="show_lunch" <?php if(date('H:i:s')<="23:15:00"){ echo "style=display:block;";} else {echo "style=display:none;";}?>>Lunch Order</a>
+                  <a href="#" class="lunch-btn" data-toggle="modal"  data-target="#myModal" id="show_lunch" >Lunch Order</a>
 
            <!--    <a href="#" class="lunch-btn" data-toggle="modal" id="show_lunch" >Lunch Order</a> -->
               <br>
-              <a class="lunch-btn" data-toggle="modal"  id="view_lunch" data-target="#lunch_modal" <?php if(date('H:i:s')<="23:15:00"){ echo "style=display:block;";} else {echo "style=display:none;";}?>>View Order</a>
+              <a class="lunch-btn" data-toggle="modal"  id="view_lunch" data-target="#lunch_modal" >View Order</a>
 
            
               <!-- Modal -->

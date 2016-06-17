@@ -117,7 +117,7 @@ if($this->session->userdata('succ_msg')!=''){?>
                           <tr>
                               <td><?php echo $value['name']; ?></td>
                               <td><?php echo $value['username']; ?></td>
-                              <td><button class="btn btn-primary" onclick="badges(<?php echo $value['Eid']; ?>)">Click</button></td>
+                              <td><!-- <button class="btn btn-primary" onclick="badges(<?php //echo $value['Eid']; ?>)">Click</button> --></td>
                               <td colspan="4"><input type="button" class="btn btn-success btn-xs" onclick="reset_pass(<?php echo $value['Eid'];?>)" value="Reset"><input type="text" style="display:none" id="newpass_<?php echo $value['Eid'];?>" name="newpass" placeholder="Enter New Password"><input type="button" class="btn btn-success btn-xs" onclick="reset(<?php echo $value['Eid'];?>)" id="btn_<?php echo $value['Eid'];?>" style="display:none" value="Click To Reset"></td>
                               <td><input type="button" class="btn btn-success btn-xs" onclick="edit_employee('<?php echo $value['Eid'];?>','<?php echo $value['name'];?>','<?php echo $value['username'];?>')" value="Edit"></td>
                               <td><input type="button" class="btn btn-success btn-xs" onclick="change_work_status(<?php echo $value['Eid'];?>)" value="Make Inactive"><textarea style="display:none" id="reason_<?php echo $value['Eid'];?>" name="newpass" placeholder="Describe Reason"></textarea><input type="text" style="display:none" placeholder="Select The Date" class="datepicker" id="datepicker<?php echo $value['Eid'];?>"><input type="button" class="btn btn-success btn-xs" onclick="change_work(<?php echo $value['Eid'];?>)" id="click_btn_<?php echo $value['Eid'];?>" style="display:none" value="Click To Inactive"></td> 
@@ -175,11 +175,8 @@ if($this->session->userdata('succ_msg')!=''){?>
         </button>
         <h4 class="modal-title">Manage Badges</h4>
       </div>
-      <div class="modal-body">
-          <?php foreach ($badges as $bad){?>
-            <input type="checkbox" name="badges" value="<?php echo $bad['badges_id']; ?>"><?php echo $bad['badge']; ?>
-
-          <?php }?>
+      <div class="modal-body" id="modal_display">
+          
       </div>
       <div class="modal-footer">
         <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

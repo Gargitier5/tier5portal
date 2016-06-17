@@ -2,7 +2,7 @@ $(document).ready(function() {
 
 $( ".datepicker" ).datepicker({ dateFormat: 'yy-mm-dd'});
 
-$('#timepicker').timepicker();
+//$('#timepicker').timepicker();
 
 
 
@@ -10,18 +10,29 @@ $('#timepicker').timepicker();
 
 });
 
-/*function badges(emp_id)
+function badges(emp_id)
 {
-  //alert(emp_id);
-  $('#baddge').modal('show');
+  
+   
    $.post('admin_control/admin/badgedisa',{emp_id:emp_id},function(data){
       if(data)
         {
           
+            $('#baddge').modal('show'); 
+            $('#modal_display').html(data); 
+        
+          
         }
     });
-}*/
+  
+  
+}
 
+function see(badge)
+{
+
+
+}
 
 function reset_pass(emp_id)
 {
