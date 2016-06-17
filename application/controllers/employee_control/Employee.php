@@ -22,7 +22,8 @@ class Employee extends CI_Controller
 
     public function index()
     {  
-     
+      //print_r($this->session->userdata);
+      //exit;
       if ($this->session->userdata('uid'))
       {
           /* chat introduce */
@@ -229,15 +230,25 @@ class Employee extends CI_Controller
 
     public function logout()
     {
+      //session_destroy();
+      //$this->session->sess_destroy();
+      //print_r($this->session->userdata);
+      //exit;
+      //redirect(base_url());
+
+
       if ($this->session->userdata('uid'))
       {
           //print_r($_SESSION['openChatBoxes']);exit;
-          $this->session->unset_userdata('uid');
           $_SESSION['username']='';
           $_SESSION['openChatBoxes']='';
+         
+          $this->session->unset_userdata('uid');
+          $this->session->unset_userdata('name');
+          $this->session->unset_userdata('role');
+          $this->session->unset_userdata('picture');
+          $this->session->unset_userdata('emp_name');
           $this->session->sess_destroy();
-          session_unset();
-          session_destroy();
           redirect(base_url());
       }
       else

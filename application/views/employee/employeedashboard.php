@@ -115,7 +115,7 @@ Notification.requestPermission();
                        <div class="col-md-4 col-sm-4">
                         <div class="privilege-box active-privilege">
                           <div class="pre-icon">
-                           <img src="images/badges/<?php //echo $split[1]; ?>" alt="img">
+                           <img src="images/badges/<?php echo $split[1]; ?>" alt="img">
                           </div>  
                           <?php echo $split[0]; ?>
                         </div>  

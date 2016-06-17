@@ -23,7 +23,8 @@
 
     <!-- Custom Theme Style -->
     <link href="css/custom.css" rel="stylesheet">
-     
+
+
     <!-- jQuery -->
      <script src="vendors/jquery/dist/jquery.min.js"></script>
 
@@ -117,7 +118,11 @@ if($this->session->userdata('succ_msg')!=''){?>
                           <tr>
                               <td><?php echo $value['name']; ?></td>
                               <td><?php echo $value['username']; ?></td>
-                              <td><!-- <button class="btn btn-primary" onclick="badges(<?php //echo $value['Eid']; ?>)">Click</button> --></td>
+                              <td>
+                                <button class="btn btn-primary btn-xs" onclick="disbadges('<?php echo $value['Eid']; ?>','<?php echo $value['name']; ?>')">Change Badges</button>
+                
+
+                              </td>
                               <td colspan="4"><input type="button" class="btn btn-success btn-xs" onclick="reset_pass(<?php echo $value['Eid'];?>)" value="Reset"><input type="text" style="display:none" id="newpass_<?php echo $value['Eid'];?>" name="newpass" placeholder="Enter New Password"><input type="button" class="btn btn-success btn-xs" onclick="reset(<?php echo $value['Eid'];?>)" id="btn_<?php echo $value['Eid'];?>" style="display:none" value="Click To Reset"></td>
                               <td><input type="button" class="btn btn-success btn-xs" onclick="edit_employee('<?php echo $value['Eid'];?>','<?php echo $value['name'];?>','<?php echo $value['username'];?>')" value="Edit"></td>
                               <td><input type="button" class="btn btn-success btn-xs" onclick="change_work_status(<?php echo $value['Eid'];?>)" value="Make Inactive"><textarea style="display:none" id="reason_<?php echo $value['Eid'];?>" name="newpass" placeholder="Describe Reason"></textarea><input type="text" style="display:none" placeholder="Select The Date" class="datepicker" id="datepicker<?php echo $value['Eid'];?>"><input type="button" class="btn btn-success btn-xs" onclick="change_work(<?php echo $value['Eid'];?>)" id="click_btn_<?php echo $value['Eid'];?>" style="display:none" value="Click To Inactive"></td> 
@@ -167,20 +172,37 @@ if($this->session->userdata('succ_msg')!=''){?>
    
 
    <div class="modal fade" id="baddge">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-        <h4 class="modal-title">Manage Badges</h4>
+        <h4 class="modal-title">Disable Badges For <span id="names"></span></h4>
       </div>
-      <div class="modal-body" id="modal_display">
-          
+      <div class="modal-body">
+        <div class="col-md-6 col-sm-6 col-lg-12" style="background:#73879c; color:white">
+          <h1>Disable badges</h1>
+          <br>
+         <strong> Check The Box To Make Badges Disable For Employee And Uncheck For Make It Enable </strong>
+          <div id="modal_display" >
+
+          </div>
+        </div>
+
+        <div class="col-md-6 col-sm-6 col-lg-12" style="background:#73879c; color:white">
+         <h1>Enable badges</h1>
+          <br>
+         <strong> Check The Box To Make Badges Enable For Employee And Uncheck For Make It Disable </strong>
+          <div id="enable" >
+
+          </div>
+        </div>
+
       </div>
       <div class="modal-footer">
-        <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button> -->
+         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+       <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

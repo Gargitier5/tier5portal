@@ -1120,6 +1120,7 @@ class Admin extends CI_Controller
     public function badgedisa()
     {
         $emp['Eid']=$this->input->post('emp_id');
+        $emp['status']='0';
         $disbadges=$this->AdminModel->fetchinfo('empbadge',$emp,'result');
           $result="";
           $con['status']='0';
@@ -1136,17 +1137,85 @@ class Admin extends CI_Controller
           foreach ($badges as $bad){
             if(in_array($bad['badges_id'],$mak_array) && !empty($mak_array)){
 
-            $result.='<input type="checkbox" onchange="see(<?php echo $bad[`badges_id`]?>)" name="badges" id="check'.$bad['badges_id'].'" value="'.$bad['badges_id'].'" checked>'.$bad['badge'];
+            $result.='<input type="checkbox" onchange="see('.$bad['badges_id'].",".$emp['Eid'].')" name="badges" id="check'.$bad['badges_id'].'" value="'.$bad['badges_id'].'" checked><img src="images/badges/'.$bad['icon'].'"><br><br>'; 
           }
           else
           {
-           $result.='<input type="checkbox" onchange="see()" name="badges" id="check'.$bad['badges_id'].'" value="'.$bad['badges_id'].'">'.$bad['badge']; 
+           $result.='<input type="checkbox" onchange="see('.$bad['badges_id'].",".$emp['Eid'].')" name="badges" id="check'.$bad['badges_id'].'" value="'.$bad['badges_id'].'"><img src="images/badges/'.$bad['icon'].'"><br><br>'; 
           }
           }
 
 
          echo $result;
+    }
+    public function badgeena()
+    {
+        $emp['Eid']=$this->input->post('emp_id');
+        $emp['status']='1';
+        $disbadges=$this->AdminModel->fetchinfo('empbadge',$emp,'result');
+          $result="";
+          $con['status']='0';
+          $badges=$this->AdminModel->fetchinfo('badges',$con,'result');
+          $mak_array=array();
+          if($disbadges)
+          {
+            foreach ($disbadges as $key)
+            {
+              array_push($mak_array,$key['Bid']);
+           
+            }
+          }
+          foreach ($badges as $bad){
+            if(in_array($bad['badges_id'],$mak_array) && !empty($mak_array)){
+
+            $result.='<input type="checkbox" onchange="change('.$bad['badges_id'].",".$emp['Eid'].')" name="badges" id="check'.$bad['badges_id'].'" value="'.$bad['badges_id'].'" checked><img src="images/badges/'.$bad['icon'].'"><br><br>'; 
+          }
+          else
+          {
+           $result.='<input type="checkbox" onchange="change('.$bad['badges_id'].",".$emp['Eid'].')" name="badges" id="check'.$bad['badges_id'].'" value="'.$bad['badges_id'].'"><img src="images/badges/'.$bad['icon'].'"><br><br>'; 
+          }
+          }
+           echo $result;
+    }
+
+    public function insertbadge()
+    {
+      $data['Eid']=$this->input->post('eid');
+      $data['Bid']=$this->input->post('bid');
+      $data['status']=$this->input->post('status');
+      if($data['status']=='0')
+      {
+        $con['status']='1';
+      }
+      else
+      {
+        $con['status']='0';
+      }
+      $con['Eid']=$data['Eid'];
+      $con['Bid']=$data['Bid'];
+      $get=$this->AdminModel->fetchinfo('empbadge',$con,'row');
+      
+      if($get)
+      {
+        $delete=$this->AdminModel->delete($con,'empbadge');
+        $insert=$this->AdminModel->insert('empbadge',$data);
+      
+
+      }
+      else
+      {
+        $insert=$this->AdminModel->insert('empbadge',$data);
         
+      }
+    }
+
+    public function deleteempbadges()
+    {
+      $data['Eid']=$this->input->post('eid');
+      $data['Bid']=$this->input->post('bid');
+      $data['status']=$this->input->post('status');
+      $delete=$this->AdminModel->delete($data,'empbadge');
+
     }
 
     public function allbreak()

@@ -11,7 +11,7 @@ class Hr extends CI_Controller
 		$this->load->database();
 		$this->load->model('HrModel');
 		//$this->load->helper('custom');
-		$this->load->library('session');
+		//$this->load->library('session');
 
 
 		if (!$this->session->userdata('adminid'))

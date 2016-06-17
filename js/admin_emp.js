@@ -10,28 +10,68 @@ $( ".datepicker" ).datepicker({ dateFormat: 'yy-mm-dd'});
 
 });
 
-function badges(emp_id)
-{
-  
-   
+function disbadges(emp_id,name)
+{  
    $.post('admin_control/admin/badgedisa',{emp_id:emp_id},function(data){
       if(data)
         {
+
+
           
-            $('#baddge').modal('show'); 
+            $('#baddge').modal('show');
+            $('#names').html(name);
             $('#modal_display').html(data); 
         
           
         }
     });
-  
-  
+
+   $.post('admin_control/admin/badgeena',{emp_id:emp_id},function(data){
+      if(data)
+        {
+          
+            $('#enable').html(data); 
+        }
+    });
+
 }
 
-function see(badge)
+
+function see(badge,eid)
 {
 
+   var status='0';
+   if($('#check'+badge+':checked').length > 0)
+   {
+      $.post('admin_control/admin/insertbadge',{eid:eid, bid:badge, status:status},function(data){
+        
+      });
+   }
+   else
+   {
+      $.post('admin_control/admin/deleteempbadges',{eid:eid, bid:badge, status:status},function(data){
+         
+      });
+   }
+  //alert(badge);
+}
 
+function change(badge,eid)
+{
+   var status='1';
+   if($('#check'+badge+':checked').length > 0)
+   {
+      $.post('admin_control/admin/insertbadge',{eid:eid, bid:badge, status:status},function(data){
+
+      });
+   }
+   else
+   {
+      $.post('admin_control/admin/deleteempbadges',{eid:eid, bid:badge, status:status},function(data){
+
+      });
+   }
+  //alert(badge);
 }
 
 function reset_pass(emp_id)

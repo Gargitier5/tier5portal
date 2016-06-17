@@ -31,21 +31,44 @@
         //return $result;
         $badgesarr=array();
         foreach ($result as $value)
-        {
-            
+        { 
             $this->db->select('*');
             $this->db->where('Eid',$Eid);
             $this->db->where('Bid',$value['badges_id']);
             $this->db->where('status',0);
             $res=$this->db->get('empbadge');
-            $count=$res->row_array();
-            if(!$count)
+            $disable=$res->row_array();
+            if(!$disable)
             {
                 array_push($badgesarr,$value['badge'].':'.$value['icon']);
             }
-
-
         }
+
+
+        $this->db->select('*');
+        $this->db->where('tpoint>',$point);
+        $this->db->where('status',0);
+        $res=$this->db->get('badges');
+        $result=$res->result_array();
+        //return $result;
+        $badgesarr=array();
+        foreach ($result as $value)
+        { 
+            $this->db->select('*');
+            $this->db->where('Eid',$Eid);
+            $this->db->where('Bid',$value['badges_id']);
+            $this->db->where('status',1);
+            $res=$this->db->get('empbadge');
+            $disable=$res->row_array();
+            if($disable)
+            {
+                array_push($badgesarr,$value['badge'].':'.$value['icon']);
+            }
+        }
+
+
+
+
         return $badgesarr;
         
     }
