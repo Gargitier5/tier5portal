@@ -42,7 +42,7 @@ Notification.requestPermission();
     <!-- jQuery -->
   
 
-     <script type="text/javascript" src="js/employee.js"></script>
+     <script type="text/javascript" src="js/employeenew.js"></script>
       
    <script type="text/javascript" src="js/booking-calendar.js"></script> 
 
