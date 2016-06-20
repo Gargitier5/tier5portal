@@ -27,6 +27,7 @@ class Employee extends CI_Controller
       if ($this->session->userdata('uid'))
       {
           /* chat introduce */
+
           $_SESSION['chatusername'] = $this->session->userdata('emp_name');
           $_SESSION['username'] = $this->session->userdata('uid');
 

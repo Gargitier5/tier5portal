@@ -1135,13 +1135,17 @@ class Admin extends CI_Controller
             }
           }
           foreach ($badges as $bad){
-            if(in_array($bad['badges_id'],$mak_array) && !empty($mak_array)){
+            if(in_array($bad['badges_id'],$mak_array) && !empty($mak_array))
+            {
 
-            $result.='<input type="checkbox" onchange="see('.$bad['badges_id'].",".$emp['Eid'].')" name="badges" id="check'.$bad['badges_id'].'" value="'.$bad['badges_id'].'" checked><img src="images/badges/'.$bad['icon'].'"><br><br>'; 
+            //$result.='<input type="checkbox" onchange="see('.$bad['badges_id'].",".$emp['Eid'].')" name="badges" id="check'.$bad['badges_id'].'" value="'.$bad['badges_id'].'" checked><img src="images/badges/'.$bad['icon'].'">';
+          $result.='<input type="checkbox" onchange="see('.$bad['badges_id'].",".$emp['Eid'].')" name="badges" id="check'.$bad['badges_id'].'" class="css-checkbox" value="'.$bad['badges_id'].'" checked/><label for="check'.$bad['badges_id'].'" class="css-label"></label><img src="images/badges/'.$bad['icon'].'"><br><br>';
+
           }
           else
           {
-           $result.='<input type="checkbox" onchange="see('.$bad['badges_id'].",".$emp['Eid'].')" name="badges" id="check'.$bad['badges_id'].'" value="'.$bad['badges_id'].'"><img src="images/badges/'.$bad['icon'].'"><br><br>'; 
+           //$result.='<input type="checkbox" onchange="see('.$bad['badges_id'].",".$emp['Eid'].')" name="badges" id="check'.$bad['badges_id'].'" value="'.$bad['badges_id'].'"><img src="images/badges/'.$bad['icon'].'"><br><br>'; 
+            $result.='<input type="checkbox" onchange="see('.$bad['badges_id'].",".$emp['Eid'].')" name="badges" id="check'.$bad['badges_id'].'" class="css-checkbox" value="'.$bad['badges_id'].'"/><label for="check'.$bad['badges_id'].'" class="css-label"></label><img src="images/badges/'.$bad['icon'].'"><br><br>';
           }
           }
 
@@ -1168,11 +1172,11 @@ class Admin extends CI_Controller
           foreach ($badges as $bad){
             if(in_array($bad['badges_id'],$mak_array) && !empty($mak_array)){
 
-            $result.='<input type="checkbox" onchange="change('.$bad['badges_id'].",".$emp['Eid'].')" name="badges" id="check'.$bad['badges_id'].'" value="'.$bad['badges_id'].'" checked><img src="images/badges/'.$bad['icon'].'"><br><br>'; 
+            $result.='<input type="checkbox" onchange="change('.$bad['badges_id'].",".$emp['Eid'].')" name="badges" id="checken'.$bad['badges_id'].'" value="'.$bad['badges_id'].'" checked><img src="images/badges/'.$bad['icon'].'"><br><br>'; 
           }
           else
           {
-           $result.='<input type="checkbox" onchange="change('.$bad['badges_id'].",".$emp['Eid'].')" name="badges" id="check'.$bad['badges_id'].'" value="'.$bad['badges_id'].'"><img src="images/badges/'.$bad['icon'].'"><br><br>'; 
+           $result.='<input type="checkbox" onchange="change('.$bad['badges_id'].",".$emp['Eid'].')" name="badges" id="checken'.$bad['badges_id'].'" value="'.$bad['badges_id'].'"><img src="images/badges/'.$bad['icon'].'"><br><br>'; 
           }
           }
            echo $result;
@@ -1197,15 +1201,22 @@ class Admin extends CI_Controller
       
       if($get)
       {
-        $delete=$this->AdminModel->delete($con,'empbadge');
-        $insert=$this->AdminModel->insert('empbadge',$data);
+        //$delete=$this->AdminModel->delete($con,'empbadge');
+        //$insert=$this->AdminModel->insert('empbadge',$data);
+        if($data['status']=='0')
+        {
+           echo "It is Already Marked As Enable !!Remove It From Enable Badges";
+        }
+        else
+        {
+            echo "It is Already Marked As Disable !!Remove It From Disable Badges";
+        }
       
 
       }
       else
       {
         $insert=$this->AdminModel->insert('empbadge',$data);
-        
       }
     }
 

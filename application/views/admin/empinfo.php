@@ -35,7 +35,42 @@
   <script src="//code.jquery.com/jquery-1.10.2.js"></script>
   <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
   <link rel="stylesheet" href="/resources/demos/style.css">
+   <style>
+     input[type=checkbox].css-checkbox
+     {
+        position:absolute; z-index:-1000; left:-1000px;
+        overflow: hidden; clip: rect(0 0 0 0); height:1px; width:1px; margin:-1px; padding:0; border:0;
+     }
 
+    input[type=checkbox].css-checkbox + label.css-label
+    {
+      padding-left:35px;
+      height:30px; 
+      display:inline-block;
+      line-height:30px;
+      background-repeat:no-repeat;
+       background-position: 0 0;
+       font-size:30px;
+      vertical-align:middle;
+      cursor:pointer;
+       margin-bottom: 6px;
+
+    }
+
+    input[type=checkbox].css-checkbox:checked + label.css-label {
+              background-position: 0 -30px;
+            }
+            label.css-label {
+        background-image:url(http://csscheckbox.com/checkboxes/u/csscheckbox_129976c07083b34e93c4b700b4795a59.png);
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+   </style>
 
 
   </head>
@@ -119,7 +154,7 @@ if($this->session->userdata('succ_msg')!=''){?>
                               <td><?php echo $value['name']; ?></td>
                               <td><?php echo $value['username']; ?></td>
                               <td>
-                                <button class="btn btn-primary btn-xs" onclick="disbadges('<?php echo $value['Eid']; ?>','<?php echo $value['name']; ?>')">Change Badges</button>
+                                <!-- <button class="btn btn-primary btn-xs" onclick="disbadges('<?php //echo $value['Eid']; ?>','<?php// echo $value['name']; ?>')">Change Badges</button> -->
                 
 
                               </td>
@@ -178,13 +213,14 @@ if($this->session->userdata('succ_msg')!=''){?>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-        <h4 class="modal-title">Disable Badges For <span id="names"></span></h4>
+        <h4 class="modal-title">Disable/Enable Badges For <span id="names"></span></h4>
       </div>
       <div class="modal-body">
+        <div id="msg"></div>
         <div class="col-md-6 col-sm-6 col-lg-12" style="background:#73879c; color:white">
           <h1>Disable badges</h1>
           <br>
-         <strong> Check The Box To Make Badges Disable For Employee And Uncheck For Make It Enable </strong>
+         <strong> Cross The Box To Make Badges Disable For Employee And Uncross For Make It Enable </strong>
           <div id="modal_display" >
 
           </div>

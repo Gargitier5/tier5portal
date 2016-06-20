@@ -59,7 +59,7 @@ function see(badge,eid)
 function change(badge,eid)
 {
    var status='1';
-   if($('#check'+badge+':checked').length > 0)
+   if($('#checken'+badge+':checked').length > 0)
    {
       $.post('admin_control/admin/insertbadge',{eid:eid, bid:badge, status:status},function(data){
 

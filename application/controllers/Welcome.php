@@ -30,6 +30,7 @@ class Welcome extends CI_Controller {
 
 	public function index()
 	{
+
 		if($this->session->userdata('adminid'))
 	    {
 	        redirect(base_url().'admin_control/Admin');
@@ -103,6 +104,7 @@ class Welcome extends CI_Controller {
 			    {
 			        if ($this->session->userdata('uid'))
 			        {
+			        	$_SESSION['username'] = $this->session->userdata('uid');
                         redirect(base_url().'employee_control/employee'); 
 			        }
 			        else
