@@ -51,7 +51,7 @@
         $res=$this->db->get('badges');
         $result=$res->result_array();
         //return $result;
-        $badgesarr=array();
+        //$badgesarr=array();
         foreach ($result as $value)
         { 
             $this->db->select('*');
@@ -59,8 +59,8 @@
             $this->db->where('Bid',$value['badges_id']);
             $this->db->where('status',1);
             $res=$this->db->get('empbadge');
-            $disable=$res->row_array();
-            if($disable)
+            $disable1=$res->row_array();
+            if($disable1)
             {
                 array_push($badgesarr,$value['badge'].':'.$value['icon']);
             }
