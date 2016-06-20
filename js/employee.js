@@ -4,10 +4,7 @@
     lbonus();
     lorder();
 
-    setInterval(function(){ chk_time() }, 1000);
-    setInterval(function(){ point() }, 2000);
-    setInterval(function(){ lbonus() }, 500000);
-    setInterval(function(){ lorder() }, 1000);
+  
 
 /*    disfirstbreak(); // This will run on page load
     dissecondbreak(); // This will run on page load
@@ -126,7 +123,10 @@
 
     
 
- 
+   setInterval(function(){ chk_time() }, 1000);
+    setInterval(function(){ point() }, 2000);
+    setInterval(function(){ lbonus() }, 500000);
+    setInterval(function(){ lorder() }, 1000);
    
 
     $.post('employee_control/employee/wmodecheck',function(data){
