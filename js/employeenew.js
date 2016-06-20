@@ -3,7 +3,7 @@
     point();
     lbonus();
     lorder();
-
+    sessioncheck();
   
 
 /*    disfirstbreak(); // This will run on page load
@@ -123,11 +123,11 @@
 
     
 
-   setInterval(function(){ chk_time() }, 1000);
+    setInterval(function(){ chk_time() }, 1000);
     setInterval(function(){ point() }, 2000);
     setInterval(function(){ lbonus() }, 500000);
     setInterval(function(){ lorder() }, 1000);
-   
+    setInterval(function(){ sessioncheck() }, 1000);
 
     $.post('employee_control/employee/wmodecheck',function(data){
     if(data) 
@@ -301,6 +301,14 @@
         {
           $('#lbonus').html(data);
         }
+     
+      });
+
+    }
+
+    function sessioncheck()
+    {
+      $.post('employee_control/employee/chksession',function(data){
      
       });
 

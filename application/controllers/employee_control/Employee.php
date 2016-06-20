@@ -7,14 +7,12 @@ class Employee extends CI_Controller
   public function __construct()
   {
     parent::__construct();
-
-    
-    $this->load->helper('url');
-    $this->load->database();
-    $this->load->model('EmployeeModel');
-    $this->load->helper('custom');
-    $this->load->library('session');
-    $this->load->library('villa_booking_calendar');
+      $this->load->helper('url');
+      $this->load->database();
+      $this->load->model('EmployeeModel');
+      $this->load->helper('custom');
+      $this->load->library('session');
+      $this->load->library('villa_booking_calendar');
     
   }
 
@@ -227,7 +225,18 @@ class Employee extends CI_Controller
       } 
     }
 
+   public function chksession()
+   {
+     if($this->session->userdata('uid'))
+      {
+         
+      }
+      else
+      {
+         redirect(base_url());
+      }
 
+   }
 
     public function logout()
     {
@@ -249,7 +258,9 @@ class Employee extends CI_Controller
           $this->session->unset_userdata('role');
           $this->session->unset_userdata('picture');
           $this->session->unset_userdata('emp_name');
+
           $this->session->sess_destroy();
+
           redirect(base_url());
       }
       else

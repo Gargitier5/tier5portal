@@ -154,8 +154,8 @@ if($this->session->userdata('succ_msg')!=''){?>
                               <td><?php echo $value['name']; ?></td>
                               <td><?php echo $value['username']; ?></td>
                               <td>
-                                <!-- <button class="btn btn-primary btn-xs" onclick="disbadges('<?php //echo $value['Eid']; ?>','<?php// echo $value['name']; ?>')">Change Badges</button> -->
-                
+                                 <!-- <button class="btn btn-primary btn-xs" onclick="disbadges('<?php// echo $value['Eid']; ?>','<?php //echo $value['name']; ?>')">Change Badges</button> -->
+                              <button class="btn btn-primary btn-xs" onclick="location.href='admin_control/Admin/editbadges/<?php echo $value['Eid']; ?>'">Change Badges</button>
 
                               </td>
                               <td colspan="4"><input type="button" class="btn btn-success btn-xs" onclick="reset_pass(<?php echo $value['Eid'];?>)" value="Reset"><input type="text" style="display:none" id="newpass_<?php echo $value['Eid'];?>" name="newpass" placeholder="Enter New Password"><input type="button" class="btn btn-success btn-xs" onclick="reset(<?php echo $value['Eid'];?>)" id="btn_<?php echo $value['Eid'];?>" style="display:none" value="Click To Reset"></td>
@@ -236,6 +236,7 @@ if($this->session->userdata('succ_msg')!=''){?>
         </div>
 
       </div>
+      <br>
       <div class="modal-footer">
          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->

@@ -10,31 +10,6 @@ $( ".datepicker" ).datepicker({ dateFormat: 'yy-mm-dd'});
 
 });
 
-function disbadges(emp_id,name)
-{  
-   $.post('admin_control/admin/badgedisa',{emp_id:emp_id},function(data){
-      if(data)
-        {
-
-
-          
-            $('#baddge').modal('show');
-            $('#names').html(name);
-            $('#modal_display').html(data); 
-        
-          
-        }
-    });
-
-   $.post('admin_control/admin/badgeena',{emp_id:emp_id},function(data){
-      if(data)
-        {
-          
-            $('#enable').html(data); 
-        }
-    });
-
-}
 
 
 function see(badge,eid)
@@ -44,16 +19,16 @@ function see(badge,eid)
    if($('#check'+badge+':checked').length > 0)
    {
       $.post('admin_control/admin/insertbadge',{eid:eid, bid:badge, status:status},function(data){
-        
+        window.location.reload();
       });
    }
    else
    {
       $.post('admin_control/admin/deleteempbadges',{eid:eid, bid:badge, status:status},function(data){
-         
+         window.location.reload();
       });
    }
-  //alert(badge);
+ 
 }
 
 function change(badge,eid)
@@ -62,13 +37,13 @@ function change(badge,eid)
    if($('#checken'+badge+':checked').length > 0)
    {
       $.post('admin_control/admin/insertbadge',{eid:eid, bid:badge, status:status},function(data){
-
+       window.location.reload();
       });
    }
    else
    {
       $.post('admin_control/admin/deleteempbadges',{eid:eid, bid:badge, status:status},function(data){
-
+          window.location.reload();
       });
    }
   //alert(badge);

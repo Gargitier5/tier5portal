@@ -1098,6 +1098,8 @@ class Admin extends CI_Controller
         }
       }
     }
+
+
     public function empinfo()
     {
           if($this->session->userdata('role')==0)
@@ -1116,8 +1118,77 @@ class Admin extends CI_Controller
        
           $this->load->view('admin/empinfo.php',$data);
     }
+    
+    public function editbadges($id)
+    {
 
-    public function badgedisa()
+          $emp['Eid']=$id;
+          $emp['status']='0';
+          $disbadges=$this->AdminModel->fetchinfo('empbadge',$emp,'result');
+          $result="";
+          $con['status']='0';
+          $badges=$this->AdminModel->fetchinfo('badges',$con,'result');
+          $mak_array=array();
+          if($disbadges)
+          {
+            foreach ($disbadges as $key)
+            {
+              array_push($mak_array,$key['Bid']);
+           
+            }
+          }
+          foreach ($badges as $bad){
+            if(in_array($bad['badges_id'],$mak_array) && !empty($mak_array))
+            {
+
+            //$result.='<input type="checkbox" onchange="see('.$bad['badges_id'].",".$emp['Eid'].')" name="badges" id="check'.$bad['badges_id'].'" value="'.$bad['badges_id'].'" checked><img src="images/badges/'.$bad['icon'].'">';
+          $result.='<input type="checkbox" onchange="see('.$bad['badges_id'].",".$emp['Eid'].')" name="badges" id="check'.$bad['badges_id'].'" class="css-checkbox" value="'.$bad['badges_id'].'" checked/><label for="check'.$bad['badges_id'].'" class="css-label"></label><img src="images/badges/'.$bad['icon'].'"><br><br>';
+
+          }
+          else
+          {
+           //$result.='<input type="checkbox" onchange="see('.$bad['badges_id'].",".$emp['Eid'].')" name="badges" id="check'.$bad['badges_id'].'" value="'.$bad['badges_id'].'"><img src="images/badges/'.$bad['icon'].'"><br><br>'; 
+            $result.='<input type="checkbox" onchange="see('.$bad['badges_id'].",".$emp['Eid'].')" name="badges" id="check'.$bad['badges_id'].'" class="css-checkbox" value="'.$bad['badges_id'].'"/><label for="check'.$bad['badges_id'].'" class="css-label"></label><img src="images/badges/'.$bad['icon'].'"><br><br>';
+          }
+          }
+          
+          $emp1['Eid']=$id;
+          $emp1['status']='1';
+          $disbadges1=$this->AdminModel->fetchinfo('empbadge',$emp1,'result');
+          $result1="";
+          $con['status']='0';
+          $badges1=$this->AdminModel->fetchinfo('badges',$con,'result');
+          $mak_array1=array();
+          if($disbadges1)
+          {
+            foreach ($disbadges1 as $key)
+            {
+              array_push($mak_array1,$key['Bid']);
+           
+            }
+          }
+          foreach ($badges1 as $bad)
+          {
+            if(in_array($bad['badges_id'],$mak_array1) && !empty($mak_array1))
+            {
+
+              $result1.='<input type="checkbox" onchange="change('.$bad['badges_id'].",".$emp1['Eid'].')" name="badges" id="checken'.$bad['badges_id'].'" value="'.$bad['badges_id'].'" checked><img src="images/badges/'.$bad['icon'].'"><br><br>'; 
+            }
+            else
+            {
+             $result1.='<input type="checkbox" onchange="change('.$bad['badges_id'].",".$emp1['Eid'].')" name="badges" id="checken'.$bad['badges_id'].'" value="'.$bad['badges_id'].'"><img src="images/badges/'.$bad['icon'].'"><br><br>'; 
+            }
+          }
+
+          $con2['id']=$id;
+          $data['info']=$this->AdminModel->fetchinfo('employee',$con2,'row');
+          $data['result1']=$result1;
+          $data['result']=$result;
+          $data['sideber']=$this->load->view('admin/includes/sideber','',true);
+          $data['header']=$this->load->view('admin/includes/header','',true);
+          $this->load->view('admin/editbadges.php',$data);
+    }
+    /*public function badgedisa()
     {
         $emp['Eid']=$this->input->post('emp_id');
         $emp['status']='0';
@@ -1151,8 +1222,8 @@ class Admin extends CI_Controller
 
 
          echo $result;
-    }
-    public function badgeena()
+    }*/
+    /*public function badgeena()
     {
         $emp['Eid']=$this->input->post('emp_id');
         $emp['status']='1';
@@ -1180,7 +1251,7 @@ class Admin extends CI_Controller
           }
           }
            echo $result;
-    }
+    }*/
 
     public function insertbadge()
     {
@@ -1201,17 +1272,8 @@ class Admin extends CI_Controller
       
       if($get)
       {
-        //$delete=$this->AdminModel->delete($con,'empbadge');
-        //$insert=$this->AdminModel->insert('empbadge',$data);
-        if($data['status']=='0')
-        {
-           echo "It is Already Marked As Enable !!Remove It From Enable Badges";
-        }
-        else
-        {
-            echo "It is Already Marked As Disable !!Remove It From Disable Badges";
-        }
-      
+        $delete=$this->AdminModel->delete($con,'empbadge');
+        $insert=$this->AdminModel->insert('empbadge',$data);
 
       }
       else
